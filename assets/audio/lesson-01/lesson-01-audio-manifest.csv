@@ -1,0 +1,93 @@
+﻿Id,TeachingText,Mp3File,Provider,Model,Voice,Locale,ApprovalStatus
+listen,Listen.,listen.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+listen-then-do-it,Listen. Then do it!,listen-then-do-it.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+hello,Hello!,hello.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+hi,Hi!,hi.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+goodbye,Goodbye!,goodbye.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+whats-your-name,What's your name?,whats-your-name.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+my-name-is,My name is ...,my-name-is.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+my-name-is-tom,My name is Tom.,my-name-is-tom.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+who-is-tom,Who is Tom?,who-is-tom.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+how-old-are-you,How old are you?,how-old-are-you.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-five,I'm five.,im-five.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-six,I'm six.,im-six.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+five-or-six,Five or six?,five-or-six.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+boy,Boy.,boy.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+girl,Girl.,girl.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+boy-or-girl,Boy or girl?,boy-or-girl.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+are-you-a-boy-or-a-girl,Are you a boy or a girl?,are-you-a-boy-or-a-girl.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-a-boy,I'm a boy.,im-a-boy.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-a-girl,I'm a girl.,im-a-girl.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+about-me-kimi,My name is Kimi. I'm six. I'm a boy.,about-me-kimi.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+happy,Happy.,happy.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+sad,Sad.,sad.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+tired,Tired.,tired.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+where-is-tired,Where is tired?,where-is-tired.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+how-are-you,How are you?,how-are-you.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-happy,I'm happy.,im-happy.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-sad,I'm sad.,im-sad.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+im-tired,I'm tired.,im-tired.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+how-is-she,How is she?,how-is-she.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+she-is-happy,She is happy.,she-is-happy.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+stand-up,Stand up.,stand-up.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+sit-down,Sit down.,sit-down.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+stand-or-sit,Stand or sit?,stand-or-sit.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+look,Look.,look.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+look-or-listen,Look or listen?,look-or-listen.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point,Point.,point.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch,Touch.,touch.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-or-touch,Point or touch?,point-or-touch.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me,Show me.,show-me.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-the-ball,Point to the ball.,point-to-the-ball.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-the-table,Touch the table.,touch-the-table.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+give-me-the-ball,Give me the ball.,give-me-the-ball.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+take-the-ball,Take the ball.,take-the-ball.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+give-or-take,Give or take?,give-or-take.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-red,Find red.,find-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-blue,Touch blue.,touch-blue.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-yellow,Point to yellow.,point-to-yellow.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-green,Show me green.,show-me-green.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-green,Touch green.,touch-green.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-red,Point to red.,point-to-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-blue,Show me blue.,show-me-blue.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-yellow,Show me yellow.,show-me-yellow.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-red,Touch red.,touch-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-blue,Point to blue.,point-to-blue.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-three,Find three.,find-three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-five,Touch five.,touch-five.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+how-many,How many?,how-many.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+one,One.,one.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+two,Two.,two.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+three,Three.,three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+three-balls,Three balls.,three-balls.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+four,Four.,four.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+four-stars,Four stars.,four-stars.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-five,Point to five.,point-to-five.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-two,Show me two.,show-me-two.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+touch-three,Touch three.,touch-three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+come-here,Come here.,come-here.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+stop,Stop.,stop.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+go,Go.,go.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-three,Show me three.,show-me-three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+sit-down-and-point-to-blue,Sit down and point to blue.,sit-down-and-point-to-blue.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+stand-up-and-show-me-three,Stand up and show me three.,stand-up-and-show-me-three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+stand-up-and-touch-red,Stand up and touch red.,stand-up-and-touch-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-a,Find A.,find-a.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-b,Find B.,find-b.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-c,Find C.,find-c.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-d,Find D.,find-d.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+find-e,Find E.,find-e.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+use-your-paper-and-pencil,Use your paper and pencil.,use-your-paper-and-pencil.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+write-your-name,Write your name.,write-your-name.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+copy-a-on-your-paper,Copy A on your paper.,copy-a-on-your-paper.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+write-a,Write A.,write-a.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+what-colour-is-it,What colour is it?,what-colour-is-it.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+red,Red.,red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+blue,Blue.,blue.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+yellow,Yellow.,yellow.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+green,Green.,green.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+its-red,It's red.,its-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+five,Five.,five.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+five-balls,Five balls.,five-balls.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+point-to-three,Point to three.,point-to-three.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved
+show-me-red,Show me red.,show-me-red.mp3,Google Cloud Text-to-Speech / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,Approved

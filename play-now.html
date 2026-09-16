@@ -1,0 +1,1703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff9f1" />
+    <title>English Adventure</title>
+  <style>
+:root {
+  --background: #fff9f1;
+  --surface: #fff;
+  --text: #263238;
+  --muted: #66767a;
+  --primary: #367c7c;
+  --primary-soft: #dcf0ee;
+  --accent: #de812d;
+  --accent-soft: #fff0df;
+  --success: #478a59;
+  --success-soft: #e5f4e8;
+  --highlight: #ffd966;
+  --danger: #9a6226;
+  --line: #e8dfd3;
+  --font: Nunito, "Arial Rounded MT Bold", "Arial Rounded MT", system-ui, sans-serif;
+  --radius-card: 24px;
+  --radius-button: 16px;
+  --space-xs: 8px;
+  --space-sm: 14px;
+  --space-md: 22px;
+  --space-lg: 34px;
+  --shadow-card: 0 14px 32px rgba(58, 48, 35, .1);
+  --transition-fast: 180ms ease;
+  --activity-heading-size: clamp(2rem, 4.3vw, 3.35rem);
+  --activity-prompt-size: clamp(1.55rem, 3.25vw, 2.15rem);
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; max-width: 100%; }
+body { margin: 0; overflow-x: hidden; background: var(--background); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+button { border: 0; color: inherit; cursor: pointer; font: inherit; }
+button:focus-visible { outline: 4px solid #1f6677; outline-offset: 4px; }
+button:disabled { cursor: not-allowed; opacity: .48; transform: none !important; }
+[hidden] { display: none !important; }
+h1, h2, h3, p { margin-top: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+
+.app { min-height: 100vh; min-height: 100dvh; }
+.home { min-height: 100vh; min-height: 100dvh; padding: clamp(32px, 7vw, 88px) clamp(20px, 7vw, 112px); background: radial-gradient(circle at 12% 10%, #ffe2ba 0 5.5%, transparent 5.7%), radial-gradient(circle at 88% 13%, #d8efec 0 6.2%, transparent 6.4%), var(--background); }
+.brand { margin: 0 0 clamp(35px, 7vw, 76px); font-size: clamp(2rem, 5.4vw, 4.2rem); font-weight: 900; letter-spacing: -.055em; }
+.lesson-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2.5vw, 30px); max-width: 1280px; }
+.player { min-height: 100vh; min-height: 100dvh; display: grid; grid-template-rows: minmax(78px, 10vh) minmax(0, 1fr) minmax(86px, 10vh); padding: 0 clamp(16px, 4vw, 62px); }
+.topbar, .bottom-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+.topbar { border-bottom: 1px solid var(--line); }
+.bottom-controls { border-top: 1px solid var(--line); }
+.lesson-title { flex: 1; min-width: 0; text-align: center; font-size: clamp(1.12rem, 2.4vw, 1.5rem); font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; }
+.stage { display: grid; place-items: center; min-height: 0; padding: clamp(18px, 3vw, 42px) 0; }
+.bottom-center { flex: 1; display: flex; justify-content: center; }
+
+@media (max-width: 900px) {
+  .lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Mobile foundation: one viewport, one content scroller, safe-area aware controls. */
+@media (max-width: 600px) {
+  .app { width: 100%; min-width: 0; overflow-x: clip; }
+  .home {
+    padding: calc(28px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(30px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  }
+  .brand { margin-bottom: 28px; font-size: clamp(2.15rem, 11vw, 2.9rem); line-height: 1; }
+  .lesson-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .player {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    grid-template-rows:
+      calc(64px + env(safe-area-inset-top))
+      minmax(0, 1fr)
+      calc(72px + env(safe-area-inset-bottom));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-left: max(12px, env(safe-area-inset-left));
+  }
+
+  .topbar {
+    min-width: 0;
+    gap: 8px;
+    padding-top: env(safe-area-inset-top);
+  }
+  .bottom-controls {
+    gap: 10px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .lesson-title {
+    font-size: clamp(.95rem, 4.2vw, 1.1rem);
+    line-height: 1.15;
+  }
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 14px 0 20px;
+    scroll-padding: 14px 0 20px;
+  }
+  .stage > .activity-card { margin-top: auto; margin-bottom: auto; flex: 0 0 auto; }
+  .bottom-center { display: flex; min-width: 0; }
+}
+
+/* Primary portrait target: iPhone 16 class screens (roughly 375-430 CSS px wide). */
+@media (max-width: 600px) and (orientation: portrait) {
+  .stage { padding-top: 12px; }
+}
+
+/* Final responsive pass --------------------------------------------------
+   Portrait phones use one vertical scroller. Short landscape phones get a
+   dedicated compact shell instead of inheriting desktop geometry. */
+@media (max-width: 600px) {
+  .stage {
+    scrollbar-width: none;
+    padding: 10px 0 16px;
+  }
+  .stage::-webkit-scrollbar { display: none; }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .app { width: 100%; min-width: 0; overflow: hidden; }
+  .player {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+    grid-template-rows:
+      calc(50px + env(safe-area-inset-top))
+      minmax(0, 1fr)
+      calc(56px + env(safe-area-inset-bottom));
+    padding-right: max(8px, env(safe-area-inset-right));
+    padding-left: max(8px, env(safe-area-inset-left));
+  }
+  .topbar {
+    min-width: 0;
+    gap: 7px;
+    padding-top: env(safe-area-inset-top);
+  }
+  .bottom-controls {
+    gap: 8px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .lesson-title {
+    font-size: .96rem;
+    line-height: 1.1;
+  }
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 7px 0 9px;
+  }
+  .stage::-webkit-scrollbar { display: none; }
+  .stage > .activity-card {
+    flex: 0 0 auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .bottom-center { display: flex; min-width: 0; }
+
+  .home {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: calc(18px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  }
+  .brand { margin-bottom: 16px; font-size: clamp(2rem, 7vw, 2.75rem); }
+  .lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 820px; }
+}
+
+.lesson-card { position: relative; display: flex; min-height: 230px; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 26px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: left; transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.lesson-card:not(:disabled):hover { transform: translateY(-5px); box-shadow: 0 19px 38px rgba(58,48,35,.14); }
+.lesson-card:active:not(:disabled) { transform: translateY(-1px) scale(.99); }
+.lesson-card.locked { background: #f7f4ee; color: #8c9798; box-shadow: none; }.lesson-card.completed { border: 2px solid #b7ddc0; }
+.lesson-icon { font-size: 4.3rem; line-height: 1; }
+.lesson-label { font-size: 1.04rem; font-weight: 900; }
+.lesson-name { font-size: clamp(1.55rem, 2.4vw, 2rem); font-weight: 900; letter-spacing: -.03em; }
+.status { padding: 6px 11px; border-radius: 999px; background: var(--primary-soft); color: #1f6262; font-size: .8rem; font-weight: 900; }
+.locked .status { background: #e7e5df; color: #737c7d; }.completed .status { background: var(--success-soft); color: #357244; }
+.icon-button, .nav-button, .replay-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 56px; min-height: 56px; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-button); background: var(--surface); font-weight: 900; transition: transform var(--transition-fast), background var(--transition-fast); }
+.nav-button { min-width: 135px; }.nav-button.next { border-color: var(--primary); background: var(--primary); color: #fff; }.icon-button:hover, .nav-button:hover, .replay-button:hover { transform: translateY(-2px); }
+.activity-card { width: min(920px, 100%); max-height: 100%; overflow: auto; padding: clamp(25px, 4vw, 50px); border: 1px solid #eee5d9; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: center; animation: fade-in 260ms ease; }
+.activity-type { margin-bottom: 10px; color: var(--primary); font-size: .9rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }.activity-heading { margin-bottom: 22px; font-size: var(--activity-heading-size); line-height: 1.1; letter-spacing: -.05em; }.instruction { max-width: 630px; margin: -8px auto 24px; color: var(--muted); font-size: clamp(1.05rem, 2.1vw, 1.25rem); }.teaching-visual { display: block; object-fit: contain; animation: none !important; }.teaching-visual--hero.character { width: min(270px, 64vw); aspect-ratio: 1; margin: 0 auto 25px; border-radius: 31px; background: var(--accent-soft); }.teaching-visual--unavailable { display: grid; place-items: center; width: 150px; height: 120px; margin: 12px auto; padding: 12px; border: 3px dashed var(--danger); border-radius: 16px; background: #fff8ed; color: #9c4129; font-size: .85rem; font-weight: 900; text-align: center; }
+.replay-button { background: var(--primary-soft); border: 0; color: #1f5b5b; }.speaker { font-size: 1.45rem; }.choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2.5vw, 24px); max-width: 780px; margin: 26px auto 0; }.choice { display: flex; min-height: clamp(150px, 24vw, 205px); flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 12px; border: 3px solid var(--line); border-radius: 22px; background: #fff; font-size: clamp(1.05rem, 2vw, 1.25rem); font-weight: 900; transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast); }.choice:hover { border-color: #94c6c4; background: #fbfffe; }.choice-visual { width: clamp(94px, 15vw, 136px); height: clamp(94px, 15vw, 136px); }.choice.correct { border-color: var(--success); background: var(--success-soft); }.choice.incorrect { border-color: var(--danger); background: #fff8ed; }.feedback { min-height: 28px; margin: 16px 0 0; font-weight: 900; }.feedback.correct { color: var(--success); }.feedback.incorrect { color: var(--danger); }
+.listen-orb { display: grid; place-items: center; width: min(130px, 30vw); aspect-ratio: 1; margin: 0 auto 24px; border-radius: 50%; background: var(--primary-soft); color: #205c5c; font-size: 4rem; }.listen-orb:active { transform: scale(.95); }
+.drag-object { display: grid; place-items: center; width: 118px; height: 118px; margin: 18px auto; border: 3px dashed #d69a55; border-radius: 24px; background: #fff9ef; touch-action: none; user-select: none; }.teaching-visual--drag { width: 96px; height: 96px; }.drop-target { display: grid; place-items: center; min-height: 180px; max-width: 600px; margin: 0 auto; border: 3px dashed #91c2bf; border-radius: 24px; background: #f5fbfa; color: #36595c; font-size: 1.25rem; font-weight: 900; }.drop-target.over { border-color: var(--primary); background: var(--primary-soft); }.target-label { margin-top: 14px; }.target-visual { width: 135px; height: 105px; }.placed-visual { width: 72px; height: 72px; margin-top: -52px; z-index: 1; }
+.speak-turn { margin: 20px 0; color: var(--accent); font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 1000; letter-spacing: .12em; }.speak-question { max-width: 650px; margin: 0 auto 18px; padding: 24px; border-radius: 22px; background: var(--accent-soft); font-size: var(--activity-prompt-size); line-height: 1.2; font-weight: 900; }.speak-complete { margin: 12px 0 0; background: var(--success-soft); color: #357244; }.action-prompt { max-width: 560px; margin: -4px auto 22px; color: var(--muted); font-size: clamp(1.1rem, 2.4vw, 1.35rem); font-weight: 800; }.action-complete { margin: 12px 0 0; background: var(--success-soft); color: #357244; }.review-list { display: grid; gap: 12px; max-width: 700px; margin: 0 auto; }.review-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 15px; min-height: 73px; padding: 12px 19px; border: 2px solid var(--line); border-radius: 17px; background: #fff; text-align: left; font-weight: 900; }.review-item.done { border-color: var(--success); background: var(--success-soft); }.review-visual { width: 56px; height: 48px; }.challenge-count { margin: -13px 0 18px; color: var(--muted); font-weight: 800; }.challenge-stage .activity-card { width: 100%; max-height: none; padding: 0; border: 0; box-shadow: none; animation: none; }.challenge-stage .activity-heading { font-size: var(--activity-heading-size); }.challenge-next { margin-top: 22px; }.renderer-error { padding: 24px; border-radius: 18px; background: #fff8ed; color: #9c4129; font-weight: 900; }
+.drop-area.correct { border-color: var(--success); background: var(--success-soft); }.progress-dots { display: flex; gap: 5px; }.progress-dot { display: block; width: 9px; height: 9px; border-radius: 50%; background: #e8dfd3; }.progress-dot.done { background: var(--primary); }.finish { min-height: 100vh; display: grid; place-items: center; padding: 28px; }.finish-card { width: min(650px,100%); padding: clamp(38px,7vw,72px); border-radius: 32px; background: var(--surface); box-shadow: var(--shadow-card); text-align: center; animation: fade-in 300ms ease; }.stars { margin-bottom: 20px; color: #e3a629; font-size: clamp(3.5rem, 10vw, 5.5rem); letter-spacing: .13em; animation: soft-scale 1.5s ease-in-out infinite; }.finish h1 { font-size: clamp(2.35rem, 5vw, 4rem); letter-spacing: -.05em; }.finish-actions { display: flex; justify-content: center; gap: 14px; margin-top: 32px; }
+.teacher-overlay { position: fixed; z-index: 10; inset: 0; background: rgba(26,39,41,.3); }.teacher-drawer { position: absolute; top: 0; right: 0; width: min(365px, 92vw); min-height: 100%; padding: 28px; background: #263238; color: #fff; box-shadow: -16px 0 36px rgba(0,0,0,.17); animation: drawer-in 220ms ease; }.teacher-drawer h2 { margin-bottom: 5px; }.teacher-meta { color: #c4d0d2; font-size: .9rem; }.teacher-note { margin: 18px 0 -4px; padding: 14px; border-radius: 13px; background: #34484c; color: #e8f1f2; }.teacher-note h3 { margin-bottom: 6px; font-size: .86rem; text-transform: uppercase; letter-spacing: .08em; }.teacher-note p { margin: 0 0 8px; font-size: .88rem; line-height: 1.45; }.teacher-note p:last-child { margin-bottom: 0; }.teacher-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 20px; }.teacher-action { min-height: 51px; padding: 10px; border-radius: 12px; background: #415357; color: #fff; font-weight: 800; }.teacher-action.primary { background: var(--accent); }.teacher-action.success { background: var(--success); }.teacher-action.wide { grid-column: span 2; }.drawer-close { position: absolute; top: 15px; right: 14px; min-width: 48px; min-height: 48px; border-radius: 50%; background: transparent; color: #fff; font-size: 1.7rem; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } } @keyframes soft-scale { 50% { transform: scale(1.055); } } @keyframes drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@media (max-width: 620px) { .nav-button { min-width: 109px; padding: 10px; }.nav-button span { display: none; } }
+
+/* Compact progress bar exists alongside desktop dots; it becomes the mobile progress UI. */
+.progress { flex: 0 0 auto; }
+.progress-bar { display: none; width: 54px; height: 8px; overflow: hidden; border-radius: 999px; background: #e8dfd3; }
+.progress-bar-fill { display: block; height: 100%; border-radius: inherit; background: var(--primary); }
+
+@media (max-width: 600px) {
+  .icon-button, .nav-button, .replay-button {
+    min-width: 54px;
+    min-height: 54px;
+    border-radius: 15px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topbar > .icon-button { flex: 0 0 54px; padding: 10px; font-size: 1.35rem; }
+  .progress-dots { display: none; }
+  .progress-bar { display: block; }
+
+  .bottom-controls > .nav-button {
+    flex: 0 0 64px;
+    min-width: 64px;
+    padding: 10px 12px;
+    font-size: 1.55rem;
+  }
+  .bottom-controls .nav-button span:not([aria-hidden="true"]) { display: none; }
+  .bottom-controls .nav-button span[aria-hidden="true"] { display: inline; }
+  .bottom-controls .bottom-center { flex: 1 1 auto; }
+  .bottom-controls .replay-button { min-width: 58px; padding: 10px 14px; font-size: 1.35rem; line-height: 1; }
+
+  .activity-card {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    margin: 0 auto;
+    padding: 22px 16px 24px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(58, 48, 35, .08);
+  }
+  .activity-type { margin-bottom: 8px; font-size: .78rem; letter-spacing: .09em; }
+  .activity-heading {
+    margin-bottom: 18px;
+    font-size: clamp(2rem, 9vw, 2.45rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+  .instruction { margin: -4px auto 18px; font-size: 1.05rem; line-height: 1.35; }
+  .teaching-visual--hero.character {
+    width: min(255px, 70vw);
+    max-height: 38dvh;
+    margin-bottom: 20px;
+  }
+  .activity-card > .replay-button { max-width: 100%; white-space: normal; }
+
+  .choice-grid { width: 100%; margin-top: 20px; }
+  .feedback { min-height: 24px; margin-top: 12px; }
+  .speak-question { max-width: 100%; padding: 18px 16px; }
+  .review-list { width: 100%; }
+  .review-item { min-width: 0; }
+  .drop-target { width: 100%; }
+  .finish { min-height: 100vh; min-height: 100dvh; padding: calc(22px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+  .teacher-drawer { padding: calc(24px + env(safe-area-inset-top)) max(22px, env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) 22px; overflow-y: auto; }
+}
+
+@media (max-width: 430px) and (orientation: portrait) {
+  .lesson-card { min-height: 176px; padding: 20px; }
+  .lesson-icon { font-size: 3.4rem; }
+  .lesson-label, .lesson-name { display: block; }
+  .lesson-label { font-size: 1.02rem; }
+  .lesson-name { margin-top: 3px; font-size: 1.5rem; }
+  .status { padding: 5px 10px; }
+
+  .activity-card { padding-right: 14px; padding-left: 14px; }
+  .teaching-visual--hero.character { width: min(248px, 72vw); }
+}
+
+/* Activity-specific mobile layouts. Teaching images stay large and stable;
+   compact concepts use grids instead of long single-column lists. */
+@media (max-width: 600px) {
+  button, .choice { touch-action: manipulation; }
+
+  .activity-card--learn { padding-top: 18px; padding-bottom: 22px; }
+  .activity-card--learn .activity-heading { margin-bottom: 16px; }
+  .activity-card--learn .teaching-visual--hero.character {
+    width: min(272px, 76vw);
+    max-height: 40dvh;
+    margin-bottom: 18px;
+  }
+  .activity-card--learn .learn-replay {
+    width: min(250px, 100%);
+    min-height: 58px;
+    margin: 0 auto;
+    font-size: 1.04rem;
+  }
+
+  .activity-card--listen-choice,
+  .activity-card--tap-choice { padding-top: 18px; }
+  .activity-card--listen-choice .activity-heading,
+  .activity-card--tap-choice .activity-heading { margin-bottom: 14px; }
+
+  .listen-orb {
+    width: 82px;
+    min-width: 82px;
+    min-height: 82px;
+    margin-bottom: 16px;
+    font-size: 2.65rem;
+    border: 2px solid #cfe7e5;
+    box-shadow: 0 5px 14px rgba(58, 48, 35, .07);
+  }
+
+  .choice-replay {
+    min-width: 126px;
+    margin-bottom: 2px;
+  }
+
+  .choice-grid {
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .choice-grid--count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3.choice-grid--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-grid--count-3:not(.choice-grid--compact) .choice:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc((100% - 10px) / 2);
+    justify-self: center;
+  }
+  .choice-grid--count-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-5,
+  .choice-grid--count-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .choice {
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 8px;
+    border-width: 2px;
+    border-radius: 18px;
+    line-height: 1.15;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .choice-grid--count-2 .choice { min-height: 174px; }
+  .choice-grid--count-3 .choice { min-height: 154px; }
+  .choice-grid--count-3.choice-grid--compact .choice,
+  .choice-grid--count-5 .choice,
+  .choice-grid--count-6 .choice { min-height: 116px; }
+  .choice-grid--count-4 .choice { min-height: 132px; }
+
+  .choice-grid--count-2 .choice-visual { width: min(132px, 31vw); height: min(132px, 31vw); }
+  .choice-grid--count-3 .choice-visual { width: min(118px, 29vw); height: min(118px, 29vw); }
+  .choice-grid--count-3.choice-grid--compact .choice-visual,
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(88px, 22vw); height: min(88px, 22vw); }
+  .choice-grid--count-4 .choice-visual { width: min(102px, 26vw); height: min(102px, 26vw); }
+
+  .choice-label {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 4.5vw, 1.16rem);
+  }
+
+  .activity-card--listen-choice .feedback,
+  .activity-card--tap-choice .feedback { margin-top: 10px; }
+}
+
+@media (max-width: 360px) {
+  .activity-card--learn .teaching-visual--hero.character { width: min(250px, 75vw); }
+  .choice-grid { gap: 8px; }
+  .choice-grid--count-2 .choice { min-height: 156px; }
+  .choice-grid--count-2 .choice-visual { width: min(116px, 31vw); height: min(116px, 31vw); }
+  .choice-grid--count-3.choice-grid--compact .choice-visual,
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(76px, 21vw); height: min(76px, 21vw); }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .lesson-card:not(:disabled):hover,
+  .icon-button:hover, .nav-button:hover, .replay-button:hover { transform: none; }
+  .choice:hover { border-color: var(--line); background: #fff; }
+  .choice:active { border-color: #94c6c4; background: #fbfffe; }
+  .choice.correct:hover { border-color: var(--success); background: var(--success-soft); }
+  .choice.incorrect:hover { border-color: var(--danger); background: #fff8ed; }
+}
+
+
+/* Final mobile activity system ------------------------------------------- */
+.activity-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.activity-actions .replay-button { min-width: 150px; }
+.activity-heading,
+.speak-question,
+.action-prompt,
+.instruction { text-wrap: balance; }
+
+@media (max-width: 600px) {
+  :root {
+    --mobile-activity-heading-size: clamp(2rem, 8.6vw, 2.35rem);
+    --mobile-prompt-size: clamp(1.22rem, 5.4vw, 1.48rem);
+  }
+
+  .activity-heading,
+  .challenge-stage .activity-heading {
+    font-size: var(--mobile-activity-heading-size);
+    line-height: 1.08;
+    letter-spacing: -.045em;
+  }
+
+  /* Speak / interview pages */
+  .activity-card--speak { padding-top: 18px; }
+  .activity-card--speak > .teaching-visual--hero.character {
+    width: min(196px, 54vw);
+    max-height: 24dvh;
+    margin-bottom: 12px;
+  }
+  .activity-card--speak .activity-heading { margin-bottom: 8px; }
+  .activity-card--speak .speak-turn {
+    margin: 8px 0 10px;
+    font-size: .98rem;
+    letter-spacing: .1em;
+  }
+  .activity-card--speak .speak-question {
+    margin-bottom: 0;
+    padding: 15px 14px;
+    font-size: var(--mobile-prompt-size);
+    line-height: 1.32;
+  }
+  .activity-card--speak .activity-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+  }
+  .activity-card--speak .activity-actions .replay-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 10px 8px;
+  }
+
+  /* Listen-and-do and paper tasks */
+  .activity-card--action,
+  .activity-card--writing { padding-top: 18px; }
+  .activity-card--action .activity-heading,
+  .activity-card--writing .activity-heading { margin-bottom: 12px; }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character {
+    width: min(220px, 61vw);
+    max-height: 29dvh;
+    margin-bottom: 12px;
+  }
+  .activity-card--action .action-prompt,
+  .activity-card--writing .instruction {
+    margin: 0 auto 4px;
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+  .activity-card--action .activity-actions,
+  .activity-card--writing .activity-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+  }
+  .activity-card--action .activity-actions .replay-button,
+  .activity-card--writing .activity-actions .replay-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 10px 8px;
+  }
+
+  /* Quick review: large tap cards without creating a very long phone page. */
+  .activity-card--review { padding-top: 18px; }
+  .activity-card--review .activity-heading { margin-bottom: 16px; }
+  .activity-card--review .review-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .activity-card--review .review-item {
+    display: flex;
+    min-width: 0;
+    min-height: 126px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    border-width: 2px;
+    text-align: center;
+    font-size: 1.04rem;
+    line-height: 1.1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .activity-card--review .review-visual {
+    width: 68px;
+    height: 58px;
+    flex: 0 0 auto;
+  }
+  .activity-card--review .review-item > span:last-child {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  /* Challenge shell stays visually secondary to the actual task inside. */
+  .activity-card--challenge { padding-top: 16px; }
+  .activity-card--challenge > .activity-heading {
+    margin-bottom: 6px;
+    font-size: clamp(1.42rem, 6.1vw, 1.72rem);
+    line-height: 1.12;
+    letter-spacing: -.035em;
+  }
+  .activity-card--challenge > .challenge-count {
+    margin: 0 0 10px;
+    font-size: .9rem;
+  }
+  .challenge-stage .activity-type { margin-bottom: 5px; }
+  .challenge-stage .activity-heading { margin-bottom: 10px; }
+  .challenge-stage .choice-grid { margin-top: 10px; }
+  .challenge-stage .listen-orb { margin-bottom: 10px; }
+  .challenge-next {
+    width: min(240px, 100%);
+    min-height: 54px;
+    margin: 14px auto 0;
+  }
+
+  /* Drag template: large drop zone and stable object for touch. */
+  .activity-card--drag .drag-object {
+    width: 104px;
+    height: 104px;
+    margin: 14px auto;
+  }
+  .activity-card--drag .teaching-visual--drag { width: 84px; height: 84px; }
+  .activity-card--drag .drop-target {
+    min-height: 148px;
+    padding: 12px;
+    font-size: 1.08rem;
+  }
+  .activity-card--drag .target-visual { width: 116px; height: 92px; }
+
+  /* Finish screen is deliberately still; no continuous celebratory motion. */
+  .stars { animation: none; }
+  .finish-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(330px, 100%); margin: 28px auto 0; }
+  .finish-actions .nav-button { width: 100%; min-width: 0; }
+}
+
+@media (max-width: 360px) {
+  .activity-card--speak > .teaching-visual--hero.character { width: min(178px, 52vw); }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character { width: min(202px, 60vw); }
+  .activity-card--review .review-item { min-height: 116px; }
+  .activity-card--review .review-visual { width: 60px; height: 52px; }
+}
+
+/* iPhone-class landscape: compact controls plus task-specific two-column
+   layouts. This applies by height, because a phone in landscape can be 800+
+   CSS pixels wide and would otherwise look like a desktop. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .icon-button, .nav-button, .replay-button {
+    min-width: 46px;
+    min-height: 46px;
+    padding: 8px 11px;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topbar > .icon-button { flex: 0 0 46px; padding: 7px; font-size: 1.15rem; }
+  .progress-dots { display: none; }
+  .progress-bar { display: block; width: 48px; height: 7px; }
+  .bottom-controls > .nav-button {
+    flex: 0 0 54px;
+    min-width: 54px;
+    padding: 7px 10px;
+    font-size: 1.35rem;
+  }
+  .bottom-controls .nav-button span:not([aria-hidden="true"]) { display: none; }
+  .bottom-controls .nav-button span[aria-hidden="true"] { display: inline; }
+  .bottom-controls .bottom-center { flex: 1 1 auto; }
+  .bottom-controls .replay-button { min-width: 54px; padding: 7px 11px; font-size: 1.15rem; line-height: 1; }
+
+  .activity-card {
+    width: min(790px, 100%);
+    max-height: none;
+    overflow: visible;
+    padding: 12px 16px;
+    border-radius: 19px;
+    box-shadow: 0 6px 18px rgba(58, 48, 35, .08);
+  }
+  .activity-type { margin-bottom: 4px; font-size: .7rem; letter-spacing: .08em; }
+  .activity-heading,
+  .challenge-stage .activity-heading {
+    margin-bottom: 8px;
+    font-size: clamp(1.58rem, 4.3vw, 1.9rem);
+    line-height: 1.05;
+    letter-spacing: -.04em;
+  }
+  .instruction { margin: 0 auto 8px; font-size: .96rem; line-height: 1.25; }
+  .feedback { min-height: 18px; margin-top: 6px; font-size: .9rem; }
+  .speaker { font-size: 1.2rem; }
+  .stars { animation: none; }
+
+  /* Learn */
+  .activity-card--learn {
+    display: grid;
+    grid-template-columns: minmax(210px, .9fr) minmax(260px, 1.1fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual action";
+    column-gap: 24px;
+    align-items: center;
+    padding: 10px 22px;
+    text-align: center;
+  }
+  .activity-card--learn > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--learn > .activity-heading { grid-area: title; margin: 0 0 10px; }
+  .activity-card--learn > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(205px, 28vw);
+    max-height: 54dvh;
+    margin: 0 auto;
+  }
+  .activity-card--learn > .learn-replay {
+    grid-area: action;
+    width: min(240px, 100%);
+    min-height: 46px;
+    margin: 0 auto;
+  }
+
+  /* Listen / tap choice */
+  .activity-card--listen-choice,
+  .activity-card--tap-choice { padding: 10px 16px 11px; }
+  .activity-card--listen-choice .activity-heading,
+  .activity-card--tap-choice .activity-heading { margin-bottom: 5px; }
+  .listen-orb {
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    margin: 0 auto 7px;
+    font-size: 1.75rem;
+    border: 1px solid #cfe7e5;
+    box-shadow: none;
+  }
+  .choice-replay { min-width: 112px; min-height: 44px; margin: 0 auto 2px; }
+  .choice-grid,
+  .choice-grid--count-2,
+  .choice-grid--count-3,
+  .choice-grid--count-3.choice-grid--compact,
+  .choice-grid--count-4,
+  .choice-grid--count-5,
+  .choice-grid--count-6 {
+    width: 100%;
+    max-width: 100%;
+    gap: 8px;
+    margin-top: 7px;
+  }
+  .choice-grid--count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3,
+  .choice-grid--count-3.choice-grid--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-grid--count-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .choice-grid--count-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .choice-grid--count-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .choice-grid--count-3:not(.choice-grid--compact) .choice:last-child:nth-child(odd) {
+    grid-column: auto;
+    width: auto;
+    justify-self: stretch;
+  }
+  .choice,
+  .choice-grid--count-2 .choice,
+  .choice-grid--count-3 .choice,
+  .choice-grid--count-3.choice-grid--compact .choice,
+  .choice-grid--count-4 .choice,
+  .choice-grid--count-5 .choice,
+  .choice-grid--count-6 .choice {
+    min-height: 104px;
+    gap: 4px;
+    padding: 6px;
+    border-width: 2px;
+    border-radius: 15px;
+  }
+  .choice-grid--count-2 .choice { min-height: 118px; }
+  .choice-grid--count-2 .choice-visual { width: min(104px, 17vw); height: min(104px, 17vw); }
+  .choice-grid--count-3 .choice-visual { width: min(92px, 14vw); height: min(92px, 14vw); }
+  .choice-grid--count-4 .choice-visual { width: min(76px, 11vw); height: min(76px, 11vw); }
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(64px, 9vw); height: min(64px, 9vw); }
+  .choice-label { font-size: .92rem; line-height: 1.05; }
+
+  /* Speak / mini interview */
+  .activity-card--speak {
+    display: grid;
+    grid-template-columns: minmax(170px, .72fr) minmax(330px, 1.28fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual turn"
+      "visual prompt"
+      "visual actions";
+    column-gap: 22px;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .activity-card--speak > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--speak > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(190px, 25vw);
+    max-height: 52dvh;
+    margin: 0 auto;
+  }
+  .activity-card--speak > .activity-heading { grid-area: title; margin: 0 0 3px; }
+  .activity-card--speak > .speak-turn { grid-area: turn; margin: 2px 0 5px; font-size: .78rem; letter-spacing: .09em; }
+  .activity-card--speak > .speak-question {
+    grid-area: prompt;
+    margin: 0;
+    padding: 9px 12px;
+    font-size: clamp(1.02rem, 2.8vw, 1.25rem);
+    line-height: 1.18;
+  }
+  .activity-card--speak > .activity-actions {
+    grid-area: actions;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .activity-card--speak .activity-actions .replay-button { width: 100%; min-width: 0; min-height: 44px; padding: 7px; }
+
+  /* Action / writing */
+  .activity-card--action,
+  .activity-card--writing {
+    display: grid;
+    grid-template-columns: minmax(190px, .78fr) minmax(320px, 1.22fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual prompt"
+      "visual actions";
+    column-gap: 22px;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .activity-card--action > .activity-type,
+  .activity-card--writing > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--action > .activity-heading,
+  .activity-card--writing > .activity-heading { grid-area: title; margin: 0 0 4px; }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(205px, 27vw);
+    max-height: 54dvh;
+    margin: 0 auto;
+  }
+  .activity-card--action > .action-prompt,
+  .activity-card--writing > .instruction {
+    grid-area: prompt;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.22;
+  }
+  .activity-card--action > .activity-actions,
+  .activity-card--writing > .activity-actions {
+    grid-area: actions;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .activity-card--action .activity-actions .replay-button,
+  .activity-card--writing .activity-actions .replay-button { width: 100%; min-width: 0; min-height: 44px; padding: 7px; }
+
+  /* Review */
+  .activity-card--review { padding: 10px 14px; }
+  .activity-card--review .activity-heading { margin-bottom: 7px; }
+  .activity-card--review .review-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+    max-width: 100%;
+  }
+  .activity-card--review .review-item {
+    display: flex;
+    min-width: 0;
+    min-height: 108px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px;
+    border-width: 2px;
+    text-align: center;
+    font-size: .88rem;
+  }
+  .activity-card--review .review-visual { width: 58px; height: 48px; }
+  .activity-card--review .review-item > span:last-child { font-size: 1.1rem; }
+
+  /* Challenge shell */
+  .activity-card--challenge { padding: 8px 14px 10px; }
+  .activity-card--challenge > .activity-heading {
+    margin-bottom: 2px;
+    font-size: 1.18rem;
+    line-height: 1.05;
+  }
+  .activity-card--challenge > .challenge-count { margin: 0 0 4px; font-size: .76rem; }
+  .challenge-stage .activity-card { padding: 0; }
+  .challenge-stage .activity-type { margin-bottom: 2px; }
+  .challenge-stage .activity-heading { margin-bottom: 5px; font-size: 1.45rem; }
+  .challenge-stage .listen-orb { margin-bottom: 5px; }
+  .challenge-stage .choice-grid { margin-top: 5px; }
+  .challenge-next { min-height: 42px; margin-top: 7px; padding: 6px 12px; }
+
+  /* Drag */
+  .activity-card--drag { padding: 10px 18px; }
+  .activity-card--drag .drag-object { width: 88px; height: 88px; margin: 7px auto; }
+  .activity-card--drag .teaching-visual--drag { width: 70px; height: 70px; }
+  .activity-card--drag .drop-target { min-height: 105px; max-width: 560px; font-size: 1rem; }
+  .activity-card--drag .target-visual { width: 100px; height: 76px; }
+
+  .finish {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: calc(10px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  }
+  .finish-card { width: min(570px, 100%); padding: 18px 30px; }
+  .stars { margin-bottom: 8px; font-size: 2.5rem; }
+  .finish h1 { font-size: 2.15rem; }
+  .finish-actions { margin-top: 14px; }
+
+  .lesson-card { min-height: 142px; padding: 16px 18px; }
+  .lesson-icon { font-size: 3rem; }
+  .lesson-name { font-size: 1.35rem; }
+}
+
+@media (orientation: landscape) and (max-height: 380px) {
+  .activity-card { padding-top: 8px; padding-bottom: 8px; }
+  .activity-card--learn > .teaching-visual--hero.character,
+  .activity-card--speak > .teaching-visual--hero.character,
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character { max-height: 48dvh; }
+  .choice, .choice-grid--count-2 .choice { min-height: 96px; }
+  .choice-grid--count-2 .choice-visual { width: min(88px, 15vw); height: min(88px, 15vw); }
+  .activity-card--review .review-item { min-height: 94px; }
+}
+
+</style></head>
+  <body>
+    <main id="app" class="app" aria-live="polite"></main>
+  <script>(() => {
+const STORAGE_KEY = "english-adventure-progress";
+const defaults = () => ({ currentLesson: "hello", lessonPositions: { hello: 0 }, lessonProgress: {}, completedLessons: {}, soundOn: true });
+
+function read() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const positions = { ...(stored.lessonPositions || {}) };
+    if (Number.isInteger(stored.currentActivity) && !Number.isInteger(positions[stored.currentLesson || "hello"])) positions[stored.currentLesson || "hello"] = stored.currentActivity;
+    delete stored.currentActivity;
+    return { ...defaults(), ...stored, lessonPositions: { ...defaults().lessonPositions, ...positions } };
+  }
+  catch { return defaults(); }
+}
+
+const state = read();
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function patch(values) { Object.assign(state, values); save(); }
+function lessonPosition(lessonId) { return state.lessonPositions[lessonId] ?? 0; }
+function setLessonPosition(lessonId, position) { state.lessonPositions[lessonId] = Math.max(0, position); save(); }
+function openLesson(lessonId) { state.currentLesson = lessonId; if (!Number.isInteger(state.lessonPositions[lessonId])) state.lessonPositions[lessonId] = 0; save(); }
+function activityDone(lessonId, activityId) { return Boolean(state.lessonProgress[lessonId]?.includes(activityId)); }
+function markActivityDone(lessonId, activityId) {
+  const done = new Set(state.lessonProgress[lessonId] || []); done.add(activityId);
+  state.lessonProgress[lessonId] = [...done]; save();
+}
+function resetLesson(lessonId) { state.currentLesson = lessonId; state.lessonPositions[lessonId] = 0; delete state.lessonProgress[lessonId]; delete state.completedLessons[lessonId]; save(); }
+function resetAll() { Object.assign(state, defaults()); save(); }
+
+
+const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
+function normalizeAudioText(text) {
+  return String(text ?? "")
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/\u2026/g, "...")
+    .toLowerCase()
+    .replace(/[.!?,;:]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const lesson01Entries = [
+  ["Listen.", "listen.mp3"],
+  ["Listen. Then do it!", "listen-then-do-it.mp3"],
+  ["Hello!", "hello.mp3"],
+  ["Hi!", "hi.mp3"],
+  ["Goodbye!", "goodbye.mp3"],
+  ["What's your name?", "whats-your-name.mp3"],
+  ["My name is ...", "my-name-is.mp3"],
+  ["My name is Tom.", "my-name-is-tom.mp3"],
+  ["Who is Tom?", "who-is-tom.mp3"],
+  ["How old are you?", "how-old-are-you.mp3"],
+  ["I'm five.", "im-five.mp3"],
+  ["I'm six.", "im-six.mp3"],
+  ["Five or six?", "five-or-six.mp3"],
+  ["Boy.", "boy.mp3"],
+  ["Girl.", "girl.mp3"],
+  ["Boy or girl?", "boy-or-girl.mp3"],
+  ["Are you a boy or a girl?", "are-you-a-boy-or-a-girl.mp3"],
+  ["I'm a boy.", "im-a-boy.mp3"],
+  ["I'm a girl.", "im-a-girl.mp3"],
+  ["My name is Kimi. I'm six. I'm a boy.", "about-me-kimi.mp3"],
+  ["Happy.", "happy.mp3"],
+  ["Sad.", "sad.mp3"],
+  ["Tired.", "tired.mp3"],
+  ["Where is tired?", "where-is-tired.mp3"],
+  ["How are you?", "how-are-you.mp3"],
+  ["I'm happy.", "im-happy.mp3"],
+  ["I'm sad.", "im-sad.mp3"],
+  ["I'm tired.", "im-tired.mp3"],
+  ["How is she?", "how-is-she.mp3"],
+  ["She is happy.", "she-is-happy.mp3"],
+  ["Stand up.", "stand-up.mp3"],
+  ["Sit down.", "sit-down.mp3"],
+  ["Stand or sit?", "stand-or-sit.mp3"],
+  ["Look.", "look.mp3"],
+  ["Look or listen?", "look-or-listen.mp3"],
+  ["Point.", "point.mp3"],
+  ["Touch.", "touch.mp3"],
+  ["Point or touch?", "point-or-touch.mp3"],
+  ["Show me.", "show-me.mp3"],
+  ["Point to the ball.", "point-to-the-ball.mp3"],
+  ["Touch the table.", "touch-the-table.mp3"],
+  ["Give me the ball.", "give-me-the-ball.mp3"],
+  ["Take the ball.", "take-the-ball.mp3"],
+  ["Give or take?", "give-or-take.mp3"],
+  ["Find red.", "find-red.mp3"],
+  ["Touch blue.", "touch-blue.mp3"],
+  ["Point to yellow.", "point-to-yellow.mp3"],
+  ["Show me green.", "show-me-green.mp3"],
+  ["Touch green.", "touch-green.mp3"],
+  ["Point to red.", "point-to-red.mp3"],
+  ["Show me blue.", "show-me-blue.mp3"],
+  ["Show me yellow.", "show-me-yellow.mp3"],
+  ["Touch red.", "touch-red.mp3"],
+  ["Point to blue.", "point-to-blue.mp3"],
+  ["Find three.", "find-three.mp3"],
+  ["Touch five.", "touch-five.mp3"],
+  ["How many?", "how-many.mp3"],
+  ["One.", "one.mp3"],
+  ["Two.", "two.mp3"],
+  ["Three.", "three.mp3"],
+  ["Three balls.", "three-balls.mp3"],
+  ["Four.", "four.mp3"],
+  ["Four stars.", "four-stars.mp3"],
+  ["Point to five.", "point-to-five.mp3"],
+  ["Show me two.", "show-me-two.mp3"],
+  ["Touch three.", "touch-three.mp3"],
+  ["Come here.", "come-here.mp3"],
+  ["Stop.", "stop.mp3"],
+  ["Go.", "go.mp3"],
+  ["Show me three.", "show-me-three.mp3"],
+  ["Sit down and point to blue.", "sit-down-and-point-to-blue.mp3"],
+  ["Stand up and show me three.", "stand-up-and-show-me-three.mp3"],
+  ["Stand up and touch red.", "stand-up-and-touch-red.mp3"],
+  ["Find A.", "find-a.mp3"],
+  ["Find B.", "find-b.mp3"],
+  ["Find C.", "find-c.mp3"],
+  ["Find D.", "find-d.mp3"],
+  ["Find E.", "find-e.mp3"],
+  ["Use your paper and pencil.", "use-your-paper-and-pencil.mp3"],
+  ["Write your name.", "write-your-name.mp3"],
+  ["Copy A on your paper.", "copy-a-on-your-paper.mp3"],
+  ["Write A.", "write-a.mp3"],
+  ["What colour is it?", "what-colour-is-it.mp3"],
+  ["Red.", "red.mp3"],
+  ["Blue.", "blue.mp3"],
+  ["Yellow.", "yellow.mp3"],
+  ["Green.", "green.mp3"],
+  ["It's red.", "its-red.mp3"],
+  ["Five.", "five.mp3"],
+  ["Five balls.", "five-balls.mp3"],
+  ["Point to three.", "point-to-three.mp3"],
+  ["Show me red.", "show-me-red.mp3"],
+];
+
+const teachingAudioRegistry = new Map(
+  lesson01Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_01_BASE + file,
+  ])
+);
+
+function resolveTeachingAudio(text) {
+  if (!text) return null;
+  return teachingAudioRegistry.get(normalizeAudioText(text)) ?? null;
+}
+
+function hasTeachingAudio(text) {
+  return Boolean(resolveTeachingAudio(text));
+}
+
+
+
+
+let currentAudio = null;
+
+function stopCurrentPlayback() {
+  window.speechSynthesis?.cancel();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+function browserTtsFallback(text) {
+  if (!state.soundOn || !text || !("speechSynthesis" in window)) return;
+  console.warn("[Teaching audio fallback] Browser TTS used for:", text);
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-GB";
+  utterance.rate = 0.78;
+  utterance.pitch = 1.0;
+  window.speechSynthesis.speak(utterance);
+}
+
+function playText(text, explicitSrc = null) {
+  if (!state.soundOn || !text) return;
+
+  stopCurrentPlayback();
+
+  const audioSrc = explicitSrc || resolveTeachingAudio(text);
+  if (!audioSrc) {
+    browserTtsFallback(text);
+    return;
+  }
+
+  currentAudio = new Audio(audioSrc);
+  currentAudio.preload = "auto";
+
+  currentAudio.play().catch((error) => {
+    console.error("[Teaching audio failed]", audioSrc, error);
+    browserTtsFallback(text);
+  });
+}
+
+function replay(activity) {
+  if (!state.soundOn || !activity) return;
+  const text = activity.ttsText || activity.title;
+  playText(text, activity.audioSrc || null);
+}
+
+function speak(text) {
+  // Backward-compatible API. Existing callers now use fixed teaching audio
+  // whenever the text exists in the registry.
+  playText(text);
+}
+
+function toggleSound() {
+  patch({ soundOn: !state.soundOn });
+  if (!state.soundOn) stopCurrentPlayback();
+  return state.soundOn;
+}
+
+function successSound() {
+  if (!state.soundOn || !window.AudioContext) return;
+  const context = new AudioContext();
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.frequency.setValueAtTime(523, context.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(783, context.currentTime + .16);
+  gain.gain.setValueAtTime(.045, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .28);
+  oscillator.connect(gain).connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + .29);
+}
+
+
+// Teaching visuals are deliberately separate from UI icons (speaker, arrows, stars).
+// A visual may be used in a lesson only after a human has approved the asset.
+const visuals = {
+  "waving-child": { id: "waving-child", type: "image", src: "assets/images/lesson-1/characters/tom/tom-hello-wave.png", alt: "Tom waving hello", concept: "child waving hello", approved: true },
+  "speaking-child": { id: "speaking-child", type: "image", src: "assets/images/lesson-1/characters/tom/tom-speaking.png", alt: "Tom speaking", concept: "child speaking", approved: true },
+  "happy-face": { id: "happy-face", type: "image", src: "assets/images/lesson-1/characters/tom/tom-happy.png", alt: "Tom clearly happy", concept: "happy", approved: true },
+  "sad-face": { id: "sad-face", type: "image", src: "assets/images/lesson-1/characters/mia/mia-sad.png", alt: "Mia clearly sad", concept: "sad", approved: true },
+  "tired-face": { id: "tired-face", type: "image", src: "assets/images/lesson-1/characters/mia/mia-tired.png", alt: "Mia clearly tired", concept: "tired", approved: true },
+  "child-standing": { id: "child-standing", type: "image", src: "assets/images/lesson-1/characters/tom/tom-stand-up.png", alt: "Tom standing upright with both feet on the floor", concept: "stand up", approved: true },
+  "child-sitting": { id: "child-sitting", type: "image", src: "assets/images/lesson-1/characters/mia/mia-sit-down.png", alt: "Mia sitting on a chair with both feet on the floor", concept: "sit down", approved: true },
+  "child-jumping": { id: "child-jumping", type: "image", src: "assets/images/common/child-jumping.svg", alt: "A child jumping with both feet off the ground", concept: "jump", approved: true },
+  ball: { id: "ball", type: "image", src: "assets/images/lesson-1/objects/ball.png", alt: "A yellow ball", concept: "ball", approved: true },
+  table: { id: "table", type: "image", src: "assets/images/lesson-1/objects/table.png", alt: "A four-legged wooden table", concept: "table", approved: true },
+  chair: { id: "chair", type: "image", src: "assets/images/lesson-1/objects/chair.png", alt: "A wooden chair", concept: "chair", approved: true },
+  apple: { id: "apple", type: "image", src: "assets/images/lesson-1/objects/apple.png", alt: "A red apple", concept: "apple", approved: true },
+  box: { id: "box", type: "image", src: "assets/images/lesson-1/objects/box.png", alt: "An open cardboard box", concept: "box", approved: true },
+  "goodbye-child": { id: "goodbye-child", type: "image", src: "assets/images/lesson-1/characters/mia/mia-goodbye-wave.png", alt: "Mia walking away and waving goodbye", concept: "child leaving and waving goodbye", approved: true },
+  "boy-child": { id: "boy-child", type: "image", src: "assets/images/lesson-1/characters/tom/tom-neutral.png", alt: "Tom, a boy, standing naturally", concept: "boy", approved: true },
+  "girl-child": { id: "girl-child", type: "image", src: "assets/images/lesson-1/characters/mia/mia-neutral.png", alt: "Mia, a girl, standing naturally", concept: "girl", approved: true },
+  "child-looking": { id: "child-looking", type: "image", src: "assets/images/lesson-1/characters/tom/tom-look-at-ball.png", alt: "Tom looking at a yellow ball", concept: "look", approved: true },
+  "child-listening": { id: "child-listening", type: "image", src: "assets/images/lesson-1/characters/mia/mia-listening.png", alt: "Mia listening with a hand near her ear", concept: "listen", approved: true },
+  "child-pointing": { id: "child-pointing", type: "image", src: "assets/images/lesson-1/characters/tom/tom-pointing-at-ball.png", alt: "Tom pointing at a yellow ball without touching it", concept: "point", approved: true },
+  "child-touching": { id: "child-touching", type: "image", src: "assets/images/lesson-1/characters/tom/tom-touching-ball.png", alt: "Tom touching a yellow ball", concept: "touch", approved: true },
+  "child-showing-ball": { id: "child-showing-ball", type: "image", src: "assets/images/lesson-1/characters/mia/mia-showing-ball.png", alt: "Mia holding a ball and showing it", concept: "show me", approved: true },
+  "child-giving-ball": { id: "child-giving-ball", type: "image", src: "assets/images/lesson-1/characters/tom/tom-giving-ball-to-mia.png", alt: "Tom giving a ball to Mia", concept: "give", approved: true },
+  "child-taking-ball": { id: "child-taking-ball", type: "image", src: "assets/images/lesson-1/characters/mia/mia-taking-ball-from-tom.png", alt: "Mia taking a ball from Tom", concept: "take", approved: true },
+  "child-come-here": { id: "child-come-here", type: "image", src: "assets/images/lesson-1/characters/mia/mia-come-here.png", alt: "Mia beckoning someone to come closer", concept: "come here", approved: true },
+  "child-stop": { id: "child-stop", type: "image", src: "assets/images/lesson-1/characters/tom/tom-stop.png", alt: "Tom holding up a hand to stop", concept: "stop", approved: true },
+  "child-going": { id: "child-going", type: "image", src: "assets/images/lesson-1/characters/mia/mia-go.png", alt: "Mia moving forward", concept: "go", approved: true },
+  "name-writing": { id: "name-writing", type: "image", src: "assets/images/lesson-1/characters/mia/mia-writing-name.png", alt: "Mia writing on paper with a pencil", concept: "write your name", approved: true },
+  "colour-red": { id: "colour-red", type: "image", src: "assets/images/common/colour-red.svg", alt: "A solid red colour card", concept: "red", approved: true },
+  "colour-blue": { id: "colour-blue", type: "image", src: "assets/images/common/colour-blue.svg", alt: "A solid blue colour card", concept: "blue", approved: true },
+  "colour-yellow": { id: "colour-yellow", type: "image", src: "assets/images/common/colour-yellow.svg", alt: "A solid yellow colour card", concept: "yellow", approved: true },
+  "colour-green": { id: "colour-green", type: "image", src: "assets/images/common/colour-green.svg", alt: "A solid green colour card", concept: "green", approved: true },
+  "numeral-1": { id: "numeral-1", type: "image", src: "assets/images/common/numeral-1.svg", alt: "The numeral 1", concept: "numeral one", approved: true },
+  "numeral-2": { id: "numeral-2", type: "image", src: "assets/images/common/numeral-2.svg", alt: "The numeral 2", concept: "numeral two", approved: true },
+  "numeral-3": { id: "numeral-3", type: "image", src: "assets/images/common/numeral-3.svg", alt: "The numeral 3", concept: "numeral three", approved: true },
+  "numeral-4": { id: "numeral-4", type: "image", src: "assets/images/common/numeral-4.svg", alt: "The numeral 4", concept: "numeral four", approved: true },
+  "numeral-5": { id: "numeral-5", type: "image", src: "assets/images/common/numeral-5.svg", alt: "The numeral 5", concept: "numeral five", approved: true },
+  "numeral-6": { id: "numeral-6", type: "image", src: "assets/images/common/numeral-6.svg", alt: "The numeral 6", concept: "numeral six", approved: true },
+  "one-ball": { id: "one-ball", type: "image", src: "assets/images/common/one-ball.svg", alt: "One ball", concept: "one ball", approved: true },
+  "two-balls": { id: "two-balls", type: "image", src: "assets/images/common/two-balls.svg", alt: "Two balls", concept: "two balls", approved: true },
+  "three-balls": { id: "three-balls", type: "image", src: "assets/images/common/three-balls.svg", alt: "Three balls", concept: "three balls", approved: true },
+  "four-balls": { id: "four-balls", type: "image", src: "assets/images/common/four-balls.svg", alt: "Four balls", concept: "four balls", approved: true },
+  "five-balls": { id: "five-balls", type: "image", src: "assets/images/common/five-balls.svg", alt: "Five balls", concept: "five balls", approved: true },
+  "four-stars": { id: "four-stars", type: "image", src: "assets/images/common/four-stars.svg", alt: "Four stars", concept: "four stars", approved: true },
+  "letter-a": { id: "letter-a", type: "image", src: "assets/images/common/letter-a.svg", alt: "Capital letter A", concept: "letter A", approved: true },
+  "letter-b": { id: "letter-b", type: "image", src: "assets/images/common/letter-b.svg", alt: "Capital letter B", concept: "letter B", approved: true },
+  "letter-c": { id: "letter-c", type: "image", src: "assets/images/common/letter-c.svg", alt: "Capital letter C", concept: "letter C", approved: true },
+  "letter-d": { id: "letter-d", type: "image", src: "assets/images/common/letter-d.svg", alt: "Capital letter D", concept: "letter D", approved: true },
+  "letter-e": { id: "letter-e", type: "image", src: "assets/images/common/letter-e.svg", alt: "Capital letter E", concept: "letter E", approved: true },
+  "letter-f": { id: "letter-f", type: "image", src: "assets/images/common/letter-f.svg", alt: "Capital letter F", concept: "letter F", approved: true }
+};
+
+const getVisual = (visualId) => visuals[visualId];
+
+
+
+/** Renders approved teaching artwork. UI symbols intentionally do not use this function. */
+function renderVisual(visualId, { className = "", size = "medium", decorative = false } = {}) {
+  const visual = getVisual(visualId);
+  if (!visual) return unavailableVisual(visualId, "Missing visual asset");
+  if (!visual.src || !visual.type || !visual.alt || !visual.concept || visual.approved !== true) {
+    console.error(`Invalid teaching visual: ${visualId}`, visual);
+    return unavailableVisual(visualId, "Invalid visual asset");
+  }
+
+  const image = document.createElement("img");
+  image.className = `teaching-visual teaching-visual--${size} ${className}`.trim();
+  image.src = visual.src;
+  image.alt = decorative ? "" : visual.alt;
+  image.loading = "eager";
+  image.decoding = "async";
+  if (decorative) image.setAttribute("aria-hidden", "true");
+  else image.setAttribute("aria-label", visual.alt);
+  image.addEventListener("error", () => {
+    console.error(`Missing visual asset: ${visualId} (${visual.src})`);
+    image.replaceWith(unavailableVisual(visualId, "Image unavailable"));
+  }, { once: true });
+  return image;
+}
+
+function unavailableVisual(visualId, message) {
+  console.error(`${message}: ${visualId}`);
+  const unavailable = document.createElement("div");
+  unavailable.className = "teaching-visual teaching-visual--unavailable";
+  unavailable.setAttribute("role", "img");
+  unavailable.setAttribute("aria-label", `Image unavailable for ${visualId}`);
+  unavailable.textContent = "Image unavailable";
+  return unavailable;
+}
+
+
+
+const NESTED_VISUAL_FIELDS = new Set(["options", "items"]);
+
+function validateLesson(lesson, { strict = false } = {}) {
+  const issues = [];
+  if (!lesson?.id || !Array.isArray(lesson.activities)) issues.push("Lesson requires an id and activities array.");
+  lesson?.activities?.forEach((activity) => validateActivity(activity, issues, `lesson ${lesson.id}`));
+  issues.forEach((issue) => strict ? console.error(`[Lesson validation] ${issue}`) : console.warn(`[Lesson validation] ${issue}`));
+  return issues;
+}
+
+function validateLessons(lessons, options) { return lessons.flatMap((lesson) => validateLesson(lesson, options)); }
+
+function validateActivity(activity, issues, location) {
+  if (!activity?.id || !activity?.type) { issues.push(`${location}: activity requires id and type.`); return; }
+  validateVisualReference(activity.visualId, issues, `${location}/${activity.id}`);
+  for (const field of NESTED_VISUAL_FIELDS) activity[field]?.forEach((item) => validateVisualReference(item.visualId, issues, `${location}/${activity.id}/${field}`));
+  validateVisualReference(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`);
+  validateVisualReference(activity.target?.visualId, issues, `${location}/${activity.id}/target`);
+  if (["learn", "speakPrompt", "actionPrompt", "writingPrompt"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
+  if (["tapChoice", "listenChoose"].includes(activity.type)) activity.options?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/options`));
+  if (activity.type === "review") activity.items?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/items`));
+  if (activity.type === "dragDrop") { requireVisual(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`); requireVisual(activity.target?.visualId, issues, `${location}/${activity.id}/target`); }
+  if (activity.type === "challenge") activity.items?.forEach((item) => validateActivity(item, issues, `${location}/${activity.id}/challenge`));
+}
+
+function requireVisual(visualId, issues, location) { if (!visualId) issues.push(`${location}: formal teaching activity requires a visualId.`); }
+
+function validateVisualReference(visualId, issues, location) {
+  if (!visualId) return;
+  const visual = getVisual(visualId);
+  if (!visual) { issues.push(`${location}: visualId "${visualId}" does not exist.`); return; }
+  for (const field of ["id", "concept", "alt", "src", "type"]) if (!visual[field]) issues.push(`${location}: visual "${visualId}" is missing ${field}.`);
+  if (visual.approved !== true) issues.push(`${location}: visual "${visualId}" is not approved.`);
+}
+
+
+const choice = (id, visualId, label) => ({ id, visualId, label });
+const colours = [choice("red", "colour-red", "Red"), choice("blue", "colour-blue", "Blue"), choice("yellow", "colour-yellow", "Yellow"), choice("green", "colour-green", "Green")];
+const numbers = [1, 2, 3, 4, 5].map((number) => choice(String(number), `numeral-${number}`, String(number)));
+const letters = ["a", "b", "c", "d", "e", "f"].map((letter) => choice(letter, `letter-${letter}`, letter.toUpperCase()));
+const listenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
+const action = (id, ttsText, visualId, teacherNote = "", teacherChecks = "") => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks });
+const speakActivity = (id, title, prompt, visualId = "speaking-child", teacherNote = "", teacherChecks = "", ttsText = title) => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
+
+const helloLesson = {
+  id: "hello",
+  lessonNumber: 1,
+  title: "Hello! This Is Me",
+  icon: "👋",
+  activities: [
+    { id: "01-hello", type: "learn", title: "Hello!", visualId: "waving-child", audioSrc: null, ttsText: "Hello!", teacherNote: "直接播放、示范、让孩子跟说；不解释中文。" },
+    listenChoice("02-hello-or-goodbye", "Hello!", [choice("hello", "waving-child", "Hello"), choice("goodbye", "goodbye-child", "Goodbye")], "hello", "不显示文字标签。确认孩子能区分刚见面与离开。"),
+    { id: "03-goodbye", type: "learn", title: "Goodbye!", visualId: "goodbye-child", audioSrc: null, ttsText: "Goodbye!", teacherNote: "老师可走出视线再返回，做真实进入 / 离开游戏。" },
+    speakActivity("04-say-hello", "Say hello!", "Hello!", "waving-child", "孩子说 Hello 后，可随机换成 Hi，要求孩子跟换。", "是否愿意开口与模仿语音", "Hello!"),
+    speakActivity("05-whats-your-name", "What's your name?", "My name is …", "speaking-child", "若孩子只说名字，第一次接受；老师自然扩展 My name is …，再请孩子说一次。", "单词回答 / 短句回答 / 完整句"),
+    { id: "06-name-recognition", type: "tapChoice", title: "Who is Tom?", audioSrc: null, ttsText: "My name is Tom.", showLabels: true, options: [choice("tom", "boy-child", "Tom"), choice("mia", "girl-child", "Mia")], correctAnswer: "tom", teacherNote: "这是轻量听力与姓名对应，不是正式阅读测试。" },
+    speakActivity("07-how-old", "How old are you?", "I'm five. / I'm six.", "speaking-child", "不重复教数字；快速确认并鼓励完整短句。", "是否能听懂问题并用年龄回答"),
+    { id: "08-five-or-six", type: "challenge", title: "Five or six?", items: [listenChoice("08a-six", "I'm six.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "six"), listenChoice("08b-five", "I'm five.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "five")] },
+    { id: "09-boy", type: "learn", title: "Boy.", visualId: "boy-child", audioSrc: null, ttsText: "Boy.", teacherNote: "人物用中性衣服颜色；仅作为儿童人物词汇介绍，不用蓝 / 粉色进行判断。" },
+    { id: "10-girl-and-listen", type: "challenge", title: "Boy or girl?", teacherNote: "紧接 Boy 呈现 Girl；人物衣服颜色保持中性。可问 Are you a boy or a girl?，不强迫孩子回答不舒服的问题。", items: [{ id: "10a-girl", type: "learn", title: "Girl.", visualId: "girl-child", audioSrc: null, ttsText: "Girl." }, listenChoice("10b-girl", "Girl.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "girl"), listenChoice("10c-boy", "Boy.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "boy")] },
+    speakActivity("11-about-me", "About me", "My name is Kimi. I'm six. I'm a boy.", "speaking-child", "先让孩子听完整示范，再根据实际情况逐句问：name → age → boy/girl。", "个人信息理解、句子长度、信心", "My name is Kimi. I'm six. I'm a boy."),
+    { id: "12-happy", type: "learn", title: "Happy.", visualId: "happy-face", audioSrc: null, ttsText: "Happy." },
+    { id: "13-sad", type: "learn", title: "Sad.", visualId: "sad-face", audioSrc: null, ttsText: "Sad." },
+    { id: "14-tired", type: "learn", title: "Tired.", visualId: "tired-face", audioSrc: null, ttsText: "Tired." },
+    listenChoice("15-which-happy", "Happy.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "happy"),
+    listenChoice("16-which-tired", "Tired.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired"),
+    listenChoice("17-feeling-memory", "Where is tired?", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired", "先让孩子看上一题三张图约 4 秒，再进入这一页。观察英文 + 视觉记忆，不要急着提示。"),
+    speakActivity("18-how-are-you", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "允许真实回答；I'm good 仅作为自然口语扩展。", "能否用 I'm + feeling 回答"),
+    speakActivity("19-how-is-she", "How is she?", "Happy. / She is happy.", "girl-child", "教师口头补充 she is happy；第一课只暴露，不要求稳定掌握 she。"),
+    { id: "20-stand-up", type: "learn", title: "Stand up.", visualId: "child-standing", audioSrc: null, ttsText: "Stand up." },
+    { id: "21-sit-down", type: "learn", title: "Sit down.", visualId: "child-sitting", audioSrc: null, ttsText: "Sit down." },
+    { id: "22-stand-or-sit", type: "challenge", title: "Stand or sit?", teacherNote: "不做老师动作；可故意做错，确认孩子听英语而非模仿。", items: [listenChoice("22a-stand", "Stand up.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "stand"), listenChoice("22b-sit", "Sit down.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "sit"), action("22c-real-stand", "Stand up.", "child-standing", "真人任务：老师自己坐着，孩子根据英语站起来。"), action("22d-real-sit", "Sit down.", "child-sitting", "真人任务：老师自己站着，孩子根据英语坐下。")] },
+    { id: "23-look", type: "learn", title: "Look.", visualId: "child-looking", audioSrc: null, ttsText: "Look." },
+    { id: "24-listen", type: "learn", title: "Listen.", visualId: "child-listening", audioSrc: null, ttsText: "Listen." },
+    { id: "25-look-or-listen", type: "challenge", title: "Look or listen?", items: [listenChoice("25a-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25b-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen"), listenChoice("25c-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25d-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen")] },
+    { id: "26-point", type: "learn", title: "Point.", visualId: "child-pointing", audioSrc: null, ttsText: "Point.", teacherNote: "核对图：手指与球之间有明确距离，不可接触。" },
+    { id: "27-touch", type: "learn", title: "Touch.", visualId: "child-touching", audioSrc: null, ttsText: "Touch.", teacherNote: "核对图：手指与球有明确接触。" },
+    { id: "28-point-or-touch", type: "challenge", title: "Point or touch?", items: [listenChoice("28a-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point"), listenChoice("28b-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28c-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28d-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point")] },
+    listenChoice("29-point-ball", "Point to the ball.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "ball"),
+    listenChoice("30-touch-table", "Touch the table.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "table", "已使用已审核 table.svg；table 与 chair 是不同视觉资产。"),
+    { id: "31-show-me", type: "learn", title: "Show me.", visualId: "child-showing-ball", audioSrc: null, ttsText: "Show me.", teacherNote: "物品仍在孩子手中，只是展示给老师看；之后用真实 ball / book / pencil 做 Show me the …。" },
+    { id: "32-give-me", type: "learn", title: "Give me the ball.", visualId: "child-giving-ball", audioSrc: null, ttsText: "Give me the ball.", teacherNote: "图中箭头：孩子 → 老师。用实物连续 4–6 轮加强。" },
+    { id: "33-take-ball", type: "learn", title: "Take the ball.", visualId: "child-taking-ball", audioSrc: null, ttsText: "Take the ball.", teacherNote: "图中箭头：老师 → 孩子。" },
+    { id: "34-give-or-take", type: "challenge", title: "Give or take?", items: [listenChoice("34a-give", "Give me the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "give"), listenChoice("34b-take", "Take the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "take"), action("34c-real-take", "Take the ball.", "child-taking-ball", "老师手拿球，孩子拿走。"), action("34d-real-give", "Give me the ball.", "child-giving-ball", "孩子把球还给老师。")] },
+    { id: "35-colour-review", type: "review", title: "Colour quick review", items: colours.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: item.label })) },
+    listenChoice("36-find-red", "Find red.", colours, "red"),
+    listenChoice("37-touch-blue", "Touch blue.", colours, "blue"),
+    listenChoice("38-point-yellow", "Point to yellow.", colours, "yellow"),
+    listenChoice("39-show-green", "Show me green.", colours, "green", "之后把四色实体卡放在桌上，重复相同指令。"),
+    { id: "40-colour-mix", type: "challenge", title: "Colour listening mix", items: [listenChoice("40a", "Touch red.", colours, "red"), listenChoice("40b", "Point to blue.", colours, "blue"), listenChoice("40c", "Show me yellow.", colours, "yellow"), listenChoice("40d", "Touch green.", colours, "green"), listenChoice("40e", "Point to red.", colours, "red"), listenChoice("40f", "Show me blue.", colours, "blue")] },
+    { id: "41-numbers-review", type: "review", title: "Numbers 1–5", items: numbers.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: ["One", "Two", "Three", "Four", "Five"][Number(item.id) - 1] })) },
+    listenChoice("42-find-three", "Find three.", [choice("two", "numeral-2", "Two"), choice("three", "numeral-3", "Three"), choice("five", "numeral-5", "Five")], "three"),
+    listenChoice("43-touch-five", "Touch five.", [choice("one", "numeral-1", "One"), choice("four", "numeral-4", "Four"), choice("five", "numeral-5", "Five")], "five"),
+    speakActivity("44-how-many-balls", "How many?", "Three. / Three balls.", "three-balls", "先接受 Three；能力好时自然扩展 Three balls。", "数量概念与口头回答"),
+    speakActivity("45-how-many-stars", "How many?", "Four. / Four stars.", "four-stars", "同样先接受数字答案。"),
+    { id: "46-number-action", type: "challenge", title: "Number + action", items: [listenChoice("46a", "Touch three.", numbers, "3"), listenChoice("46b", "Point to five.", numbers, "5"), listenChoice("46c", "Show me two.", numbers, "2")] },
+    { id: "47-listen-and-do", type: "challenge", title: "Listen and do challenge", teacherNote: "不显示模块名称，让孩子真正切换任务。真人任务由教师观察后再点 I did it。", items: [action("47a", "Stand up.", "child-standing"), action("47b", "Sit down.", "child-sitting"), listenChoice("47c", "Touch red.", colours, "red"), listenChoice("47d", "Point to blue.", colours, "blue"), listenChoice("47e", "Show me three.", numbers, "3"), action("47f", "Look.", "child-looking"), action("47g", "Listen.", "child-listening"), listenChoice("47h", "Touch five.", numbers, "5"), action("47i", "Come here.", "child-come-here"), action("47j", "Stop.", "child-stop"), action("47k", "Go.", "child-going")] },
+    { id: "48-two-step", type: "challenge", title: "Two-step listening", teacherNote: "只做 Baseline。若困难，立刻退回一步指令，不反复强训。", teacherChecks: "能否保留两个信息、按顺序完成、不等中文翻译", items: [action("48a", "Stand up and touch red.", "child-standing"), action("48b", "Sit down and point to blue.", "child-sitting"), action("48c", "Stand up and show me three.", "child-standing")] },
+    listenChoice("49-find-a", "Find A.", [choice("a", "letter-a", "A"), choice("b", "letter-b", "B"), choice("c", "letter-c", "C")], "a", "只记录第一次反应；不在此处教授 phonics。"),
+    listenChoice("50-find-c", "Find C.", [choice("a", "letter-a", "A"), choice("c", "letter-c", "C"), choice("f", "letter-f", "F")], "c"),
+    { id: "51-letter-hunt", type: "challenge", title: "Letter hunt", teacherNote: "可换成磁性 / 纸质字母，加入 Show me A、Give me C、Touch B。", teacherChecks: "A–F 识别的第一反应、是否猜测", items: [listenChoice("51a", "Find B.", letters, "b"), listenChoice("51b", "Find E.", letters, "e"), listenChoice("51c", "Find D.", letters, "d")] },
+    { id: "52-write-name", type: "writingPrompt", title: "Write your name.", childPrompt: "Use your paper and pencil.", visualId: "name-writing", audioSrc: null, ttsText: "Write your name.", teacherNote: "网页只给英语指令，孩子在真实纸张上写。不要做正式纠错教学。", teacherChecks: "是否理解并主动开始；姓名拼写、字母方向、大小、握笔、是否需要范例" },
+    { id: "53-copy-letter", type: "writingPrompt", title: "Write A.", childPrompt: "Copy A on your paper.", visualId: "letter-a", audioSrc: null, ttsText: "Write A.", teacherNote: "若姓名书写顺利，再用教师 Next 追加口头 Write B；最多测试 2–3 个字母。" },
+    speakActivity("54-my-name", "What's your name?", "My name is …", "speaking-child", "这里不再提示名字本身，观察是否能独立回答。"),
+    speakActivity("55-my-age", "How old are you?", "I'm five. / I'm six.", "speaking-child"),
+    speakActivity("56-boy-or-girl", "Are you a boy or a girl?", "I'm a boy. / I'm a girl.", "boy-child"),
+    speakActivity("57-my-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face"),
+    speakActivity("58-what-colour", "What colour is it?", "Red. / It's red.", "colour-red", "接受 Red；更好的回答是 It's red。第一课不强制完整句。"),
+    speakActivity("59-how-many", "How many?", "Five. / Five balls.", "five-balls", "接受 Five；能力好时扩展 Five balls。"),
+    { id: "60-english-adventure-challenge", type: "challenge", title: "English Adventure Challenge", teacherNote: "最后模拟新老师：坐得稍远、尽量不使用中文。完成后用下面 mini interview 把屏幕关闭 2–3 分钟；根据孩子表现决定 Lesson 2 加速或回到基础听力。", teacherChecks: "个人问题、一步指令、颜色 + 动词、数字 + 动词、字母 B、注意力与切换能力", items: [speakActivity("60a", "Hello!", "Hello!", "waving-child"), speakActivity("60b", "What's your name?", "My name is …"), speakActivity("60c", "How old are you?", "I'm five. / I'm six."), speakActivity("60d", "How are you?", "I'm happy."), action("60e", "Stand up.", "child-standing"), listenChoice("60f", "Touch blue.", colours, "blue"), listenChoice("60g", "Point to three.", numbers, "3"), action("60h", "Sit down.", "child-sitting"), listenChoice("60i", "Show me red.", colours, "red"), listenChoice("60j", "Find B.", letters, "b"), speakActivity("60k", "Goodbye!", "Goodbye!", "goodbye-child")] }
+  ]
+};
+
+
+
+const lessons = [
+  helloLesson,
+  { id: "colours", lessonNumber: 2, title: "Colours", icon: "🎨", locked: true },
+  { id: "numbers", lessonNumber: 3, title: "Numbers", icon: "🔢", locked: true },
+  { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
+];
+
+const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
+
+
+function lessonCard(lesson, onOpen, completed = false) {
+  const card = document.createElement("button"); card.type = "button"; card.className = `lesson-card ${lesson.locked ? "locked" : ""} ${completed ? "completed" : ""}`; card.disabled = Boolean(lesson.locked);
+  card.innerHTML = `<span class="lesson-icon" aria-hidden="true">${lesson.icon}</span><span><span class="lesson-label">Lesson ${lesson.lessonNumber}</span><span class="lesson-name">${lesson.title}</span></span><span class="status">${lesson.locked ? "Locked" : completed ? "Completed" : "Ready"}</span>`;
+  if (!lesson.locked) card.addEventListener("click", onOpen); return card;
+}
+
+
+
+function progress(lesson) {
+  const done = lesson.activities.filter((activity) => activityDone(lesson.id, activity.id)).length;
+  const total = lesson.activities.length;
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  const wrap = document.createElement("div"); wrap.className = "progress"; wrap.setAttribute("aria-label", `${done} of ${total} complete`);
+  wrap.innerHTML = `<span class="sr-only">${done} of ${total} complete</span><div class="progress-dots">${lesson.activities.map((_, index) => `<span class="progress-dot ${index < done ? "done" : ""}"></span>`).join("")}</div><div class="progress-bar" aria-hidden="true"><span class="progress-bar-fill" style="width:${percent}%"></span></div>`;
+  return wrap;
+}
+
+
+
+function feedbackLine() { const line = document.createElement("p"); line.className = "feedback"; line.setAttribute("aria-live", "assertive"); return line; }
+function correct(card, button, feedback, onDone, text = "Great!") { button.classList.add("correct"); feedback.className = "feedback correct"; feedback.textContent = text; successSound(); window.setTimeout(onDone, 620); }
+function incorrect(button, feedback, replayText) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => button.classList.remove("incorrect"), 390); window.setTimeout(() => playText(replayText), 430); }
+
+
+
+
+
+function openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }) {
+  document.querySelector(".teacher-overlay")?.remove();
+  const overlay = document.createElement("div"); overlay.className = "teacher-overlay";
+  const position = state.lessonPositions[lesson.id] ?? 0;
+  const note = activity.teacherNote ? `<section class="teacher-note"><h3>Teacher note</h3><p>${activity.teacherNote}</p>${activity.teacherChecks ? `<p><strong>Observe:</strong> ${activity.teacherChecks}</p>` : ""}</section>` : "";
+  overlay.innerHTML = `<aside class="teacher-drawer" role="dialog" aria-modal="true" aria-label="Teacher controls"><button class="drawer-close" type="button" aria-label="Close teacher controls">×</button><h2>Teacher controls</h2><p class="teacher-meta">Current Activity: ${position + 1} — ${activity.type}</p>${note}<div class="teacher-grid"><button class="teacher-action" data-action="previous">Previous</button><button class="teacher-action" data-action="next">Next</button><button class="teacher-action" data-action="replay">Replay</button><button class="teacher-action" data-action="sound">Sound ${state.soundOn ? "On" : "Off"}</button><button class="teacher-action success" data-action="correct">Mark Correct</button><button class="teacher-action primary" data-action="again">Try Again</button><button class="teacher-action wide" data-action="reset-lesson">Reset Lesson</button><button class="teacher-action wide" data-action="reset-all">Reset All Progress</button></div></aside>`;
+  const close = () => { overlay.remove(); onClose?.(); };
+  overlay.addEventListener("click", (event) => { if (event.target === overlay) close(); });
+  overlay.querySelector(".drawer-close").addEventListener("click", close);
+  overlay.querySelector(".teacher-grid").addEventListener("click", (event) => {
+    const action = event.target.dataset.action; if (!action) return;
+    if (action === "previous") { close(); onPrevious(); }
+    if (action === "next") { close(); onNext(); }
+    if (action === "replay") replay(activity);
+    if (action === "sound") { toggleSound(); openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }); }
+    if (action === "correct") { close(); onMarkCorrect(); }
+    if (action === "again") { close(); onTryAgain(); }
+    if (action === "reset-lesson") { resetLesson(lesson.id); close(); onHome(); }
+    if (action === "reset-all") { resetAll(); close(); onHome(); }
+  });
+}
+
+
+
+
+function renderLearn(stage, activity, api) {
+  const card = document.createElement("section");
+  card.className = "activity-card activity-card--learn";
+  const type = textElement("p", "activity-type", activity.activityLabel || "Learn");
+  const title = textElement("h1", "activity-heading", activity.title);
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const play = document.createElement("button");
+  play.type = "button";
+  play.className = "replay-button learn-replay";
+  play.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span>';
+  play.append(` ${activity.replayLabel || `Play ${activity.title}`}`);
+  play.setAttribute("aria-label", activity.replayLabel || `Play ${activity.title}`);
+  play.addEventListener("click", () => { replay(activity); api.complete(); });
+  card.append(play);
+  stage.append(card);
+  card.prepend(type, title, visual);
+}
+
+function textElement(tag, className, value) {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = value;
+  return element;
+}
+
+
+
+
+
+function choiceButton(option, { showLabel = true } = {}) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `choice ${showLabel ? "choice--labelled" : "choice--visual-only"}`;
+  button.append(renderVisual(option.visualId, { className: "choice-visual", size: "choice", decorative: false }));
+  if (showLabel) {
+    const label = document.createElement("span");
+    label.className = "choice-label";
+    label.textContent = option.label;
+    button.append(label);
+  }
+  button.setAttribute("aria-label", option.label);
+  return button;
+}
+
+
+function compactChoiceSet(options = []) {
+  const compactIds = new Set(["ball", "table", "chair", "apple", "box"]);
+  return options.length > 0 && options.every((option) =>
+    /^(colour|numeral|letter)-/.test(option.visualId || "") || compactIds.has(option.visualId)
+  );
+}
+
+function renderTapChoice(stage, activity, api) {
+  const card = document.createElement("section");
+  card.className = "activity-card activity-card--tap-choice";
+  card.innerHTML = `<p class="activity-type">Play</p><h1 class="activity-heading">${activity.title}</h1>`;
+
+  const grid = document.createElement("div");
+  grid.className = `choice-grid choice-grid--tap choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
+  const feedback = feedbackLine();
+  activity.options.forEach((option) => {
+    const button = choiceButton(option, { showLabel: activity.showLabels !== false });
+    button.addEventListener("click", () => {
+      if (option.id === activity.correctAnswer) {
+        grid.querySelectorAll("button").forEach((item) => item.disabled = true);
+        correct(card, button, feedback, api.complete, "Great!");
+      } else {
+        incorrect(button, feedback, activity.ttsText);
+      }
+    });
+    grid.append(button);
+  });
+
+  const listen = document.createElement("button");
+  listen.type = "button";
+  listen.className = "replay-button choice-replay";
+  listen.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span> Listen';
+  listen.addEventListener("click", () => replay(activity));
+  card.append(listen, grid, feedback);
+  stage.append(card);
+}
+
+
+
+
+
+function renderListenChoose(stage, activity, api) {
+  const card = document.createElement("section");
+  card.className = "activity-card activity-card--listen-choice";
+  card.innerHTML = '<p class="activity-type">Listen</p><h1 class="activity-heading">Listen.</h1>';
+
+  const speaker = document.createElement("button");
+  speaker.type = "button";
+  speaker.className = "listen-orb";
+  speaker.textContent = "🔊";
+  speaker.setAttribute("aria-label", "Play instruction");
+  speaker.addEventListener("click", () => replay(activity));
+
+  const grid = document.createElement("div");
+  grid.className = `choice-grid choice-grid--listen choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
+  const feedback = feedbackLine();
+  activity.options.forEach((option) => {
+    const button = choiceButton(option, { showLabel: activity.showLabels === true });
+    button.addEventListener("click", () => {
+      if (option.id === activity.correctAnswer) {
+        grid.querySelectorAll("button").forEach((item) => item.disabled = true);
+        correct(card, button, feedback, api.complete, "Good job!");
+      } else {
+        incorrect(button, feedback, activity.ttsText);
+      }
+    });
+    grid.append(button);
+  });
+
+  card.append(speaker, grid, feedback);
+  stage.append(card);
+}
+
+
+
+
+
+function renderDragDrop(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card activity-card--drag";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Play";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
+  card.append(type, title);
+  const replayButton = document.createElement("button"); replayButton.type = "button"; replayButton.className = "replay-button"; replayButton.innerHTML = '<span class="speaker">🔊</span> Listen'; replayButton.addEventListener("click", () => replay(activity));
+  const draggable = document.createElement("div"); draggable.className = "drag-object"; draggable.append(renderVisual(activity.draggable.visualId, { size: "drag", decorative: true })); draggable.setAttribute("role", "button"); draggable.tabIndex = 0; draggable.setAttribute("aria-label", `Drag ${activity.draggable.label} to ${activity.target.label}`);
+  const target = document.createElement("div"); target.className = "drop-target";
+  const targetLabel = document.createElement("span"); targetLabel.className = "target-label"; targetLabel.textContent = activity.target.label;
+  target.append(targetLabel, renderVisual(activity.target.visualId, { className: "target-visual", size: "target", decorative: true })); target.setAttribute("aria-label", `Drop ${activity.draggable.label} on ${activity.target.label}`);
+  const feedback = feedbackLine(); let origin = null; let placed = false;
+  const restore = () => { draggable.style.cssText = ""; draggable.className = "drag-object"; };
+  const drop = (x, y) => { const box = target.getBoundingClientRect(); if (x >= box.left && x <= box.right && y >= box.top && y <= box.bottom) { placed = true; draggable.style.display = "none"; const placedVisual = renderVisual(activity.draggable.visualId, { className: "placed-visual", size: "placed", decorative: true }); target.append(placedVisual); correct(card, target, feedback, api.complete, "Great!"); } else { restore(); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => feedback.textContent = "", 650); } };
+  draggable.addEventListener("pointerdown", (event) => { if (placed) return; origin = { x: event.clientX, y: event.clientY }; draggable.setPointerCapture(event.pointerId); draggable.style.position = "fixed"; draggable.style.zIndex = "5"; draggable.style.pointerEvents = "none"; });
+  draggable.addEventListener("pointermove", (event) => { if (!origin || placed) return; draggable.style.left = `${event.clientX - 59}px`; draggable.style.top = `${event.clientY - 59}px`; target.classList.toggle("over", document.elementFromPoint(event.clientX, event.clientY)?.closest(".drop-target") === target); });
+  draggable.addEventListener("pointerup", (event) => { if (!origin || placed) return; origin = null; target.classList.remove("over"); drop(event.clientX, event.clientY); });
+  draggable.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); const rect = target.getBoundingClientRect(); drop(rect.left + rect.width / 2, rect.top + rect.height / 2); } });
+  card.append(replayButton, draggable, target, feedback); stage.append(card);
+}
+
+
+
+
+function renderSpeakPrompt(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card activity-card--speak";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Speak";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
+  const turn = document.createElement("p"); turn.className = "speak-turn"; turn.textContent = activity.turnLabel || "YOUR TURN";
+  const prompt = document.createElement("p"); prompt.className = "speak-question"; prompt.textContent = activity.prompt;
+  card.append(type, renderVisual(activity.visualId, { className: "character", size: "hero" }), title, turn, prompt);
+  const button = document.createElement("button"); button.type = "button"; button.className = "replay-button"; button.innerHTML = '<span class="speaker">🔊</span> Replay'; button.addEventListener("click", () => replay(activity));
+  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button speak-complete"; complete.textContent = activity.completeLabel || "I said it!"; complete.addEventListener("click", api.complete);
+  const actions = document.createElement("div"); actions.className = "activity-actions speak-actions"; actions.append(button, complete); card.append(actions); stage.append(card);
+}
+
+
+
+
+// The child acts away from the screen; the teacher observes before completion.
+function renderActionPrompt(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card action-card activity-card--action";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Listen and do";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title || "Listen and do.";
+  const prompt = document.createElement("p"); prompt.className = "action-prompt"; prompt.textContent = activity.childPrompt || "Listen. Then do it!";
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
+  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I did it!"; complete.addEventListener("click", api.complete);
+  const actions = document.createElement("div"); actions.className = "activity-actions action-actions"; actions.append(play, complete);
+  card.append(type, title, visual, prompt, actions); stage.append(card);
+}
+
+
+
+
+// Writing is performed on paper, not simulated with an imprecise screen trace.
+function renderWritingPrompt(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card writing-card activity-card--writing";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = "Paper time";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const prompt = document.createElement("p"); prompt.className = "instruction"; prompt.textContent = activity.childPrompt || "Use your paper and pencil.";
+  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
+  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I finished!"; complete.addEventListener("click", api.complete);
+  const actions = document.createElement("div"); actions.className = "activity-actions writing-actions"; actions.append(play, complete);
+  card.append(type, title, visual, prompt, actions); stage.append(card);
+}
+
+
+
+
+function renderReview(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card activity-card--review"; card.innerHTML = `<p class="activity-type">Review</p><h1 class="activity-heading">${activity.title}</h1>`;
+  const list = document.createElement("div"); list.className = "review-list"; let count = 0;
+  activity.items.forEach((item) => { const button = document.createElement("button"); button.type = "button"; button.className = "review-item"; button.append(renderVisual(item.visualId, { className: "review-visual", size: "review", decorative: true })); const label = document.createElement("span"); label.textContent = item.text; const icon = document.createElement("span"); icon.setAttribute("aria-hidden", "true"); icon.textContent = "🔊"; button.append(label, icon); button.addEventListener("click", () => { playText(item.ttsText || item.text, item.audioSrc || null); if (!button.classList.contains("done")) { button.classList.add("done"); count += 1; if (count === activity.items.length) api.complete(); } }); list.append(button); }); card.append(list); stage.append(card);
+}
+
+
+
+
+// Challenge only sequences activity data; it never owns choice, audio or feedback logic.
+function renderChallenge(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card challenge-card activity-card--challenge";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = "Challenge";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
+  const count = document.createElement("p"); count.className = "challenge-count";
+  const inner = document.createElement("div"); inner.className = "challenge-stage";
+  const continueButton = document.createElement("button"); continueButton.type = "button"; continueButton.className = "nav-button next challenge-next"; continueButton.textContent = "Next challenge"; continueButton.hidden = true;
+  card.append(type, title, count, inner, continueButton); stage.append(card);
+  let index = 0;
+  const show = () => {
+    const item = activity.items?.[index];
+    if (!item) { api.complete(); return; }
+    if (item.type === "challenge") { console.error("Challenge cannot contain another challenge.", item); return; }
+    count.textContent = `${index + 1} / ${activity.items.length}`;
+    continueButton.hidden = true; inner.replaceChildren();
+    renderActivity(inner, item, { complete: () => { continueButton.hidden = false; continueButton.focus(); } });
+  };
+  continueButton.addEventListener("click", () => { index += 1; show(); });
+  show();
+}
+
+
+
+
+
+
+
+
+
+
+
+const renderers = {
+  learn: renderLearn,
+  tapChoice: renderTapChoice,
+  listenChoose: renderListenChoose,
+  dragDrop: renderDragDrop,
+  speakPrompt: renderSpeakPrompt,
+  review: renderReview,
+  challenge: renderChallenge,
+  actionPrompt: renderActionPrompt,
+  writingPrompt: renderWritingPrompt
+};
+function renderActivity(stage, activity, api) {
+  const renderer = renderers[activity?.type];
+  if (!renderer) {
+    const message = `Unknown activity type: ${activity?.type || "(missing)"}`;
+    console.error(message, activity);
+    const error = document.createElement("p"); error.className = "renderer-error"; error.textContent = message; stage.replaceChildren(error); return;
+  }
+  renderer(stage, activity, api);
+}
+
+
+
+
+
+
+
+
+
+
+const app = document.querySelector("#app");
+let page = "home";
+let longPress = null;
+const lesson = () => getLesson(state.currentLesson);
+const activityIndex = () => lessonPosition(state.currentLesson);
+const activity = () => lesson().activities[activityIndex()];
+
+function showHome() {
+  page = "home"; document.querySelector(".teacher-overlay")?.remove(); app.replaceChildren();
+  const home = document.createElement("section"); home.className = "home";
+  const brand = document.createElement("h1"); brand.className = "brand"; brand.textContent = "English Adventure";
+  const grid = document.createElement("div"); grid.className = "lesson-grid";
+  lessons.forEach((item) => grid.append(lessonCard(item, () => { openLesson(item.id); showPlayer(); }, Boolean(state.completedLessons[item.id]))));
+  home.append(brand, grid); app.append(home);
+}
+
+function showPlayer() {
+  page = "player"; const currentLesson = lesson(); const currentActivity = activity();
+  if (!currentLesson || !currentActivity) return showHome();
+  validateLesson(currentLesson, { strict: true });
+  app.replaceChildren(); const player = document.createElement("section"); player.className = "player";
+  const header = document.createElement("header"); header.className = "topbar";
+  const back = button("←", "Back to lessons", "icon-button");
+  const title = document.createElement("div"); title.className = "lesson-title"; title.textContent = currentLesson.title; title.setAttribute("aria-label", "Press and hold for teacher controls");
+  header.append(back, title, progress(currentLesson));
+  const stage = document.createElement("section"); stage.className = "stage"; stage.setAttribute("aria-label", "Learning activity");
+  const footer = document.createElement("footer"); footer.className = "bottom-controls";
+  const previous = button("‹", "Previous", "nav-button"); previous.innerHTML = '<span aria-hidden="true">‹</span><span>Previous</span>';
+  const replayButton = button("🔊", "Replay audio", "replay-button");
+  const next = button("›", "Next", "nav-button next"); next.innerHTML = '<span>Next</span><span aria-hidden="true">›</span>';
+  const center = document.createElement("div"); center.className = "bottom-center"; center.append(replayButton); footer.append(previous, center, next); player.append(header, stage, footer); app.append(player);
+  const complete = () => { markActivityDone(currentLesson.id, currentActivity.id); next.disabled = false; };
+  renderActivity(stage, currentActivity, { complete });
+  back.addEventListener("click", showHome); replayButton.addEventListener("click", () => replay(currentActivity)); previous.addEventListener("click", previousActivity); next.addEventListener("click", nextActivity); next.disabled = !activityDone(currentLesson.id, currentActivity.id);
+  const openTeacher = () => openTeacherPanel({ lesson: currentLesson, activity: currentActivity, onPrevious: previousActivity, onNext: teacherNext, onMarkCorrect: markCorrect, onTryAgain: showPlayer, onClose: () => {}, onHome: showHome });
+  title.addEventListener("pointerdown", () => { longPress = window.setTimeout(openTeacher, 1500); });
+  ["pointerup", "pointerleave", "pointercancel"].forEach((event) => title.addEventListener(event, () => window.clearTimeout(longPress)));
+}
+
+function nextActivity() {
+  const currentLesson = lesson(); const currentActivity = activity();
+  if (!activityDone(currentLesson.id, currentActivity.id)) return;
+  goNext(false);
+}
+function previousActivity() { if (activityIndex() === 0) return showHome(); setLessonPosition(state.currentLesson, activityIndex() - 1); showPlayer(); }
+function markCorrect() { const currentLesson = lesson(); const currentActivity = activity(); markActivityDone(currentLesson.id, currentActivity.id); showPlayer(); }
+function teacherNext() { goNext(true); }
+function goNext(force) {
+  const currentLesson = lesson(); const currentActivity = activity();
+  if (!force && !activityDone(currentLesson.id, currentActivity.id)) return;
+  if (activityIndex() >= currentLesson.activities.length - 1) { state.completedLessons[currentLesson.id] = true; patch({}); return showFinish(); }
+  setLessonPosition(currentLesson.id, activityIndex() + 1); showPlayer();
+}
+function showFinish() {
+  page = "finish"; document.querySelector(".teacher-overlay")?.remove();
+  app.innerHTML = '<section class="finish"><div class="finish-card"><div class="stars" aria-hidden="true">★ ★ ★</div><h1>Great job!</h1><div class="finish-actions"><button class="nav-button" type="button" data-finish="home">Home</button><button class="nav-button next" type="button" data-finish="again">Again</button></div></div></section>';
+  app.querySelector('[data-finish="home"]').addEventListener("click", showHome);
+  app.querySelector('[data-finish="again"]').addEventListener("click", () => { resetLesson(lesson().id); showPlayer(); });
+}
+function openTeacherFromShortcut() {
+  if (page !== "player") return; const currentLesson = lesson(); const currentActivity = activity();
+  openTeacherPanel({ lesson: currentLesson, activity: currentActivity, onPrevious: previousActivity, onNext: teacherNext, onMarkCorrect: markCorrect, onTryAgain: showPlayer, onClose: () => {}, onHome: showHome });
+}
+function button(text, label, className) { const element = document.createElement("button"); element.type = "button"; element.className = className; element.textContent = text; element.setAttribute("aria-label", label); return element; }
+
+
+
+
+
+validateLessons(lessons.filter((lesson) => Array.isArray(lesson.activities)), { strict: true });
+
+document.addEventListener("keydown", (event) => {
+  if (event.shiftKey && !event.ctrlKey && !event.metaKey && event.key.toLowerCase() === "t") { event.preventDefault(); openTeacherFromShortcut(); }
+});
+showHome();
+
+})();</script></body>
+</html>

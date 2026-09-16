@@ -1,0 +1,26 @@
+:root {
+  --background: #fff9f1;
+  --surface: #fff;
+  --text: #263238;
+  --muted: #66767a;
+  --primary: #367c7c;
+  --primary-soft: #dcf0ee;
+  --accent: #de812d;
+  --accent-soft: #fff0df;
+  --success: #478a59;
+  --success-soft: #e5f4e8;
+  --highlight: #ffd966;
+  --danger: #9a6226;
+  --line: #e8dfd3;
+  --font: Nunito, "Arial Rounded MT Bold", "Arial Rounded MT", system-ui, sans-serif;
+  --radius-card: 24px;
+  --radius-button: 16px;
+  --space-xs: 8px;
+  --space-sm: 14px;
+  --space-md: 22px;
+  --space-lg: 34px;
+  --shadow-card: 0 14px 32px rgba(58, 48, 35, .1);
+  --transition-fast: 180ms ease;
+  --activity-heading-size: clamp(2rem, 4.3vw, 3.35rem);
+  --activity-prompt-size: clamp(1.55rem, 3.25vw, 2.15rem);
+}

@@ -1,0 +1,669 @@
+.lesson-card { position: relative; display: flex; min-height: 230px; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 26px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: left; transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.lesson-card:not(:disabled):hover { transform: translateY(-5px); box-shadow: 0 19px 38px rgba(58,48,35,.14); }
+.lesson-card:active:not(:disabled) { transform: translateY(-1px) scale(.99); }
+.lesson-card.locked { background: #f7f4ee; color: #8c9798; box-shadow: none; }.lesson-card.completed { border: 2px solid #b7ddc0; }
+.lesson-icon { font-size: 4.3rem; line-height: 1; }
+.lesson-label { font-size: 1.04rem; font-weight: 900; }
+.lesson-name { font-size: clamp(1.55rem, 2.4vw, 2rem); font-weight: 900; letter-spacing: -.03em; }
+.status { padding: 6px 11px; border-radius: 999px; background: var(--primary-soft); color: #1f6262; font-size: .8rem; font-weight: 900; }
+.locked .status { background: #e7e5df; color: #737c7d; }.completed .status { background: var(--success-soft); color: #357244; }
+.icon-button, .nav-button, .replay-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 56px; min-height: 56px; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-button); background: var(--surface); font-weight: 900; transition: transform var(--transition-fast), background var(--transition-fast); }
+.nav-button { min-width: 135px; }.nav-button.next { border-color: var(--primary); background: var(--primary); color: #fff; }.icon-button:hover, .nav-button:hover, .replay-button:hover { transform: translateY(-2px); }
+.activity-card { width: min(920px, 100%); max-height: 100%; overflow: auto; padding: clamp(25px, 4vw, 50px); border: 1px solid #eee5d9; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: center; animation: fade-in 260ms ease; }
+.activity-type { margin-bottom: 10px; color: var(--primary); font-size: .9rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }.activity-heading { margin-bottom: 22px; font-size: var(--activity-heading-size); line-height: 1.1; letter-spacing: -.05em; }.instruction { max-width: 630px; margin: -8px auto 24px; color: var(--muted); font-size: clamp(1.05rem, 2.1vw, 1.25rem); }.teaching-visual { display: block; object-fit: contain; animation: none !important; }.teaching-visual--hero.character { width: min(270px, 64vw); aspect-ratio: 1; margin: 0 auto 25px; border-radius: 31px; background: var(--accent-soft); }.teaching-visual--unavailable { display: grid; place-items: center; width: 150px; height: 120px; margin: 12px auto; padding: 12px; border: 3px dashed var(--danger); border-radius: 16px; background: #fff8ed; color: #9c4129; font-size: .85rem; font-weight: 900; text-align: center; }
+.replay-button { background: var(--primary-soft); border: 0; color: #1f5b5b; }.speaker { font-size: 1.45rem; }.choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2.5vw, 24px); max-width: 780px; margin: 26px auto 0; }.choice { display: flex; min-height: clamp(150px, 24vw, 205px); flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 12px; border: 3px solid var(--line); border-radius: 22px; background: #fff; font-size: clamp(1.05rem, 2vw, 1.25rem); font-weight: 900; transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast); }.choice:hover { border-color: #94c6c4; background: #fbfffe; }.choice-visual { width: clamp(94px, 15vw, 136px); height: clamp(94px, 15vw, 136px); }.choice.correct { border-color: var(--success); background: var(--success-soft); }.choice.incorrect { border-color: var(--danger); background: #fff8ed; }.feedback { min-height: 28px; margin: 16px 0 0; font-weight: 900; }.feedback.correct { color: var(--success); }.feedback.incorrect { color: var(--danger); }
+.listen-orb { display: grid; place-items: center; width: min(130px, 30vw); aspect-ratio: 1; margin: 0 auto 24px; border-radius: 50%; background: var(--primary-soft); color: #205c5c; font-size: 4rem; }.listen-orb:active { transform: scale(.95); }
+.drag-object { display: grid; place-items: center; width: 118px; height: 118px; margin: 18px auto; border: 3px dashed #d69a55; border-radius: 24px; background: #fff9ef; touch-action: none; user-select: none; }.teaching-visual--drag { width: 96px; height: 96px; }.drop-target { display: grid; place-items: center; min-height: 180px; max-width: 600px; margin: 0 auto; border: 3px dashed #91c2bf; border-radius: 24px; background: #f5fbfa; color: #36595c; font-size: 1.25rem; font-weight: 900; }.drop-target.over { border-color: var(--primary); background: var(--primary-soft); }.target-label { margin-top: 14px; }.target-visual { width: 135px; height: 105px; }.placed-visual { width: 72px; height: 72px; margin-top: -52px; z-index: 1; }
+.speak-turn { margin: 20px 0; color: var(--accent); font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 1000; letter-spacing: .12em; }.speak-question { max-width: 650px; margin: 0 auto 18px; padding: 24px; border-radius: 22px; background: var(--accent-soft); font-size: var(--activity-prompt-size); line-height: 1.2; font-weight: 900; }.speak-complete { margin: 12px 0 0; background: var(--success-soft); color: #357244; }.action-prompt { max-width: 560px; margin: -4px auto 22px; color: var(--muted); font-size: clamp(1.1rem, 2.4vw, 1.35rem); font-weight: 800; }.action-complete { margin: 12px 0 0; background: var(--success-soft); color: #357244; }.review-list { display: grid; gap: 12px; max-width: 700px; margin: 0 auto; }.review-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 15px; min-height: 73px; padding: 12px 19px; border: 2px solid var(--line); border-radius: 17px; background: #fff; text-align: left; font-weight: 900; }.review-item.done { border-color: var(--success); background: var(--success-soft); }.review-visual { width: 56px; height: 48px; }.challenge-count { margin: -13px 0 18px; color: var(--muted); font-weight: 800; }.challenge-stage .activity-card { width: 100%; max-height: none; padding: 0; border: 0; box-shadow: none; animation: none; }.challenge-stage .activity-heading { font-size: var(--activity-heading-size); }.challenge-next { margin-top: 22px; }.renderer-error { padding: 24px; border-radius: 18px; background: #fff8ed; color: #9c4129; font-weight: 900; }
+.drop-area.correct { border-color: var(--success); background: var(--success-soft); }.progress-dots { display: flex; gap: 5px; }.progress-dot { display: block; width: 9px; height: 9px; border-radius: 50%; background: #e8dfd3; }.progress-dot.done { background: var(--primary); }.finish { min-height: 100vh; display: grid; place-items: center; padding: 28px; }.finish-card { width: min(650px,100%); padding: clamp(38px,7vw,72px); border-radius: 32px; background: var(--surface); box-shadow: var(--shadow-card); text-align: center; animation: fade-in 300ms ease; }.stars { margin-bottom: 20px; color: #e3a629; font-size: clamp(3.5rem, 10vw, 5.5rem); letter-spacing: .13em; animation: soft-scale 1.5s ease-in-out infinite; }.finish h1 { font-size: clamp(2.35rem, 5vw, 4rem); letter-spacing: -.05em; }.finish-actions { display: flex; justify-content: center; gap: 14px; margin-top: 32px; }
+.teacher-overlay { position: fixed; z-index: 10; inset: 0; background: rgba(26,39,41,.3); }.teacher-drawer { position: absolute; top: 0; right: 0; width: min(365px, 92vw); min-height: 100%; padding: 28px; background: #263238; color: #fff; box-shadow: -16px 0 36px rgba(0,0,0,.17); animation: drawer-in 220ms ease; }.teacher-drawer h2 { margin-bottom: 5px; }.teacher-meta { color: #c4d0d2; font-size: .9rem; }.teacher-note { margin: 18px 0 -4px; padding: 14px; border-radius: 13px; background: #34484c; color: #e8f1f2; }.teacher-note h3 { margin-bottom: 6px; font-size: .86rem; text-transform: uppercase; letter-spacing: .08em; }.teacher-note p { margin: 0 0 8px; font-size: .88rem; line-height: 1.45; }.teacher-note p:last-child { margin-bottom: 0; }.teacher-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 20px; }.teacher-action { min-height: 51px; padding: 10px; border-radius: 12px; background: #415357; color: #fff; font-weight: 800; }.teacher-action.primary { background: var(--accent); }.teacher-action.success { background: var(--success); }.teacher-action.wide { grid-column: span 2; }.drawer-close { position: absolute; top: 15px; right: 14px; min-width: 48px; min-height: 48px; border-radius: 50%; background: transparent; color: #fff; font-size: 1.7rem; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } } @keyframes soft-scale { 50% { transform: scale(1.055); } } @keyframes drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@media (max-width: 620px) { .nav-button { min-width: 109px; padding: 10px; }.nav-button span { display: none; } }
+
+/* Compact progress bar exists alongside desktop dots; it becomes the mobile progress UI. */
+.progress { flex: 0 0 auto; }
+.progress-bar { display: none; width: 54px; height: 8px; overflow: hidden; border-radius: 999px; background: #e8dfd3; }
+.progress-bar-fill { display: block; height: 100%; border-radius: inherit; background: var(--primary); }
+
+@media (max-width: 600px) {
+  .icon-button, .nav-button, .replay-button {
+    min-width: 54px;
+    min-height: 54px;
+    border-radius: 15px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topbar > .icon-button { flex: 0 0 54px; padding: 10px; font-size: 1.35rem; }
+  .progress-dots { display: none; }
+  .progress-bar { display: block; }
+
+  .bottom-controls > .nav-button {
+    flex: 0 0 64px;
+    min-width: 64px;
+    padding: 10px 12px;
+    font-size: 1.55rem;
+  }
+  .bottom-controls .nav-button span:not([aria-hidden="true"]) { display: none; }
+  .bottom-controls .nav-button span[aria-hidden="true"] { display: inline; }
+  .bottom-controls .bottom-center { flex: 1 1 auto; }
+  .bottom-controls .replay-button { min-width: 58px; padding: 10px 14px; font-size: 1.35rem; line-height: 1; }
+
+  .activity-card {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    margin: 0 auto;
+    padding: 22px 16px 24px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(58, 48, 35, .08);
+  }
+  .activity-type { margin-bottom: 8px; font-size: .78rem; letter-spacing: .09em; }
+  .activity-heading {
+    margin-bottom: 18px;
+    font-size: clamp(2rem, 9vw, 2.45rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+  .instruction { margin: -4px auto 18px; font-size: 1.05rem; line-height: 1.35; }
+  .teaching-visual--hero.character {
+    width: min(255px, 70vw);
+    max-height: 38dvh;
+    margin-bottom: 20px;
+  }
+  .activity-card > .replay-button { max-width: 100%; white-space: normal; }
+
+  .choice-grid { width: 100%; margin-top: 20px; }
+  .feedback { min-height: 24px; margin-top: 12px; }
+  .speak-question { max-width: 100%; padding: 18px 16px; }
+  .review-list { width: 100%; }
+  .review-item { min-width: 0; }
+  .drop-target { width: 100%; }
+  .finish { min-height: 100vh; min-height: 100dvh; padding: calc(22px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+  .teacher-drawer { padding: calc(24px + env(safe-area-inset-top)) max(22px, env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) 22px; overflow-y: auto; }
+}
+
+@media (max-width: 430px) and (orientation: portrait) {
+  .lesson-card { min-height: 176px; padding: 20px; }
+  .lesson-icon { font-size: 3.4rem; }
+  .lesson-label, .lesson-name { display: block; }
+  .lesson-label { font-size: 1.02rem; }
+  .lesson-name { margin-top: 3px; font-size: 1.5rem; }
+  .status { padding: 5px 10px; }
+
+  .activity-card { padding-right: 14px; padding-left: 14px; }
+  .teaching-visual--hero.character { width: min(248px, 72vw); }
+}
+
+/* Activity-specific mobile layouts. Teaching images stay large and stable;
+   compact concepts use grids instead of long single-column lists. */
+@media (max-width: 600px) {
+  button, .choice { touch-action: manipulation; }
+
+  .activity-card--learn { padding-top: 18px; padding-bottom: 22px; }
+  .activity-card--learn .activity-heading { margin-bottom: 16px; }
+  .activity-card--learn .teaching-visual--hero.character {
+    width: min(272px, 76vw);
+    max-height: 40dvh;
+    margin-bottom: 18px;
+  }
+  .activity-card--learn .learn-replay {
+    width: min(250px, 100%);
+    min-height: 58px;
+    margin: 0 auto;
+    font-size: 1.04rem;
+  }
+
+  .activity-card--listen-choice,
+  .activity-card--tap-choice { padding-top: 18px; }
+  .activity-card--listen-choice .activity-heading,
+  .activity-card--tap-choice .activity-heading { margin-bottom: 14px; }
+
+  .listen-orb {
+    width: 82px;
+    min-width: 82px;
+    min-height: 82px;
+    margin-bottom: 16px;
+    font-size: 2.65rem;
+    border: 2px solid #cfe7e5;
+    box-shadow: 0 5px 14px rgba(58, 48, 35, .07);
+  }
+
+  .choice-replay {
+    min-width: 126px;
+    margin-bottom: 2px;
+  }
+
+  .choice-grid {
+    width: 100%;
+    max-width: 100%;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .choice-grid--count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3.choice-grid--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-grid--count-3:not(.choice-grid--compact) .choice:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc((100% - 10px) / 2);
+    justify-self: center;
+  }
+  .choice-grid--count-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-5,
+  .choice-grid--count-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .choice {
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 8px;
+    border-width: 2px;
+    border-radius: 18px;
+    line-height: 1.15;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .choice-grid--count-2 .choice { min-height: 174px; }
+  .choice-grid--count-3 .choice { min-height: 154px; }
+  .choice-grid--count-3.choice-grid--compact .choice,
+  .choice-grid--count-5 .choice,
+  .choice-grid--count-6 .choice { min-height: 116px; }
+  .choice-grid--count-4 .choice { min-height: 132px; }
+
+  .choice-grid--count-2 .choice-visual { width: min(132px, 31vw); height: min(132px, 31vw); }
+  .choice-grid--count-3 .choice-visual { width: min(118px, 29vw); height: min(118px, 29vw); }
+  .choice-grid--count-3.choice-grid--compact .choice-visual,
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(88px, 22vw); height: min(88px, 22vw); }
+  .choice-grid--count-4 .choice-visual { width: min(102px, 26vw); height: min(102px, 26vw); }
+
+  .choice-label {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 4.5vw, 1.16rem);
+  }
+
+  .activity-card--listen-choice .feedback,
+  .activity-card--tap-choice .feedback { margin-top: 10px; }
+}
+
+@media (max-width: 360px) {
+  .activity-card--learn .teaching-visual--hero.character { width: min(250px, 75vw); }
+  .choice-grid { gap: 8px; }
+  .choice-grid--count-2 .choice { min-height: 156px; }
+  .choice-grid--count-2 .choice-visual { width: min(116px, 31vw); height: min(116px, 31vw); }
+  .choice-grid--count-3.choice-grid--compact .choice-visual,
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(76px, 21vw); height: min(76px, 21vw); }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .lesson-card:not(:disabled):hover,
+  .icon-button:hover, .nav-button:hover, .replay-button:hover { transform: none; }
+  .choice:hover { border-color: var(--line); background: #fff; }
+  .choice:active { border-color: #94c6c4; background: #fbfffe; }
+  .choice.correct:hover { border-color: var(--success); background: var(--success-soft); }
+  .choice.incorrect:hover { border-color: var(--danger); background: #fff8ed; }
+}
+
+
+/* Final mobile activity system ------------------------------------------- */
+.activity-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.activity-actions .replay-button { min-width: 150px; }
+.activity-heading,
+.speak-question,
+.action-prompt,
+.instruction { text-wrap: balance; }
+
+@media (max-width: 600px) {
+  :root {
+    --mobile-activity-heading-size: clamp(2rem, 8.6vw, 2.35rem);
+    --mobile-prompt-size: clamp(1.22rem, 5.4vw, 1.48rem);
+  }
+
+  .activity-heading,
+  .challenge-stage .activity-heading {
+    font-size: var(--mobile-activity-heading-size);
+    line-height: 1.08;
+    letter-spacing: -.045em;
+  }
+
+  /* Speak / interview pages */
+  .activity-card--speak { padding-top: 18px; }
+  .activity-card--speak > .teaching-visual--hero.character {
+    width: min(196px, 54vw);
+    max-height: 24dvh;
+    margin-bottom: 12px;
+  }
+  .activity-card--speak .activity-heading { margin-bottom: 8px; }
+  .activity-card--speak .speak-turn {
+    margin: 8px 0 10px;
+    font-size: .98rem;
+    letter-spacing: .1em;
+  }
+  .activity-card--speak .speak-question {
+    margin-bottom: 0;
+    padding: 15px 14px;
+    font-size: var(--mobile-prompt-size);
+    line-height: 1.32;
+  }
+  .activity-card--speak .activity-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+  }
+  .activity-card--speak .activity-actions .replay-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 10px 8px;
+  }
+
+  /* Listen-and-do and paper tasks */
+  .activity-card--action,
+  .activity-card--writing { padding-top: 18px; }
+  .activity-card--action .activity-heading,
+  .activity-card--writing .activity-heading { margin-bottom: 12px; }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character {
+    width: min(220px, 61vw);
+    max-height: 29dvh;
+    margin-bottom: 12px;
+  }
+  .activity-card--action .action-prompt,
+  .activity-card--writing .instruction {
+    margin: 0 auto 4px;
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+  .activity-card--action .activity-actions,
+  .activity-card--writing .activity-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+  }
+  .activity-card--action .activity-actions .replay-button,
+  .activity-card--writing .activity-actions .replay-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 10px 8px;
+  }
+
+  /* Quick review: large tap cards without creating a very long phone page. */
+  .activity-card--review { padding-top: 18px; }
+  .activity-card--review .activity-heading { margin-bottom: 16px; }
+  .activity-card--review .review-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .activity-card--review .review-item {
+    display: flex;
+    min-width: 0;
+    min-height: 126px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    border-width: 2px;
+    text-align: center;
+    font-size: 1.04rem;
+    line-height: 1.1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .activity-card--review .review-visual {
+    width: 68px;
+    height: 58px;
+    flex: 0 0 auto;
+  }
+  .activity-card--review .review-item > span:last-child {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  /* Challenge shell stays visually secondary to the actual task inside. */
+  .activity-card--challenge { padding-top: 16px; }
+  .activity-card--challenge > .activity-heading {
+    margin-bottom: 6px;
+    font-size: clamp(1.42rem, 6.1vw, 1.72rem);
+    line-height: 1.12;
+    letter-spacing: -.035em;
+  }
+  .activity-card--challenge > .challenge-count {
+    margin: 0 0 10px;
+    font-size: .9rem;
+  }
+  .challenge-stage .activity-type { margin-bottom: 5px; }
+  .challenge-stage .activity-heading { margin-bottom: 10px; }
+  .challenge-stage .choice-grid { margin-top: 10px; }
+  .challenge-stage .listen-orb { margin-bottom: 10px; }
+  .challenge-next {
+    width: min(240px, 100%);
+    min-height: 54px;
+    margin: 14px auto 0;
+  }
+
+  /* Drag template: large drop zone and stable object for touch. */
+  .activity-card--drag .drag-object {
+    width: 104px;
+    height: 104px;
+    margin: 14px auto;
+  }
+  .activity-card--drag .teaching-visual--drag { width: 84px; height: 84px; }
+  .activity-card--drag .drop-target {
+    min-height: 148px;
+    padding: 12px;
+    font-size: 1.08rem;
+  }
+  .activity-card--drag .target-visual { width: 116px; height: 92px; }
+
+  /* Finish screen is deliberately still; no continuous celebratory motion. */
+  .stars { animation: none; }
+  .finish-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: min(330px, 100%); margin: 28px auto 0; }
+  .finish-actions .nav-button { width: 100%; min-width: 0; }
+}
+
+@media (max-width: 360px) {
+  .activity-card--speak > .teaching-visual--hero.character { width: min(178px, 52vw); }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character { width: min(202px, 60vw); }
+  .activity-card--review .review-item { min-height: 116px; }
+  .activity-card--review .review-visual { width: 60px; height: 52px; }
+}
+
+/* iPhone-class landscape: compact controls plus task-specific two-column
+   layouts. This applies by height, because a phone in landscape can be 800+
+   CSS pixels wide and would otherwise look like a desktop. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .icon-button, .nav-button, .replay-button {
+    min-width: 46px;
+    min-height: 46px;
+    padding: 8px 11px;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topbar > .icon-button { flex: 0 0 46px; padding: 7px; font-size: 1.15rem; }
+  .progress-dots { display: none; }
+  .progress-bar { display: block; width: 48px; height: 7px; }
+  .bottom-controls > .nav-button {
+    flex: 0 0 54px;
+    min-width: 54px;
+    padding: 7px 10px;
+    font-size: 1.35rem;
+  }
+  .bottom-controls .nav-button span:not([aria-hidden="true"]) { display: none; }
+  .bottom-controls .nav-button span[aria-hidden="true"] { display: inline; }
+  .bottom-controls .bottom-center { flex: 1 1 auto; }
+  .bottom-controls .replay-button { min-width: 54px; padding: 7px 11px; font-size: 1.15rem; line-height: 1; }
+
+  .activity-card {
+    width: min(790px, 100%);
+    max-height: none;
+    overflow: visible;
+    padding: 12px 16px;
+    border-radius: 19px;
+    box-shadow: 0 6px 18px rgba(58, 48, 35, .08);
+  }
+  .activity-type { margin-bottom: 4px; font-size: .7rem; letter-spacing: .08em; }
+  .activity-heading,
+  .challenge-stage .activity-heading {
+    margin-bottom: 8px;
+    font-size: clamp(1.58rem, 4.3vw, 1.9rem);
+    line-height: 1.05;
+    letter-spacing: -.04em;
+  }
+  .instruction { margin: 0 auto 8px; font-size: .96rem; line-height: 1.25; }
+  .feedback { min-height: 18px; margin-top: 6px; font-size: .9rem; }
+  .speaker { font-size: 1.2rem; }
+  .stars { animation: none; }
+
+  /* Learn */
+  .activity-card--learn {
+    display: grid;
+    grid-template-columns: minmax(210px, .9fr) minmax(260px, 1.1fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual action";
+    column-gap: 24px;
+    align-items: center;
+    padding: 10px 22px;
+    text-align: center;
+  }
+  .activity-card--learn > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--learn > .activity-heading { grid-area: title; margin: 0 0 10px; }
+  .activity-card--learn > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(205px, 28vw);
+    max-height: 54dvh;
+    margin: 0 auto;
+  }
+  .activity-card--learn > .learn-replay {
+    grid-area: action;
+    width: min(240px, 100%);
+    min-height: 46px;
+    margin: 0 auto;
+  }
+
+  /* Listen / tap choice */
+  .activity-card--listen-choice,
+  .activity-card--tap-choice { padding: 10px 16px 11px; }
+  .activity-card--listen-choice .activity-heading,
+  .activity-card--tap-choice .activity-heading { margin-bottom: 5px; }
+  .listen-orb {
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    margin: 0 auto 7px;
+    font-size: 1.75rem;
+    border: 1px solid #cfe7e5;
+    box-shadow: none;
+  }
+  .choice-replay { min-width: 112px; min-height: 44px; margin: 0 auto 2px; }
+  .choice-grid,
+  .choice-grid--count-2,
+  .choice-grid--count-3,
+  .choice-grid--count-3.choice-grid--compact,
+  .choice-grid--count-4,
+  .choice-grid--count-5,
+  .choice-grid--count-6 {
+    width: 100%;
+    max-width: 100%;
+    gap: 8px;
+    margin-top: 7px;
+  }
+  .choice-grid--count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-grid--count-3,
+  .choice-grid--count-3.choice-grid--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-grid--count-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .choice-grid--count-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .choice-grid--count-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .choice-grid--count-3:not(.choice-grid--compact) .choice:last-child:nth-child(odd) {
+    grid-column: auto;
+    width: auto;
+    justify-self: stretch;
+  }
+  .choice,
+  .choice-grid--count-2 .choice,
+  .choice-grid--count-3 .choice,
+  .choice-grid--count-3.choice-grid--compact .choice,
+  .choice-grid--count-4 .choice,
+  .choice-grid--count-5 .choice,
+  .choice-grid--count-6 .choice {
+    min-height: 104px;
+    gap: 4px;
+    padding: 6px;
+    border-width: 2px;
+    border-radius: 15px;
+  }
+  .choice-grid--count-2 .choice { min-height: 118px; }
+  .choice-grid--count-2 .choice-visual { width: min(104px, 17vw); height: min(104px, 17vw); }
+  .choice-grid--count-3 .choice-visual { width: min(92px, 14vw); height: min(92px, 14vw); }
+  .choice-grid--count-4 .choice-visual { width: min(76px, 11vw); height: min(76px, 11vw); }
+  .choice-grid--count-5 .choice-visual,
+  .choice-grid--count-6 .choice-visual { width: min(64px, 9vw); height: min(64px, 9vw); }
+  .choice-label { font-size: .92rem; line-height: 1.05; }
+
+  /* Speak / mini interview */
+  .activity-card--speak {
+    display: grid;
+    grid-template-columns: minmax(170px, .72fr) minmax(330px, 1.28fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual turn"
+      "visual prompt"
+      "visual actions";
+    column-gap: 22px;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .activity-card--speak > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--speak > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(190px, 25vw);
+    max-height: 52dvh;
+    margin: 0 auto;
+  }
+  .activity-card--speak > .activity-heading { grid-area: title; margin: 0 0 3px; }
+  .activity-card--speak > .speak-turn { grid-area: turn; margin: 2px 0 5px; font-size: .78rem; letter-spacing: .09em; }
+  .activity-card--speak > .speak-question {
+    grid-area: prompt;
+    margin: 0;
+    padding: 9px 12px;
+    font-size: clamp(1.02rem, 2.8vw, 1.25rem);
+    line-height: 1.18;
+  }
+  .activity-card--speak > .activity-actions {
+    grid-area: actions;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .activity-card--speak .activity-actions .replay-button { width: 100%; min-width: 0; min-height: 44px; padding: 7px; }
+
+  /* Action / writing */
+  .activity-card--action,
+  .activity-card--writing {
+    display: grid;
+    grid-template-columns: minmax(190px, .78fr) minmax(320px, 1.22fr);
+    grid-template-areas:
+      "visual type"
+      "visual title"
+      "visual prompt"
+      "visual actions";
+    column-gap: 22px;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .activity-card--action > .activity-type,
+  .activity-card--writing > .activity-type { grid-area: type; align-self: end; }
+  .activity-card--action > .activity-heading,
+  .activity-card--writing > .activity-heading { grid-area: title; margin: 0 0 4px; }
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character {
+    grid-area: visual;
+    width: min(205px, 27vw);
+    max-height: 54dvh;
+    margin: 0 auto;
+  }
+  .activity-card--action > .action-prompt,
+  .activity-card--writing > .instruction {
+    grid-area: prompt;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.22;
+  }
+  .activity-card--action > .activity-actions,
+  .activity-card--writing > .activity-actions {
+    grid-area: actions;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .activity-card--action .activity-actions .replay-button,
+  .activity-card--writing .activity-actions .replay-button { width: 100%; min-width: 0; min-height: 44px; padding: 7px; }
+
+  /* Review */
+  .activity-card--review { padding: 10px 14px; }
+  .activity-card--review .activity-heading { margin-bottom: 7px; }
+  .activity-card--review .review-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+    max-width: 100%;
+  }
+  .activity-card--review .review-item {
+    display: flex;
+    min-width: 0;
+    min-height: 108px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px;
+    border-width: 2px;
+    text-align: center;
+    font-size: .88rem;
+  }
+  .activity-card--review .review-visual { width: 58px; height: 48px; }
+  .activity-card--review .review-item > span:last-child { font-size: 1.1rem; }
+
+  /* Challenge shell */
+  .activity-card--challenge { padding: 8px 14px 10px; }
+  .activity-card--challenge > .activity-heading {
+    margin-bottom: 2px;
+    font-size: 1.18rem;
+    line-height: 1.05;
+  }
+  .activity-card--challenge > .challenge-count { margin: 0 0 4px; font-size: .76rem; }
+  .challenge-stage .activity-card { padding: 0; }
+  .challenge-stage .activity-type { margin-bottom: 2px; }
+  .challenge-stage .activity-heading { margin-bottom: 5px; font-size: 1.45rem; }
+  .challenge-stage .listen-orb { margin-bottom: 5px; }
+  .challenge-stage .choice-grid { margin-top: 5px; }
+  .challenge-next { min-height: 42px; margin-top: 7px; padding: 6px 12px; }
+
+  /* Drag */
+  .activity-card--drag { padding: 10px 18px; }
+  .activity-card--drag .drag-object { width: 88px; height: 88px; margin: 7px auto; }
+  .activity-card--drag .teaching-visual--drag { width: 70px; height: 70px; }
+  .activity-card--drag .drop-target { min-height: 105px; max-width: 560px; font-size: 1rem; }
+  .activity-card--drag .target-visual { width: 100px; height: 76px; }
+
+  .finish {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: calc(10px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  }
+  .finish-card { width: min(570px, 100%); padding: 18px 30px; }
+  .stars { margin-bottom: 8px; font-size: 2.5rem; }
+  .finish h1 { font-size: 2.15rem; }
+  .finish-actions { margin-top: 14px; }
+
+  .lesson-card { min-height: 142px; padding: 16px 18px; }
+  .lesson-icon { font-size: 3rem; }
+  .lesson-name { font-size: 1.35rem; }
+}
+
+@media (orientation: landscape) and (max-height: 380px) {
+  .activity-card { padding-top: 8px; padding-bottom: 8px; }
+  .activity-card--learn > .teaching-visual--hero.character,
+  .activity-card--speak > .teaching-visual--hero.character,
+  .activity-card--action > .teaching-visual--hero.character,
+  .activity-card--writing > .teaching-visual--hero.character { max-height: 48dvh; }
+  .choice, .choice-grid--count-2 .choice { min-height: 96px; }
+  .choice-grid--count-2 .choice-visual { width: min(88px, 15vw); height: min(88px, 15vw); }
+  .activity-card--review .review-item { min-height: 94px; }
+}
