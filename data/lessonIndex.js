@@ -1,8 +1,9 @@
 import { helloLesson } from "./lessons/hello.js";
+import { coloursLesson } from "./lessons/colours.js";
 
 export const lessons = [
   helloLesson,
-  { id: "colours", lessonNumber: 2, title: "Colours", icon: "🎨", locked: true },
+  coloursLesson,
   { id: "numbers", lessonNumber: 3, title: "Numbers", icon: "🔢", locked: true },
   { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
 ];

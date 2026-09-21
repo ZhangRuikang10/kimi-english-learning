@@ -44,6 +44,7 @@ export function playText(text, explicitSrc = null) {
 
 export function replay(activity) {
   if (!state.soundOn || !activity) return;
+  if (activity.audioEnabled === false || activity.audioDisposition === "INTENTIONALLY_SILENT") return;
   const text = activity.ttsText || activity.title;
   playText(text, activity.audioSrc || null);
 }

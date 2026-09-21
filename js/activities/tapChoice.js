@@ -46,11 +46,14 @@ export function renderTapChoice(stage, activity, api) {
     grid.append(button);
   });
 
-  const listen = document.createElement("button");
-  listen.type = "button";
-  listen.className = "replay-button choice-replay";
-  listen.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span> Listen';
-  listen.addEventListener("click", () => replay(activity));
-  card.append(listen, grid, feedback);
+  if (activity.audioEnabled !== false) {
+    const listen = document.createElement("button");
+    listen.type = "button";
+    listen.className = "replay-button choice-replay";
+    listen.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span> Listen';
+    listen.addEventListener("click", () => replay(activity));
+    card.append(listen);
+  }
+  card.append(grid, feedback);
   stage.append(card);
 }

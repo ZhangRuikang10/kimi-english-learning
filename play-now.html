@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#fff9f1" />
-    <title>English Adventure</title>
-  <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kimi English Adventure</title>
+    <style>
+/* css/tokens.css */
 :root {
   --background: #fff9f1;
   --surface: #fff;
@@ -33,6 +33,7 @@
   --activity-prompt-size: clamp(1.55rem, 3.25vw, 2.15rem);
 }
 
+/* css/base.css */
 * { box-sizing: border-box; }
 html, body { min-height: 100%; max-width: 100%; }
 body { margin: 0; overflow-x: hidden; background: var(--background); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -44,6 +45,7 @@ h1, h2, h3, p { margin-top: 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 
+/* css/layout.css */
 .app { min-height: 100vh; min-height: 100dvh; }
 .home { min-height: 100vh; min-height: 100dvh; padding: clamp(32px, 7vw, 88px) clamp(20px, 7vw, 112px); background: radial-gradient(circle at 12% 10%, #ffe2ba 0 5.5%, transparent 5.7%), radial-gradient(circle at 88% 13%, #d8efec 0 6.2%, transparent 6.4%), var(--background); }
 .brand { margin: 0 0 clamp(35px, 7vw, 76px); font-size: clamp(2rem, 5.4vw, 4.2rem); font-weight: 900; letter-spacing: -.055em; }
@@ -187,6 +189,7 @@ h1, h2, h3, p { margin-top: 0; }
   .lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 820px; }
 }
 
+/* css/components.css */
 .lesson-card { position: relative; display: flex; min-height: 230px; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 26px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: left; transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
 .lesson-card:not(:disabled):hover { transform: translateY(-5px); box-shadow: 0 19px 38px rgba(58,48,35,.14); }
 .lesson-card:active:not(:disabled) { transform: translateY(-1px) scale(.99); }
@@ -856,41 +859,15 @@ h1, h2, h3, p { margin-top: 0; }
   .choice-grid--count-2 .choice-visual { width: min(88px, 15vw); height: min(88px, 15vw); }
   .activity-card--review .review-item { min-height: 94px; }
 }
-
-</style></head>
+    </style>
+  </head>
   <body>
     <main id="app" class="app" aria-live="polite"></main>
-  <script>(() => {
-const STORAGE_KEY = "english-adventure-progress";
-const defaults = () => ({ currentLesson: "hello", lessonPositions: { hello: 0 }, lessonProgress: {}, completedLessons: {}, soundOn: true });
-
-function read() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    const positions = { ...(stored.lessonPositions || {}) };
-    if (Number.isInteger(stored.currentActivity) && !Number.isInteger(positions[stored.currentLesson || "hello"])) positions[stored.currentLesson || "hello"] = stored.currentActivity;
-    delete stored.currentActivity;
-    return { ...defaults(), ...stored, lessonPositions: { ...defaults().lessonPositions, ...positions } };
-  }
-  catch { return defaults(); }
-}
-
-const state = read();
-function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-function patch(values) { Object.assign(state, values); save(); }
-function lessonPosition(lessonId) { return state.lessonPositions[lessonId] ?? 0; }
-function setLessonPosition(lessonId, position) { state.lessonPositions[lessonId] = Math.max(0, position); save(); }
-function openLesson(lessonId) { state.currentLesson = lessonId; if (!Number.isInteger(state.lessonPositions[lessonId])) state.lessonPositions[lessonId] = 0; save(); }
-function activityDone(lessonId, activityId) { return Boolean(state.lessonProgress[lessonId]?.includes(activityId)); }
-function markActivityDone(lessonId, activityId) {
-  const done = new Set(state.lessonProgress[lessonId] || []); done.add(activityId);
-  state.lessonProgress[lessonId] = [...done]; save();
-}
-function resetLesson(lessonId) { state.currentLesson = lessonId; state.lessonPositions[lessonId] = 0; delete state.lessonProgress[lessonId]; delete state.completedLessons[lessonId]; save(); }
-function resetAll() { Object.assign(state, defaults()); save(); }
-
-
+    <script>
+(() => {
+/* data/audio/audioRegistry.js */
 const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
+const LESSON_02_BASE = "assets/audio/lesson-02/mp3/";
 function normalizeAudioText(text) {
   return String(text ?? "")
     .replace(/[\u2018\u2019]/g, "'")
@@ -900,7 +877,6 @@ function normalizeAudioText(text) {
     .replace(/\s+/g, " ")
     .trim();
 }
-
 const lesson01Entries = [
   ["Listen.", "listen.mp3"],
   ["Listen. Then do it!", "listen-then-do-it.mp3"],
@@ -995,100 +971,38 @@ const lesson01Entries = [
   ["Point to three.", "point-to-three.mp3"],
   ["Show me red.", "show-me-red.mp3"],
 ];
+const lesson02Entries = [
+  ["Orange.", "orange.mp3"], ["Pink.", "pink.mp3"], ["Purple.", "purple.mp3"], ["Black.", "black.mp3"], ["White.", "white.mp3"], ["Brown.", "brown.mp3"],
+  ["Find purple.", "find-purple.mp3"], ["Touch orange.", "touch-orange.mp3"], ["Point to black.", "point-to-black.mp3"], ["Show me pink.", "show-me-pink.mp3"],
+  ["What colour is it? It's red.", "what-colour-is-it-it-s-red.mp3"],
+  ["Red ball.", "red-ball.mp3"], ["Blue ball.", "blue-ball.mp3"], ["Yellow ball.", "yellow-ball.mp3"], ["Green ball.", "green-ball.mp3"], ["Orange ball.", "orange-ball.mp3"], ["Pink ball.", "pink-ball.mp3"], ["Purple ball.", "purple-ball.mp3"], ["Black ball.", "black-ball.mp3"], ["White ball.", "white-ball.mp3"], ["Brown ball.", "brown-ball.mp3"],
+  ["Find the red ball.", "find-the-red-ball.mp3"], ["Touch the blue ball.", "touch-the-blue-ball.mp3"], ["Point to the yellow ball.", "point-to-the-yellow-ball.mp3"], ["Find the purple ball.", "find-the-purple-ball.mp3"],
+  ["A red ball.", "a-red-ball.mp3"], ["A blue pencil.", "a-blue-pencil.mp3"], ["A yellow star.", "a-yellow-star.mp3"], ["A green apple.", "a-green-apple.mp3"], ["A pink bag.", "a-pink-bag.mp3"],
+  ["Find the blue pencil.", "find-the-blue-pencil.mp3"], ["Touch the green apple.", "touch-the-green-apple.mp3"], ["Point to the yellow star.", "point-to-the-yellow-star.mp3"],
+  ["What colour is the ball? It's red.", "what-colour-is-the-ball-it-s-red.mp3"], ["What colour is the bag? It's pink.", "what-colour-is-the-bag-it-s-pink.mp3"], ["It's a red ball.", "it-s-a-red-ball.mp3"],
+  ["Find something red.", "find-something-red.mp3"], ["Touch something blue.", "touch-something-blue.mp3"], ["Show me something green.", "show-me-something-green.mp3"], ["Find something black.", "find-something-black.mp3"],
+  ["Which one is the same colour as the red ball?", "which-one-is-the-same-colour-as-the-red-ball.mp3"], ["Which one is different?", "which-one-is-different.mp3"], ["Which one belongs with the red things?", "which-one-belongs-with-the-red-things.mp3"], ["Which one starts with the b sound?", "which-one-starts-with-the-b-sound.mp3"],
+  ["Write red.", "write-red.mp3"], ["Write blue.", "write-blue.mp3"], ["Touch the red ball.", "touch-the-red-ball.mp3"], ["Point to the blue pencil.", "point-to-the-blue-pencil.mp3"], ["Show me the green apple.", "show-me-the-green-apple.mp3"], ["Touch the red ball and point to the blue pencil.", "touch-the-red-ball-and-point-to-the-blue-pencil.mp3"],
+];
 
 const teachingAudioRegistry = new Map(
   lesson01Entries.map(([text, file]) => [
     normalizeAudioText(text),
     LESSON_01_BASE + file,
-  ])
+  ]).concat(lesson02Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_02_BASE + file,
+  ]))
 );
-
 function resolveTeachingAudio(text) {
   if (!text) return null;
   return teachingAudioRegistry.get(normalizeAudioText(text)) ?? null;
 }
-
 function hasTeachingAudio(text) {
   return Boolean(resolveTeachingAudio(text));
 }
 
-
-
-
-let currentAudio = null;
-
-function stopCurrentPlayback() {
-  window.speechSynthesis?.cancel();
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
-  }
-}
-
-function browserTtsFallback(text) {
-  if (!state.soundOn || !text || !("speechSynthesis" in window)) return;
-  console.warn("[Teaching audio fallback] Browser TTS used for:", text);
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-GB";
-  utterance.rate = 0.78;
-  utterance.pitch = 1.0;
-  window.speechSynthesis.speak(utterance);
-}
-
-function playText(text, explicitSrc = null) {
-  if (!state.soundOn || !text) return;
-
-  stopCurrentPlayback();
-
-  const audioSrc = explicitSrc || resolveTeachingAudio(text);
-  if (!audioSrc) {
-    browserTtsFallback(text);
-    return;
-  }
-
-  currentAudio = new Audio(audioSrc);
-  currentAudio.preload = "auto";
-
-  currentAudio.play().catch((error) => {
-    console.error("[Teaching audio failed]", audioSrc, error);
-    browserTtsFallback(text);
-  });
-}
-
-function replay(activity) {
-  if (!state.soundOn || !activity) return;
-  const text = activity.ttsText || activity.title;
-  playText(text, activity.audioSrc || null);
-}
-
-function speak(text) {
-  // Backward-compatible API. Existing callers now use fixed teaching audio
-  // whenever the text exists in the registry.
-  playText(text);
-}
-
-function toggleSound() {
-  patch({ soundOn: !state.soundOn });
-  if (!state.soundOn) stopCurrentPlayback();
-  return state.soundOn;
-}
-
-function successSound() {
-  if (!state.soundOn || !window.AudioContext) return;
-  const context = new AudioContext();
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
-  oscillator.frequency.setValueAtTime(523, context.currentTime);
-  oscillator.frequency.exponentialRampToValueAtTime(783, context.currentTime + .16);
-  gain.gain.setValueAtTime(.045, context.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .28);
-  oscillator.connect(gain).connect(context.destination);
-  oscillator.start();
-  oscillator.stop(context.currentTime + .29);
-}
-
-
+/* data/visuals.js */
 // Teaching visuals are deliberately separate from UI icons (speaker, arrows, stars).
 // A visual may be used in a lesson only after a human has approved the asset.
 const visuals = {
@@ -1140,85 +1054,38 @@ const visuals = {
   "letter-c": { id: "letter-c", type: "image", src: "assets/images/common/letter-c.svg", alt: "Capital letter C", concept: "letter C", approved: true },
   "letter-d": { id: "letter-d", type: "image", src: "assets/images/common/letter-d.svg", alt: "Capital letter D", concept: "letter D", approved: true },
   "letter-e": { id: "letter-e", type: "image", src: "assets/images/common/letter-e.svg", alt: "Capital letter E", concept: "letter E", approved: true },
-  "letter-f": { id: "letter-f", type: "image", src: "assets/images/common/letter-f.svg", alt: "Capital letter F", concept: "letter F", approved: true }
+  "letter-f": { id: "letter-f", type: "image", src: "assets/images/common/letter-f.svg", alt: "Capital letter F", concept: "letter F", approved: true },
+  "l2-colour-red": { id: "l2-colour-red", type: "image", src: "assets/images/lesson-2/colours/colour-red.svg", alt: "A solid red colour card", concept: "red", approved: true },
+  "l2-colour-blue": { id: "l2-colour-blue", type: "image", src: "assets/images/lesson-2/colours/colour-blue.svg", alt: "A solid blue colour card", concept: "blue", approved: true },
+  "l2-colour-yellow": { id: "l2-colour-yellow", type: "image", src: "assets/images/lesson-2/colours/colour-yellow.svg", alt: "A solid yellow colour card", concept: "yellow", approved: true },
+  "l2-colour-green": { id: "l2-colour-green", type: "image", src: "assets/images/lesson-2/colours/colour-green.svg", alt: "A solid green colour card", concept: "green", approved: true },
+  "l2-colour-orange": { id: "l2-colour-orange", type: "image", src: "assets/images/lesson-2/colours/colour-orange.svg", alt: "A solid orange colour card", concept: "orange", approved: true },
+  "l2-colour-pink": { id: "l2-colour-pink", type: "image", src: "assets/images/lesson-2/colours/colour-pink.svg", alt: "A solid pink colour card", concept: "pink", approved: true },
+  "l2-colour-purple": { id: "l2-colour-purple", type: "image", src: "assets/images/lesson-2/colours/colour-purple.svg", alt: "A solid purple colour card", concept: "purple", approved: true },
+  "l2-colour-black": { id: "l2-colour-black", type: "image", src: "assets/images/lesson-2/colours/colour-black.svg", alt: "A solid black colour card", concept: "black", approved: true },
+  "l2-colour-white": { id: "l2-colour-white", type: "image", src: "assets/images/lesson-2/colours/colour-white.svg", alt: "A solid white colour card with a grey outline", concept: "white", approved: true },
+  "l2-colour-brown": { id: "l2-colour-brown", type: "image", src: "assets/images/lesson-2/colours/colour-brown.svg", alt: "A solid brown colour card", concept: "brown", approved: true },
+  "ball-red": { id: "ball-red", type: "image", src: "assets/images/lesson-2/balls/ball-red.png", alt: "A red ball", concept: "red ball", approved: true },
+  "ball-blue": { id: "ball-blue", type: "image", src: "assets/images/lesson-2/balls/ball-blue.png", alt: "A blue ball", concept: "blue ball", approved: true },
+  "ball-yellow": { id: "ball-yellow", type: "image", src: "assets/images/lesson-2/balls/ball-yellow.png", alt: "A yellow ball", concept: "yellow ball", approved: true },
+  "ball-green": { id: "ball-green", type: "image", src: "assets/images/lesson-2/balls/ball-green.png", alt: "A green ball", concept: "green ball", approved: true },
+  "ball-orange": { id: "ball-orange", type: "image", src: "assets/images/lesson-2/balls/ball-orange.png", alt: "An orange ball", concept: "orange ball", approved: true },
+  "ball-pink": { id: "ball-pink", type: "image", src: "assets/images/lesson-2/balls/ball-pink.png", alt: "A pink ball", concept: "pink ball", approved: true },
+  "ball-purple": { id: "ball-purple", type: "image", src: "assets/images/lesson-2/balls/ball-purple.png", alt: "A purple ball", concept: "purple ball", approved: true },
+  "ball-black": { id: "ball-black", type: "image", src: "assets/images/lesson-2/balls/ball-black.png", alt: "A black ball", concept: "black ball", approved: true },
+  "ball-white": { id: "ball-white", type: "image", src: "assets/images/lesson-2/balls/ball-white.png", alt: "A white ball", concept: "white ball", approved: true },
+  "ball-brown": { id: "ball-brown", type: "image", src: "assets/images/lesson-2/balls/ball-brown.png", alt: "A brown ball", concept: "brown ball", approved: true },
+  "pencil-blue": { id: "pencil-blue", type: "image", src: "assets/images/lesson-2/objects/pencil-blue.png", alt: "A blue pencil", concept: "blue pencil", approved: true },
+  "star-yellow": { id: "star-yellow", type: "image", src: "assets/images/lesson-2/objects/star-yellow.png", alt: "A yellow five-point star", concept: "yellow star", approved: true },
+  "apple-green": { id: "apple-green", type: "image", src: "assets/images/lesson-2/objects/apple-green.png", alt: "A green apple", concept: "green apple", approved: true },
+  "bag-pink": { id: "bag-pink", type: "image", src: "assets/images/lesson-2/objects/bag-pink.png", alt: "A pink backpack", concept: "pink bag", approved: true },
+  "apple-red": { id: "apple-red", type: "image", src: "assets/images/lesson-2/objects/apple-red.png", alt: "A red apple", concept: "red apple", approved: true },
+  "star-red": { id: "star-red", type: "image", src: "assets/images/lesson-2/objects/star-red.png", alt: "A red five-point star", concept: "red star", approved: true },
+  "bag-blue": { id: "bag-blue", type: "image", src: "assets/images/lesson-2/objects/bag-blue.png", alt: "A blue backpack", concept: "blue bag", approved: true }
 };
-
 const getVisual = (visualId) => visuals[visualId];
 
-
-
-/** Renders approved teaching artwork. UI symbols intentionally do not use this function. */
-function renderVisual(visualId, { className = "", size = "medium", decorative = false } = {}) {
-  const visual = getVisual(visualId);
-  if (!visual) return unavailableVisual(visualId, "Missing visual asset");
-  if (!visual.src || !visual.type || !visual.alt || !visual.concept || visual.approved !== true) {
-    console.error(`Invalid teaching visual: ${visualId}`, visual);
-    return unavailableVisual(visualId, "Invalid visual asset");
-  }
-
-  const image = document.createElement("img");
-  image.className = `teaching-visual teaching-visual--${size} ${className}`.trim();
-  image.src = visual.src;
-  image.alt = decorative ? "" : visual.alt;
-  image.loading = "eager";
-  image.decoding = "async";
-  if (decorative) image.setAttribute("aria-hidden", "true");
-  else image.setAttribute("aria-label", visual.alt);
-  image.addEventListener("error", () => {
-    console.error(`Missing visual asset: ${visualId} (${visual.src})`);
-    image.replaceWith(unavailableVisual(visualId, "Image unavailable"));
-  }, { once: true });
-  return image;
-}
-
-function unavailableVisual(visualId, message) {
-  console.error(`${message}: ${visualId}`);
-  const unavailable = document.createElement("div");
-  unavailable.className = "teaching-visual teaching-visual--unavailable";
-  unavailable.setAttribute("role", "img");
-  unavailable.setAttribute("aria-label", `Image unavailable for ${visualId}`);
-  unavailable.textContent = "Image unavailable";
-  return unavailable;
-}
-
-
-
-const NESTED_VISUAL_FIELDS = new Set(["options", "items"]);
-
-function validateLesson(lesson, { strict = false } = {}) {
-  const issues = [];
-  if (!lesson?.id || !Array.isArray(lesson.activities)) issues.push("Lesson requires an id and activities array.");
-  lesson?.activities?.forEach((activity) => validateActivity(activity, issues, `lesson ${lesson.id}`));
-  issues.forEach((issue) => strict ? console.error(`[Lesson validation] ${issue}`) : console.warn(`[Lesson validation] ${issue}`));
-  return issues;
-}
-
-function validateLessons(lessons, options) { return lessons.flatMap((lesson) => validateLesson(lesson, options)); }
-
-function validateActivity(activity, issues, location) {
-  if (!activity?.id || !activity?.type) { issues.push(`${location}: activity requires id and type.`); return; }
-  validateVisualReference(activity.visualId, issues, `${location}/${activity.id}`);
-  for (const field of NESTED_VISUAL_FIELDS) activity[field]?.forEach((item) => validateVisualReference(item.visualId, issues, `${location}/${activity.id}/${field}`));
-  validateVisualReference(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`);
-  validateVisualReference(activity.target?.visualId, issues, `${location}/${activity.id}/target`);
-  if (["learn", "speakPrompt", "actionPrompt", "writingPrompt"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
-  if (["tapChoice", "listenChoose"].includes(activity.type)) activity.options?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/options`));
-  if (activity.type === "review") activity.items?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/items`));
-  if (activity.type === "dragDrop") { requireVisual(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`); requireVisual(activity.target?.visualId, issues, `${location}/${activity.id}/target`); }
-  if (activity.type === "challenge") activity.items?.forEach((item) => validateActivity(item, issues, `${location}/${activity.id}/challenge`));
-}
-
-function requireVisual(visualId, issues, location) { if (!visualId) issues.push(`${location}: formal teaching activity requires a visualId.`); }
-
-function validateVisualReference(visualId, issues, location) {
-  if (!visualId) return;
-  const visual = getVisual(visualId);
-  if (!visual) { issues.push(`${location}: visualId "${visualId}" does not exist.`); return; }
-  for (const field of ["id", "concept", "alt", "src", "type"]) if (!visual[field]) issues.push(`${location}: visual "${visualId}" is missing ${field}.`);
-  if (visual.approved !== true) issues.push(`${location}: visual "${visualId}" is not approved.`);
-}
-
-
+/* data/lessons/hello.js */
 const choice = (id, visualId, label) => ({ id, visualId, label });
 const colours = [choice("red", "colour-red", "Red"), choice("blue", "colour-blue", "Blue"), choice("yellow", "colour-yellow", "Yellow"), choice("green", "colour-green", "Green")];
 const numbers = [1, 2, 3, 4, 5].map((number) => choice(String(number), `numeral-${number}`, String(number)));
@@ -1226,7 +1093,6 @@ const letters = ["a", "b", "c", "d", "e", "f"].map((letter) => choice(letter, `l
 const listenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
 const action = (id, ttsText, visualId, teacherNote = "", teacherChecks = "") => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks });
 const speakActivity = (id, title, prompt, visualId = "speaking-child", teacherNote = "", teacherChecks = "", ttsText = title) => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
-
 const helloLesson = {
   id: "hello",
   lessonNumber: 1,
@@ -1296,26 +1162,251 @@ const helloLesson = {
   ]
 };
 
+/* data/lessons/colours.js */
+const coloursChoice = (id, visualId, label) => ({ id, visualId, label });
+const colour = (name) => coloursChoice(name, `l2-colour-${name}`, name[0].toUpperCase() + name.slice(1));
+const ball = (name) => coloursChoice(name, `ball-${name}`, `${name[0].toUpperCase() + name.slice(1)} ball`);
+const coloursListenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
+const coloursAction = (id, ttsText, visualId, teacherNote = "", teacherChecks = "", hideNestedHeader = false) => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks, hideNestedHeader });
+const coloursSpeak = (id, title, prompt, visualId, ttsText = title, teacherNote = "", teacherChecks = "") => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
+const learn = (id, title, visualId, ttsText = title, teacherNote = "") => ({ id, type: "learn", title, visualId, audioSrc: null, ttsText, teacherNote });
+const reviewItem = (name) => ({ visualId: `l2-colour-${name}`, text: name[0].toUpperCase() + name.slice(1), ttsText: `${name[0].toUpperCase() + name.slice(1)}.` });
 
+const oldColours = ["red", "blue", "yellow", "green"];
+const setOneColours = ["orange", "pink", "purple"];
+const setTwoColours = ["black", "white", "brown"];
+const allColours = [...oldColours, ...setOneColours, ...setTwoColours];
+const colourBalls = allColours.map((name) => ({ visualId: `ball-${name}`, text: `${name[0].toUpperCase() + name.slice(1)} ball`, ttsText: `${name[0].toUpperCase() + name.slice(1)} ball.` }));
+const colourObjects = [
+  { visualId: "ball-red", text: "A red ball", ttsText: "A red ball." },
+  { visualId: "pencil-blue", text: "A blue pencil", ttsText: "A blue pencil." },
+  { visualId: "star-yellow", text: "A yellow star", ttsText: "A yellow star." },
+  { visualId: "apple-green", text: "A green apple", ttsText: "A green apple." },
+  { visualId: "bag-pink", text: "A pink bag", ttsText: "A pink bag." }
+];
+const coloursLesson = {
+  id: "colours",
+  lessonNumber: 2,
+  title: "Colours",
+  icon: "🎨",
+  activities: [
+    coloursSpeak("01-hello", "Hello!", "Hello!", "waving-child", "Hello!"),
+    coloursSpeak("02-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"),
+    coloursSpeak("03-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"),
+    coloursSpeak("04-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"),
+    { id: "05-listen-and-do", type: "challenge", title: "Listen and do!", items: [coloursAction("05a-stand", "Stand up.", "child-standing", "", "", true), coloursAction("05b-sit", "Sit down.", "child-sitting", "", "", true), coloursAction("05c-look", "Look.", "child-looking", "", "", true), coloursAction("05d-listen", "Listen.", "child-listening", "", "", true)] },
+    { id: "06-point-or-touch", type: "challenge", title: "Point or touch?", items: [coloursListenChoice("06a-point", "Point.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "point"), coloursListenChoice("06b-touch", "Touch.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "touch"), coloursListenChoice("06c-touch", "Touch.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "touch"), coloursListenChoice("06d-point", "Point.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "point")] },
+    { id: "07-old-colours-review", type: "review", title: "Colour quick review", items: oldColours.map(reviewItem) },
+    coloursListenChoice("08-find-red", "Find red.", oldColours.map(colour), "red"),
+    coloursListenChoice("09-touch-blue", "Touch blue.", oldColours.map(colour), "blue"),
+    coloursListenChoice("10-point-yellow", "Point to yellow.", oldColours.map(colour), "yellow"),
+    coloursListenChoice("11-show-green", "Show me green.", oldColours.map(colour), "green"),
+    learn("12-orange", "Orange.", "l2-colour-orange"),
+    learn("13-pink", "Pink.", "l2-colour-pink"),
+    learn("14-purple", "Purple.", "l2-colour-purple"),
+    { id: "15-new-colours-one", type: "challenge", title: "New colours: listen!", items: [coloursListenChoice("15a-orange", "Orange.", setOneColours.map(colour), "orange"), coloursListenChoice("15b-pink", "Pink.", setOneColours.map(colour), "pink"), coloursListenChoice("15c-purple", "Purple.", setOneColours.map(colour), "purple")] },
+    learn("16-black", "Black.", "l2-colour-black"),
+    learn("17-white", "White.", "l2-colour-white"),
+    learn("18-brown", "Brown.", "l2-colour-brown"),
+    { id: "19-new-colours-two", type: "challenge", title: "Black / White / Brown listening", items: [coloursListenChoice("19a-black", "Black.", setTwoColours.map(colour), "black"), coloursListenChoice("19b-white", "White.", setTwoColours.map(colour), "white"), coloursListenChoice("19c-brown", "Brown.", setTwoColours.map(colour), "brown")] },
+    { id: "20-new-colours-review", type: "review", title: "New colours", items: [...setOneColours, ...setTwoColours].map(reviewItem) },
+    coloursListenChoice("21-find-purple", "Find purple.", [...setOneColours, "blue"].map(colour), "purple"),
+    coloursListenChoice("22-touch-orange", "Touch orange.", ["orange", "yellow", "brown", "pink"].map(colour), "orange"),
+    coloursListenChoice("23-point-black", "Point to black.", ["black", "white", "blue", "purple"].map(colour), "black"),
+    coloursListenChoice("24-show-pink", "Show me pink.", ["pink", "red", "purple", "orange"].map(colour), "pink"),
+    { id: "25-ten-colours-review", type: "review", title: "Ten colours", items: allColours.map(reviewItem) },
+    { id: "26-colour-listening-mix-one", type: "challenge", title: "Colour listening mix 1", items: [coloursListenChoice("26a-red", "Red.", ["red", "purple", "yellow", "brown"].map(colour), "red"), coloursListenChoice("26b-purple", "Purple.", ["red", "purple", "yellow", "brown"].map(colour), "purple"), coloursListenChoice("26c-yellow", "Yellow.", ["red", "purple", "yellow", "brown"].map(colour), "yellow"), coloursListenChoice("26d-brown", "Brown.", ["red", "purple", "yellow", "brown"].map(colour), "brown")] },
+    { id: "27-colour-listening-mix-two", type: "challenge", title: "Colour listening mix 2", items: [coloursListenChoice("27a-orange", "Orange.", ["orange", "brown", "red", "pink"].map(colour), "orange"), coloursListenChoice("27b-brown", "Brown.", ["orange", "brown", "red", "pink"].map(colour), "brown"), coloursListenChoice("27c-red", "Red.", ["orange", "brown", "red", "pink"].map(colour), "red"), coloursListenChoice("27d-pink", "Pink.", ["orange", "brown", "red", "pink"].map(colour), "pink")] },
+    { id: "28-colour-listening-mix-three", type: "challenge", title: "Colour listening mix 3", items: [coloursListenChoice("28a-black", "Black.", ["black", "white", "blue", "purple"].map(colour), "black"), coloursListenChoice("28b-white", "White.", ["black", "white", "blue", "purple"].map(colour), "white"), coloursListenChoice("28c-green", "Green.", ["green", "yellow", "blue", "purple"].map(colour), "green"), coloursListenChoice("28d-yellow", "Yellow.", ["green", "yellow", "blue", "purple"].map(colour), "yellow")] },
+    coloursSpeak("29-what-colour-red", "What colour is it?", "It's red.", "ball-red", "What colour is it? It's red.", "Model the whole question-and-answer exchange before the child repeats."),
+    coloursSpeak("30-what-colour-blue", "What colour is it?", "It's ______.", "ball-blue", "What colour is it?", "Teacher expects: It's blue."),
+    coloursSpeak("31-what-colour-yellow", "What colour is it?", "It's ______.", "ball-yellow", "What colour is it?", "Teacher expects: It's yellow."),
+    coloursSpeak("32-what-colour-orange", "What colour is it?", "It's ______.", "ball-orange", "What colour is it?", "Teacher expects: It's orange."),
+    coloursSpeak("33-what-colour-purple", "What colour is it?", "It's ______.", "ball-purple", "What colour is it?", "Teacher expects: It's purple."),
+    coloursSpeak("34-what-colour-brown", "What colour is it?", "It's ______.", "ball-brown", "What colour is it?", "Teacher expects: It's brown."),
+    { id: "35-colour-balls", type: "review", title: "Colour balls", items: colourBalls },
+    coloursListenChoice("36-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"),
+    coloursListenChoice("37-touch-blue-ball", "Touch the blue ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "blue"),
+    coloursListenChoice("38-point-yellow-ball", "Point to the yellow ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "yellow"),
+    coloursListenChoice("39-find-purple-ball", "Find the purple ball.", [ball("purple"), ball("pink"), ball("black"), ball("brown")], "purple"),
+    { id: "40-colour-and-object", type: "review", title: "Colour and object", items: colourObjects },
+    coloursListenChoice("41-find-blue-pencil", "Find the blue pencil.", [coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("bag-blue", "bag-blue", "Blue bag"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"),
+    coloursListenChoice("42-touch-green-apple", "Touch the green apple.", [coloursChoice("apple-green", "apple-green", "Green apple"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-green", "ball-green", "Green ball"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-green"),
+    coloursListenChoice("43-point-yellow-star", "Point to the yellow star.", [coloursChoice("star-yellow", "star-yellow", "Yellow star"), coloursChoice("star-red", "star-red", "Red star"), coloursChoice("ball-yellow", "ball-yellow", "Yellow ball"), coloursChoice("pencil-blue", "pencil-blue", "Blue pencil")], "star-yellow"),
+    coloursSpeak("44-ball-question", "What colour is the ball?", "It's red.", "ball-red", "What colour is the ball? It's red."),
+    coloursSpeak("45-bag-question", "What colour is the bag?", "It's pink.", "bag-pink", "What colour is the bag? It's pink."),
+    { id: "46-build-it", type: "challenge", title: "Build it!", items: [learn("46a-red", "Red.", "ball-red"), learn("46b-red-ball", "Red ball.", "ball-red"), learn("46c-a-red-ball", "A red ball.", "ball-red"), coloursSpeak("46d-its-a-red-ball", "It's a red ball.", "It's a red ball.", "ball-red", "It's a red ball.")] },
+    { id: "47-colour-hunt", type: "challenge", title: "Colour Hunt", teacherNote: "These are real-world tasks. Observe the child, then let them tap I did it.", items: [coloursAction("47a-find-red", "Find something red.", "l2-colour-red"), coloursAction("47b-touch-blue", "Touch something blue.", "l2-colour-blue"), coloursAction("47c-show-green", "Show me something green.", "l2-colour-green"), coloursAction("47d-find-black", "Find something black.", "l2-colour-black")] },
+    { id: "48-think-with-colours", type: "challenge", title: "Think with colours", items: [coloursListenChoice("48a-same-colour", "Which one is the same colour as the red ball?", [coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "apple-red"), coloursListenChoice("48b-different", "Which one is different?", [coloursChoice("ball-red", "ball-red", "Red ball"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("star-red", "star-red", "Red star"), coloursChoice("bag-blue", "bag-blue", "Blue bag")], "bag-blue"), coloursListenChoice("48c-red-things", "Which one belongs with the red things?", [coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("star-yellow", "star-yellow", "Yellow star"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-red")] },
+    { id: "49-read-it", type: "challenge", title: "Read it!", teacherNote: "For 49a–49c, test reading without clicking Replay. The replay control exists only because this uses the standard activity component.", items: [
+      { id: "49a-read-red", type: "tapChoice", title: "red", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [colour("red"), colour("blue"), colour("green")], correctAnswer: "red", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49b-read-blue-ball", type: "tapChoice", title: "blue ball", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49c-read-sentence", type: "tapChoice", title: "The ball is blue.", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49d-phonics-b", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [coloursChoice("blue", "l2-colour-blue", "blue"), coloursChoice("red", "l2-colour-red", "red"), coloursChoice("yellow", "l2-colour-yellow", "yellow")], correctAnswer: "blue", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." },
+      { id: "49e-phonics-b-two", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [coloursChoice("black", "l2-colour-black", "black"), coloursChoice("pink", "l2-colour-pink", "pink"), coloursChoice("green", "l2-colour-green", "green")], correctAnswer: "black", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." }
+    ] },
+    { id: "50-write-red", type: "writingPrompt", title: "Write red.", childPrompt: "Copy red on your paper.", visualId: "l2-colour-red", audioSrc: null, ttsText: "Write red.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
+    { id: "51-write-blue", type: "writingPrompt", title: "Write blue.", childPrompt: "Copy blue on your paper.", visualId: "l2-colour-blue", audioSrc: null, ttsText: "Write blue.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
+    { id: "52-final-colour-challenge", type: "challenge", title: "English Adventure Colour Challenge", teacherNote: "The final two-step instruction is an advanced observation. If it is difficult, return to one-step instructions; do not treat Lesson 2 as failed.", teacherChecks: "Colour listening, colour plus object, real-world transfer, and two-step attention.", items: [coloursAction("52a-touch-red", "Touch red.", "l2-colour-red"), coloursListenChoice("52b-find-purple", "Find purple.", ["purple", "pink", "blue", "brown"].map(colour), "purple"), coloursListenChoice("52c-touch-red-ball", "Touch the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), coloursListenChoice("52d-point-blue-pencil", "Point to the blue pencil.", [coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("bag-blue", "bag-blue", "Blue bag"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"), coloursListenChoice("52e-show-green-apple", "Show me the green apple.", [coloursChoice("apple-green", "apple-green", "Green apple"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-green", "ball-green", "Green ball"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-green"), coloursAction("52f-find-black", "Find something black.", "l2-colour-black"), coloursAction("52g-two-step", "Touch the red ball and point to the blue pencil.", "ball-red", "Advanced two-step observation. The teacher can use the screen choices or nearby real objects.")] },
+    { id: "53-mini-interview", type: "challenge", title: "Mini Interview", teacherNote: "A Lesson 1 and Lesson 2 wrap-up. Keep the exchange natural and encouraging.", items: [coloursSpeak("53a-hello", "Hello!", "Hello!", "waving-child", "Hello!"), coloursSpeak("53b-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"), coloursSpeak("53c-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"), coloursSpeak("53d-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"), coloursSpeak("53e-blue", "What colour is it?", "It's blue.", "ball-blue", "What colour is it?"), coloursSpeak("53f-orange", "What colour is it?", "It's orange.", "ball-orange", "What colour is it?"), coloursListenChoice("53g-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), coloursSpeak("53h-goodbye", "Goodbye!", "Goodbye!", "goodbye-child", "Goodbye!")] }
+  ]
+};
 
+/* data/lessonIndex.js */
 const lessons = [
   helloLesson,
-  { id: "colours", lessonNumber: 2, title: "Colours", icon: "🎨", locked: true },
+  coloursLesson,
   { id: "numbers", lessonNumber: 3, title: "Numbers", icon: "🔢", locked: true },
   { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
 ];
-
 const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
 
+/* js/store.js */
+const STORAGE_KEY = "english-adventure-progress";
+const defaults = () => ({ currentLesson: "hello", lessonPositions: { hello: 0 }, lessonProgress: {}, completedLessons: {}, soundOn: true });
 
+function read() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const positions = { ...(stored.lessonPositions || {}) };
+    if (Number.isInteger(stored.currentActivity) && !Number.isInteger(positions[stored.currentLesson || "hello"])) positions[stored.currentLesson || "hello"] = stored.currentActivity;
+    delete stored.currentActivity;
+    return { ...defaults(), ...stored, lessonPositions: { ...defaults().lessonPositions, ...positions } };
+  }
+  catch { return defaults(); }
+}
+const state = read();
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function patch(values) { Object.assign(state, values); save(); }
+function lessonPosition(lessonId) { return state.lessonPositions[lessonId] ?? 0; }
+function setLessonPosition(lessonId, position) { state.lessonPositions[lessonId] = Math.max(0, position); save(); }
+function openLesson(lessonId) { state.currentLesson = lessonId; if (!Number.isInteger(state.lessonPositions[lessonId])) state.lessonPositions[lessonId] = 0; save(); }
+function activityDone(lessonId, activityId) { return Boolean(state.lessonProgress[lessonId]?.includes(activityId)); }
+function markActivityDone(lessonId, activityId) {
+  const done = new Set(state.lessonProgress[lessonId] || []); done.add(activityId);
+  state.lessonProgress[lessonId] = [...done]; save();
+}
+function resetLesson(lessonId) { state.currentLesson = lessonId; state.lessonPositions[lessonId] = 0; delete state.lessonProgress[lessonId]; delete state.completedLessons[lessonId]; save(); }
+function resetAll() { Object.assign(state, defaults()); save(); }
+
+/* js/audio.js */
+let currentAudio = null;
+
+function stopCurrentPlayback() {
+  window.speechSynthesis?.cancel();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+function browserTtsFallback(text) {
+  if (!state.soundOn || !text || !("speechSynthesis" in window)) return;
+  console.warn("[Teaching audio fallback] Browser TTS used for:", text);
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-GB";
+  utterance.rate = 0.78;
+  utterance.pitch = 1.0;
+  window.speechSynthesis.speak(utterance);
+}
+function playText(text, explicitSrc = null) {
+  if (!state.soundOn || !text) return;
+
+  stopCurrentPlayback();
+
+  const audioSrc = explicitSrc || resolveTeachingAudio(text);
+  if (!audioSrc) {
+    browserTtsFallback(text);
+    return;
+  }
+
+  currentAudio = new Audio(audioSrc);
+  currentAudio.preload = "auto";
+
+  currentAudio.play().catch((error) => {
+    console.error("[Teaching audio failed]", audioSrc, error);
+    browserTtsFallback(text);
+  });
+}
+function replay(activity) {
+  if (!state.soundOn || !activity) return;
+  if (activity.audioEnabled === false || activity.audioDisposition === "INTENTIONALLY_SILENT") return;
+  const text = activity.ttsText || activity.title;
+  playText(text, activity.audioSrc || null);
+}
+function speak(text) {
+  // Backward-compatible API. Existing callers now use fixed teaching audio
+  // whenever the text exists in the registry.
+  playText(text);
+}
+function toggleSound() {
+  patch({ soundOn: !state.soundOn });
+  if (!state.soundOn) stopCurrentPlayback();
+  return state.soundOn;
+}
+function successSound() {
+  if (!state.soundOn || !window.AudioContext) return;
+  const context = new AudioContext();
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.frequency.setValueAtTime(523, context.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(783, context.currentTime + .16);
+  gain.gain.setValueAtTime(.045, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .28);
+  oscillator.connect(gain).connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + .29);
+}
+
+/* js/visuals/renderVisual.js */
+/** Renders approved teaching artwork. UI symbols intentionally do not use this function. */
+function renderVisual(visualId, { className = "", size = "medium", decorative = false } = {}) {
+  const visual = getVisual(visualId);
+  if (!visual) return unavailableVisual(visualId, "Missing visual asset");
+  if (!visual.src || !visual.type || !visual.alt || !visual.concept || visual.approved !== true) {
+    console.error(`Invalid teaching visual: ${visualId}`, visual);
+    return unavailableVisual(visualId, "Invalid visual asset");
+  }
+
+  const image = document.createElement("img");
+  image.className = `teaching-visual teaching-visual--${size} ${className}`.trim();
+  image.src = visual.src;
+  image.alt = decorative ? "" : visual.alt;
+  image.loading = "eager";
+  image.decoding = "async";
+  if (decorative) image.setAttribute("aria-hidden", "true");
+  else image.setAttribute("aria-label", visual.alt);
+  image.addEventListener("error", () => {
+    console.error(`Missing visual asset: ${visualId} (${visual.src})`);
+    image.replaceWith(unavailableVisual(visualId, "Image unavailable"));
+  }, { once: true });
+  return image;
+}
+
+function unavailableVisual(visualId, message) {
+  console.error(`${message}: ${visualId}`);
+  const unavailable = document.createElement("div");
+  unavailable.className = "teaching-visual teaching-visual--unavailable";
+  unavailable.setAttribute("role", "img");
+  unavailable.setAttribute("aria-label", `Image unavailable for ${visualId}`);
+  unavailable.textContent = "Image unavailable";
+  return unavailable;
+}
+
+/* js/components/feedback.js */
+function feedbackLine() { const line = document.createElement("p"); line.className = "feedback"; line.setAttribute("aria-live", "assertive"); return line; }
+function correct(card, button, feedback, onDone, text = "Great!") { button.classList.add("correct"); feedback.className = "feedback correct"; feedback.textContent = text; successSound(); window.setTimeout(onDone, 620); }
+function incorrect(button, feedback, replayText) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => button.classList.remove("incorrect"), 390); window.setTimeout(() => playText(replayText), 430); }
+
+/* js/components/lessonCard.js */
 function lessonCard(lesson, onOpen, completed = false) {
   const card = document.createElement("button"); card.type = "button"; card.className = `lesson-card ${lesson.locked ? "locked" : ""} ${completed ? "completed" : ""}`; card.disabled = Boolean(lesson.locked);
   card.innerHTML = `<span class="lesson-icon" aria-hidden="true">${lesson.icon}</span><span><span class="lesson-label">Lesson ${lesson.lessonNumber}</span><span class="lesson-name">${lesson.title}</span></span><span class="status">${lesson.locked ? "Locked" : completed ? "Completed" : "Ready"}</span>`;
   if (!lesson.locked) card.addEventListener("click", onOpen); return card;
 }
 
-
-
+/* js/components/progress.js */
 function progress(lesson) {
   const done = lesson.activities.filter((activity) => activityDone(lesson.id, activity.id)).length;
   const total = lesson.activities.length;
@@ -1325,16 +1416,7 @@ function progress(lesson) {
   return wrap;
 }
 
-
-
-function feedbackLine() { const line = document.createElement("p"); line.className = "feedback"; line.setAttribute("aria-live", "assertive"); return line; }
-function correct(card, button, feedback, onDone, text = "Great!") { button.classList.add("correct"); feedback.className = "feedback correct"; feedback.textContent = text; successSound(); window.setTimeout(onDone, 620); }
-function incorrect(button, feedback, replayText) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => button.classList.remove("incorrect"), 390); window.setTimeout(() => playText(replayText), 430); }
-
-
-
-
-
+/* js/components/teacherPanel.js */
 function openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }) {
   document.querySelector(".teacher-overlay")?.remove();
   const overlay = document.createElement("div"); overlay.className = "teacher-overlay";
@@ -1357,9 +1439,61 @@ function openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect,
   });
 }
 
+/* js/activities/tapChoice.js */
+function choiceButton(option, { showLabel = true } = {}) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `choice ${showLabel ? "choice--labelled" : "choice--visual-only"}`;
+  button.append(renderVisual(option.visualId, { className: "choice-visual", size: "choice", decorative: false }));
+  if (showLabel) {
+    const label = document.createElement("span");
+    label.className = "choice-label";
+    label.textContent = option.label;
+    button.append(label);
+  }
+  button.setAttribute("aria-label", option.label);
+  return button;
+}
+function compactChoiceSet(options = []) {
+  const compactIds = new Set(["ball", "table", "chair", "apple", "box"]);
+  return options.length > 0 && options.every((option) =>
+    /^(colour|numeral|letter)-/.test(option.visualId || "") || compactIds.has(option.visualId)
+  );
+}
+function renderTapChoice(stage, activity, api) {
+  const card = document.createElement("section");
+  card.className = "activity-card activity-card--tap-choice";
+  card.innerHTML = `<p class="activity-type">Play</p><h1 class="activity-heading">${activity.title}</h1>`;
 
+  const grid = document.createElement("div");
+  grid.className = `choice-grid choice-grid--tap choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
+  const feedback = feedbackLine();
+  activity.options.forEach((option) => {
+    const button = choiceButton(option, { showLabel: activity.showLabels !== false });
+    button.addEventListener("click", () => {
+      if (option.id === activity.correctAnswer) {
+        grid.querySelectorAll("button").forEach((item) => item.disabled = true);
+        correct(card, button, feedback, api.complete, "Great!");
+      } else {
+        incorrect(button, feedback, activity.ttsText);
+      }
+    });
+    grid.append(button);
+  });
 
+  if (activity.audioEnabled !== false) {
+    const listen = document.createElement("button");
+    listen.type = "button";
+    listen.className = "replay-button choice-replay";
+    listen.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span> Listen';
+    listen.addEventListener("click", () => replay(activity));
+    card.append(listen);
+  }
+  card.append(grid, feedback);
+  stage.append(card);
+}
 
+/* js/activities/learn.js */
 function renderLearn(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--learn";
@@ -1385,67 +1519,7 @@ function textElement(tag, className, value) {
   return element;
 }
 
-
-
-
-
-function choiceButton(option, { showLabel = true } = {}) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = `choice ${showLabel ? "choice--labelled" : "choice--visual-only"}`;
-  button.append(renderVisual(option.visualId, { className: "choice-visual", size: "choice", decorative: false }));
-  if (showLabel) {
-    const label = document.createElement("span");
-    label.className = "choice-label";
-    label.textContent = option.label;
-    button.append(label);
-  }
-  button.setAttribute("aria-label", option.label);
-  return button;
-}
-
-
-function compactChoiceSet(options = []) {
-  const compactIds = new Set(["ball", "table", "chair", "apple", "box"]);
-  return options.length > 0 && options.every((option) =>
-    /^(colour|numeral|letter)-/.test(option.visualId || "") || compactIds.has(option.visualId)
-  );
-}
-
-function renderTapChoice(stage, activity, api) {
-  const card = document.createElement("section");
-  card.className = "activity-card activity-card--tap-choice";
-  card.innerHTML = `<p class="activity-type">Play</p><h1 class="activity-heading">${activity.title}</h1>`;
-
-  const grid = document.createElement("div");
-  grid.className = `choice-grid choice-grid--tap choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
-  const feedback = feedbackLine();
-  activity.options.forEach((option) => {
-    const button = choiceButton(option, { showLabel: activity.showLabels !== false });
-    button.addEventListener("click", () => {
-      if (option.id === activity.correctAnswer) {
-        grid.querySelectorAll("button").forEach((item) => item.disabled = true);
-        correct(card, button, feedback, api.complete, "Great!");
-      } else {
-        incorrect(button, feedback, activity.ttsText);
-      }
-    });
-    grid.append(button);
-  });
-
-  const listen = document.createElement("button");
-  listen.type = "button";
-  listen.className = "replay-button choice-replay";
-  listen.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span> Listen';
-  listen.addEventListener("click", () => replay(activity));
-  card.append(listen, grid, feedback);
-  stage.append(card);
-}
-
-
-
-
-
+/* js/activities/listenChoose.js */
 function renderListenChoose(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--listen-choice";
@@ -1478,10 +1552,7 @@ function renderListenChoose(stage, activity, api) {
   stage.append(card);
 }
 
-
-
-
-
+/* js/activities/dragDrop.js */
 function renderDragDrop(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card activity-card--drag";
   const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Play";
@@ -1502,9 +1573,7 @@ function renderDragDrop(stage, activity, api) {
   card.append(replayButton, draggable, target, feedback); stage.append(card);
 }
 
-
-
-
+/* js/activities/speakPrompt.js */
 function renderSpeakPrompt(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card activity-card--speak";
   const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Speak";
@@ -1517,9 +1586,14 @@ function renderSpeakPrompt(stage, activity, api) {
   const actions = document.createElement("div"); actions.className = "activity-actions speak-actions"; actions.append(button, complete); card.append(actions); stage.append(card);
 }
 
+/* js/activities/review.js */
+function renderReview(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card activity-card--review"; card.innerHTML = `<p class="activity-type">Review</p><h1 class="activity-heading">${activity.title}</h1>`;
+  const list = document.createElement("div"); list.className = "review-list"; let count = 0;
+  activity.items.forEach((item) => { const button = document.createElement("button"); button.type = "button"; button.className = "review-item"; button.append(renderVisual(item.visualId, { className: "review-visual", size: "review", decorative: true })); const label = document.createElement("span"); label.textContent = item.text; const icon = document.createElement("span"); icon.setAttribute("aria-hidden", "true"); icon.textContent = "🔊"; button.append(label, icon); button.addEventListener("click", () => { playText(item.ttsText || item.text, item.audioSrc || null); if (!button.classList.contains("done")) { button.classList.add("done"); count += 1; if (count === activity.items.length) api.complete(); } }); list.append(button); }); card.append(list); stage.append(card);
+}
 
-
-
+/* js/activities/actionPrompt.js */
 // The child acts away from the screen; the teacher observes before completion.
 function renderActionPrompt(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card action-card activity-card--action";
@@ -1530,12 +1604,12 @@ function renderActionPrompt(stage, activity, api) {
   const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
   const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I did it!"; complete.addEventListener("click", api.complete);
   const actions = document.createElement("div"); actions.className = "activity-actions action-actions"; actions.append(play, complete);
-  card.append(type, title, visual, prompt, actions); stage.append(card);
+  if (activity.hideNestedHeader) card.append(visual, prompt, actions);
+  else card.append(type, title, visual, prompt, actions);
+  stage.append(card);
 }
 
-
-
-
+/* js/activities/writingPrompt.js */
 // Writing is performed on paper, not simulated with an imprecise screen trace.
 function renderWritingPrompt(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card writing-card activity-card--writing";
@@ -1549,18 +1623,7 @@ function renderWritingPrompt(stage, activity, api) {
   card.append(type, title, visual, prompt, actions); stage.append(card);
 }
 
-
-
-
-function renderReview(stage, activity, api) {
-  const card = document.createElement("section"); card.className = "activity-card activity-card--review"; card.innerHTML = `<p class="activity-type">Review</p><h1 class="activity-heading">${activity.title}</h1>`;
-  const list = document.createElement("div"); list.className = "review-list"; let count = 0;
-  activity.items.forEach((item) => { const button = document.createElement("button"); button.type = "button"; button.className = "review-item"; button.append(renderVisual(item.visualId, { className: "review-visual", size: "review", decorative: true })); const label = document.createElement("span"); label.textContent = item.text; const icon = document.createElement("span"); icon.setAttribute("aria-hidden", "true"); icon.textContent = "🔊"; button.append(label, icon); button.addEventListener("click", () => { playText(item.ttsText || item.text, item.audioSrc || null); if (!button.classList.contains("done")) { button.classList.add("done"); count += 1; if (count === activity.items.length) api.complete(); } }); list.append(button); }); card.append(list); stage.append(card);
-}
-
-
-
-
+/* js/activities/challenge.js */
 // Challenge only sequences activity data; it never owns choice, audio or feedback logic.
 function renderChallenge(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card challenge-card activity-card--challenge";
@@ -1583,16 +1646,7 @@ function renderChallenge(stage, activity, api) {
   show();
 }
 
-
-
-
-
-
-
-
-
-
-
+/* js/activities/renderer.js */
 const renderers = {
   learn: renderLearn,
   tapChoice: renderTapChoice,
@@ -1614,22 +1668,47 @@ function renderActivity(stage, activity, api) {
   renderer(stage, activity, api);
 }
 
+/* js/validation/lessonValidator.js */
+const NESTED_VISUAL_FIELDS = new Set(["options", "items"]);
+function validateLesson(lesson, { strict = false } = {}) {
+  const issues = [];
+  if (!lesson?.id || !Array.isArray(lesson.activities)) issues.push("Lesson requires an id and activities array.");
+  lesson?.activities?.forEach((activity) => validateActivity(activity, issues, `lesson ${lesson.id}`));
+  issues.forEach((issue) => strict ? console.error(`[Lesson validation] ${issue}`) : console.warn(`[Lesson validation] ${issue}`));
+  return issues;
+}
+function validateLessons(lessons, options) { return lessons.flatMap((lesson) => validateLesson(lesson, options)); }
 
+function validateActivity(activity, issues, location) {
+  if (!activity?.id || !activity?.type) { issues.push(`${location}: activity requires id and type.`); return; }
+  validateVisualReference(activity.visualId, issues, `${location}/${activity.id}`);
+  for (const field of NESTED_VISUAL_FIELDS) activity[field]?.forEach((item) => validateVisualReference(item.visualId, issues, `${location}/${activity.id}/${field}`));
+  validateVisualReference(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`);
+  validateVisualReference(activity.target?.visualId, issues, `${location}/${activity.id}/target`);
+  if (["learn", "speakPrompt", "actionPrompt", "writingPrompt"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
+  if (["tapChoice", "listenChoose"].includes(activity.type)) activity.options?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/options`));
+  if (activity.type === "review") activity.items?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/items`));
+  if (activity.type === "dragDrop") { requireVisual(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`); requireVisual(activity.target?.visualId, issues, `${location}/${activity.id}/target`); }
+  if (activity.type === "challenge") activity.items?.forEach((item) => validateActivity(item, issues, `${location}/${activity.id}/challenge`));
+}
 
+function requireVisual(visualId, issues, location) { if (!visualId) issues.push(`${location}: formal teaching activity requires a visualId.`); }
 
+function validateVisualReference(visualId, issues, location) {
+  if (!visualId) return;
+  const visual = getVisual(visualId);
+  if (!visual) { issues.push(`${location}: visualId "${visualId}" does not exist.`); return; }
+  for (const field of ["id", "concept", "alt", "src", "type"]) if (!visual[field]) issues.push(`${location}: visual "${visualId}" is missing ${field}.`);
+  if (visual.approved !== true) issues.push(`${location}: visual "${visualId}" is not approved.`);
+}
 
-
-
-
-
-
+/* js/router.js */
 const app = document.querySelector("#app");
 let page = "home";
 let longPress = null;
 const lesson = () => getLesson(state.currentLesson);
 const activityIndex = () => lessonPosition(state.currentLesson);
 const activity = () => lesson().activities[activityIndex()];
-
 function showHome() {
   page = "home"; document.querySelector(".teacher-overlay")?.remove(); app.replaceChildren();
   const home = document.createElement("section"); home.className = "home";
@@ -1638,7 +1717,6 @@ function showHome() {
   lessons.forEach((item) => grid.append(lessonCard(item, () => { openLesson(item.id); showPlayer(); }, Boolean(state.completedLessons[item.id]))));
   home.append(brand, grid); app.append(home);
 }
-
 function showPlayer() {
   page = "player"; const currentLesson = lesson(); const currentActivity = activity();
   if (!currentLesson || !currentActivity) return showHome();
@@ -1661,7 +1739,6 @@ function showPlayer() {
   title.addEventListener("pointerdown", () => { longPress = window.setTimeout(openTeacher, 1500); });
   ["pointerup", "pointerleave", "pointercancel"].forEach((event) => title.addEventListener(event, () => window.clearTimeout(longPress)));
 }
-
 function nextActivity() {
   const currentLesson = lesson(); const currentActivity = activity();
   if (!activityDone(currentLesson.id, currentActivity.id)) return;
@@ -1688,16 +1765,14 @@ function openTeacherFromShortcut() {
 }
 function button(text, label, className) { const element = document.createElement("button"); element.type = "button"; element.className = className; element.textContent = text; element.setAttribute("aria-label", label); return element; }
 
-
-
-
-
+/* js/app.js */
 validateLessons(lessons.filter((lesson) => Array.isArray(lesson.activities)), { strict: true });
 
 document.addEventListener("keydown", (event) => {
   if (event.shiftKey && !event.ctrlKey && !event.metaKey && event.key.toLowerCase() === "t") { event.preventDefault(); openTeacherFromShortcut(); }
 });
 showHome();
-
-})();</script></body>
+})();
+    </script>
+  </body>
 </html>

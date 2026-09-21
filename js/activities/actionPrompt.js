@@ -11,5 +11,7 @@ export function renderActionPrompt(stage, activity, api) {
   const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
   const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I did it!"; complete.addEventListener("click", api.complete);
   const actions = document.createElement("div"); actions.className = "activity-actions action-actions"; actions.append(play, complete);
-  card.append(type, title, visual, prompt, actions); stage.append(card);
+  if (activity.hideNestedHeader) card.append(visual, prompt, actions);
+  else card.append(type, title, visual, prompt, actions);
+  stage.append(card);
 }

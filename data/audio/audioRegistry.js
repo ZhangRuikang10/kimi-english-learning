@@ -1,4 +1,5 @@
 const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
+const LESSON_02_BASE = "assets/audio/lesson-02/mp3/";
 export function normalizeAudioText(text) {
   return String(text ?? "")
     .replace(/[\u2018\u2019]/g, "'")
@@ -104,11 +105,28 @@ export const lesson01Entries = [
   ["Show me red.", "show-me-red.mp3"],
 ];
 
+export const lesson02Entries = [
+  ["Orange.", "orange.mp3"], ["Pink.", "pink.mp3"], ["Purple.", "purple.mp3"], ["Black.", "black.mp3"], ["White.", "white.mp3"], ["Brown.", "brown.mp3"],
+  ["Find purple.", "find-purple.mp3"], ["Touch orange.", "touch-orange.mp3"], ["Point to black.", "point-to-black.mp3"], ["Show me pink.", "show-me-pink.mp3"],
+  ["What colour is it? It's red.", "what-colour-is-it-it-s-red.mp3"],
+  ["Red ball.", "red-ball.mp3"], ["Blue ball.", "blue-ball.mp3"], ["Yellow ball.", "yellow-ball.mp3"], ["Green ball.", "green-ball.mp3"], ["Orange ball.", "orange-ball.mp3"], ["Pink ball.", "pink-ball.mp3"], ["Purple ball.", "purple-ball.mp3"], ["Black ball.", "black-ball.mp3"], ["White ball.", "white-ball.mp3"], ["Brown ball.", "brown-ball.mp3"],
+  ["Find the red ball.", "find-the-red-ball.mp3"], ["Touch the blue ball.", "touch-the-blue-ball.mp3"], ["Point to the yellow ball.", "point-to-the-yellow-ball.mp3"], ["Find the purple ball.", "find-the-purple-ball.mp3"],
+  ["A red ball.", "a-red-ball.mp3"], ["A blue pencil.", "a-blue-pencil.mp3"], ["A yellow star.", "a-yellow-star.mp3"], ["A green apple.", "a-green-apple.mp3"], ["A pink bag.", "a-pink-bag.mp3"],
+  ["Find the blue pencil.", "find-the-blue-pencil.mp3"], ["Touch the green apple.", "touch-the-green-apple.mp3"], ["Point to the yellow star.", "point-to-the-yellow-star.mp3"],
+  ["What colour is the ball? It's red.", "what-colour-is-the-ball-it-s-red.mp3"], ["What colour is the bag? It's pink.", "what-colour-is-the-bag-it-s-pink.mp3"], ["It's a red ball.", "it-s-a-red-ball.mp3"],
+  ["Find something red.", "find-something-red.mp3"], ["Touch something blue.", "touch-something-blue.mp3"], ["Show me something green.", "show-me-something-green.mp3"], ["Find something black.", "find-something-black.mp3"],
+  ["Which one is the same colour as the red ball?", "which-one-is-the-same-colour-as-the-red-ball.mp3"], ["Which one is different?", "which-one-is-different.mp3"], ["Which one belongs with the red things?", "which-one-belongs-with-the-red-things.mp3"], ["Which one starts with the b sound?", "which-one-starts-with-the-b-sound.mp3"],
+  ["Write red.", "write-red.mp3"], ["Write blue.", "write-blue.mp3"], ["Touch the red ball.", "touch-the-red-ball.mp3"], ["Point to the blue pencil.", "point-to-the-blue-pencil.mp3"], ["Show me the green apple.", "show-me-the-green-apple.mp3"], ["Touch the red ball and point to the blue pencil.", "touch-the-red-ball-and-point-to-the-blue-pencil.mp3"],
+];
+
 const teachingAudioRegistry = new Map(
   lesson01Entries.map(([text, file]) => [
     normalizeAudioText(text),
     LESSON_01_BASE + file,
-  ])
+  ]).concat(lesson02Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_02_BASE + file,
+  ]))
 );
 
 export function resolveTeachingAudio(text) {
