@@ -38,6 +38,20 @@ export const visuals = {
   "numeral-4": { id: "numeral-4", type: "image", src: "assets/images/common/numeral-4.svg", alt: "The numeral 4", concept: "numeral four", approved: true },
   "numeral-5": { id: "numeral-5", type: "image", src: "assets/images/common/numeral-5.svg", alt: "The numeral 5", concept: "numeral five", approved: true },
   "numeral-6": { id: "numeral-6", type: "image", src: "assets/images/common/numeral-6.svg", alt: "The numeral 6", concept: "numeral six", approved: true },
+  "numeral-7": { id: "numeral-7", type: "image", src: "assets/images/common/numeral-7.svg", alt: "The numeral 7", concept: "numeral seven", approved: true },
+  "numeral-8": { id: "numeral-8", type: "image", src: "assets/images/common/numeral-8.svg", alt: "The numeral 8", concept: "numeral eight", approved: true },
+  "numeral-9": { id: "numeral-9", type: "image", src: "assets/images/common/numeral-9.svg", alt: "The numeral 9", concept: "numeral nine", approved: true },
+  "numeral-10": { id: "numeral-10", type: "image", src: "assets/images/common/numeral-10.svg", alt: "The numeral 10", concept: "numeral ten", approved: true },
+  "numeral-11": { id: "numeral-11", type: "image", src: "assets/images/common/numeral-11.svg", alt: "The numeral 11", concept: "numeral eleven", approved: true },
+  "numeral-12": { id: "numeral-12", type: "image", src: "assets/images/common/numeral-12.svg", alt: "The numeral 12", concept: "numeral twelve", approved: true },
+  "numeral-13": { id: "numeral-13", type: "image", src: "assets/images/common/numeral-13.svg", alt: "The numeral 13", concept: "numeral thirteen", approved: true },
+  "numeral-14": { id: "numeral-14", type: "image", src: "assets/images/common/numeral-14.svg", alt: "The numeral 14", concept: "numeral fourteen", approved: true },
+  "numeral-15": { id: "numeral-15", type: "image", src: "assets/images/common/numeral-15.svg", alt: "The numeral 15", concept: "numeral fifteen", approved: true },
+  "numeral-16": { id: "numeral-16", type: "image", src: "assets/images/common/numeral-16.svg", alt: "The numeral 16", concept: "numeral sixteen", approved: true },
+  "numeral-17": { id: "numeral-17", type: "image", src: "assets/images/common/numeral-17.svg", alt: "The numeral 17", concept: "numeral seventeen", approved: true },
+  "numeral-18": { id: "numeral-18", type: "image", src: "assets/images/common/numeral-18.svg", alt: "The numeral 18", concept: "numeral eighteen", approved: true },
+  "numeral-19": { id: "numeral-19", type: "image", src: "assets/images/common/numeral-19.svg", alt: "The numeral 19", concept: "numeral nineteen", approved: true },
+  "numeral-20": { id: "numeral-20", type: "image", src: "assets/images/common/numeral-20.svg", alt: "The numeral 20", concept: "numeral twenty", approved: true },
   "one-ball": { id: "one-ball", type: "image", src: "assets/images/common/one-ball.svg", alt: "One ball", concept: "one ball", approved: true },
   "two-balls": { id: "two-balls", type: "image", src: "assets/images/common/two-balls.svg", alt: "Two balls", concept: "two balls", approved: true },
   "three-balls": { id: "three-balls", type: "image", src: "assets/images/common/three-balls.svg", alt: "Three balls", concept: "three balls", approved: true },
@@ -77,6 +91,27 @@ export const visuals = {
   "apple-red": { id: "apple-red", type: "image", src: "assets/images/lesson-2/objects/apple-red.png", alt: "A red apple", concept: "red apple", approved: true },
   "star-red": { id: "star-red", type: "image", src: "assets/images/lesson-2/objects/star-red.png", alt: "A red five-point star", concept: "red star", approved: true },
   "bag-blue": { id: "bag-blue", type: "image", src: "assets/images/lesson-2/objects/bag-blue.png", alt: "A blue backpack", concept: "blue bag", approved: true }
+  ,"l3-tom-shopkeeper": { id: "l3-tom-shopkeeper", type: "image", src: "assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper.png", alt: "Tom as a friendly shopkeeper offering one red apple", concept: "fruit shop", approved: true }
+  ,"l3-tom-shopkeeper-banana": { id: "l3-tom-shopkeeper-banana", type: "image", src: "assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper-banana.png", alt: "Tom as a friendly shopkeeper offering one banana", concept: "fruit shop banana", approved: true }
+  ,"l3-mia-shopping": { id: "l3-mia-shopping", type: "image", src: "assets/images/lesson-03/characters/mia/mia-shopping-list-basket.png", alt: "Mia holding a blank shopping list and basket", concept: "shopping list", approved: true }
+  ,"l3-banana": { id: "l3-banana", type: "image", src: "assets/images/lesson-03/objects/banana.png", alt: "A banana", concept: "banana", approved: true }
+  ,"l3-orange": { id: "l3-orange", type: "image", src: "assets/images/lesson-03/objects/orange.png", alt: "An orange", concept: "orange", approved: true }
+  ,"l3-cookie": { id: "l3-cookie", type: "image", src: "assets/images/lesson-03/objects/cookie.png", alt: "A cookie", concept: "cookie", approved: true }
+  ,"l3-crayon": { id: "l3-crayon", type: "image", src: "assets/images/lesson-03/objects/crayon.png", alt: "A crayon", concept: "crayon", approved: true }
+  ,"l3-pencil-red": { id: "l3-pencil-red", type: "image", src: "assets/images/lesson-03/objects/pencil-red.png", alt: "A red pencil", concept: "red pencil", approved: true }
+  ,"l3-pencil-yellow": { id: "l3-pencil-yellow", type: "image", src: "assets/images/lesson-03/objects/pencil-yellow.png", alt: "A yellow pencil", concept: "yellow pencil", approved: true }
+  ,"l3-book-green": { id: "l3-book-green", type: "image", src: "assets/images/lesson-03/objects/book-green.png", alt: "A green book", concept: "green book", approved: true }
+  ,"l3-notebook": { id: "l3-notebook", type: "image", src: "assets/images/lesson-03/objects/notebook.png", alt: "A notebook", concept: "notebook", approved: true }
+  ,"l3-eraser": { id: "l3-eraser", type: "image", src: "assets/images/lesson-03/objects/eraser.png", alt: "An eraser", concept: "eraser", approved: true }
+  ,"l3-ruler": { id: "l3-ruler", type: "image", src: "assets/images/lesson-03/objects/ruler.png", alt: "A ruler", concept: "ruler", approved: true }
+  ,"l3-toy-car": { id: "l3-toy-car", type: "image", src: "assets/images/lesson-03/objects/toy-car.svg", alt: "A toy car", concept: "toy car", approved: true }
+  ,"l3-teddy-bear": { id: "l3-teddy-bear", type: "image", src: "assets/images/lesson-03/objects/teddy-bear.svg", alt: "A teddy bear", concept: "teddy bear", approved: true }
+  ,"l3-basket": { id: "l3-basket", type: "image", src: "assets/images/lesson-03/objects/basket.svg", alt: "An empty shopping basket", concept: "basket", approved: true }
+  ,"l3-euro-1": { id: "l3-euro-1", type: "image", src: "assets/images/lesson-03/money/euro-1.svg", alt: "One euro", concept: "one euro", approved: true }
+  ,"l3-euro-2": { id: "l3-euro-2", type: "image", src: "assets/images/lesson-03/money/euro-2.svg", alt: "Two euros", concept: "two euros", approved: true }
+  ,"l3-euro-5": { id: "l3-euro-5", type: "image", src: "assets/images/lesson-03/money/euro-5.svg", alt: "Five euros", concept: "five euros", approved: true }
+  ,"l3-euro-3": { id: "l3-euro-3", type: "image", src: "assets/images/lesson-03/money/euro-3.svg", alt: "Three euros", concept: "three euros", approved: true }
+  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true }
 };
 
 export const getVisual = (visualId) => visuals[visualId];

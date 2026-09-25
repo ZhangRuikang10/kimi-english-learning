@@ -1,0 +1,26 @@
+Asset ID,Filename,Type,Teaching meaning,Source,Generated/reused,Used pages,QA status
+l3-tom-shopkeeper,assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper.png,PNG,Tom fruit-shop shopkeeper offering one apple,Image generation with Tom reference,generated,1/19/33,RC visual pass — transparency corners checked; human identity review required
+l3-tom-shopkeeper-banana,assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper-banana.png,PNG,Tom fruit-shop shopkeeper offering one banana,Image generation edited from approved Tom reference,generated,20,RC visual pass — transparency corners checked; human identity review required
+l3-mia-shopping,assets/images/lesson-03/characters/mia/mia-shopping-list-basket.png,PNG,Mia with blank list and empty basket,Image generation with Mia reference,generated,16/18/21/34,RC visual pass — transparency corners checked; human identity review required
+apple-red,assets/images/lesson-2/objects/apple-red.png,PNG,red apple,Lesson 2,reused,3/6/7/10/11/12/13/14/17/19/20/31/33,REUSED_APPROVED
+apple-green,assets/images/lesson-2/objects/apple-green.png,PNG,green apple,Lesson 2,reused,7/11/13/27,REUSED_APPROVED
+pencil-blue,assets/images/lesson-2/objects/pencil-blue.png,PNG,blue pencil,Lesson 2,reused,8/11/12/15/17/21/31/33/34,REUSED_APPROVED
+ball-blue,assets/images/lesson-2/balls/ball-blue.png,PNG,blue ball,Lesson 2,reused,3/9/11/24,REUSED_APPROVED
+ball-yellow,assets/images/lesson-2/balls/ball-yellow.png,PNG,yellow ball,Lesson 2,reused,12,REUSED_APPROVED
+l3-banana,assets/images/lesson-03/objects/banana.png,PNG,banana,Image generation in Lesson 3 object style,generated,7/17/20/32/33,RC visual pass — transparent object; human visual review required
+l3-orange,assets/images/lesson-03/objects/orange.png,PNG,orange,Image generation in Lesson 3 object style,generated,7/17/32/33,RC visual pass — transparent object; human visual review required
+l3-cookie,assets/images/lesson-03/objects/cookie.png,PNG,cookie,Image generation in Lesson 3 object style,generated,7/17/25/26/31/32/33,RC visual pass — transparent object; human visual review required
+l3-crayon,assets/images/lesson-03/objects/crayon.png,PNG,crayon,Image generation in Lesson 3 object style,generated,8/21/28/32/33,RC visual pass — transparent object; human visual review required
+l3-book-green,assets/images/lesson-03/objects/book-green.png,PNG,green book,Image generation in Lesson 3 object style,generated,3/11/12/23/28/31/32/34,RC visual pass — transparent object; human visual review required
+l3-notebook,assets/images/lesson-03/objects/notebook.png,PNG,notebook,Image generation in Lesson 3 object style,generated,8/16/17/21/32/33,RC visual pass — transparent object; human visual review required
+l3-eraser,assets/images/lesson-03/objects/eraser.png,PNG,eraser,Image generation in Lesson 3 object style,generated,8/21/32/33,RC visual pass — transparent object; human visual review required
+l3-ruler,assets/images/lesson-03/objects/ruler.png,PNG,ruler,Image generation in Lesson 3 object style,generated,8/21/32/33,RC visual pass — transparent object; human visual review required
+l3-pencil-red,assets/images/lesson-03/objects/pencil-red.png,PNG,red pencil,Image generation in Lesson 3 object style,generated,22,RC visual pass — transparent object; human visual review required
+l3-pencil-yellow,assets/images/lesson-03/objects/pencil-yellow.png,PNG,yellow pencil,Image generation in Lesson 3 object style,generated,3,RC visual pass — transparent object; human visual review required
+l3-toy-car,assets/images/lesson-03/objects/toy-car.svg,SVG,toy car,programmatic teaching illustration,generated,9/11,PASS
+l3-teddy-bear,assets/images/lesson-03/objects/teddy-bear.svg,SVG,teddy bear,programmatic teaching illustration,generated,9,PASS
+l3-basket,assets/images/lesson-03/objects/basket.svg,SVG,shopping basket,programmatic teaching illustration,generated,17/33,PASS
+l3-euro-1..5,assets/images/lesson-03/money/euro-*.svg,SVG,clear euro teaching cards,programmatic teaching illustration,generated,23/24/25/33,PASS
+boy-child,assets/images/lesson-1/characters/tom/tom-neutral.png,PNG,Tom as delivery recipient,Lesson 1,reused,32,REUSED_APPROVED
+girl-child,assets/images/lesson-1/characters/mia/mia-neutral.png,PNG,Mia as delivery recipient,Lesson 1,reused,32,REUSED_APPROVED
+numeral-7..20,assets/images/common/numeral-7.svg..numeral-20.svg,SVG,numerals 7 to 20,programmatic teaching illustration,generated,4/5,PASS

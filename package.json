@@ -1,0 +1,9 @@
+{
+  "name": "kimi-english-learning",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:standalone": "node scripts/build-standalone.mjs",
+    "qa:lesson03": "node scripts/lesson03-audit.mjs"
+  }
+}

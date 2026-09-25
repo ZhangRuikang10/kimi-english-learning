@@ -1,12 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kimi English Adventure</title>
-    <style>
-/* css/tokens.css */
-:root {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#fff9f1"><title>English Adventure</title><style>:root {
   --background: #fff9f1;
   --surface: #fff;
   --text: #263238;
@@ -33,7 +25,6 @@
   --activity-prompt-size: clamp(1.55rem, 3.25vw, 2.15rem);
 }
 
-/* css/base.css */
 * { box-sizing: border-box; }
 html, body { min-height: 100%; max-width: 100%; }
 body { margin: 0; overflow-x: hidden; background: var(--background); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -45,7 +36,6 @@ h1, h2, h3, p { margin-top: 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 
-/* css/layout.css */
 .app { min-height: 100vh; min-height: 100dvh; }
 .home { min-height: 100vh; min-height: 100dvh; padding: clamp(32px, 7vw, 88px) clamp(20px, 7vw, 112px); background: radial-gradient(circle at 12% 10%, #ffe2ba 0 5.5%, transparent 5.7%), radial-gradient(circle at 88% 13%, #d8efec 0 6.2%, transparent 6.4%), var(--background); }
 .brand { margin: 0 0 clamp(35px, 7vw, 76px); font-size: clamp(2rem, 5.4vw, 4.2rem); font-weight: 900; letter-spacing: -.055em; }
@@ -189,7 +179,6 @@ h1, h2, h3, p { margin-top: 0; }
   .lesson-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 820px; }
 }
 
-/* css/components.css */
 .lesson-card { position: relative; display: flex; min-height: 230px; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 26px; border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); text-align: left; transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
 .lesson-card:not(:disabled):hover { transform: translateY(-5px); box-shadow: 0 19px 38px rgba(58,48,35,.14); }
 .lesson-card:active:not(:disabled) { transform: translateY(-1px) scale(.99); }
@@ -859,15 +848,397 @@ h1, h2, h3, p { margin-top: 0; }
   .choice-grid--count-2 .choice-visual { width: min(88px, 15vw); height: min(88px, 15vw); }
   .activity-card--review .review-item { min-height: 94px; }
 }
-    </style>
-  </head>
-  <body>
-    <main id="app" class="app" aria-live="polite"></main>
-    <script>
-(() => {
-/* data/audio/audioRegistry.js */
+
+/* Lesson 3: static teaching objects; tap interactions remain touch-friendly. */
+.activity-card--l3 { max-width: 920px; }.activity-card--cover .l3-subtitle { margin: -8px 0 12px; color: var(--accent); font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; }.activity-card--cover .nav-button { margin-top: 16px; }.l3-quantity-groups, .l3-compare-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 16px auto; }.l3-quantity-group, .l3-compare-group { min-height: 148px; padding: 12px; border: 2px solid var(--line); border-radius: 18px; background: #fffdf9; }.l3-compare-group { cursor: pointer; }.l3-count-items { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 3px; }.l3-object { width: 46px; height: 46px; }.l3-object-label { margin: 8px 0 0; font-weight: 900; }.l3-question { margin: 14px 0; font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 900; }.l3-answer-row, .l3-money-choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }.l3-number-choice, .l3-word-choice { min-width: 58px; min-height: 52px; padding: 10px 16px; border: 2px solid var(--line); border-radius: 14px; background: #fff; font-weight: 900; }.l3-word-choice.selected { border-color: var(--primary); background: var(--primary-soft); }.l3-builder-visual { width: 150px; height: 150px; object-fit: contain; }.l3-builder-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: 10px 0; }.l3-built-phrase { min-height: 42px; color: var(--primary); font-size: 1.35rem; font-weight: 900; }.l3-shop-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 10px; margin: 16px 0; }.l3-product { display: grid; place-items: center; gap: 4px; min-height: 118px; padding: 8px; border: 2px solid var(--line); border-radius: 16px; background: #fff; font-weight: 800; }.l3-product .teaching-visual { width: 62px; height: 62px; }.l3-basket { position: relative; display: flex; flex-wrap: wrap; align-items: end; justify-content: center; min-height: 150px; margin: 14px auto; padding: 25px 18px 16px; overflow: hidden; border: 3px dashed #b7844e; border-radius: 24px; background: #fff8e9; }.l3-basket-image { position: absolute; width: 190px; height: 150px; opacity: .22; }.l3-basket-item { width: 48px; height: 48px; z-index: 1; }.l3-price-product { width: 130px; height: 130px; object-fit: contain; }.l3-money-choice { display: grid; place-items: center; gap: 5px; min-width: 116px; padding: 8px; border: 2px solid var(--line); border-radius: 16px; background: #fff; font-weight: 900; }.l3-money-choice .teaching-visual { width: 66px; height: 66px; }
+
+/* Lesson 3 correction pass: the selected answer must remain unmistakable. */
+.l3-number-choice.correct, .l3-money-choice.correct, .l3-compare-group.correct, .l3-quantity-group--choice.correct { border-color: var(--success); background: var(--success-soft); color: #27653a; box-shadow: 0 0 0 3px rgba(94, 171, 108, .16); }
+.l3-number-choice.incorrect, .l3-money-choice.incorrect, .l3-compare-group.incorrect, .l3-quantity-group--choice.incorrect { border-color: var(--danger); background: #fff1ed; color: #9c4129; }
+.l3-number-choice.correct:disabled, .l3-money-choice.correct:disabled, .l3-compare-group.correct:disabled, .l3-quantity-group--choice.correct:disabled { opacity: 1; }
+button.choice.correct:disabled { opacity: 1; }
+.l3-memory-stage { position: relative; }.l3-memory-status { margin: 0 0 8px; color: var(--accent); font-weight: 900; text-align: center; }.l3-memory-cover { display: none; }.l3-memory-stage.is-covered .l3-quantity-groups { visibility: hidden; }.l3-memory-stage.is-covered .l3-memory-cover { position: absolute; inset: 0 0 34px; display: grid; place-items: center; padding: 18px; border: 2px dashed var(--primary); border-radius: 18px; background: #f2fbf8; color: var(--primary); font-size: 1.2rem; font-weight: 900; text-align: center; }
+.l3-quantity-group--choice { cursor: pointer; text-align: center; transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast); }
+.l3-quantity-group--choice:hover { border-color: var(--primary); background: #f7fcfb; transform: translateY(-2px); }
+.l3-builder-visual { display: block; margin: 12px auto 18px; }
+.l3-builder-quantity { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; width: min(360px, 100%); min-height: 142px; margin: 12px auto 18px; padding: 12px; border-radius: 24px; background: var(--accent-soft); }
+.l3-builder-quantity .l3-object { width: 112px; height: 112px; }
+.l3-basket-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: -4px 0 14px; }
+.l3-basket-action { min-height: 46px; padding: 9px 14px; border: 2px solid var(--line); border-radius: 14px; background: #fff; color: #255e60; font-weight: 900; }
+.l3-product.is-selected { border-color: var(--primary); background: var(--primary-soft); box-shadow: 0 0 0 3px rgba(47, 130, 132, .15); }.l3-delivery-targets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0; }.l3-delivery-target { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; align-items: center; min-height: 154px; padding: 12px; border: 3px dashed #b7844e; border-radius: 20px; background: #fff8e9; color: var(--ink); font-weight: 900; text-align: left; }.l3-delivery-target:focus-visible, .l3-delivery-target:hover { border-color: var(--primary); background: #f4fbfa; }.l3-delivery-character { grid-row: span 2; width: 78px; height: 112px; object-fit: contain; }.l3-delivery-items { display: flex; flex-wrap: wrap; align-items: center; min-height: 54px; gap: 4px; }.l3-delivery-item { width: 48px; height: 48px; }
+.l3-model-answer { width: fit-content; max-width: 100%; margin: 0 auto 10px; padding: 10px 17px; border-radius: 14px; background: var(--accent-soft); font-size: clamp(1.18rem, 2.5vw, 1.48rem); font-weight: 900; }
+.l3-choice-prompt { margin: 0 0 12px; color: #255e60; font-size: 1.08rem; font-weight: 900; }
+.l3-customer-request, .l3-listen-text { width: fit-content; max-width: 100%; margin: 0 auto 12px; padding: 10px 16px; border-radius: 14px; background: var(--primary-soft); color: #1f5b5b; font-size: 1.05rem; font-weight: 900; }
+.l3-think-question { margin: 14px auto 18px; font-size: clamp(1.45rem, 3.1vw, 2rem); color: #173c4e; }
+.l3-speak-quantity { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; width: min(430px, 100%); min-height: 150px; margin: 0 auto 18px; padding: 14px; border-radius: 28px; background: var(--accent-soft); }
+.l3-speak-object { width: min(116px, 25vw); height: min(116px, 25vw); object-fit: contain; }
+.l3-speak-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; width: min(520px, 100%); margin: 0 auto 18px; }
+.l3-speak-group { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px; min-height: 124px; padding: 12px; border: 2px solid var(--line); border-radius: 18px; background: #fffdf9; }
+.l3-shopping-list { display: grid; gap: 7px; width: min(360px, 100%); margin: -8px auto 18px; padding: 16px 22px 16px 42px; border: 2px solid #e7d8c2; border-radius: 18px; background: #fffaf2; text-align: left; font-size: 1.1rem; font-weight: 900; }
+.review-visuals { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 110px; min-height: 48px; gap: 1px; }.review-visuals .review-visual { flex: 0 0 auto; width: 44px; height: 44px; }
+@media (max-width: 600px) { .l3-quantity-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }.l3-quantity-group { min-height: 122px; padding: 8px; }.l3-object { width: 36px; height: 36px; }.l3-shop-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }.l3-product { min-height: 100px; font-size: .78rem; }.l3-product .teaching-visual { width: 48px; height: 48px; }.l3-basket { min-height: 128px; }.l3-money-choice { min-width: 92px; }.l3-money-choice .teaching-visual { width: 55px; height: 55px; }.l3-delivery-targets { gap: 9px; }.l3-delivery-target { min-height: 126px; padding: 8px; font-size: .85rem; }.l3-delivery-character { width: 55px; height: 92px; }.l3-delivery-item { width: 38px; height: 38px; }.l3-think-question { font-size: 1.42rem; }.l3-speak-quantity { min-height: 126px; }.l3-speak-object { width: min(92px, 24vw); height: min(92px, 24vw); }.l3-speak-group { min-height: 105px; padding: 8px; }.l3-shopping-list { font-size: 1rem; }.review-visuals { width: 84px; }.review-visuals .review-visual { width: 34px; height: 34px; } }
+@media (max-width: 720px) { .l3-quantity-groups, .l3-compare-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }.l3-quantity-group { min-height: 122px; padding: 8px; }.l3-object { width: 36px; height: 36px; }.l3-shop-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }.l3-product { min-height: 100px; font-size: .78rem; }.l3-product .teaching-visual { width: 48px; height: 48px; } }
+
+/* Lesson 3 final alignment pass: product, question and answer share one centre line. */
+.l3-price-product { display: block; width: 118px; height: 118px; margin: 6px auto 2px; }
+.l3-delivery-target { grid-template-columns: minmax(58px, 78px) minmax(54px, max-content); grid-template-rows: auto minmax(88px, 1fr); justify-content: center; }
+.l3-delivery-target strong { grid-column: 1 / -1; grid-row: 1; justify-self: center; text-align: center; }
+.l3-delivery-character { grid-column: 1; grid-row: 2; justify-self: center; align-self: center; width: 78px; height: 102px; }
+.l3-delivery-items { grid-column: 2; grid-row: 2; min-width: 54px; justify-content: center; }
+@media (max-width: 600px) { .l3-delivery-character { width: 55px; height: 84px; } }
+</style></head><body><main id="app" class="app" aria-live="polite"></main><script>window.__eaModules = {};
+window.__eaModules["data/lessons/hello.js"] = {};
+(function(exports) {
+const choice = (id, visualId, label) => ({ id, visualId, label });
+const colours = [choice("red", "colour-red", "Red"), choice("blue", "colour-blue", "Blue"), choice("yellow", "colour-yellow", "Yellow"), choice("green", "colour-green", "Green")];
+const numbers = [1, 2, 3, 4, 5].map((number) => choice(String(number), `numeral-${number}`, String(number)));
+const letters = ["a", "b", "c", "d", "e", "f"].map((letter) => choice(letter, `letter-${letter}`, letter.toUpperCase()));
+const listenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
+const action = (id, ttsText, visualId, teacherNote = "", teacherChecks = "") => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks });
+const speakActivity = (id, title, prompt, visualId = "speaking-child", teacherNote = "", teacherChecks = "", ttsText = title) => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
+
+const helloLesson = {
+  id: "hello",
+  lessonNumber: 1,
+  title: "Hello! This Is Me",
+  icon: "👋",
+  activities: [
+    { id: "01-hello", type: "learn", title: "Hello!", visualId: "waving-child", audioSrc: null, ttsText: "Hello!", teacherNote: "直接播放、示范、让孩子跟说；不解释中文。" },
+    listenChoice("02-hello-or-goodbye", "Hello!", [choice("hello", "waving-child", "Hello"), choice("goodbye", "goodbye-child", "Goodbye")], "hello", "不显示文字标签。确认孩子能区分刚见面与离开。"),
+    { id: "03-goodbye", type: "learn", title: "Goodbye!", visualId: "goodbye-child", audioSrc: null, ttsText: "Goodbye!", teacherNote: "老师可走出视线再返回，做真实进入 / 离开游戏。" },
+    speakActivity("04-say-hello", "Say hello!", "Hello!", "waving-child", "孩子说 Hello 后，可随机换成 Hi，要求孩子跟换。", "是否愿意开口与模仿语音", "Hello!"),
+    speakActivity("05-whats-your-name", "What's your name?", "My name is …", "speaking-child", "若孩子只说名字，第一次接受；老师自然扩展 My name is …，再请孩子说一次。", "单词回答 / 短句回答 / 完整句"),
+    { id: "06-name-recognition", type: "tapChoice", title: "Who is Tom?", audioSrc: null, ttsText: "My name is Tom.", showLabels: true, options: [choice("tom", "boy-child", "Tom"), choice("mia", "girl-child", "Mia")], correctAnswer: "tom", teacherNote: "这是轻量听力与姓名对应，不是正式阅读测试。" },
+    speakActivity("07-how-old", "How old are you?", "I'm five. / I'm six.", "speaking-child", "不重复教数字；快速确认并鼓励完整短句。", "是否能听懂问题并用年龄回答"),
+    { id: "08-five-or-six", type: "challenge", title: "Five or six?", items: [listenChoice("08a-six", "I'm six.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "six"), listenChoice("08b-five", "I'm five.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "five")] },
+    { id: "09-boy", type: "learn", title: "Boy.", visualId: "boy-child", audioSrc: null, ttsText: "Boy.", teacherNote: "人物用中性衣服颜色；仅作为儿童人物词汇介绍，不用蓝 / 粉色进行判断。" },
+    { id: "10-girl-and-listen", type: "challenge", title: "Boy or girl?", teacherNote: "紧接 Boy 呈现 Girl；人物衣服颜色保持中性。可问 Are you a boy or a girl?，不强迫孩子回答不舒服的问题。", items: [{ id: "10a-girl", type: "learn", title: "Girl.", visualId: "girl-child", audioSrc: null, ttsText: "Girl." }, listenChoice("10b-girl", "Girl.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "girl"), listenChoice("10c-boy", "Boy.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "boy")] },
+    speakActivity("11-about-me", "About me", "My name is Kimi. I'm six. I'm a boy.", "speaking-child", "先让孩子听完整示范，再根据实际情况逐句问：name → age → boy/girl。", "个人信息理解、句子长度、信心", "My name is Kimi. I'm six. I'm a boy."),
+    { id: "12-happy", type: "learn", title: "Happy.", visualId: "happy-face", audioSrc: null, ttsText: "Happy." },
+    { id: "13-sad", type: "learn", title: "Sad.", visualId: "sad-face", audioSrc: null, ttsText: "Sad." },
+    { id: "14-tired", type: "learn", title: "Tired.", visualId: "tired-face", audioSrc: null, ttsText: "Tired." },
+    listenChoice("15-which-happy", "Happy.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "happy"),
+    listenChoice("16-which-tired", "Tired.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired"),
+    listenChoice("17-feeling-memory", "Where is tired?", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired", "先让孩子看上一题三张图约 4 秒，再进入这一页。观察英文 + 视觉记忆，不要急着提示。"),
+    speakActivity("18-how-are-you", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "允许真实回答；I'm good 仅作为自然口语扩展。", "能否用 I'm + feeling 回答"),
+    speakActivity("19-how-is-she", "How is she?", "Happy. / She is happy.", "girl-child", "教师口头补充 she is happy；第一课只暴露，不要求稳定掌握 she。"),
+    { id: "20-stand-up", type: "learn", title: "Stand up.", visualId: "child-standing", audioSrc: null, ttsText: "Stand up." },
+    { id: "21-sit-down", type: "learn", title: "Sit down.", visualId: "child-sitting", audioSrc: null, ttsText: "Sit down." },
+    { id: "22-stand-or-sit", type: "challenge", title: "Stand or sit?", teacherNote: "不做老师动作；可故意做错，确认孩子听英语而非模仿。", items: [listenChoice("22a-stand", "Stand up.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "stand"), listenChoice("22b-sit", "Sit down.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "sit"), action("22c-real-stand", "Stand up.", "child-standing", "真人任务：老师自己坐着，孩子根据英语站起来。"), action("22d-real-sit", "Sit down.", "child-sitting", "真人任务：老师自己站着，孩子根据英语坐下。")] },
+    { id: "23-look", type: "learn", title: "Look.", visualId: "child-looking", audioSrc: null, ttsText: "Look." },
+    { id: "24-listen", type: "learn", title: "Listen.", visualId: "child-listening", audioSrc: null, ttsText: "Listen." },
+    { id: "25-look-or-listen", type: "challenge", title: "Look or listen?", items: [listenChoice("25a-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25b-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen"), listenChoice("25c-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25d-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen")] },
+    { id: "26-point", type: "learn", title: "Point.", visualId: "child-pointing", audioSrc: null, ttsText: "Point.", teacherNote: "核对图：手指与球之间有明确距离，不可接触。" },
+    { id: "27-touch", type: "learn", title: "Touch.", visualId: "child-touching", audioSrc: null, ttsText: "Touch.", teacherNote: "核对图：手指与球有明确接触。" },
+    { id: "28-point-or-touch", type: "challenge", title: "Point or touch?", items: [listenChoice("28a-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point"), listenChoice("28b-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28c-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28d-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point")] },
+    listenChoice("29-point-ball", "Point to the ball.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "ball"),
+    listenChoice("30-touch-table", "Touch the table.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "table", "已使用已审核 table.svg；table 与 chair 是不同视觉资产。"),
+    { id: "31-show-me", type: "learn", title: "Show me.", visualId: "child-showing-ball", audioSrc: null, ttsText: "Show me.", teacherNote: "物品仍在孩子手中，只是展示给老师看；之后用真实 ball / book / pencil 做 Show me the …。" },
+    { id: "32-give-me", type: "learn", title: "Give me the ball.", visualId: "child-giving-ball", audioSrc: null, ttsText: "Give me the ball.", teacherNote: "图中箭头：孩子 → 老师。用实物连续 4–6 轮加强。" },
+    { id: "33-take-ball", type: "learn", title: "Take the ball.", visualId: "child-taking-ball", audioSrc: null, ttsText: "Take the ball.", teacherNote: "图中箭头：老师 → 孩子。" },
+    { id: "34-give-or-take", type: "challenge", title: "Give or take?", items: [listenChoice("34a-give", "Give me the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "give"), listenChoice("34b-take", "Take the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "take"), action("34c-real-take", "Take the ball.", "child-taking-ball", "老师手拿球，孩子拿走。"), action("34d-real-give", "Give me the ball.", "child-giving-ball", "孩子把球还给老师。")] },
+    { id: "35-colour-review", type: "review", title: "Colour quick review", items: colours.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: item.label })) },
+    listenChoice("36-find-red", "Find red.", colours, "red"),
+    listenChoice("37-touch-blue", "Touch blue.", colours, "blue"),
+    listenChoice("38-point-yellow", "Point to yellow.", colours, "yellow"),
+    listenChoice("39-show-green", "Show me green.", colours, "green", "之后把四色实体卡放在桌上，重复相同指令。"),
+    { id: "40-colour-mix", type: "challenge", title: "Colour listening mix", items: [listenChoice("40a", "Touch red.", colours, "red"), listenChoice("40b", "Point to blue.", colours, "blue"), listenChoice("40c", "Show me yellow.", colours, "yellow"), listenChoice("40d", "Touch green.", colours, "green"), listenChoice("40e", "Point to red.", colours, "red"), listenChoice("40f", "Show me blue.", colours, "blue")] },
+    { id: "41-numbers-review", type: "review", title: "Numbers 1–5", items: numbers.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: ["One", "Two", "Three", "Four", "Five"][Number(item.id) - 1] })) },
+    listenChoice("42-find-three", "Find three.", [choice("two", "numeral-2", "Two"), choice("three", "numeral-3", "Three"), choice("five", "numeral-5", "Five")], "three"),
+    listenChoice("43-touch-five", "Touch five.", [choice("one", "numeral-1", "One"), choice("four", "numeral-4", "Four"), choice("five", "numeral-5", "Five")], "five"),
+    speakActivity("44-how-many-balls", "How many?", "Three. / Three balls.", "three-balls", "先接受 Three；能力好时自然扩展 Three balls。", "数量概念与口头回答"),
+    speakActivity("45-how-many-stars", "How many?", "Four. / Four stars.", "four-stars", "同样先接受数字答案。"),
+    { id: "46-number-action", type: "challenge", title: "Number + action", items: [listenChoice("46a", "Touch three.", numbers, "3"), listenChoice("46b", "Point to five.", numbers, "5"), listenChoice("46c", "Show me two.", numbers, "2")] },
+    { id: "47-listen-and-do", type: "challenge", title: "Listen and do challenge", teacherNote: "不显示模块名称，让孩子真正切换任务。真人任务由教师观察后再点 I did it。", items: [action("47a", "Stand up.", "child-standing"), action("47b", "Sit down.", "child-sitting"), listenChoice("47c", "Touch red.", colours, "red"), listenChoice("47d", "Point to blue.", colours, "blue"), listenChoice("47e", "Show me three.", numbers, "3"), action("47f", "Look.", "child-looking"), action("47g", "Listen.", "child-listening"), listenChoice("47h", "Touch five.", numbers, "5"), action("47i", "Come here.", "child-come-here"), action("47j", "Stop.", "child-stop"), action("47k", "Go.", "child-going")] },
+    { id: "48-two-step", type: "challenge", title: "Two-step listening", teacherNote: "只做 Baseline。若困难，立刻退回一步指令，不反复强训。", teacherChecks: "能否保留两个信息、按顺序完成、不等中文翻译", items: [action("48a", "Stand up and touch red.", "child-standing"), action("48b", "Sit down and point to blue.", "child-sitting"), action("48c", "Stand up and show me three.", "child-standing")] },
+    listenChoice("49-find-a", "Find A.", [choice("a", "letter-a", "A"), choice("b", "letter-b", "B"), choice("c", "letter-c", "C")], "a", "只记录第一次反应；不在此处教授 phonics。"),
+    listenChoice("50-find-c", "Find C.", [choice("a", "letter-a", "A"), choice("c", "letter-c", "C"), choice("f", "letter-f", "F")], "c"),
+    { id: "51-letter-hunt", type: "challenge", title: "Letter hunt", teacherNote: "可换成磁性 / 纸质字母，加入 Show me A、Give me C、Touch B。", teacherChecks: "A–F 识别的第一反应、是否猜测", items: [listenChoice("51a", "Find B.", letters, "b"), listenChoice("51b", "Find E.", letters, "e"), listenChoice("51c", "Find D.", letters, "d")] },
+    { id: "52-write-name", type: "writingPrompt", title: "Write your name.", childPrompt: "Use your paper and pencil.", visualId: "name-writing", audioSrc: null, ttsText: "Write your name.", teacherNote: "网页只给英语指令，孩子在真实纸张上写。不要做正式纠错教学。", teacherChecks: "是否理解并主动开始；姓名拼写、字母方向、大小、握笔、是否需要范例" },
+    { id: "53-copy-letter", type: "writingPrompt", title: "Write A.", childPrompt: "Copy A on your paper.", visualId: "letter-a", audioSrc: null, ttsText: "Write A.", teacherNote: "若姓名书写顺利，再用教师 Next 追加口头 Write B；最多测试 2–3 个字母。" },
+    speakActivity("54-my-name", "What's your name?", "My name is …", "speaking-child", "这里不再提示名字本身，观察是否能独立回答。"),
+    speakActivity("55-my-age", "How old are you?", "I'm five. / I'm six.", "speaking-child"),
+    speakActivity("56-boy-or-girl", "Are you a boy or a girl?", "I'm a boy. / I'm a girl.", "boy-child"),
+    speakActivity("57-my-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face"),
+    speakActivity("58-what-colour", "What colour is it?", "Red. / It's red.", "colour-red", "接受 Red；更好的回答是 It's red。第一课不强制完整句。"),
+    speakActivity("59-how-many", "How many?", "Five. / Five balls.", "five-balls", "接受 Five；能力好时扩展 Five balls。"),
+    { id: "60-english-adventure-challenge", type: "challenge", title: "English Adventure Challenge", teacherNote: "最后模拟新老师：坐得稍远、尽量不使用中文。完成后用下面 mini interview 把屏幕关闭 2–3 分钟；根据孩子表现决定 Lesson 2 加速或回到基础听力。", teacherChecks: "个人问题、一步指令、颜色 + 动词、数字 + 动词、字母 B、注意力与切换能力", items: [speakActivity("60a", "Hello!", "Hello!", "waving-child"), speakActivity("60b", "What's your name?", "My name is …"), speakActivity("60c", "How old are you?", "I'm five. / I'm six."), speakActivity("60d", "How are you?", "I'm happy."), action("60e", "Stand up.", "child-standing"), listenChoice("60f", "Touch blue.", colours, "blue"), listenChoice("60g", "Point to three.", numbers, "3"), action("60h", "Sit down.", "child-sitting"), listenChoice("60i", "Show me red.", colours, "red"), listenChoice("60j", "Find B.", letters, "b"), speakActivity("60k", "Goodbye!", "Goodbye!", "goodbye-child")] }
+  ]
+};
+
+Object.assign(exports, { helloLesson });
+})(window.__eaModules["data/lessons/hello.js"]);
+
+window.__eaModules["data/lessons/colours.js"] = {};
+(function(exports) {
+const choice = (id, visualId, label) => ({ id, visualId, label });
+const colour = (name) => choice(name, `l2-colour-${name}`, name[0].toUpperCase() + name.slice(1));
+const ball = (name) => choice(name, `ball-${name}`, `${name[0].toUpperCase() + name.slice(1)} ball`);
+const listenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
+const action = (id, ttsText, visualId, teacherNote = "", teacherChecks = "", hideNestedHeader = false) => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks, hideNestedHeader });
+const speak = (id, title, prompt, visualId, ttsText = title, teacherNote = "", teacherChecks = "") => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
+const learn = (id, title, visualId, ttsText = title, teacherNote = "") => ({ id, type: "learn", title, visualId, audioSrc: null, ttsText, teacherNote });
+const reviewItem = (name) => ({ visualId: `l2-colour-${name}`, text: name[0].toUpperCase() + name.slice(1), ttsText: `${name[0].toUpperCase() + name.slice(1)}.` });
+
+const oldColours = ["red", "blue", "yellow", "green"];
+const setOneColours = ["orange", "pink", "purple"];
+const setTwoColours = ["black", "white", "brown"];
+const allColours = [...oldColours, ...setOneColours, ...setTwoColours];
+const colourBalls = allColours.map((name) => ({ visualId: `ball-${name}`, text: `${name[0].toUpperCase() + name.slice(1)} ball`, ttsText: `${name[0].toUpperCase() + name.slice(1)} ball.` }));
+const colourObjects = [
+  { visualId: "ball-red", text: "A red ball", ttsText: "A red ball." },
+  { visualId: "pencil-blue", text: "A blue pencil", ttsText: "A blue pencil." },
+  { visualId: "star-yellow", text: "A yellow star", ttsText: "A yellow star." },
+  { visualId: "apple-green", text: "A green apple", ttsText: "A green apple." },
+  { visualId: "bag-pink", text: "A pink bag", ttsText: "A pink bag." }
+];
+
+const coloursLesson = {
+  id: "colours",
+  lessonNumber: 2,
+  title: "Colours",
+  icon: "🎨",
+  activities: [
+    speak("01-hello", "Hello!", "Hello!", "waving-child", "Hello!"),
+    speak("02-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"),
+    speak("03-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"),
+    speak("04-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"),
+    { id: "05-listen-and-do", type: "challenge", title: "Listen and do!", items: [action("05a-stand", "Stand up.", "child-standing", "", "", true), action("05b-sit", "Sit down.", "child-sitting", "", "", true), action("05c-look", "Look.", "child-looking", "", "", true), action("05d-listen", "Listen.", "child-listening", "", "", true)] },
+    { id: "06-point-or-touch", type: "challenge", title: "Point or touch?", items: [listenChoice("06a-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point"), listenChoice("06b-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("06c-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("06d-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point")] },
+    { id: "07-old-colours-review", type: "review", title: "Colour quick review", items: oldColours.map(reviewItem) },
+    listenChoice("08-find-red", "Find red.", oldColours.map(colour), "red"),
+    listenChoice("09-touch-blue", "Touch blue.", oldColours.map(colour), "blue"),
+    listenChoice("10-point-yellow", "Point to yellow.", oldColours.map(colour), "yellow"),
+    listenChoice("11-show-green", "Show me green.", oldColours.map(colour), "green"),
+    learn("12-orange", "Orange.", "l2-colour-orange"),
+    learn("13-pink", "Pink.", "l2-colour-pink"),
+    learn("14-purple", "Purple.", "l2-colour-purple"),
+    { id: "15-new-colours-one", type: "challenge", title: "New colours: listen!", items: [listenChoice("15a-orange", "Orange.", setOneColours.map(colour), "orange"), listenChoice("15b-pink", "Pink.", setOneColours.map(colour), "pink"), listenChoice("15c-purple", "Purple.", setOneColours.map(colour), "purple")] },
+    learn("16-black", "Black.", "l2-colour-black"),
+    learn("17-white", "White.", "l2-colour-white"),
+    learn("18-brown", "Brown.", "l2-colour-brown"),
+    { id: "19-new-colours-two", type: "challenge", title: "Black / White / Brown listening", items: [listenChoice("19a-black", "Black.", setTwoColours.map(colour), "black"), listenChoice("19b-white", "White.", setTwoColours.map(colour), "white"), listenChoice("19c-brown", "Brown.", setTwoColours.map(colour), "brown")] },
+    { id: "20-new-colours-review", type: "review", title: "New colours", items: [...setOneColours, ...setTwoColours].map(reviewItem) },
+    listenChoice("21-find-purple", "Find purple.", [...setOneColours, "blue"].map(colour), "purple"),
+    listenChoice("22-touch-orange", "Touch orange.", ["orange", "yellow", "brown", "pink"].map(colour), "orange"),
+    listenChoice("23-point-black", "Point to black.", ["black", "white", "blue", "purple"].map(colour), "black"),
+    listenChoice("24-show-pink", "Show me pink.", ["pink", "red", "purple", "orange"].map(colour), "pink"),
+    { id: "25-ten-colours-review", type: "review", title: "Ten colours", items: allColours.map(reviewItem) },
+    { id: "26-colour-listening-mix-one", type: "challenge", title: "Colour listening mix 1", items: [listenChoice("26a-red", "Red.", ["red", "purple", "yellow", "brown"].map(colour), "red"), listenChoice("26b-purple", "Purple.", ["red", "purple", "yellow", "brown"].map(colour), "purple"), listenChoice("26c-yellow", "Yellow.", ["red", "purple", "yellow", "brown"].map(colour), "yellow"), listenChoice("26d-brown", "Brown.", ["red", "purple", "yellow", "brown"].map(colour), "brown")] },
+    { id: "27-colour-listening-mix-two", type: "challenge", title: "Colour listening mix 2", items: [listenChoice("27a-orange", "Orange.", ["orange", "brown", "red", "pink"].map(colour), "orange"), listenChoice("27b-brown", "Brown.", ["orange", "brown", "red", "pink"].map(colour), "brown"), listenChoice("27c-red", "Red.", ["orange", "brown", "red", "pink"].map(colour), "red"), listenChoice("27d-pink", "Pink.", ["orange", "brown", "red", "pink"].map(colour), "pink")] },
+    { id: "28-colour-listening-mix-three", type: "challenge", title: "Colour listening mix 3", items: [listenChoice("28a-black", "Black.", ["black", "white", "blue", "purple"].map(colour), "black"), listenChoice("28b-white", "White.", ["black", "white", "blue", "purple"].map(colour), "white"), listenChoice("28c-green", "Green.", ["green", "yellow", "blue", "purple"].map(colour), "green"), listenChoice("28d-yellow", "Yellow.", ["green", "yellow", "blue", "purple"].map(colour), "yellow")] },
+    speak("29-what-colour-red", "What colour is it?", "It's red.", "ball-red", "What colour is it? It's red.", "Model the whole question-and-answer exchange before the child repeats."),
+    speak("30-what-colour-blue", "What colour is it?", "It's ______.", "ball-blue", "What colour is it?", "Teacher expects: It's blue."),
+    speak("31-what-colour-yellow", "What colour is it?", "It's ______.", "ball-yellow", "What colour is it?", "Teacher expects: It's yellow."),
+    speak("32-what-colour-orange", "What colour is it?", "It's ______.", "ball-orange", "What colour is it?", "Teacher expects: It's orange."),
+    speak("33-what-colour-purple", "What colour is it?", "It's ______.", "ball-purple", "What colour is it?", "Teacher expects: It's purple."),
+    speak("34-what-colour-brown", "What colour is it?", "It's ______.", "ball-brown", "What colour is it?", "Teacher expects: It's brown."),
+    { id: "35-colour-balls", type: "review", title: "Colour balls", items: colourBalls },
+    listenChoice("36-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"),
+    listenChoice("37-touch-blue-ball", "Touch the blue ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "blue"),
+    listenChoice("38-point-yellow-ball", "Point to the yellow ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "yellow"),
+    listenChoice("39-find-purple-ball", "Find the purple ball.", [ball("purple"), ball("pink"), ball("black"), ball("brown")], "purple"),
+    { id: "40-colour-and-object", type: "review", title: "Colour and object", items: colourObjects },
+    listenChoice("41-find-blue-pencil", "Find the blue pencil.", [choice("pencil-blue", "pencil-blue", "Blue pencil"), choice("ball-blue", "ball-blue", "Blue ball"), choice("bag-blue", "bag-blue", "Blue bag"), choice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"),
+    listenChoice("42-touch-green-apple", "Touch the green apple.", [choice("apple-green", "apple-green", "Green apple"), choice("apple-red", "apple-red", "Red apple"), choice("ball-green", "ball-green", "Green ball"), choice("bag-pink", "bag-pink", "Pink bag")], "apple-green"),
+    listenChoice("43-point-yellow-star", "Point to the yellow star.", [choice("star-yellow", "star-yellow", "Yellow star"), choice("star-red", "star-red", "Red star"), choice("ball-yellow", "ball-yellow", "Yellow ball"), choice("pencil-blue", "pencil-blue", "Blue pencil")], "star-yellow"),
+    speak("44-ball-question", "What colour is the ball?", "It's red.", "ball-red", "What colour is the ball? It's red."),
+    speak("45-bag-question", "What colour is the bag?", "It's pink.", "bag-pink", "What colour is the bag? It's pink."),
+    { id: "46-build-it", type: "challenge", title: "Build it!", items: [learn("46a-red", "Red.", "ball-red"), learn("46b-red-ball", "Red ball.", "ball-red"), learn("46c-a-red-ball", "A red ball.", "ball-red"), speak("46d-its-a-red-ball", "It's a red ball.", "It's a red ball.", "ball-red", "It's a red ball.")] },
+    { id: "47-colour-hunt", type: "challenge", title: "Colour Hunt", teacherNote: "These are real-world tasks. Observe the child, then let them tap I did it.", items: [action("47a-find-red", "Find something red.", "l2-colour-red"), action("47b-touch-blue", "Touch something blue.", "l2-colour-blue"), action("47c-show-green", "Show me something green.", "l2-colour-green"), action("47d-find-black", "Find something black.", "l2-colour-black")] },
+    { id: "48-think-with-colours", type: "challenge", title: "Think with colours", items: [listenChoice("48a-same-colour", "Which one is the same colour as the red ball?", [choice("apple-red", "apple-red", "Red apple"), choice("pencil-blue", "pencil-blue", "Blue pencil"), choice("star-yellow", "star-yellow", "Yellow star")], "apple-red"), listenChoice("48b-different", "Which one is different?", [choice("ball-red", "ball-red", "Red ball"), choice("apple-red", "apple-red", "Red apple"), choice("star-red", "star-red", "Red star"), choice("bag-blue", "bag-blue", "Blue bag")], "bag-blue"), listenChoice("48c-red-things", "Which one belongs with the red things?", [choice("apple-red", "apple-red", "Red apple"), choice("ball-blue", "ball-blue", "Blue ball"), choice("star-yellow", "star-yellow", "Yellow star"), choice("bag-pink", "bag-pink", "Pink bag")], "apple-red")] },
+    { id: "49-read-it", type: "challenge", title: "Read it!", teacherNote: "For 49a–49c, test reading without clicking Replay. The replay control exists only because this uses the standard activity component.", items: [
+      { id: "49a-read-red", type: "tapChoice", title: "red", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [colour("red"), colour("blue"), colour("green")], correctAnswer: "red", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49b-read-blue-ball", type: "tapChoice", title: "blue ball", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49c-read-sentence", type: "tapChoice", title: "The ball is blue.", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
+      { id: "49d-phonics-b", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [choice("blue", "l2-colour-blue", "blue"), choice("red", "l2-colour-red", "red"), choice("yellow", "l2-colour-yellow", "yellow")], correctAnswer: "blue", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." },
+      { id: "49e-phonics-b-two", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [choice("black", "l2-colour-black", "black"), choice("pink", "l2-colour-pink", "pink"), choice("green", "l2-colour-green", "green")], correctAnswer: "black", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." }
+    ] },
+    { id: "50-write-red", type: "writingPrompt", title: "Write red.", childPrompt: "Copy red on your paper.", visualId: "l2-colour-red", audioSrc: null, ttsText: "Write red.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
+    { id: "51-write-blue", type: "writingPrompt", title: "Write blue.", childPrompt: "Copy blue on your paper.", visualId: "l2-colour-blue", audioSrc: null, ttsText: "Write blue.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
+    { id: "52-final-colour-challenge", type: "challenge", title: "English Adventure Colour Challenge", teacherNote: "The final two-step instruction is an advanced observation. If it is difficult, return to one-step instructions; do not treat Lesson 2 as failed.", teacherChecks: "Colour listening, colour plus object, real-world transfer, and two-step attention.", items: [action("52a-touch-red", "Touch red.", "l2-colour-red"), listenChoice("52b-find-purple", "Find purple.", ["purple", "pink", "blue", "brown"].map(colour), "purple"), listenChoice("52c-touch-red-ball", "Touch the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), listenChoice("52d-point-blue-pencil", "Point to the blue pencil.", [choice("pencil-blue", "pencil-blue", "Blue pencil"), choice("ball-blue", "ball-blue", "Blue ball"), choice("bag-blue", "bag-blue", "Blue bag"), choice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"), listenChoice("52e-show-green-apple", "Show me the green apple.", [choice("apple-green", "apple-green", "Green apple"), choice("apple-red", "apple-red", "Red apple"), choice("ball-green", "ball-green", "Green ball"), choice("bag-pink", "bag-pink", "Pink bag")], "apple-green"), action("52f-find-black", "Find something black.", "l2-colour-black"), action("52g-two-step", "Touch the red ball and point to the blue pencil.", "ball-red", "Advanced two-step observation. The teacher can use the screen choices or nearby real objects.")] },
+    { id: "53-mini-interview", type: "challenge", title: "Mini Interview", teacherNote: "A Lesson 1 and Lesson 2 wrap-up. Keep the exchange natural and encouraging.", items: [speak("53a-hello", "Hello!", "Hello!", "waving-child", "Hello!"), speak("53b-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"), speak("53c-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"), speak("53d-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"), speak("53e-blue", "What colour is it?", "It's blue.", "ball-blue", "What colour is it?"), speak("53f-orange", "What colour is it?", "It's orange.", "ball-orange", "What colour is it?"), listenChoice("53g-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), speak("53h-goodbye", "Goodbye!", "Goodbye!", "goodbye-child", "Goodbye!")] }
+  ]
+};
+
+Object.assign(exports, { coloursLesson });
+})(window.__eaModules["data/lessons/colours.js"]);
+
+window.__eaModules["data/lessons/numbers.js"] = {};
+(function(exports) {
+const choice = (id, label) => ({ id: String(id), label: String(label) });
+const q = (id, title, ttsText, question, visualId, count, answer, options = [1, 2, 3, 4, 5]) => ({ id, type: "quantity", title, ttsText, prompt: "Listen, look and count.", question, groups: [{ visualId, count }], options: options.map((n) => choice(n, n)), correctAnswer: String(answer) });
+const speak = (id, title, prompt, visualId, ttsText = title, visualOptions = {}) => ({ id, type: "speakPrompt", title, prompt, visualId, ttsText, completeLabel: "I said it!", teacherNote: "Play the audio, wait for the child to speak aloud, then let the adult confirm. The page does not claim speech recognition.", ...visualOptions });
+const product = (visualId, label) => ({ visualId, label });
+const fruit = [product("apple-red", "red apple"), product("apple-green", "green apple"), product("l3-banana", "banana"), product("l3-orange", "orange"), product("l3-cookie", "cookie")];
+const school = [product("pencil-blue", "blue pencil"), product("l3-crayon", "crayon"), product("l3-book-green", "green book"), product("l3-notebook", "notebook"), product("l3-eraser", "eraser"), product("l3-ruler", "ruler")];
+
+const numbersLesson = {
+  id: "numbers", lessonNumber: 3, title: "Numbers in My World", icon: "🔢",
+  activities: [
+    { id: "01-cover", type: "cover", title: "Lesson 3 — Numbers in My World", subtitle: "Count · Choose · Buy", visualId: "l3-tom-shopkeeper", ttsText: "Welcome to Lesson 3! Let's count, choose and buy!" },
+    speak("02-hello-routine", "Hello!", "Hello! What's your name? How are you?", "waving-child", "Hello! What's your name? How are you?"),
+    { id: "03-colour-flash", type: "review", title: "Colour flash review", ttsText: "Show me red.", items: [{ visualId: "apple-red", text: "red apple", ttsText: "Red apple." }, { visualId: "ball-blue", text: "blue ball", ttsText: "Blue ball." }, { visualId: "l3-pencil-yellow", text: "yellow pencil", ttsText: "Yellow pencil." }, { visualId: "l3-book-green", text: "green book", ttsText: "Green book." }] },
+    { id: "04-number-speed", type: "tapChoice", title: "Speed round", ttsText: "Seven.", showLabels: true, options: [1,2,3,4,5,6,7,8,9,10].map((n) => ({ id: String(n), visualId: `numeral-${n}`, label: String(n) })), correctAnswer: "7" },
+    { id: "05-bonus-numbers", type: "review", title: "Bonus number challenge", ttsText: "Eleven. Twelve. Thirteen. Fourteen. Fifteen. Sixteen. Seventeen. Eighteen. Nineteen. Twenty.", items: [11,12,13,14,15,16,17,18,19,20].map((n) => ({ visualId: `numeral-${n}`, text: String(n), ttsText: String(n) })) , teacherNote: "Recognition and listening only. Do not assess this bonus content." },
+    q("06-how-many", "How many?", "How many apples?", "How many apples?", "apple-red", 3, 3),
+    { id: "07-count-fruit", type: "quantity", title: "Count the fruit", ttsText: "How many bananas?", prompt: "Count each group.", question: "How many bananas?", groups: [{ visualId: "apple-red", count: 3, label: "apples" }, { visualId: "l3-banana", count: 2, label: "bananas" }, { visualId: "l3-orange", count: 4, label: "oranges" }, { visualId: "l3-cookie", count: 5, label: "cookies" }], options: [1,2,3,4,5].map((n) => choice(n,n)), correctAnswer: "2" },
+    { id: "08-count-school", type: "quantity", title: "Count the school things", ttsText: "How many crayons?", prompt: "Count each group.", question: "How many crayons?", groups: [{ visualId:"pencil-blue",count:2,label:"pencils" },{ visualId:"l3-crayon",count:3,label:"crayons" },{ visualId:"l3-notebook",count:4,label:"notebooks" },{visualId:"l3-ruler",count:5,label:"rulers"}], options:[1,2,3,4,5].map((n)=>choice(n,n)),correctAnswer:"3" },
+    { id: "09-count-toys", type: "quantity", title: "Count the toys", ttsText: "How many balls?", prompt: "Count the toys.", question: "How many balls?", groups: [{visualId:"ball-blue",count:3,label:"balls"},{visualId:"l3-toy-car",count:2,label:"toy cars"},{visualId:"l3-teddy-bear",count:4,label:"teddy bears"}], options:[1,2,3,4,5].map((n)=>choice(n,n)),correctAnswer:"3" },
+    { id: "10-one-or-many", type: "review", title: "One or many", ttsText: "One apple. Two apples. One pencil. Three pencils.", items: [{visualId:"apple-red",count:1,text:"one apple",ttsText:"One apple."},{visualId:"apple-red",count:2,text:"two apples",ttsText:"Two apples."},{visualId:"pencil-blue",count:1,text:"one pencil",ttsText:"One pencil."},{visualId:"pencil-blue",count:3,text:"three pencils",ttsText:"Three pencils."}] },
+    { id: "11-mixed-count", type: "quantity", title: "Count mixed objects", ttsText: "How many books can you see?", prompt:"Find the right things in the busy table.",question:"How many books can you see?",groups:[{visualId:"apple-red",count:2},{visualId:"ball-blue",count:3},{visualId:"pencil-blue",count:4},{visualId:"l3-book-green",count:5},{visualId:"l3-toy-car",count:1}],options:[1,2,3,4,5].map((n)=>choice(n,n)),correctAnswer:"5" },
+    { id:"12-number-colour-object", type:"review", title:"Number + colour + object", ttsText:"Two red apples. Three blue pencils. One yellow ball. Four green books.", items:[{visualId:"apple-red",count:2,text:"two red apples",ttsText:"Two red apples."},{visualId:"pencil-blue",count:3,text:"three blue pencils",ttsText:"Three blue pencils."},{visualId:"ball-yellow",count:1,text:"one yellow ball",ttsText:"One yellow ball."},{visualId:"l3-book-green",count:4,text:"four green books",ttsText:"Four green books."}] },
+    { id:"13-listen-choose",type:"quantity",title:"Listen and choose",ttsText:"Show me two red apples.",prompt:"Listen. Touch the matching picture group.",question:"Show me two red apples.",groupChoices:true,groups:[{id:"two-red-apples",visualId:"apple-red",count:2,label:"two red apples"},{id:"three-red-apples",visualId:"apple-red",count:3,label:"three red apples"},{id:"two-green-apples",visualId:"apple-green",count:2,label:"two green apples"},{id:"three-green-apples",visualId:"apple-green",count:3,label:"three green apples"}],correctAnswer:"two-red-apples" },
+    { id:"14-build-phrase",type:"phraseBuilder",title:"Build the phrase",ttsText:"Two red apples.",visualId:"apple-red",quantityItems:[{visualId:"apple-red",count:2}],parts:[{options:["two","three","one"]},{options:["red","blue","green"]},{options:["apples","pencils","balls"]}],answer:"two red apples" },
+    speak("15-speak-phrase", "What can you see?", "Three blue pencils.", "pencil-blue", "What can you see?", { quantityItems:[{visualId:"pencil-blue",count:3}] }),
+    { id:"16-mia-list",type:"learn",title:"Mia's shopping list",visualId:"l3-mia-shopping",ttsText:"Two red apples. One notebook. Three blue pencils. Two cookies.",listItems:["2 red apples","1 notebook","3 blue pencils","2 cookies"],teacherNote:"Read the shopping list aloud: 2 red apples, 1 notebook, 3 blue pencils, 2 cookies." },
+    { id:"17-basket",type:"basketShop",title:"Put it in the basket",ttsText:"Put two red apples, one notebook and three blue pencils in the basket.",prompt:"Put two red apples, one notebook and three blue pencils in the basket.",products:[...fruit,...school],request:[{visualId:"apple-red",count:2},{visualId:"l3-notebook",count:1},{visualId:"pencil-blue",count:3}] },
+    speak("18-i-want", "I want ..., please", "I want two apples, please.", "l3-mia-shopping", "I want two apples, please."),
+    speak("19-fruit-shop", "Fruit Shop", "Hello. I want two apples, please.", "l3-tom-shopkeeper", "Hello! What would you like?", {listenText:"Tom: Hello! What would you like?"}),
+    speak("20-fruit-shop-challenge", "Fruit Shop Challenge", "I want three bananas, please.", "l3-tom-shopkeeper-banana", "What would you like?", {listenText:"Tom: What would you like?"}),
+    speak("21-school-shop", "School Shop", "I want three crayons, please.", "l3-mia-shopping", "I want three crayons, please."),
+    { id:"22-role-swap",type:"basketShop",title:"Shopkeeper role swap",ttsText:"Two red pencils, please.",customerRequest:"Customer: Two red pencils, please.",prompt:"You are the shopkeeper. Give the customer two red pencils.",products:[...school,product("l3-pencil-red", "red pencil")],request:[{visualId:"l3-pencil-red",count:2}] },
+    { id:"23-how-much",type:"pricePlay",title:"How much is it?",ttsText:"How much is the book? It's three euros. Now touch three euros.",prompt:"Listen to the question and the answer. Then touch the price.",visualId:"l3-book-green",question:"How much is the book?",modelAnswer:"It's three euros.",choicePrompt:"Now touch three euros.",options:[{id:"1",visualId:"l3-euro-1",label:"one euro"},{id:"2",visualId:"l3-euro-2",label:"two euros"},{id:"3",visualId:"l3-euro-3",label:"three euros"}],correctAnswer:"3",teacherNote:"The model answer and the correct coin both show €3." },
+    { id:"24-listen-price",type:"pricePlay",title:"Listen to the price",ttsText:"How much is the ball? It's four euros. Now touch four euros.",prompt:"Listen to the question and the answer. Then touch the price.",visualId:"ball-blue",question:"How much is the ball?",modelAnswer:"It's four euros.",choicePrompt:"Now touch four euros.",options:[{id:"2",visualId:"l3-euro-2",label:"two euros"},{id:"4",visualId:"l3-euro-4",label:"four euros"},{id:"5",visualId:"l3-euro-5",label:"five euros"}],correctAnswer:"4" },
+    { id:"25-pay-money",type:"pricePlay",title:"Pay the money",ttsText:"Five euros, please.",prompt:"Pay the shopkeeper.",visualId:"l3-cookie",question:"Five euros, please.",options:[{id:"1",visualId:"l3-euro-1",label:"€1"},{id:"2",visualId:"l3-euro-2",label:"€2"},{id:"5",visualId:"l3-euro-5",label:"€5"}],correctAnswer:"5" },
+    speak("26-star-price", "€2.50 Star Challenge", "Two euros fifty.", "l3-cookie", "Two euros fifty."),
+    { id:"27-more-less",type:"compare",title:"More or less",ttsText:"Which group has more?",prompt:"Which group has more?",groups:[{id:"left",visualId:"apple-red",count:4,label:"four red apples"},{id:"right",visualId:"apple-green",count:2,label:"two green apples"}],correctAnswer:"left" },
+    { id:"28-same",type:"compare",title:"Same",ttsText:"Which groups have the same number?",prompt:"Which groups have the same number?",groups:[{id:"left",visualId:"pencil-blue",count:3,label:"three blue pencils"},{id:"right",visualId:"l3-crayon",count:3,label:"three crayons"}],correctAnswers:["left","right"],teacherNote:"Both groups have three. Let the child tap either group after saying same." },
+    { id:"29-one-more", type:"quantity", title:"One more", ttsText:"There are two apples. One more apple. How many apples now?", prompt:"Start with two apples. Add one more apple.", question:"How many apples now?", groups:[{visualId:"apple-red",count:3,label:"2 apples + 1 more apple"}], options:[1,2,3,4,5].map((n)=>choice(n,n)), correctAnswer:"3" },
+    { id:"30-number-words",type:"tapChoice",title:"Find the word: three",audioEnabled:false,audioDisposition:"INTENTIONALLY_SILENT",showLabels:true,options:[{id:"1",visualId:"numeral-1",label:"one"},{id:"2",visualId:"numeral-2",label:"two"},{id:"3",visualId:"numeral-3",label:"three"}],correctAnswer:"3",teacherNote:"Read the labels, then touch the card with the word three. This early-reading page is intentionally silent." },
+    { id:"31-memory-shop",type:"quantity",title:"Memory Shop",ttsText:"How many cookies did you see?",prompt:"Look carefully. The shop will cover in five seconds.",memoryRevealSeconds:5,question:"How many cookies did you see?",groups:[{visualId:"apple-red",count:2,label:"red apples"},{visualId:"l3-book-green",count:1,label:"book"},{visualId:"pencil-blue",count:3,label:"blue pencils"},{visualId:"l3-cookie",count:4,label:"cookies"}],options:[1,2,3,4,5].map((n)=>choice(n,n)),correctAnswer:"4" },
+    { id:"32-give-me",type:"basketShop",title:"Give me ...",ttsText:"Give Tom one green book and Mia two cookies.",customerRequest:"Give Tom one green book and Mia two cookies.",prompt:"Choose an item, then choose Tom or Mia.",products:[...fruit,...school],recipients:[{id:"tom",name:"Tom",visualId:"boy-child",request:[{visualId:"l3-book-green",count:1}]},{id:"mia",name:"Mia",visualId:"girl-child",request:[{visualId:"l3-cookie",count:2}]}] },
+    { id:"33-final-shopping",type:"challenge",title:"Final Shopping Challenge",teacherNote:"Complete the basket first, then pay. Do not let the teacher skip a task before feedback.",items:[{id:"33a-basket",type:"basketShop",title:"Mia's order",ttsText:"I want two red apples and three blue pencils, please. Put two red apples and three blue pencils in the basket.",customerRequest:"Mia: I want two red apples and three blue pencils, please.",prompt:"Put two red apples and three blue pencils in the basket.",products:[...fruit,...school],request:[{visualId:"apple-red",count:2},{visualId:"pencil-blue",count:3}]},{id:"33b-pay",type:"pricePlay",title:"Pay",ttsText:"Five euros, please.",prompt:"Now pay the price.",visualId:"l3-basket",question:"Five euros, please.",options:[{id:"1",visualId:"l3-euro-1",label:"€1"},{id:"2",visualId:"l3-euro-2",label:"€2"},{id:"5",visualId:"l3-euro-5",label:"€5"}],correctAnswer:"5"},{id:"33c-thanks",type:"speakPrompt",title:"Thank you!",prompt:"Thank you!",visualId:"l3-tom-shopkeeper",ttsText:"Here you are. Thank you.",listenText:"Tom: Here you are.",completeLabel:"I said it!"}] },
+    { id:"34-interview",type:"challenge",title:"Mini Interview + Finish",items:[speak("34a-count","How many apples can you see?","Three apples.","apple-red","How many apples can you see?",{quantityItems:[{visualId:"apple-red",count:3}]}),speak("34b-want","What would you like?","I want two apples, please.","l3-mia-shopping","What would you like?"),speak("34c-price","How much is the book?","It's three euros.","l3-book-green","How much is the book?"),speak("34d-more","Which group has more?","Four apples.","apple-red","Which group has more?",{quantityGroups:[{visualId:"apple-red",count:4},{visualId:"apple-green",count:2}]}),speak("34e-give","Can you give me three pencils?","Here you are.","pencil-blue","Can you give me three pencils?",{quantityItems:[{visualId:"pencil-blue",count:3}]}),speak("34f-goodbye","Great work!","Great work! Today you counted, shopped and used numbers in English. Goodbye!","goodbye-child","Great work! Today you counted, shopped and used numbers in English. Goodbye!")] }
+  ]
+};
+
+Object.assign(exports, { numbersLesson });
+})(window.__eaModules["data/lessons/numbers.js"]);
+
+window.__eaModules["data/lessonIndex.js"] = {};
+(function(exports) {
+const { helloLesson } = window.__eaModules["data/lessons/hello.js"];
+const { coloursLesson } = window.__eaModules["data/lessons/colours.js"];
+const { numbersLesson } = window.__eaModules["data/lessons/numbers.js"];
+
+const lessons = [
+  helloLesson,
+  coloursLesson,
+  numbersLesson,
+  { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
+];
+
+const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
+
+Object.assign(exports, { lessons, getLesson });
+})(window.__eaModules["data/lessonIndex.js"]);
+
+window.__eaModules["js/store.js"] = {};
+(function(exports) {
+const STORAGE_KEY = "english-adventure-progress";
+const defaults = () => ({ currentLesson: "hello", lessonPositions: { hello: 0 }, lessonProgress: {}, completedLessons: {}, soundOn: true });
+
+function read() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const positions = { ...(stored.lessonPositions || {}) };
+    if (Number.isInteger(stored.currentActivity) && !Number.isInteger(positions[stored.currentLesson || "hello"])) positions[stored.currentLesson || "hello"] = stored.currentActivity;
+    delete stored.currentActivity;
+    return { ...defaults(), ...stored, lessonPositions: { ...defaults().lessonPositions, ...positions } };
+  }
+  catch { return defaults(); }
+}
+
+const state = read();
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function patch(values) { Object.assign(state, values); save(); }
+function lessonPosition(lessonId) { return state.lessonPositions[lessonId] ?? 0; }
+function setLessonPosition(lessonId, position) { state.lessonPositions[lessonId] = Math.max(0, position); save(); }
+function openLesson(lessonId) { state.currentLesson = lessonId; if (!Number.isInteger(state.lessonPositions[lessonId])) state.lessonPositions[lessonId] = 0; save(); }
+function activityDone(lessonId, activityId) { return Boolean(state.lessonProgress[lessonId]?.includes(activityId)); }
+function markActivityDone(lessonId, activityId) {
+  const done = new Set(state.lessonProgress[lessonId] || []); done.add(activityId);
+  state.lessonProgress[lessonId] = [...done]; save();
+}
+function resetLesson(lessonId) { state.currentLesson = lessonId; state.lessonPositions[lessonId] = 0; delete state.lessonProgress[lessonId]; delete state.completedLessons[lessonId]; save(); }
+function resetAll() { Object.assign(state, defaults()); save(); }
+
+Object.assign(exports, { state, save, patch, lessonPosition, setLessonPosition, openLesson, activityDone, markActivityDone, resetLesson, resetAll });
+})(window.__eaModules["js/store.js"]);
+
+window.__eaModules["data/audio/lesson03Entries.js"] = {};
+(function(exports) {
+// Generated by scripts/generate-lesson03-audio.mjs. Do not hand-edit filenames.
+const lesson03Entries = [
+  ["Welcome to Lesson 3! Let's count, choose and buy!", "welcome-to-lesson-3-let-s-count-choose-and-buy.mp3"],
+  ["Hello! What's your name? How are you?", "hello-what-s-your-name-how-are-you.mp3"],
+  ["Red apple.", "red-apple.mp3"],
+  ["Yellow pencil.", "yellow-pencil.mp3"],
+  ["Green book.", "green-book.mp3"],
+  ["Seven.", "seven.mp3"],
+  ["Eleven. Twelve. Thirteen. Fourteen. Fifteen. Sixteen. Seventeen. Eighteen. Nineteen. Twenty.", "eleven-twelve-thirteen-fourteen-fifteen-sixteen-seventeen-eighteen-nineteen-twenty.mp3"],
+  ["11", "11.mp3"],
+  ["12", "12.mp3"],
+  ["13", "13.mp3"],
+  ["14", "14.mp3"],
+  ["15", "15.mp3"],
+  ["16", "16.mp3"],
+  ["17", "17.mp3"],
+  ["18", "18.mp3"],
+  ["19", "19.mp3"],
+  ["20", "20.mp3"],
+  ["How many apples?", "how-many-apples.mp3"],
+  ["How many bananas?", "how-many-bananas.mp3"],
+  ["How many crayons?", "how-many-crayons.mp3"],
+  ["How many balls?", "how-many-balls.mp3"],
+  ["One apple. Two apples. One pencil. Three pencils.", "one-apple-two-apples-one-pencil-three-pencils.mp3"],
+  ["One apple.", "one-apple.mp3"],
+  ["Two apples.", "two-apples.mp3"],
+  ["One pencil.", "one-pencil.mp3"],
+  ["Three pencils.", "three-pencils.mp3"],
+  ["How many books can you see?", "how-many-books-can-you-see.mp3"],
+  ["Two red apples. Three blue pencils. One yellow ball. Four green books.", "two-red-apples-three-blue-pencils-one-yellow-ball-four-green-books.mp3"],
+  ["Two red apples.", "two-red-apples.mp3"],
+  ["Three blue pencils.", "three-blue-pencils.mp3"],
+  ["One yellow ball.", "one-yellow-ball.mp3"],
+  ["Four green books.", "four-green-books.mp3"],
+  ["Show me two red apples.", "show-me-two-red-apples.mp3"],
+  ["What can you see?", "what-can-you-see.mp3"],
+  ["Two red apples. One notebook. Three blue pencils. Two cookies.", "two-red-apples-one-notebook-three-blue-pencils-two-cookies.mp3"],
+  ["Put two red apples, one notebook and three blue pencils in the basket.", "put-two-red-apples-one-notebook-and-three-blue-pencils-in-the-basket.mp3"],
+  ["I want two apples, please.", "i-want-two-apples-please.mp3"],
+  ["Hello! What would you like?", "hello-what-would-you-like.mp3"],
+  ["What would you like?", "what-would-you-like.mp3"],
+  ["I want three crayons, please.", "i-want-three-crayons-please.mp3"],
+  ["Two red pencils, please.", "two-red-pencils-please.mp3"],
+  ["How much is the book? It's three euros. Now touch three euros.", "how-much-is-the-book-it-s-three-euros-now-touch-three-euros.mp3"],
+  ["How much is the ball? It's four euros. Now touch four euros.", "how-much-is-the-ball-it-s-four-euros-now-touch-four-euros.mp3"],
+  ["Five euros, please.", "five-euros-please.mp3"],
+  ["Two euros fifty.", "two-euros-fifty.mp3"],
+  ["Which group has more?", "which-group-has-more.mp3"],
+  ["Which groups have the same number?", "which-groups-have-the-same-number.mp3"],
+  ["There are two apples. One more apple. How many apples now?", "there-are-two-apples-one-more-apple-how-many-apples-now.mp3"],
+  ["How many cookies did you see?", "how-many-cookies-did-you-see.mp3"],
+  ["Give Tom one green book and Mia two cookies.", "give-tom-one-green-book-and-mia-two-cookies.mp3"],
+  ["I want two red apples and three blue pencils, please. Put two red apples and three blue pencils in the basket.", "i-want-two-red-apples-and-three-blue-pencils-please-put-two-red-apples-and-three-blue-penc.mp3"],
+  ["Here you are. Thank you.", "here-you-are-thank-you.mp3"],
+  ["How many apples can you see?", "how-many-apples-can-you-see.mp3"],
+  ["How much is the book?", "how-much-is-the-book.mp3"],
+  ["Can you give me three pencils?", "can-you-give-me-three-pencils.mp3"],
+  ["Great work! Today you counted, shopped and used numbers in English. Goodbye!", "great-work-today-you-counted-shopped-and-used-numbers-in-english-goodbye.mp3"],
+];
+
+Object.assign(exports, { lesson03Entries });
+})(window.__eaModules["data/audio/lesson03Entries.js"]);
+
+window.__eaModules["data/audio/audioRegistry.js"] = {};
+(function(exports) {
+const { lesson03Entries } = window.__eaModules["data/audio/lesson03Entries.js"];
+
 const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
 const LESSON_02_BASE = "assets/audio/lesson-02/mp3/";
+const LESSON_03_BASE = "assets/audio/lesson-03/mp3/";
 function normalizeAudioText(text) {
   return String(text ?? "")
     .replace(/[\u2018\u2019]/g, "'")
@@ -877,6 +1248,7 @@ function normalizeAudioText(text) {
     .replace(/\s+/g, " ")
     .trim();
 }
+
 const lesson01Entries = [
   ["Listen.", "listen.mp3"],
   ["Listen. Then do it!", "listen-then-do-it.mp3"],
@@ -971,6 +1343,7 @@ const lesson01Entries = [
   ["Point to three.", "point-to-three.mp3"],
   ["Show me red.", "show-me-red.mp3"],
 ];
+
 const lesson02Entries = [
   ["Orange.", "orange.mp3"], ["Pink.", "pink.mp3"], ["Purple.", "purple.mp3"], ["Black.", "black.mp3"], ["White.", "white.mp3"], ["Brown.", "brown.mp3"],
   ["Find purple.", "find-purple.mp3"], ["Touch orange.", "touch-orange.mp3"], ["Point to black.", "point-to-black.mp3"], ["Show me pink.", "show-me-pink.mp3"],
@@ -992,17 +1365,154 @@ const teachingAudioRegistry = new Map(
   ]).concat(lesson02Entries.map(([text, file]) => [
     normalizeAudioText(text),
     LESSON_02_BASE + file,
+  ])).concat(lesson03Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_03_BASE + file,
   ]))
 );
+
 function resolveTeachingAudio(text) {
   if (!text) return null;
   return teachingAudioRegistry.get(normalizeAudioText(text)) ?? null;
 }
+
 function hasTeachingAudio(text) {
   return Boolean(resolveTeachingAudio(text));
 }
 
-/* data/visuals.js */
+Object.assign(exports, { normalizeAudioText, lesson01Entries, lesson02Entries, resolveTeachingAudio, hasTeachingAudio });
+})(window.__eaModules["data/audio/audioRegistry.js"]);
+
+window.__eaModules["js/audio.js"] = {};
+(function(exports) {
+﻿const { state, patch } = window.__eaModules["js/store.js"];
+const { resolveTeachingAudio } = window.__eaModules["data/audio/audioRegistry.js"];
+
+let currentAudio = null;
+
+function stopCurrentPlayback() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+function playText(text, explicitSrc = null) {
+  if (!state.soundOn || !text) return;
+
+  stopCurrentPlayback();
+
+  const audioSrc = explicitSrc || resolveTeachingAudio(text);
+  if (!audioSrc) {
+    // Formal lessons never substitute browser speech synthesis for approved MP3.
+    console.warn("[Teaching audio unavailable] No approved MP3 for:", text);
+    return;
+  }
+
+  currentAudio = new Audio(audioSrc);
+  currentAudio.preload = "auto";
+
+  currentAudio.play().catch((error) => {
+    console.error("[Teaching audio failed]", audioSrc, error);
+  });
+}
+
+function replay(activity) {
+  if (!state.soundOn || !activity) return;
+  if (activity.audioEnabled === false || activity.audioDisposition === "INTENTIONALLY_SILENT") return;
+  const text = activity.ttsText || activity.title;
+  playText(text, activity.audioSrc || null);
+}
+
+function speak(text) {
+  // Backward-compatible API. Existing callers now use fixed teaching audio
+  // whenever the text exists in the registry.
+  playText(text);
+}
+
+function toggleSound() {
+  patch({ soundOn: !state.soundOn });
+  if (!state.soundOn) stopCurrentPlayback();
+  return state.soundOn;
+}
+
+function successSound() {
+  if (!state.soundOn || !window.AudioContext) return;
+  const context = new AudioContext();
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.frequency.setValueAtTime(523, context.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(783, context.currentTime + .16);
+  gain.gain.setValueAtTime(.045, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .28);
+  oscillator.connect(gain).connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + .29);
+}
+
+Object.assign(exports, { playText, replay, speak, toggleSound, successSound });
+})(window.__eaModules["js/audio.js"]);
+
+window.__eaModules["js/components/lessonCard.js"] = {};
+(function(exports) {
+function lessonCard(lesson, onOpen, completed = false) {
+  const card = document.createElement("button"); card.type = "button"; card.className = `lesson-card ${lesson.locked ? "locked" : ""} ${completed ? "completed" : ""}`; card.disabled = Boolean(lesson.locked);
+  card.innerHTML = `<span class="lesson-icon" aria-hidden="true">${lesson.icon}</span><span><span class="lesson-label">Lesson ${lesson.lessonNumber}</span><span class="lesson-name">${lesson.title}</span></span><span class="status">${lesson.locked ? "Locked" : completed ? "Completed" : "Ready"}</span>`;
+  if (!lesson.locked) card.addEventListener("click", onOpen); return card;
+}
+
+Object.assign(exports, { lessonCard });
+})(window.__eaModules["js/components/lessonCard.js"]);
+
+window.__eaModules["js/components/progress.js"] = {};
+(function(exports) {
+const { activityDone } = window.__eaModules["js/store.js"];
+
+function progress(lesson) {
+  const done = lesson.activities.filter((activity) => activityDone(lesson.id, activity.id)).length;
+  const total = lesson.activities.length;
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  const wrap = document.createElement("div"); wrap.className = "progress"; wrap.setAttribute("aria-label", `${done} of ${total} complete`);
+  wrap.innerHTML = `<span class="sr-only">${done} of ${total} complete</span><div class="progress-dots">${lesson.activities.map((_, index) => `<span class="progress-dot ${index < done ? "done" : ""}"></span>`).join("")}</div><div class="progress-bar" aria-hidden="true"><span class="progress-bar-fill" style="width:${percent}%"></span></div>`;
+  return wrap;
+}
+
+Object.assign(exports, { progress });
+})(window.__eaModules["js/components/progress.js"]);
+
+window.__eaModules["js/components/teacherPanel.js"] = {};
+(function(exports) {
+const { state, resetAll, resetLesson } = window.__eaModules["js/store.js"];
+const { replay, toggleSound } = window.__eaModules["js/audio.js"];
+
+function openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }) {
+  document.querySelector(".teacher-overlay")?.remove();
+  const overlay = document.createElement("div"); overlay.className = "teacher-overlay";
+  const position = state.lessonPositions[lesson.id] ?? 0;
+  const note = activity.teacherNote ? `<section class="teacher-note"><h3>Teacher note</h3><p>${activity.teacherNote}</p>${activity.teacherChecks ? `<p><strong>Observe:</strong> ${activity.teacherChecks}</p>` : ""}</section>` : "";
+  overlay.innerHTML = `<aside class="teacher-drawer" role="dialog" aria-modal="true" aria-label="Teacher controls"><button class="drawer-close" type="button" aria-label="Close teacher controls">×</button><h2>Teacher controls</h2><p class="teacher-meta">Current Activity: ${position + 1} — ${activity.type}</p>${note}<div class="teacher-grid"><button class="teacher-action" data-action="previous">Previous</button><button class="teacher-action" data-action="next">Next</button><button class="teacher-action" data-action="replay">Replay</button><button class="teacher-action" data-action="sound">Sound ${state.soundOn ? "On" : "Off"}</button><button class="teacher-action success" data-action="correct">Mark Correct</button><button class="teacher-action primary" data-action="again">Try Again</button><button class="teacher-action wide" data-action="reset-lesson">Reset Lesson</button><button class="teacher-action wide" data-action="reset-all">Reset All Progress</button></div></aside>`;
+  const close = () => { overlay.remove(); onClose?.(); };
+  overlay.addEventListener("click", (event) => { if (event.target === overlay) close(); });
+  overlay.querySelector(".drawer-close").addEventListener("click", close);
+  overlay.querySelector(".teacher-grid").addEventListener("click", (event) => {
+    const action = event.target.dataset.action; if (!action) return;
+    if (action === "previous") { close(); onPrevious(); }
+    if (action === "next") { close(); onNext(); }
+    if (action === "replay") replay(activity);
+    if (action === "sound") { toggleSound(); openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }); }
+    if (action === "correct") { close(); onMarkCorrect(); }
+    if (action === "again") { close(); onTryAgain(); }
+    if (action === "reset-lesson") { resetLesson(lesson.id); close(); onHome(); }
+    if (action === "reset-all") { resetAll(); close(); onHome(); }
+  });
+}
+
+Object.assign(exports, { openTeacherPanel });
+})(window.__eaModules["js/components/teacherPanel.js"]);
+
+window.__eaModules["data/visuals.js"] = {};
+(function(exports) {
 // Teaching visuals are deliberately separate from UI icons (speaker, arrows, stars).
 // A visual may be used in a lesson only after a human has approved the asset.
 const visuals = {
@@ -1043,6 +1553,20 @@ const visuals = {
   "numeral-4": { id: "numeral-4", type: "image", src: "assets/images/common/numeral-4.svg", alt: "The numeral 4", concept: "numeral four", approved: true },
   "numeral-5": { id: "numeral-5", type: "image", src: "assets/images/common/numeral-5.svg", alt: "The numeral 5", concept: "numeral five", approved: true },
   "numeral-6": { id: "numeral-6", type: "image", src: "assets/images/common/numeral-6.svg", alt: "The numeral 6", concept: "numeral six", approved: true },
+  "numeral-7": { id: "numeral-7", type: "image", src: "assets/images/common/numeral-7.svg", alt: "The numeral 7", concept: "numeral seven", approved: true },
+  "numeral-8": { id: "numeral-8", type: "image", src: "assets/images/common/numeral-8.svg", alt: "The numeral 8", concept: "numeral eight", approved: true },
+  "numeral-9": { id: "numeral-9", type: "image", src: "assets/images/common/numeral-9.svg", alt: "The numeral 9", concept: "numeral nine", approved: true },
+  "numeral-10": { id: "numeral-10", type: "image", src: "assets/images/common/numeral-10.svg", alt: "The numeral 10", concept: "numeral ten", approved: true },
+  "numeral-11": { id: "numeral-11", type: "image", src: "assets/images/common/numeral-11.svg", alt: "The numeral 11", concept: "numeral eleven", approved: true },
+  "numeral-12": { id: "numeral-12", type: "image", src: "assets/images/common/numeral-12.svg", alt: "The numeral 12", concept: "numeral twelve", approved: true },
+  "numeral-13": { id: "numeral-13", type: "image", src: "assets/images/common/numeral-13.svg", alt: "The numeral 13", concept: "numeral thirteen", approved: true },
+  "numeral-14": { id: "numeral-14", type: "image", src: "assets/images/common/numeral-14.svg", alt: "The numeral 14", concept: "numeral fourteen", approved: true },
+  "numeral-15": { id: "numeral-15", type: "image", src: "assets/images/common/numeral-15.svg", alt: "The numeral 15", concept: "numeral fifteen", approved: true },
+  "numeral-16": { id: "numeral-16", type: "image", src: "assets/images/common/numeral-16.svg", alt: "The numeral 16", concept: "numeral sixteen", approved: true },
+  "numeral-17": { id: "numeral-17", type: "image", src: "assets/images/common/numeral-17.svg", alt: "The numeral 17", concept: "numeral seventeen", approved: true },
+  "numeral-18": { id: "numeral-18", type: "image", src: "assets/images/common/numeral-18.svg", alt: "The numeral 18", concept: "numeral eighteen", approved: true },
+  "numeral-19": { id: "numeral-19", type: "image", src: "assets/images/common/numeral-19.svg", alt: "The numeral 19", concept: "numeral nineteen", approved: true },
+  "numeral-20": { id: "numeral-20", type: "image", src: "assets/images/common/numeral-20.svg", alt: "The numeral 20", concept: "numeral twenty", approved: true },
   "one-ball": { id: "one-ball", type: "image", src: "assets/images/common/one-ball.svg", alt: "One ball", concept: "one ball", approved: true },
   "two-balls": { id: "two-balls", type: "image", src: "assets/images/common/two-balls.svg", alt: "Two balls", concept: "two balls", approved: true },
   "three-balls": { id: "three-balls", type: "image", src: "assets/images/common/three-balls.svg", alt: "Three balls", concept: "three balls", approved: true },
@@ -1082,284 +1606,38 @@ const visuals = {
   "apple-red": { id: "apple-red", type: "image", src: "assets/images/lesson-2/objects/apple-red.png", alt: "A red apple", concept: "red apple", approved: true },
   "star-red": { id: "star-red", type: "image", src: "assets/images/lesson-2/objects/star-red.png", alt: "A red five-point star", concept: "red star", approved: true },
   "bag-blue": { id: "bag-blue", type: "image", src: "assets/images/lesson-2/objects/bag-blue.png", alt: "A blue backpack", concept: "blue bag", approved: true }
+  ,"l3-tom-shopkeeper": { id: "l3-tom-shopkeeper", type: "image", src: "assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper.png", alt: "Tom as a friendly shopkeeper offering one red apple", concept: "fruit shop", approved: true }
+  ,"l3-tom-shopkeeper-banana": { id: "l3-tom-shopkeeper-banana", type: "image", src: "assets/images/lesson-03/characters/tom/tom-fruit-shopkeeper-banana.png", alt: "Tom as a friendly shopkeeper offering one banana", concept: "fruit shop banana", approved: true }
+  ,"l3-mia-shopping": { id: "l3-mia-shopping", type: "image", src: "assets/images/lesson-03/characters/mia/mia-shopping-list-basket.png", alt: "Mia holding a blank shopping list and basket", concept: "shopping list", approved: true }
+  ,"l3-banana": { id: "l3-banana", type: "image", src: "assets/images/lesson-03/objects/banana.png", alt: "A banana", concept: "banana", approved: true }
+  ,"l3-orange": { id: "l3-orange", type: "image", src: "assets/images/lesson-03/objects/orange.png", alt: "An orange", concept: "orange", approved: true }
+  ,"l3-cookie": { id: "l3-cookie", type: "image", src: "assets/images/lesson-03/objects/cookie.png", alt: "A cookie", concept: "cookie", approved: true }
+  ,"l3-crayon": { id: "l3-crayon", type: "image", src: "assets/images/lesson-03/objects/crayon.png", alt: "A crayon", concept: "crayon", approved: true }
+  ,"l3-pencil-red": { id: "l3-pencil-red", type: "image", src: "assets/images/lesson-03/objects/pencil-red.png", alt: "A red pencil", concept: "red pencil", approved: true }
+  ,"l3-pencil-yellow": { id: "l3-pencil-yellow", type: "image", src: "assets/images/lesson-03/objects/pencil-yellow.png", alt: "A yellow pencil", concept: "yellow pencil", approved: true }
+  ,"l3-book-green": { id: "l3-book-green", type: "image", src: "assets/images/lesson-03/objects/book-green.png", alt: "A green book", concept: "green book", approved: true }
+  ,"l3-notebook": { id: "l3-notebook", type: "image", src: "assets/images/lesson-03/objects/notebook.png", alt: "A notebook", concept: "notebook", approved: true }
+  ,"l3-eraser": { id: "l3-eraser", type: "image", src: "assets/images/lesson-03/objects/eraser.png", alt: "An eraser", concept: "eraser", approved: true }
+  ,"l3-ruler": { id: "l3-ruler", type: "image", src: "assets/images/lesson-03/objects/ruler.png", alt: "A ruler", concept: "ruler", approved: true }
+  ,"l3-toy-car": { id: "l3-toy-car", type: "image", src: "assets/images/lesson-03/objects/toy-car.svg", alt: "A toy car", concept: "toy car", approved: true }
+  ,"l3-teddy-bear": { id: "l3-teddy-bear", type: "image", src: "assets/images/lesson-03/objects/teddy-bear.svg", alt: "A teddy bear", concept: "teddy bear", approved: true }
+  ,"l3-basket": { id: "l3-basket", type: "image", src: "assets/images/lesson-03/objects/basket.svg", alt: "An empty shopping basket", concept: "basket", approved: true }
+  ,"l3-euro-1": { id: "l3-euro-1", type: "image", src: "assets/images/lesson-03/money/euro-1.svg", alt: "One euro", concept: "one euro", approved: true }
+  ,"l3-euro-2": { id: "l3-euro-2", type: "image", src: "assets/images/lesson-03/money/euro-2.svg", alt: "Two euros", concept: "two euros", approved: true }
+  ,"l3-euro-5": { id: "l3-euro-5", type: "image", src: "assets/images/lesson-03/money/euro-5.svg", alt: "Five euros", concept: "five euros", approved: true }
+  ,"l3-euro-3": { id: "l3-euro-3", type: "image", src: "assets/images/lesson-03/money/euro-3.svg", alt: "Three euros", concept: "three euros", approved: true }
+  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true }
 };
+
 const getVisual = (visualId) => visuals[visualId];
 
-/* data/lessons/hello.js */
-const choice = (id, visualId, label) => ({ id, visualId, label });
-const colours = [choice("red", "colour-red", "Red"), choice("blue", "colour-blue", "Blue"), choice("yellow", "colour-yellow", "Yellow"), choice("green", "colour-green", "Green")];
-const numbers = [1, 2, 3, 4, 5].map((number) => choice(String(number), `numeral-${number}`, String(number)));
-const letters = ["a", "b", "c", "d", "e", "f"].map((letter) => choice(letter, `letter-${letter}`, letter.toUpperCase()));
-const listenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
-const action = (id, ttsText, visualId, teacherNote = "", teacherChecks = "") => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks });
-const speakActivity = (id, title, prompt, visualId = "speaking-child", teacherNote = "", teacherChecks = "", ttsText = title) => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
-const helloLesson = {
-  id: "hello",
-  lessonNumber: 1,
-  title: "Hello! This Is Me",
-  icon: "👋",
-  activities: [
-    { id: "01-hello", type: "learn", title: "Hello!", visualId: "waving-child", audioSrc: null, ttsText: "Hello!", teacherNote: "直接播放、示范、让孩子跟说；不解释中文。" },
-    listenChoice("02-hello-or-goodbye", "Hello!", [choice("hello", "waving-child", "Hello"), choice("goodbye", "goodbye-child", "Goodbye")], "hello", "不显示文字标签。确认孩子能区分刚见面与离开。"),
-    { id: "03-goodbye", type: "learn", title: "Goodbye!", visualId: "goodbye-child", audioSrc: null, ttsText: "Goodbye!", teacherNote: "老师可走出视线再返回，做真实进入 / 离开游戏。" },
-    speakActivity("04-say-hello", "Say hello!", "Hello!", "waving-child", "孩子说 Hello 后，可随机换成 Hi，要求孩子跟换。", "是否愿意开口与模仿语音", "Hello!"),
-    speakActivity("05-whats-your-name", "What's your name?", "My name is …", "speaking-child", "若孩子只说名字，第一次接受；老师自然扩展 My name is …，再请孩子说一次。", "单词回答 / 短句回答 / 完整句"),
-    { id: "06-name-recognition", type: "tapChoice", title: "Who is Tom?", audioSrc: null, ttsText: "My name is Tom.", showLabels: true, options: [choice("tom", "boy-child", "Tom"), choice("mia", "girl-child", "Mia")], correctAnswer: "tom", teacherNote: "这是轻量听力与姓名对应，不是正式阅读测试。" },
-    speakActivity("07-how-old", "How old are you?", "I'm five. / I'm six.", "speaking-child", "不重复教数字；快速确认并鼓励完整短句。", "是否能听懂问题并用年龄回答"),
-    { id: "08-five-or-six", type: "challenge", title: "Five or six?", items: [listenChoice("08a-six", "I'm six.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "six"), listenChoice("08b-five", "I'm five.", [choice("five", "numeral-5", "Five"), choice("six", "numeral-6", "Six")], "five")] },
-    { id: "09-boy", type: "learn", title: "Boy.", visualId: "boy-child", audioSrc: null, ttsText: "Boy.", teacherNote: "人物用中性衣服颜色；仅作为儿童人物词汇介绍，不用蓝 / 粉色进行判断。" },
-    { id: "10-girl-and-listen", type: "challenge", title: "Boy or girl?", teacherNote: "紧接 Boy 呈现 Girl；人物衣服颜色保持中性。可问 Are you a boy or a girl?，不强迫孩子回答不舒服的问题。", items: [{ id: "10a-girl", type: "learn", title: "Girl.", visualId: "girl-child", audioSrc: null, ttsText: "Girl." }, listenChoice("10b-girl", "Girl.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "girl"), listenChoice("10c-boy", "Boy.", [choice("boy", "boy-child", "Boy"), choice("girl", "girl-child", "Girl")], "boy")] },
-    speakActivity("11-about-me", "About me", "My name is Kimi. I'm six. I'm a boy.", "speaking-child", "先让孩子听完整示范，再根据实际情况逐句问：name → age → boy/girl。", "个人信息理解、句子长度、信心", "My name is Kimi. I'm six. I'm a boy."),
-    { id: "12-happy", type: "learn", title: "Happy.", visualId: "happy-face", audioSrc: null, ttsText: "Happy." },
-    { id: "13-sad", type: "learn", title: "Sad.", visualId: "sad-face", audioSrc: null, ttsText: "Sad." },
-    { id: "14-tired", type: "learn", title: "Tired.", visualId: "tired-face", audioSrc: null, ttsText: "Tired." },
-    listenChoice("15-which-happy", "Happy.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "happy"),
-    listenChoice("16-which-tired", "Tired.", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired"),
-    listenChoice("17-feeling-memory", "Where is tired?", [choice("happy", "happy-face", "Happy"), choice("sad", "sad-face", "Sad"), choice("tired", "tired-face", "Tired")], "tired", "先让孩子看上一题三张图约 4 秒，再进入这一页。观察英文 + 视觉记忆，不要急着提示。"),
-    speakActivity("18-how-are-you", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "允许真实回答；I'm good 仅作为自然口语扩展。", "能否用 I'm + feeling 回答"),
-    speakActivity("19-how-is-she", "How is she?", "Happy. / She is happy.", "girl-child", "教师口头补充 she is happy；第一课只暴露，不要求稳定掌握 she。"),
-    { id: "20-stand-up", type: "learn", title: "Stand up.", visualId: "child-standing", audioSrc: null, ttsText: "Stand up." },
-    { id: "21-sit-down", type: "learn", title: "Sit down.", visualId: "child-sitting", audioSrc: null, ttsText: "Sit down." },
-    { id: "22-stand-or-sit", type: "challenge", title: "Stand or sit?", teacherNote: "不做老师动作；可故意做错，确认孩子听英语而非模仿。", items: [listenChoice("22a-stand", "Stand up.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "stand"), listenChoice("22b-sit", "Sit down.", [choice("stand", "child-standing", "Stand up"), choice("sit", "child-sitting", "Sit down")], "sit"), action("22c-real-stand", "Stand up.", "child-standing", "真人任务：老师自己坐着，孩子根据英语站起来。"), action("22d-real-sit", "Sit down.", "child-sitting", "真人任务：老师自己站着，孩子根据英语坐下。")] },
-    { id: "23-look", type: "learn", title: "Look.", visualId: "child-looking", audioSrc: null, ttsText: "Look." },
-    { id: "24-listen", type: "learn", title: "Listen.", visualId: "child-listening", audioSrc: null, ttsText: "Listen." },
-    { id: "25-look-or-listen", type: "challenge", title: "Look or listen?", items: [listenChoice("25a-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25b-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen"), listenChoice("25c-look", "Look.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "look"), listenChoice("25d-listen", "Listen.", [choice("look", "child-looking", "Look"), choice("listen", "child-listening", "Listen")], "listen")] },
-    { id: "26-point", type: "learn", title: "Point.", visualId: "child-pointing", audioSrc: null, ttsText: "Point.", teacherNote: "核对图：手指与球之间有明确距离，不可接触。" },
-    { id: "27-touch", type: "learn", title: "Touch.", visualId: "child-touching", audioSrc: null, ttsText: "Touch.", teacherNote: "核对图：手指与球有明确接触。" },
-    { id: "28-point-or-touch", type: "challenge", title: "Point or touch?", items: [listenChoice("28a-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point"), listenChoice("28b-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28c-touch", "Touch.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "touch"), listenChoice("28d-point", "Point.", [choice("point", "child-pointing", "Point"), choice("touch", "child-touching", "Touch")], "point")] },
-    listenChoice("29-point-ball", "Point to the ball.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "ball"),
-    listenChoice("30-touch-table", "Touch the table.", [choice("ball", "ball", "Ball"), choice("table", "table", "Table"), choice("chair", "chair", "Chair")], "table", "已使用已审核 table.svg；table 与 chair 是不同视觉资产。"),
-    { id: "31-show-me", type: "learn", title: "Show me.", visualId: "child-showing-ball", audioSrc: null, ttsText: "Show me.", teacherNote: "物品仍在孩子手中，只是展示给老师看；之后用真实 ball / book / pencil 做 Show me the …。" },
-    { id: "32-give-me", type: "learn", title: "Give me the ball.", visualId: "child-giving-ball", audioSrc: null, ttsText: "Give me the ball.", teacherNote: "图中箭头：孩子 → 老师。用实物连续 4–6 轮加强。" },
-    { id: "33-take-ball", type: "learn", title: "Take the ball.", visualId: "child-taking-ball", audioSrc: null, ttsText: "Take the ball.", teacherNote: "图中箭头：老师 → 孩子。" },
-    { id: "34-give-or-take", type: "challenge", title: "Give or take?", items: [listenChoice("34a-give", "Give me the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "give"), listenChoice("34b-take", "Take the ball.", [choice("give", "child-giving-ball", "Give"), choice("take", "child-taking-ball", "Take")], "take"), action("34c-real-take", "Take the ball.", "child-taking-ball", "老师手拿球，孩子拿走。"), action("34d-real-give", "Give me the ball.", "child-giving-ball", "孩子把球还给老师。")] },
-    { id: "35-colour-review", type: "review", title: "Colour quick review", items: colours.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: item.label })) },
-    listenChoice("36-find-red", "Find red.", colours, "red"),
-    listenChoice("37-touch-blue", "Touch blue.", colours, "blue"),
-    listenChoice("38-point-yellow", "Point to yellow.", colours, "yellow"),
-    listenChoice("39-show-green", "Show me green.", colours, "green", "之后把四色实体卡放在桌上，重复相同指令。"),
-    { id: "40-colour-mix", type: "challenge", title: "Colour listening mix", items: [listenChoice("40a", "Touch red.", colours, "red"), listenChoice("40b", "Point to blue.", colours, "blue"), listenChoice("40c", "Show me yellow.", colours, "yellow"), listenChoice("40d", "Touch green.", colours, "green"), listenChoice("40e", "Point to red.", colours, "red"), listenChoice("40f", "Show me blue.", colours, "blue")] },
-    { id: "41-numbers-review", type: "review", title: "Numbers 1–5", items: numbers.map((item) => ({ visualId: item.visualId, text: item.label, ttsText: ["One", "Two", "Three", "Four", "Five"][Number(item.id) - 1] })) },
-    listenChoice("42-find-three", "Find three.", [choice("two", "numeral-2", "Two"), choice("three", "numeral-3", "Three"), choice("five", "numeral-5", "Five")], "three"),
-    listenChoice("43-touch-five", "Touch five.", [choice("one", "numeral-1", "One"), choice("four", "numeral-4", "Four"), choice("five", "numeral-5", "Five")], "five"),
-    speakActivity("44-how-many-balls", "How many?", "Three. / Three balls.", "three-balls", "先接受 Three；能力好时自然扩展 Three balls。", "数量概念与口头回答"),
-    speakActivity("45-how-many-stars", "How many?", "Four. / Four stars.", "four-stars", "同样先接受数字答案。"),
-    { id: "46-number-action", type: "challenge", title: "Number + action", items: [listenChoice("46a", "Touch three.", numbers, "3"), listenChoice("46b", "Point to five.", numbers, "5"), listenChoice("46c", "Show me two.", numbers, "2")] },
-    { id: "47-listen-and-do", type: "challenge", title: "Listen and do challenge", teacherNote: "不显示模块名称，让孩子真正切换任务。真人任务由教师观察后再点 I did it。", items: [action("47a", "Stand up.", "child-standing"), action("47b", "Sit down.", "child-sitting"), listenChoice("47c", "Touch red.", colours, "red"), listenChoice("47d", "Point to blue.", colours, "blue"), listenChoice("47e", "Show me three.", numbers, "3"), action("47f", "Look.", "child-looking"), action("47g", "Listen.", "child-listening"), listenChoice("47h", "Touch five.", numbers, "5"), action("47i", "Come here.", "child-come-here"), action("47j", "Stop.", "child-stop"), action("47k", "Go.", "child-going")] },
-    { id: "48-two-step", type: "challenge", title: "Two-step listening", teacherNote: "只做 Baseline。若困难，立刻退回一步指令，不反复强训。", teacherChecks: "能否保留两个信息、按顺序完成、不等中文翻译", items: [action("48a", "Stand up and touch red.", "child-standing"), action("48b", "Sit down and point to blue.", "child-sitting"), action("48c", "Stand up and show me three.", "child-standing")] },
-    listenChoice("49-find-a", "Find A.", [choice("a", "letter-a", "A"), choice("b", "letter-b", "B"), choice("c", "letter-c", "C")], "a", "只记录第一次反应；不在此处教授 phonics。"),
-    listenChoice("50-find-c", "Find C.", [choice("a", "letter-a", "A"), choice("c", "letter-c", "C"), choice("f", "letter-f", "F")], "c"),
-    { id: "51-letter-hunt", type: "challenge", title: "Letter hunt", teacherNote: "可换成磁性 / 纸质字母，加入 Show me A、Give me C、Touch B。", teacherChecks: "A–F 识别的第一反应、是否猜测", items: [listenChoice("51a", "Find B.", letters, "b"), listenChoice("51b", "Find E.", letters, "e"), listenChoice("51c", "Find D.", letters, "d")] },
-    { id: "52-write-name", type: "writingPrompt", title: "Write your name.", childPrompt: "Use your paper and pencil.", visualId: "name-writing", audioSrc: null, ttsText: "Write your name.", teacherNote: "网页只给英语指令，孩子在真实纸张上写。不要做正式纠错教学。", teacherChecks: "是否理解并主动开始；姓名拼写、字母方向、大小、握笔、是否需要范例" },
-    { id: "53-copy-letter", type: "writingPrompt", title: "Write A.", childPrompt: "Copy A on your paper.", visualId: "letter-a", audioSrc: null, ttsText: "Write A.", teacherNote: "若姓名书写顺利，再用教师 Next 追加口头 Write B；最多测试 2–3 个字母。" },
-    speakActivity("54-my-name", "What's your name?", "My name is …", "speaking-child", "这里不再提示名字本身，观察是否能独立回答。"),
-    speakActivity("55-my-age", "How old are you?", "I'm five. / I'm six.", "speaking-child"),
-    speakActivity("56-boy-or-girl", "Are you a boy or a girl?", "I'm a boy. / I'm a girl.", "boy-child"),
-    speakActivity("57-my-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face"),
-    speakActivity("58-what-colour", "What colour is it?", "Red. / It's red.", "colour-red", "接受 Red；更好的回答是 It's red。第一课不强制完整句。"),
-    speakActivity("59-how-many", "How many?", "Five. / Five balls.", "five-balls", "接受 Five；能力好时扩展 Five balls。"),
-    { id: "60-english-adventure-challenge", type: "challenge", title: "English Adventure Challenge", teacherNote: "最后模拟新老师：坐得稍远、尽量不使用中文。完成后用下面 mini interview 把屏幕关闭 2–3 分钟；根据孩子表现决定 Lesson 2 加速或回到基础听力。", teacherChecks: "个人问题、一步指令、颜色 + 动词、数字 + 动词、字母 B、注意力与切换能力", items: [speakActivity("60a", "Hello!", "Hello!", "waving-child"), speakActivity("60b", "What's your name?", "My name is …"), speakActivity("60c", "How old are you?", "I'm five. / I'm six."), speakActivity("60d", "How are you?", "I'm happy."), action("60e", "Stand up.", "child-standing"), listenChoice("60f", "Touch blue.", colours, "blue"), listenChoice("60g", "Point to three.", numbers, "3"), action("60h", "Sit down.", "child-sitting"), listenChoice("60i", "Show me red.", colours, "red"), listenChoice("60j", "Find B.", letters, "b"), speakActivity("60k", "Goodbye!", "Goodbye!", "goodbye-child")] }
-  ]
-};
+Object.assign(exports, { visuals, getVisual });
+})(window.__eaModules["data/visuals.js"]);
 
-/* data/lessons/colours.js */
-const coloursChoice = (id, visualId, label) => ({ id, visualId, label });
-const colour = (name) => coloursChoice(name, `l2-colour-${name}`, name[0].toUpperCase() + name.slice(1));
-const ball = (name) => coloursChoice(name, `ball-${name}`, `${name[0].toUpperCase() + name.slice(1)} ball`);
-const coloursListenChoice = (id, ttsText, options, correctAnswer, teacherNote = "") => ({ id, type: "listenChoose", title: "Listen.", audioSrc: null, ttsText, showLabels: false, options, correctAnswer, teacherNote });
-const coloursAction = (id, ttsText, visualId, teacherNote = "", teacherChecks = "", hideNestedHeader = false) => ({ id, type: "actionPrompt", title: "Listen and do!", childPrompt: "Listen. Then do it!", audioSrc: null, ttsText, visualId, teacherNote, teacherChecks, hideNestedHeader });
-const coloursSpeak = (id, title, prompt, visualId, ttsText = title, teacherNote = "", teacherChecks = "") => ({ id, type: "speakPrompt", title, prompt, visualId, completeLabel: "I said it!", audioSrc: null, ttsText, teacherNote, teacherChecks });
-const learn = (id, title, visualId, ttsText = title, teacherNote = "") => ({ id, type: "learn", title, visualId, audioSrc: null, ttsText, teacherNote });
-const reviewItem = (name) => ({ visualId: `l2-colour-${name}`, text: name[0].toUpperCase() + name.slice(1), ttsText: `${name[0].toUpperCase() + name.slice(1)}.` });
+window.__eaModules["js/visuals/renderVisual.js"] = {};
+(function(exports) {
+const { getVisual } = window.__eaModules["data/visuals.js"];
 
-const oldColours = ["red", "blue", "yellow", "green"];
-const setOneColours = ["orange", "pink", "purple"];
-const setTwoColours = ["black", "white", "brown"];
-const allColours = [...oldColours, ...setOneColours, ...setTwoColours];
-const colourBalls = allColours.map((name) => ({ visualId: `ball-${name}`, text: `${name[0].toUpperCase() + name.slice(1)} ball`, ttsText: `${name[0].toUpperCase() + name.slice(1)} ball.` }));
-const colourObjects = [
-  { visualId: "ball-red", text: "A red ball", ttsText: "A red ball." },
-  { visualId: "pencil-blue", text: "A blue pencil", ttsText: "A blue pencil." },
-  { visualId: "star-yellow", text: "A yellow star", ttsText: "A yellow star." },
-  { visualId: "apple-green", text: "A green apple", ttsText: "A green apple." },
-  { visualId: "bag-pink", text: "A pink bag", ttsText: "A pink bag." }
-];
-const coloursLesson = {
-  id: "colours",
-  lessonNumber: 2,
-  title: "Colours",
-  icon: "🎨",
-  activities: [
-    coloursSpeak("01-hello", "Hello!", "Hello!", "waving-child", "Hello!"),
-    coloursSpeak("02-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"),
-    coloursSpeak("03-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"),
-    coloursSpeak("04-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"),
-    { id: "05-listen-and-do", type: "challenge", title: "Listen and do!", items: [coloursAction("05a-stand", "Stand up.", "child-standing", "", "", true), coloursAction("05b-sit", "Sit down.", "child-sitting", "", "", true), coloursAction("05c-look", "Look.", "child-looking", "", "", true), coloursAction("05d-listen", "Listen.", "child-listening", "", "", true)] },
-    { id: "06-point-or-touch", type: "challenge", title: "Point or touch?", items: [coloursListenChoice("06a-point", "Point.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "point"), coloursListenChoice("06b-touch", "Touch.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "touch"), coloursListenChoice("06c-touch", "Touch.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "touch"), coloursListenChoice("06d-point", "Point.", [coloursChoice("point", "child-pointing", "Point"), coloursChoice("touch", "child-touching", "Touch")], "point")] },
-    { id: "07-old-colours-review", type: "review", title: "Colour quick review", items: oldColours.map(reviewItem) },
-    coloursListenChoice("08-find-red", "Find red.", oldColours.map(colour), "red"),
-    coloursListenChoice("09-touch-blue", "Touch blue.", oldColours.map(colour), "blue"),
-    coloursListenChoice("10-point-yellow", "Point to yellow.", oldColours.map(colour), "yellow"),
-    coloursListenChoice("11-show-green", "Show me green.", oldColours.map(colour), "green"),
-    learn("12-orange", "Orange.", "l2-colour-orange"),
-    learn("13-pink", "Pink.", "l2-colour-pink"),
-    learn("14-purple", "Purple.", "l2-colour-purple"),
-    { id: "15-new-colours-one", type: "challenge", title: "New colours: listen!", items: [coloursListenChoice("15a-orange", "Orange.", setOneColours.map(colour), "orange"), coloursListenChoice("15b-pink", "Pink.", setOneColours.map(colour), "pink"), coloursListenChoice("15c-purple", "Purple.", setOneColours.map(colour), "purple")] },
-    learn("16-black", "Black.", "l2-colour-black"),
-    learn("17-white", "White.", "l2-colour-white"),
-    learn("18-brown", "Brown.", "l2-colour-brown"),
-    { id: "19-new-colours-two", type: "challenge", title: "Black / White / Brown listening", items: [coloursListenChoice("19a-black", "Black.", setTwoColours.map(colour), "black"), coloursListenChoice("19b-white", "White.", setTwoColours.map(colour), "white"), coloursListenChoice("19c-brown", "Brown.", setTwoColours.map(colour), "brown")] },
-    { id: "20-new-colours-review", type: "review", title: "New colours", items: [...setOneColours, ...setTwoColours].map(reviewItem) },
-    coloursListenChoice("21-find-purple", "Find purple.", [...setOneColours, "blue"].map(colour), "purple"),
-    coloursListenChoice("22-touch-orange", "Touch orange.", ["orange", "yellow", "brown", "pink"].map(colour), "orange"),
-    coloursListenChoice("23-point-black", "Point to black.", ["black", "white", "blue", "purple"].map(colour), "black"),
-    coloursListenChoice("24-show-pink", "Show me pink.", ["pink", "red", "purple", "orange"].map(colour), "pink"),
-    { id: "25-ten-colours-review", type: "review", title: "Ten colours", items: allColours.map(reviewItem) },
-    { id: "26-colour-listening-mix-one", type: "challenge", title: "Colour listening mix 1", items: [coloursListenChoice("26a-red", "Red.", ["red", "purple", "yellow", "brown"].map(colour), "red"), coloursListenChoice("26b-purple", "Purple.", ["red", "purple", "yellow", "brown"].map(colour), "purple"), coloursListenChoice("26c-yellow", "Yellow.", ["red", "purple", "yellow", "brown"].map(colour), "yellow"), coloursListenChoice("26d-brown", "Brown.", ["red", "purple", "yellow", "brown"].map(colour), "brown")] },
-    { id: "27-colour-listening-mix-two", type: "challenge", title: "Colour listening mix 2", items: [coloursListenChoice("27a-orange", "Orange.", ["orange", "brown", "red", "pink"].map(colour), "orange"), coloursListenChoice("27b-brown", "Brown.", ["orange", "brown", "red", "pink"].map(colour), "brown"), coloursListenChoice("27c-red", "Red.", ["orange", "brown", "red", "pink"].map(colour), "red"), coloursListenChoice("27d-pink", "Pink.", ["orange", "brown", "red", "pink"].map(colour), "pink")] },
-    { id: "28-colour-listening-mix-three", type: "challenge", title: "Colour listening mix 3", items: [coloursListenChoice("28a-black", "Black.", ["black", "white", "blue", "purple"].map(colour), "black"), coloursListenChoice("28b-white", "White.", ["black", "white", "blue", "purple"].map(colour), "white"), coloursListenChoice("28c-green", "Green.", ["green", "yellow", "blue", "purple"].map(colour), "green"), coloursListenChoice("28d-yellow", "Yellow.", ["green", "yellow", "blue", "purple"].map(colour), "yellow")] },
-    coloursSpeak("29-what-colour-red", "What colour is it?", "It's red.", "ball-red", "What colour is it? It's red.", "Model the whole question-and-answer exchange before the child repeats."),
-    coloursSpeak("30-what-colour-blue", "What colour is it?", "It's ______.", "ball-blue", "What colour is it?", "Teacher expects: It's blue."),
-    coloursSpeak("31-what-colour-yellow", "What colour is it?", "It's ______.", "ball-yellow", "What colour is it?", "Teacher expects: It's yellow."),
-    coloursSpeak("32-what-colour-orange", "What colour is it?", "It's ______.", "ball-orange", "What colour is it?", "Teacher expects: It's orange."),
-    coloursSpeak("33-what-colour-purple", "What colour is it?", "It's ______.", "ball-purple", "What colour is it?", "Teacher expects: It's purple."),
-    coloursSpeak("34-what-colour-brown", "What colour is it?", "It's ______.", "ball-brown", "What colour is it?", "Teacher expects: It's brown."),
-    { id: "35-colour-balls", type: "review", title: "Colour balls", items: colourBalls },
-    coloursListenChoice("36-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"),
-    coloursListenChoice("37-touch-blue-ball", "Touch the blue ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "blue"),
-    coloursListenChoice("38-point-yellow-ball", "Point to the yellow ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "yellow"),
-    coloursListenChoice("39-find-purple-ball", "Find the purple ball.", [ball("purple"), ball("pink"), ball("black"), ball("brown")], "purple"),
-    { id: "40-colour-and-object", type: "review", title: "Colour and object", items: colourObjects },
-    coloursListenChoice("41-find-blue-pencil", "Find the blue pencil.", [coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("bag-blue", "bag-blue", "Blue bag"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"),
-    coloursListenChoice("42-touch-green-apple", "Touch the green apple.", [coloursChoice("apple-green", "apple-green", "Green apple"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-green", "ball-green", "Green ball"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-green"),
-    coloursListenChoice("43-point-yellow-star", "Point to the yellow star.", [coloursChoice("star-yellow", "star-yellow", "Yellow star"), coloursChoice("star-red", "star-red", "Red star"), coloursChoice("ball-yellow", "ball-yellow", "Yellow ball"), coloursChoice("pencil-blue", "pencil-blue", "Blue pencil")], "star-yellow"),
-    coloursSpeak("44-ball-question", "What colour is the ball?", "It's red.", "ball-red", "What colour is the ball? It's red."),
-    coloursSpeak("45-bag-question", "What colour is the bag?", "It's pink.", "bag-pink", "What colour is the bag? It's pink."),
-    { id: "46-build-it", type: "challenge", title: "Build it!", items: [learn("46a-red", "Red.", "ball-red"), learn("46b-red-ball", "Red ball.", "ball-red"), learn("46c-a-red-ball", "A red ball.", "ball-red"), coloursSpeak("46d-its-a-red-ball", "It's a red ball.", "It's a red ball.", "ball-red", "It's a red ball.")] },
-    { id: "47-colour-hunt", type: "challenge", title: "Colour Hunt", teacherNote: "These are real-world tasks. Observe the child, then let them tap I did it.", items: [coloursAction("47a-find-red", "Find something red.", "l2-colour-red"), coloursAction("47b-touch-blue", "Touch something blue.", "l2-colour-blue"), coloursAction("47c-show-green", "Show me something green.", "l2-colour-green"), coloursAction("47d-find-black", "Find something black.", "l2-colour-black")] },
-    { id: "48-think-with-colours", type: "challenge", title: "Think with colours", items: [coloursListenChoice("48a-same-colour", "Which one is the same colour as the red ball?", [coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "apple-red"), coloursListenChoice("48b-different", "Which one is different?", [coloursChoice("ball-red", "ball-red", "Red ball"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("star-red", "star-red", "Red star"), coloursChoice("bag-blue", "bag-blue", "Blue bag")], "bag-blue"), coloursListenChoice("48c-red-things", "Which one belongs with the red things?", [coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("star-yellow", "star-yellow", "Yellow star"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-red")] },
-    { id: "49-read-it", type: "challenge", title: "Read it!", teacherNote: "For 49a–49c, test reading without clicking Replay. The replay control exists only because this uses the standard activity component.", items: [
-      { id: "49a-read-red", type: "tapChoice", title: "red", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [colour("red"), colour("blue"), colour("green")], correctAnswer: "red", teacherNote: "Reading check: the task is intentionally silent." },
-      { id: "49b-read-blue-ball", type: "tapChoice", title: "blue ball", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
-      { id: "49c-read-sentence", type: "tapChoice", title: "The ball is blue.", audioSrc: null, audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", silenceReason: "Early reading comprehension — audio would reveal the answer.", showLabels: false, options: [ball("red"), ball("blue"), ball("green")], correctAnswer: "blue", teacherNote: "Reading check: the task is intentionally silent." },
-      { id: "49d-phonics-b", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [coloursChoice("blue", "l2-colour-blue", "blue"), coloursChoice("red", "l2-colour-red", "red"), coloursChoice("yellow", "l2-colour-yellow", "yellow")], correctAnswer: "blue", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." },
-      { id: "49e-phonics-b-two", type: "tapChoice", title: "Which one starts with /b/?", audioSrc: null, ttsText: "Which one starts with the b sound?", showLabels: true, options: [coloursChoice("black", "l2-colour-black", "black"), coloursChoice("pink", "l2-colour-pink", "pink"), coloursChoice("green", "l2-colour-green", "green")], correctAnswer: "black", teacherNote: "Initial-sound awareness only. Do not ask the child to spell the word. Audio requires special phonics review." }
-    ] },
-    { id: "50-write-red", type: "writingPrompt", title: "Write red.", childPrompt: "Copy red on your paper.", visualId: "l2-colour-red", audioSrc: null, ttsText: "Write red.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
-    { id: "51-write-blue", type: "writingPrompt", title: "Write blue.", childPrompt: "Copy blue on your paper.", visualId: "l2-colour-blue", audioSrc: null, ttsText: "Write blue.", teacherNote: "Use real paper and pencil. Do not turn this into a screen-writing task." },
-    { id: "52-final-colour-challenge", type: "challenge", title: "English Adventure Colour Challenge", teacherNote: "The final two-step instruction is an advanced observation. If it is difficult, return to one-step instructions; do not treat Lesson 2 as failed.", teacherChecks: "Colour listening, colour plus object, real-world transfer, and two-step attention.", items: [coloursAction("52a-touch-red", "Touch red.", "l2-colour-red"), coloursListenChoice("52b-find-purple", "Find purple.", ["purple", "pink", "blue", "brown"].map(colour), "purple"), coloursListenChoice("52c-touch-red-ball", "Touch the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), coloursListenChoice("52d-point-blue-pencil", "Point to the blue pencil.", [coloursChoice("pencil-blue", "pencil-blue", "Blue pencil"), coloursChoice("ball-blue", "ball-blue", "Blue ball"), coloursChoice("bag-blue", "bag-blue", "Blue bag"), coloursChoice("star-yellow", "star-yellow", "Yellow star")], "pencil-blue"), coloursListenChoice("52e-show-green-apple", "Show me the green apple.", [coloursChoice("apple-green", "apple-green", "Green apple"), coloursChoice("apple-red", "apple-red", "Red apple"), coloursChoice("ball-green", "ball-green", "Green ball"), coloursChoice("bag-pink", "bag-pink", "Pink bag")], "apple-green"), coloursAction("52f-find-black", "Find something black.", "l2-colour-black"), coloursAction("52g-two-step", "Touch the red ball and point to the blue pencil.", "ball-red", "Advanced two-step observation. The teacher can use the screen choices or nearby real objects.")] },
-    { id: "53-mini-interview", type: "challenge", title: "Mini Interview", teacherNote: "A Lesson 1 and Lesson 2 wrap-up. Keep the exchange natural and encouraging.", items: [coloursSpeak("53a-hello", "Hello!", "Hello!", "waving-child", "Hello!"), coloursSpeak("53b-name", "What's your name?", "My name is …", "speaking-child", "What's your name?"), coloursSpeak("53c-age", "How old are you?", "I'm five. / I'm six.", "speaking-child", "How old are you?"), coloursSpeak("53d-feeling", "How are you?", "I'm happy. / I'm sad. / I'm tired.", "happy-face", "How are you?"), coloursSpeak("53e-blue", "What colour is it?", "It's blue.", "ball-blue", "What colour is it?"), coloursSpeak("53f-orange", "What colour is it?", "It's orange.", "ball-orange", "What colour is it?"), coloursListenChoice("53g-find-red-ball", "Find the red ball.", [ball("red"), ball("blue"), ball("yellow"), ball("green")], "red"), coloursSpeak("53h-goodbye", "Goodbye!", "Goodbye!", "goodbye-child", "Goodbye!")] }
-  ]
-};
-
-/* data/lessonIndex.js */
-const lessons = [
-  helloLesson,
-  coloursLesson,
-  { id: "numbers", lessonNumber: 3, title: "Numbers", icon: "🔢", locked: true },
-  { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
-];
-const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
-
-/* js/store.js */
-const STORAGE_KEY = "english-adventure-progress";
-const defaults = () => ({ currentLesson: "hello", lessonPositions: { hello: 0 }, lessonProgress: {}, completedLessons: {}, soundOn: true });
-
-function read() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    const positions = { ...(stored.lessonPositions || {}) };
-    if (Number.isInteger(stored.currentActivity) && !Number.isInteger(positions[stored.currentLesson || "hello"])) positions[stored.currentLesson || "hello"] = stored.currentActivity;
-    delete stored.currentActivity;
-    return { ...defaults(), ...stored, lessonPositions: { ...defaults().lessonPositions, ...positions } };
-  }
-  catch { return defaults(); }
-}
-const state = read();
-function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-function patch(values) { Object.assign(state, values); save(); }
-function lessonPosition(lessonId) { return state.lessonPositions[lessonId] ?? 0; }
-function setLessonPosition(lessonId, position) { state.lessonPositions[lessonId] = Math.max(0, position); save(); }
-function openLesson(lessonId) { state.currentLesson = lessonId; if (!Number.isInteger(state.lessonPositions[lessonId])) state.lessonPositions[lessonId] = 0; save(); }
-function activityDone(lessonId, activityId) { return Boolean(state.lessonProgress[lessonId]?.includes(activityId)); }
-function markActivityDone(lessonId, activityId) {
-  const done = new Set(state.lessonProgress[lessonId] || []); done.add(activityId);
-  state.lessonProgress[lessonId] = [...done]; save();
-}
-function resetLesson(lessonId) { state.currentLesson = lessonId; state.lessonPositions[lessonId] = 0; delete state.lessonProgress[lessonId]; delete state.completedLessons[lessonId]; save(); }
-function resetAll() { Object.assign(state, defaults()); save(); }
-
-/* js/audio.js */
-let currentAudio = null;
-
-function stopCurrentPlayback() {
-  window.speechSynthesis?.cancel();
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
-  }
-}
-
-function browserTtsFallback(text) {
-  if (!state.soundOn || !text || !("speechSynthesis" in window)) return;
-  console.warn("[Teaching audio fallback] Browser TTS used for:", text);
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-GB";
-  utterance.rate = 0.78;
-  utterance.pitch = 1.0;
-  window.speechSynthesis.speak(utterance);
-}
-function playText(text, explicitSrc = null) {
-  if (!state.soundOn || !text) return;
-
-  stopCurrentPlayback();
-
-  const audioSrc = explicitSrc || resolveTeachingAudio(text);
-  if (!audioSrc) {
-    browserTtsFallback(text);
-    return;
-  }
-
-  currentAudio = new Audio(audioSrc);
-  currentAudio.preload = "auto";
-
-  currentAudio.play().catch((error) => {
-    console.error("[Teaching audio failed]", audioSrc, error);
-    browserTtsFallback(text);
-  });
-}
-function replay(activity) {
-  if (!state.soundOn || !activity) return;
-  if (activity.audioEnabled === false || activity.audioDisposition === "INTENTIONALLY_SILENT") return;
-  const text = activity.ttsText || activity.title;
-  playText(text, activity.audioSrc || null);
-}
-function speak(text) {
-  // Backward-compatible API. Existing callers now use fixed teaching audio
-  // whenever the text exists in the registry.
-  playText(text);
-}
-function toggleSound() {
-  patch({ soundOn: !state.soundOn });
-  if (!state.soundOn) stopCurrentPlayback();
-  return state.soundOn;
-}
-function successSound() {
-  if (!state.soundOn || !window.AudioContext) return;
-  const context = new AudioContext();
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
-  oscillator.frequency.setValueAtTime(523, context.currentTime);
-  oscillator.frequency.exponentialRampToValueAtTime(783, context.currentTime + .16);
-  gain.gain.setValueAtTime(.045, context.currentTime);
-  gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .28);
-  oscillator.connect(gain).connect(context.destination);
-  oscillator.start();
-  oscillator.stop(context.currentTime + .29);
-}
-
-/* js/visuals/renderVisual.js */
 /** Renders approved teaching artwork. UI symbols intentionally do not use this function. */
 function renderVisual(visualId, { className = "", size = "medium", decorative = false } = {}) {
   const visual = getVisual(visualId);
@@ -1394,52 +1672,65 @@ function unavailableVisual(visualId, message) {
   return unavailable;
 }
 
-/* js/components/feedback.js */
+Object.assign(exports, { renderVisual });
+})(window.__eaModules["js/visuals/renderVisual.js"]);
+
+window.__eaModules["js/activities/learn.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
+function renderLearn(stage, activity, api) {
+  const card = document.createElement("section");
+  card.className = "activity-card activity-card--learn";
+  const type = textElement("p", "activity-type", activity.activityLabel || "Learn");
+  const title = textElement("h1", "activity-heading", activity.title);
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const play = document.createElement("button");
+  play.type = "button";
+  play.className = "replay-button learn-replay";
+  play.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span>';
+  play.append(` ${activity.replayLabel || `Play ${activity.title}`}`);
+  play.setAttribute("aria-label", activity.replayLabel || `Play ${activity.title}`);
+  play.addEventListener("click", () => { replay(activity); api.complete(); });
+  if (activity.listItems?.length) {
+    const list = document.createElement("ul"); list.className = "l3-shopping-list";
+    activity.listItems.forEach((item) => { const row = document.createElement("li"); row.textContent = item; list.append(row); });
+    card.append(list);
+  }
+  card.append(play);
+  stage.append(card);
+  card.prepend(type, title, visual);
+}
+
+function textElement(tag, className, value) {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = value;
+  return element;
+}
+
+Object.assign(exports, { renderLearn });
+})(window.__eaModules["js/activities/learn.js"]);
+
+window.__eaModules["js/components/feedback.js"] = {};
+(function(exports) {
+﻿const { successSound, playText } = window.__eaModules["js/audio.js"];
+
 function feedbackLine() { const line = document.createElement("p"); line.className = "feedback"; line.setAttribute("aria-live", "assertive"); return line; }
 function correct(card, button, feedback, onDone, text = "Great!") { button.classList.add("correct"); feedback.className = "feedback correct"; feedback.textContent = text; successSound(); window.setTimeout(onDone, 620); }
 function incorrect(button, feedback, replayText) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => button.classList.remove("incorrect"), 390); window.setTimeout(() => playText(replayText), 430); }
 
-/* js/components/lessonCard.js */
-function lessonCard(lesson, onOpen, completed = false) {
-  const card = document.createElement("button"); card.type = "button"; card.className = `lesson-card ${lesson.locked ? "locked" : ""} ${completed ? "completed" : ""}`; card.disabled = Boolean(lesson.locked);
-  card.innerHTML = `<span class="lesson-icon" aria-hidden="true">${lesson.icon}</span><span><span class="lesson-label">Lesson ${lesson.lessonNumber}</span><span class="lesson-name">${lesson.title}</span></span><span class="status">${lesson.locked ? "Locked" : completed ? "Completed" : "Ready"}</span>`;
-  if (!lesson.locked) card.addEventListener("click", onOpen); return card;
-}
 
-/* js/components/progress.js */
-function progress(lesson) {
-  const done = lesson.activities.filter((activity) => activityDone(lesson.id, activity.id)).length;
-  const total = lesson.activities.length;
-  const percent = total ? Math.round((done / total) * 100) : 0;
-  const wrap = document.createElement("div"); wrap.className = "progress"; wrap.setAttribute("aria-label", `${done} of ${total} complete`);
-  wrap.innerHTML = `<span class="sr-only">${done} of ${total} complete</span><div class="progress-dots">${lesson.activities.map((_, index) => `<span class="progress-dot ${index < done ? "done" : ""}"></span>`).join("")}</div><div class="progress-bar" aria-hidden="true"><span class="progress-bar-fill" style="width:${percent}%"></span></div>`;
-  return wrap;
-}
+Object.assign(exports, { feedbackLine, correct, incorrect });
+})(window.__eaModules["js/components/feedback.js"]);
 
-/* js/components/teacherPanel.js */
-function openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }) {
-  document.querySelector(".teacher-overlay")?.remove();
-  const overlay = document.createElement("div"); overlay.className = "teacher-overlay";
-  const position = state.lessonPositions[lesson.id] ?? 0;
-  const note = activity.teacherNote ? `<section class="teacher-note"><h3>Teacher note</h3><p>${activity.teacherNote}</p>${activity.teacherChecks ? `<p><strong>Observe:</strong> ${activity.teacherChecks}</p>` : ""}</section>` : "";
-  overlay.innerHTML = `<aside class="teacher-drawer" role="dialog" aria-modal="true" aria-label="Teacher controls"><button class="drawer-close" type="button" aria-label="Close teacher controls">×</button><h2>Teacher controls</h2><p class="teacher-meta">Current Activity: ${position + 1} — ${activity.type}</p>${note}<div class="teacher-grid"><button class="teacher-action" data-action="previous">Previous</button><button class="teacher-action" data-action="next">Next</button><button class="teacher-action" data-action="replay">Replay</button><button class="teacher-action" data-action="sound">Sound ${state.soundOn ? "On" : "Off"}</button><button class="teacher-action success" data-action="correct">Mark Correct</button><button class="teacher-action primary" data-action="again">Try Again</button><button class="teacher-action wide" data-action="reset-lesson">Reset Lesson</button><button class="teacher-action wide" data-action="reset-all">Reset All Progress</button></div></aside>`;
-  const close = () => { overlay.remove(); onClose?.(); };
-  overlay.addEventListener("click", (event) => { if (event.target === overlay) close(); });
-  overlay.querySelector(".drawer-close").addEventListener("click", close);
-  overlay.querySelector(".teacher-grid").addEventListener("click", (event) => {
-    const action = event.target.dataset.action; if (!action) return;
-    if (action === "previous") { close(); onPrevious(); }
-    if (action === "next") { close(); onNext(); }
-    if (action === "replay") replay(activity);
-    if (action === "sound") { toggleSound(); openTeacherPanel({ lesson, activity, onPrevious, onNext, onMarkCorrect, onTryAgain, onClose, onHome }); }
-    if (action === "correct") { close(); onMarkCorrect(); }
-    if (action === "again") { close(); onTryAgain(); }
-    if (action === "reset-lesson") { resetLesson(lesson.id); close(); onHome(); }
-    if (action === "reset-all") { resetAll(); close(); onHome(); }
-  });
-}
+window.__eaModules["js/activities/tapChoice.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { correct, feedbackLine, incorrect } = window.__eaModules["js/components/feedback.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
 
-/* js/activities/tapChoice.js */
 function choiceButton(option, { showLabel = true } = {}) {
   const button = document.createElement("button");
   button.type = "button";
@@ -1454,12 +1745,15 @@ function choiceButton(option, { showLabel = true } = {}) {
   button.setAttribute("aria-label", option.label);
   return button;
 }
+
+
 function compactChoiceSet(options = []) {
   const compactIds = new Set(["ball", "table", "chair", "apple", "box"]);
   return options.length > 0 && options.every((option) =>
     /^(colour|numeral|letter)-/.test(option.visualId || "") || compactIds.has(option.visualId)
   );
 }
+
 function renderTapChoice(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--tap-choice";
@@ -1493,33 +1787,15 @@ function renderTapChoice(stage, activity, api) {
   stage.append(card);
 }
 
-/* js/activities/learn.js */
-function renderLearn(stage, activity, api) {
-  const card = document.createElement("section");
-  card.className = "activity-card activity-card--learn";
-  const type = textElement("p", "activity-type", activity.activityLabel || "Learn");
-  const title = textElement("h1", "activity-heading", activity.title);
-  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
-  const play = document.createElement("button");
-  play.type = "button";
-  play.className = "replay-button learn-replay";
-  play.innerHTML = '<span class="speaker" aria-hidden="true">🔊</span>';
-  play.append(` ${activity.replayLabel || `Play ${activity.title}`}`);
-  play.setAttribute("aria-label", activity.replayLabel || `Play ${activity.title}`);
-  play.addEventListener("click", () => { replay(activity); api.complete(); });
-  card.append(play);
-  stage.append(card);
-  card.prepend(type, title, visual);
-}
+Object.assign(exports, { choiceButton, compactChoiceSet, renderTapChoice });
+})(window.__eaModules["js/activities/tapChoice.js"]);
 
-function textElement(tag, className, value) {
-  const element = document.createElement(tag);
-  element.className = className;
-  element.textContent = value;
-  return element;
-}
+window.__eaModules["js/activities/listenChoose.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { choiceButton, compactChoiceSet } = window.__eaModules["js/activities/tapChoice.js"];
+const { correct, feedbackLine, incorrect } = window.__eaModules["js/components/feedback.js"];
 
-/* js/activities/listenChoose.js */
 function renderListenChoose(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--listen-choice";
@@ -1552,7 +1828,15 @@ function renderListenChoose(stage, activity, api) {
   stage.append(card);
 }
 
-/* js/activities/dragDrop.js */
+Object.assign(exports, { renderListenChoose });
+})(window.__eaModules["js/activities/listenChoose.js"]);
+
+window.__eaModules["js/activities/dragDrop.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { correct, feedbackLine } = window.__eaModules["js/components/feedback.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
 function renderDragDrop(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card activity-card--drag";
   const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Play";
@@ -1573,57 +1857,60 @@ function renderDragDrop(stage, activity, api) {
   card.append(replayButton, draggable, target, feedback); stage.append(card);
 }
 
-/* js/activities/speakPrompt.js */
+Object.assign(exports, { renderDragDrop });
+})(window.__eaModules["js/activities/dragDrop.js"]);
+
+window.__eaModules["js/activities/speakPrompt.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
 function renderSpeakPrompt(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card activity-card--speak";
   const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Speak";
   const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
   const turn = document.createElement("p"); turn.className = "speak-turn"; turn.textContent = activity.turnLabel || "YOUR TURN";
   const prompt = document.createElement("p"); prompt.className = "speak-question"; prompt.textContent = activity.prompt;
-  card.append(type, renderVisual(activity.visualId, { className: "character", size: "hero" }), title, turn, prompt);
+  const visualArea = document.createElement("div");
+  visualArea.className = activity.quantityGroups ? "l3-speak-groups" : activity.quantityItems ? "l3-speak-quantity" : "";
+  if (activity.quantityGroups) {
+    activity.quantityGroups.forEach((group) => {
+      const groupNode = document.createElement("div"); groupNode.className = "l3-speak-group";
+      for (let i = 0; i < group.count; i += 1) groupNode.append(renderVisual(group.visualId, { className: "l3-speak-object", size: "choice", decorative: true }));
+      visualArea.append(groupNode);
+    });
+  } else if (activity.quantityItems) {
+    activity.quantityItems.forEach((item) => { for (let i = 0; i < item.count; i += 1) visualArea.append(renderVisual(item.visualId, { className: "l3-speak-object", size: "choice", decorative: true })); });
+  } else {
+    visualArea.append(renderVisual(activity.visualId, { className: "character", size: "hero" }));
+  }
+  card.append(type, visualArea, title);
+  if (activity.listenText) { const listenText = document.createElement("p"); listenText.className = "l3-listen-text"; listenText.textContent = activity.listenText; card.append(listenText); }
+  card.append(turn, prompt);
   const button = document.createElement("button"); button.type = "button"; button.className = "replay-button"; button.innerHTML = '<span class="speaker">🔊</span> Replay'; button.addEventListener("click", () => replay(activity));
   const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button speak-complete"; complete.textContent = activity.completeLabel || "I said it!"; complete.addEventListener("click", api.complete);
   const actions = document.createElement("div"); actions.className = "activity-actions speak-actions"; actions.append(button, complete); card.append(actions); stage.append(card);
 }
 
-/* js/activities/review.js */
+Object.assign(exports, { renderSpeakPrompt });
+})(window.__eaModules["js/activities/speakPrompt.js"]);
+
+window.__eaModules["js/activities/review.js"] = {};
+(function(exports) {
+const { playText } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
 function renderReview(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card activity-card--review"; card.innerHTML = `<p class="activity-type">Review</p><h1 class="activity-heading">${activity.title}</h1>`;
   const list = document.createElement("div"); list.className = "review-list"; let count = 0;
-  activity.items.forEach((item) => { const button = document.createElement("button"); button.type = "button"; button.className = "review-item"; button.append(renderVisual(item.visualId, { className: "review-visual", size: "review", decorative: true })); const label = document.createElement("span"); label.textContent = item.text; const icon = document.createElement("span"); icon.setAttribute("aria-hidden", "true"); icon.textContent = "🔊"; button.append(label, icon); button.addEventListener("click", () => { playText(item.ttsText || item.text, item.audioSrc || null); if (!button.classList.contains("done")) { button.classList.add("done"); count += 1; if (count === activity.items.length) api.complete(); } }); list.append(button); }); card.append(list); stage.append(card);
+  activity.items.forEach((item) => { const button = document.createElement("button"); button.type = "button"; button.className = "review-item"; const visuals = document.createElement("div"); visuals.className = "review-visuals"; for (let i = 0; i < (item.count || 1); i += 1) visuals.append(renderVisual(item.visualId, { className: "review-visual", size: "review", decorative: true })); button.append(visuals); const label = document.createElement("span"); label.textContent = item.text; const icon = document.createElement("span"); icon.setAttribute("aria-hidden", "true"); icon.textContent = "🔊"; button.append(label, icon); button.addEventListener("click", () => { playText(item.ttsText || item.text, item.audioSrc || null); if (!button.classList.contains("done")) { button.classList.add("done"); count += 1; if (count === activity.items.length) api.complete(); } }); list.append(button); }); card.append(list); stage.append(card);
 }
 
-/* js/activities/actionPrompt.js */
-// The child acts away from the screen; the teacher observes before completion.
-function renderActionPrompt(stage, activity, api) {
-  const card = document.createElement("section"); card.className = "activity-card action-card activity-card--action";
-  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Listen and do";
-  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title || "Listen and do.";
-  const prompt = document.createElement("p"); prompt.className = "action-prompt"; prompt.textContent = activity.childPrompt || "Listen. Then do it!";
-  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
-  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
-  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I did it!"; complete.addEventListener("click", api.complete);
-  const actions = document.createElement("div"); actions.className = "activity-actions action-actions"; actions.append(play, complete);
-  if (activity.hideNestedHeader) card.append(visual, prompt, actions);
-  else card.append(type, title, visual, prompt, actions);
-  stage.append(card);
-}
+Object.assign(exports, { renderReview });
+})(window.__eaModules["js/activities/review.js"]);
 
-/* js/activities/writingPrompt.js */
-// Writing is performed on paper, not simulated with an imprecise screen trace.
-function renderWritingPrompt(stage, activity, api) {
-  const card = document.createElement("section"); card.className = "activity-card writing-card activity-card--writing";
-  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = "Paper time";
-  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
-  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
-  const prompt = document.createElement("p"); prompt.className = "instruction"; prompt.textContent = activity.childPrompt || "Use your paper and pencil.";
-  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
-  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I finished!"; complete.addEventListener("click", api.complete);
-  const actions = document.createElement("div"); actions.className = "activity-actions writing-actions"; actions.append(play, complete);
-  card.append(type, title, visual, prompt, actions); stage.append(card);
-}
-
-/* js/activities/challenge.js */
+window.__eaModules["js/activities/challenge.js"] = {};
+(function(exports) {
 // Challenge only sequences activity data; it never owns choice, audio or feedback logic.
 function renderChallenge(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card challenge-card activity-card--challenge";
@@ -1640,13 +1927,203 @@ function renderChallenge(stage, activity, api) {
     if (item.type === "challenge") { console.error("Challenge cannot contain another challenge.", item); return; }
     count.textContent = `${index + 1} / ${activity.items.length}`;
     continueButton.hidden = true; inner.replaceChildren();
-    renderActivity(inner, item, { complete: () => { continueButton.hidden = false; continueButton.focus(); } });
+    api.renderNested(inner, item, { complete: () => { continueButton.hidden = false; continueButton.focus(); } });
   };
   continueButton.addEventListener("click", () => { index += 1; show(); });
   show();
 }
 
-/* js/activities/renderer.js */
+Object.assign(exports, { renderChallenge });
+})(window.__eaModules["js/activities/challenge.js"]);
+
+window.__eaModules["js/activities/actionPrompt.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
+// The child acts away from the screen; the teacher observes before completion.
+function renderActionPrompt(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card action-card activity-card--action";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = activity.activityLabel || "Listen and do";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title || "Listen and do.";
+  const prompt = document.createElement("p"); prompt.className = "action-prompt"; prompt.textContent = activity.childPrompt || "Listen. Then do it!";
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
+  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I did it!"; complete.addEventListener("click", api.complete);
+  const actions = document.createElement("div"); actions.className = "activity-actions action-actions"; actions.append(play, complete);
+  if (activity.hideNestedHeader) card.append(visual, prompt, actions);
+  else card.append(type, title, visual, prompt, actions);
+  stage.append(card);
+}
+
+Object.assign(exports, { renderActionPrompt });
+})(window.__eaModules["js/activities/actionPrompt.js"]);
+
+window.__eaModules["js/activities/writingPrompt.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+
+// Writing is performed on paper, not simulated with an imprecise screen trace.
+function renderWritingPrompt(stage, activity, api) {
+  const card = document.createElement("section"); card.className = "activity-card writing-card activity-card--writing";
+  const type = document.createElement("p"); type.className = "activity-type"; type.textContent = "Paper time";
+  const title = document.createElement("h1"); title.className = "activity-heading"; title.textContent = activity.title;
+  const visual = renderVisual(activity.visualId, { className: "character", size: "hero" });
+  const prompt = document.createElement("p"); prompt.className = "instruction"; prompt.textContent = activity.childPrompt || "Use your paper and pencil.";
+  const play = document.createElement("button"); play.type = "button"; play.className = "replay-button"; play.innerHTML = '<span class="speaker">🔊</span> Listen again'; play.addEventListener("click", () => replay(activity));
+  const complete = document.createElement("button"); complete.type = "button"; complete.className = "replay-button action-complete"; complete.textContent = activity.completeLabel || "I finished!"; complete.addEventListener("click", api.complete);
+  const actions = document.createElement("div"); actions.className = "activity-actions writing-actions"; actions.append(play, complete);
+  card.append(type, title, visual, prompt, actions); stage.append(card);
+}
+
+Object.assign(exports, { renderWritingPrompt });
+})(window.__eaModules["js/activities/writingPrompt.js"]);
+
+window.__eaModules["js/activities/lesson03.js"] = {};
+(function(exports) {
+const { replay } = window.__eaModules["js/audio.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+const { correct, feedbackLine } = window.__eaModules["js/components/feedback.js"];
+
+const element = (tag, className, value) => { const node = document.createElement(tag); node.className = className; if (value != null) node.textContent = value; return node; };
+const playButton = (activity) => { const button = element("button", "replay-button", "🔊 Listen"); button.type = "button"; button.addEventListener("click", () => replay(activity)); return button; };
+const visual = (id, className = "") => renderVisual(id, { className, size: "choice", decorative: true });
+function cardShell(stage, activity, label = "Play") { const card = element("section", "activity-card activity-card--l3"); card.append(element("p", "activity-type", label), element("h1", "activity-heading", activity.title)); stage.append(card); return card; }
+function repeatVisuals(items, className = "l3-count-items") { const wrap = element("div", className); items.forEach(({ visualId, count }) => { for (let i = 0; i < count; i += 1) wrap.append(visual(visualId, "l3-object")); }); return wrap; }
+
+function renderCover(stage, activity, api) {
+  const card = cardShell(stage, activity, "Welcome");
+  card.classList.add("activity-card--cover");
+  card.append(element("p", "l3-subtitle", activity.subtitle), renderVisual(activity.visualId, { className: "character", size: "hero" }), playButton(activity));
+  const start = element("button", "nav-button next", "Let's go!"); start.type = "button"; start.addEventListener("click", api.complete); card.append(start);
+}
+
+function renderQuantity(stage, activity, api) {
+  const card = cardShell(stage, activity, activity.activityLabel || "Count");
+  card.append(playButton(activity), element("p", "instruction", activity.prompt || "Count the things."));
+  const groups = element("div", "l3-quantity-groups");
+  const memoryStage = activity.memoryRevealSeconds ? element("div", "l3-memory-stage") : null;
+  const memoryStatus = memoryStage ? element("p", "l3-memory-status", `Look carefully: ${activity.memoryRevealSeconds}`) : null;
+  const feedback = feedbackLine();
+  const selectGroup = (group, button) => {
+    if (group.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and look carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; }
+    groups.querySelectorAll("button").forEach((item) => item.disabled = true);
+    correct(card, button, feedback, api.complete, "Great listening!");
+  };
+  activity.groups.forEach((group) => {
+    const section = element(activity.groupChoices ? "button" : "section", `l3-quantity-group${activity.groupChoices ? " l3-quantity-group--choice" : ""}`);
+    if (activity.groupChoices) { section.type = "button"; section.setAttribute("aria-label", group.label); section.addEventListener("click", () => selectGroup(group, section)); }
+    section.append(repeatVisuals([{ visualId: group.visualId, count: group.count }]));
+    if (group.label) section.append(element("p", "l3-object-label", group.label));
+    groups.append(section);
+  });
+  if (memoryStage) { memoryStage.append(groups, memoryStatus); card.append(memoryStage); } else card.append(groups);
+  card.append(element("p", "l3-question", activity.question));
+  if (activity.groupChoices) { card.append(feedback); return; }
+  const answer = element("div", "l3-answer-row");
+  activity.options.forEach((option) => { const button = element("button", "l3-number-choice", option.label); button.type = "button"; button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Count carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } answer.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "Great counting!"); }); answer.append(button); });
+  card.append(answer, feedback);
+  if (memoryStage) {
+    const buttons = [...answer.querySelectorAll("button")];
+    buttons.forEach((button) => button.disabled = true);
+    let remaining = activity.memoryRevealSeconds;
+    const cover = element("div", "l3-memory-cover", "The shop is covered. Now answer from memory.");
+    memoryStage.append(cover);
+    const countdown = window.setInterval(() => { remaining -= 1; if (remaining > 0) memoryStatus.textContent = `Look carefully: ${remaining}`; }, 1000);
+    window.setTimeout(() => { window.clearInterval(countdown); memoryStage.classList.add("is-covered"); memoryStatus.remove(); buttons.forEach((button) => button.disabled = false); }, activity.memoryRevealSeconds * 1000);
+  }
+}
+
+function renderPhraseBuilder(stage, activity, api) {
+  const card = cardShell(stage, activity, "Build");
+  const builderVisual = activity.quantityItems ? repeatVisuals(activity.quantityItems, "l3-builder-quantity") : renderVisual(activity.visualId, { className: "l3-builder-visual", size: "hero", decorative: true });
+  card.append(playButton(activity), builderVisual);
+  const sentence = element("p", "l3-built-phrase", "Choose the words."); const feedback = feedbackLine(); const selected = [];
+  activity.parts.forEach((part, partIndex) => { const row = element("div", "l3-builder-row"); part.options.forEach((option) => { const button = element("button", "l3-word-choice", option); button.type = "button"; button.addEventListener("click", () => { selected[partIndex] = option; row.querySelectorAll("button").forEach((node) => node.classList.toggle("selected", node === button)); sentence.textContent = selected.filter(Boolean).join(" "); if (selected.length === activity.parts.length && selected.every(Boolean)) { if (sentence.textContent === activity.answer) correct(card, button, feedback, api.complete, "You built it!"); else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and build the phrase."; } } }); row.append(button); }); card.append(row); }); card.append(sentence, feedback);
+}
+
+function renderBasketShop(stage, activity, api) {
+  const card = cardShell(stage, activity, activity.activityLabel || "Shop"); card.append(playButton(activity));
+  if (activity.customerRequest) card.append(element("p", "l3-customer-request", activity.customerRequest));
+  card.append(element("p", "instruction", activity.prompt));
+  const products = element("div", "l3-shop-products"); const feedback = feedbackLine(); const recipientMode = Array.isArray(activity.recipients);
+  const chosen = []; const productButtons = []; let selectedProduct = null;
+  const recipientStates = new Map((activity.recipients || []).map((recipient) => [recipient.id, { items: [], zone: null }]));
+  const history = [];
+  const updateSelectedProduct = () => productButtons.forEach(({ button, visualId }) => button.classList.toggle("is-selected", visualId === selectedProduct));
+  activity.products.forEach((item) => {
+    const button = element("button", "l3-product", item.label); button.type = "button"; button.prepend(visual(item.visualId));
+    button.addEventListener("click", () => {
+      if (recipientMode) { selectedProduct = item.visualId; updateSelectedProduct(); feedback.className = "feedback"; feedback.textContent = `Now choose who receives the ${item.label}.`; return; }
+      const limit = activity.request.reduce((total, value) => total + value.count, 0); if (chosen.length >= limit) return; chosen.push(item.visualId); summary();
+    });
+    productButtons.push({ button, visualId: item.visualId }); products.append(button);
+  });
+  const basket = recipientMode ? null : element("div", "l3-basket");
+  const summary = () => { if (!basket) return; basket.querySelectorAll(".l3-basket-item").forEach((node) => node.remove()); chosen.forEach((id) => basket.append(visual(id, "l3-basket-item"))); };
+  if (basket) basket.append(visual("l3-basket", "l3-basket-image"));
+  const targets = recipientMode ? element("div", "l3-delivery-targets") : null;
+  const updateRecipient = (recipient) => { const state = recipientStates.get(recipient.id); const items = state.zone.querySelector(".l3-delivery-items"); items.replaceChildren(...state.items.map((id) => visual(id, "l3-delivery-item"))); };
+  if (recipientMode) activity.recipients.forEach((recipient) => {
+    const target = element("button", "l3-delivery-target"); target.type = "button"; target.setAttribute("aria-label", `Give the selected item to ${recipient.name}`);
+    target.append(visual(recipient.visualId, "l3-delivery-character"), element("strong", "", `Give to ${recipient.name}`), element("span", "l3-delivery-items"));
+    recipientStates.get(recipient.id).zone = target;
+    target.addEventListener("click", () => {
+      if (!selectedProduct) { feedback.className = "feedback incorrect"; feedback.textContent = "Choose an item first, then choose Tom or Mia."; return; }
+      recipientStates.get(recipient.id).items.push(selectedProduct); history.push({ recipientId: recipient.id, visualId: selectedProduct }); selectedProduct = null; updateSelectedProduct(); updateRecipient(recipient); feedback.className = "feedback"; feedback.textContent = "Good giving!";
+    });
+    targets.append(target);
+  });
+  const controls = element("div", "l3-basket-controls");
+  const undo = element("button", "l3-basket-action", "Undo last"); undo.type = "button"; undo.addEventListener("click", () => {
+    if (recipientMode) { const last = history.pop(); if (!last) return; const state = recipientStates.get(last.recipientId); state.items.pop(); updateRecipient(activity.recipients.find((recipient) => recipient.id === last.recipientId)); return; }
+    chosen.pop(); summary();
+  });
+  const clear = element("button", "l3-basket-action", recipientMode ? "Clear delivery" : "Clear basket"); clear.type = "button"; clear.addEventListener("click", () => {
+    if (recipientMode) { history.length = 0; recipientStates.forEach((state, id) => { state.items.length = 0; updateRecipient(activity.recipients.find((recipient) => recipient.id === id)); }); selectedProduct = null; updateSelectedProduct(); return; }
+    chosen.length = 0; summary();
+  });
+  controls.append(undo, clear);
+  const check = element("button", "nav-button next", recipientMode ? "Check delivery" : "Check basket"); check.type = "button"; check.addEventListener("click", () => {
+    const deliveryMatches = recipientMode && activity.recipients.every((recipient) => { const expected = recipient.request.flatMap((item) => Array(item.count).fill(item.visualId)).sort().join("|"); return recipientStates.get(recipient.id).items.slice().sort().join("|") === expected; });
+    const basketMatches = !recipientMode && chosen.slice().sort().join("|") === activity.request.flatMap((item) => Array(item.count).fill(item.visualId)).sort().join("|");
+    if (!deliveryMatches && !basketMatches) { feedback.className = "feedback incorrect"; feedback.textContent = recipientMode ? "Not yet — check who receives each item. You can undo or clear your delivery." : "Not yet — check the colour and number. You can undo or clear your basket."; return; }
+    correct(card, check, feedback, api.complete, recipientMode ? "Perfect delivery!" : "Perfect shopping!");
+  });
+  card.append(products); if (targets) card.append(targets); if (basket) card.append(basket); card.append(controls, check, feedback);
+}
+
+function renderPricePlay(stage, activity, api) {
+  const card = cardShell(stage, activity, "Prices"); card.append(playButton(activity), element("p", "instruction", activity.prompt), visual(activity.visualId, "l3-price-product"));
+  const grid = element("div", "l3-money-choices"); const feedback = feedbackLine(); activity.options.forEach((option) => { const button = element("button", "l3-money-choice"); button.type = "button"; button.append(visual(option.visualId), element("span", "", option.label)); button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen to the price again."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } grid.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "That is the right price!"); }); grid.append(button); });
+  card.append(element("p", "l3-question", activity.question));
+  if (activity.modelAnswer) card.append(element("p", "l3-model-answer", activity.modelAnswer));
+  if (activity.choicePrompt) card.append(element("p", "l3-choice-prompt", activity.choicePrompt));
+  card.append(grid, feedback);
+}
+
+function renderCompare(stage, activity, api) {
+  const card = cardShell(stage, activity, "Think"); card.append(playButton(activity), element("p", "l3-question l3-think-question", activity.prompt)); const groups = element("div", "l3-compare-groups");
+  activity.groups.forEach((group) => { const button = element("button", "l3-compare-group"); button.type = "button"; button.setAttribute("aria-label", group.label || `${group.count} items`); button.append(repeatVisuals([{ visualId: group.visualId, count: group.count }])); button.addEventListener("click", () => { const feedback = card.querySelector(".feedback"); const accepted = activity.correctAnswers || [activity.correctAnswer]; if (!accepted.includes(group.id)) { feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; return; } correct(card, button, feedback, api.complete, "Great thinking!"); }); groups.append(button); }); card.append(groups, feedbackLine());
+}
+
+Object.assign(exports, { renderCover, renderQuantity, renderPhraseBuilder, renderBasketShop, renderPricePlay, renderCompare });
+})(window.__eaModules["js/activities/lesson03.js"]);
+
+window.__eaModules["js/activities/renderer.js"] = {};
+(function(exports) {
+const { renderLearn } = window.__eaModules["js/activities/learn.js"];
+const { renderTapChoice } = window.__eaModules["js/activities/tapChoice.js"];
+const { renderListenChoose } = window.__eaModules["js/activities/listenChoose.js"];
+const { renderDragDrop } = window.__eaModules["js/activities/dragDrop.js"];
+const { renderSpeakPrompt } = window.__eaModules["js/activities/speakPrompt.js"];
+const { renderReview } = window.__eaModules["js/activities/review.js"];
+const { renderChallenge } = window.__eaModules["js/activities/challenge.js"];
+const { renderActionPrompt } = window.__eaModules["js/activities/actionPrompt.js"];
+const { renderWritingPrompt } = window.__eaModules["js/activities/writingPrompt.js"];
+const { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } = window.__eaModules["js/activities/lesson03.js"];
+
 const renderers = {
   learn: renderLearn,
   tapChoice: renderTapChoice,
@@ -1656,7 +2133,13 @@ const renderers = {
   review: renderReview,
   challenge: renderChallenge,
   actionPrompt: renderActionPrompt,
-  writingPrompt: renderWritingPrompt
+  writingPrompt: renderWritingPrompt,
+  cover: renderCover,
+  quantity: renderQuantity,
+  phraseBuilder: renderPhraseBuilder,
+  basketShop: renderBasketShop,
+  pricePlay: renderPricePlay,
+  compare: renderCompare
 };
 function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];
@@ -1665,11 +2148,18 @@ function renderActivity(stage, activity, api) {
     console.error(message, activity);
     const error = document.createElement("p"); error.className = "renderer-error"; error.textContent = message; stage.replaceChildren(error); return;
   }
-  renderer(stage, activity, api);
+  renderer(stage, activity, { ...api, renderNested: renderActivity });
 }
 
-/* js/validation/lessonValidator.js */
+Object.assign(exports, { renderers, renderActivity });
+})(window.__eaModules["js/activities/renderer.js"]);
+
+window.__eaModules["js/validation/lessonValidator.js"] = {};
+(function(exports) {
+const { getVisual } = window.__eaModules["data/visuals.js"];
+
 const NESTED_VISUAL_FIELDS = new Set(["options", "items"]);
+
 function validateLesson(lesson, { strict = false } = {}) {
   const issues = [];
   if (!lesson?.id || !Array.isArray(lesson.activities)) issues.push("Lesson requires an id and activities array.");
@@ -1677,6 +2167,7 @@ function validateLesson(lesson, { strict = false } = {}) {
   issues.forEach((issue) => strict ? console.error(`[Lesson validation] ${issue}`) : console.warn(`[Lesson validation] ${issue}`));
   return issues;
 }
+
 function validateLessons(lessons, options) { return lessons.flatMap((lesson) => validateLesson(lesson, options)); }
 
 function validateActivity(activity, issues, location) {
@@ -1702,13 +2193,27 @@ function validateVisualReference(visualId, issues, location) {
   if (visual.approved !== true) issues.push(`${location}: visual "${visualId}" is not approved.`);
 }
 
-/* js/router.js */
+Object.assign(exports, { validateLesson, validateLessons });
+})(window.__eaModules["js/validation/lessonValidator.js"]);
+
+window.__eaModules["js/router.js"] = {};
+(function(exports) {
+const { getLesson, lessons } = window.__eaModules["data/lessonIndex.js"];
+const { replay } = window.__eaModules["js/audio.js"];
+const { activityDone, lessonPosition, markActivityDone, openLesson, patch, resetLesson, setLessonPosition, state } = window.__eaModules["js/store.js"];
+const { lessonCard } = window.__eaModules["js/components/lessonCard.js"];
+const { progress } = window.__eaModules["js/components/progress.js"];
+const { openTeacherPanel } = window.__eaModules["js/components/teacherPanel.js"];
+const { renderActivity } = window.__eaModules["js/activities/renderer.js"];
+const { validateLesson } = window.__eaModules["js/validation/lessonValidator.js"];
+
 const app = document.querySelector("#app");
 let page = "home";
 let longPress = null;
 const lesson = () => getLesson(state.currentLesson);
 const activityIndex = () => lessonPosition(state.currentLesson);
 const activity = () => lesson().activities[activityIndex()];
+
 function showHome() {
   page = "home"; document.querySelector(".teacher-overlay")?.remove(); app.replaceChildren();
   const home = document.createElement("section"); home.className = "home";
@@ -1717,6 +2222,7 @@ function showHome() {
   lessons.forEach((item) => grid.append(lessonCard(item, () => { openLesson(item.id); showPlayer(); }, Boolean(state.completedLessons[item.id]))));
   home.append(brand, grid); app.append(home);
 }
+
 function showPlayer() {
   page = "player"; const currentLesson = lesson(); const currentActivity = activity();
   if (!currentLesson || !currentActivity) return showHome();
@@ -1739,6 +2245,7 @@ function showPlayer() {
   title.addEventListener("pointerdown", () => { longPress = window.setTimeout(openTeacher, 1500); });
   ["pointerup", "pointerleave", "pointercancel"].forEach((event) => title.addEventListener(event, () => window.clearTimeout(longPress)));
 }
+
 function nextActivity() {
   const currentLesson = lesson(); const currentActivity = activity();
   if (!activityDone(currentLesson.id, currentActivity.id)) return;
@@ -1765,14 +2272,21 @@ function openTeacherFromShortcut() {
 }
 function button(text, label, className) { const element = document.createElement("button"); element.type = "button"; element.className = className; element.textContent = text; element.setAttribute("aria-label", label); return element; }
 
-/* js/app.js */
+Object.assign(exports, { showHome, showPlayer, nextActivity, previousActivity, markCorrect, teacherNext, showFinish, openTeacherFromShortcut });
+})(window.__eaModules["js/router.js"]);
+
+window.__eaModules["js/app.js"] = {};
+(function(exports) {
+const { openTeacherFromShortcut, showHome } = window.__eaModules["js/router.js"];
+const { lessons } = window.__eaModules["data/lessonIndex.js"];
+const { validateLessons } = window.__eaModules["js/validation/lessonValidator.js"];
+
 validateLessons(lessons.filter((lesson) => Array.isArray(lesson.activities)), { strict: true });
 
 document.addEventListener("keydown", (event) => {
   if (event.shiftKey && !event.ctrlKey && !event.metaKey && event.key.toLowerCase() === "t") { event.preventDefault(); openTeacherFromShortcut(); }
 });
 showHome();
-})();
-    </script>
-  </body>
-</html>
+
+Object.assign(exports, {  });
+})(window.__eaModules["js/app.js"]);</script></body></html>

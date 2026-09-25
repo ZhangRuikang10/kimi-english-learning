@@ -1,5 +1,8 @@
+import { lesson03Entries } from "./lesson03Entries.js";
+
 const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
 const LESSON_02_BASE = "assets/audio/lesson-02/mp3/";
+const LESSON_03_BASE = "assets/audio/lesson-03/mp3/";
 export function normalizeAudioText(text) {
   return String(text ?? "")
     .replace(/[\u2018\u2019]/g, "'")
@@ -126,6 +129,9 @@ const teachingAudioRegistry = new Map(
   ]).concat(lesson02Entries.map(([text, file]) => [
     normalizeAudioText(text),
     LESSON_02_BASE + file,
+  ])).concat(lesson03Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_03_BASE + file,
   ]))
 );
 

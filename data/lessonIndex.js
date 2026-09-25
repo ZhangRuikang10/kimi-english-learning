@@ -1,10 +1,11 @@
 import { helloLesson } from "./lessons/hello.js";
 import { coloursLesson } from "./lessons/colours.js";
+import { numbersLesson } from "./lessons/numbers.js";
 
 export const lessons = [
   helloLesson,
   coloursLesson,
-  { id: "numbers", lessonNumber: 3, title: "Numbers", icon: "🔢", locked: true },
+  numbersLesson,
   { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
 ];
 

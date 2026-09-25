@@ -14,6 +14,11 @@ export function renderLearn(stage, activity, api) {
   play.append(` ${activity.replayLabel || `Play ${activity.title}`}`);
   play.setAttribute("aria-label", activity.replayLabel || `Play ${activity.title}`);
   play.addEventListener("click", () => { replay(activity); api.complete(); });
+  if (activity.listItems?.length) {
+    const list = document.createElement("ul"); list.className = "l3-shopping-list";
+    activity.listItems.forEach((item) => { const row = document.createElement("li"); row.textContent = item; list.append(row); });
+    card.append(list);
+  }
   card.append(play);
   stage.append(card);
   card.prepend(type, title, visual);

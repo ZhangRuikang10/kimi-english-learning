@@ -4,22 +4,11 @@ import { resolveTeachingAudio } from "../data/audio/audioRegistry.js";
 let currentAudio = null;
 
 function stopCurrentPlayback() {
-  window.speechSynthesis?.cancel();
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
     currentAudio = null;
   }
-}
-
-function browserTtsFallback(text) {
-  if (!state.soundOn || !text || !("speechSynthesis" in window)) return;
-  console.warn("[Teaching audio fallback] Browser TTS used for:", text);
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-GB";
-  utterance.rate = 0.78;
-  utterance.pitch = 1.0;
-  window.speechSynthesis.speak(utterance);
 }
 
 export function playText(text, explicitSrc = null) {
@@ -29,7 +18,8 @@ export function playText(text, explicitSrc = null) {
 
   const audioSrc = explicitSrc || resolveTeachingAudio(text);
   if (!audioSrc) {
-    browserTtsFallback(text);
+    // Formal lessons never substitute browser speech synthesis for approved MP3.
+    console.warn("[Teaching audio unavailable] No approved MP3 for:", text);
     return;
   }
 
@@ -38,7 +28,6 @@ export function playText(text, explicitSrc = null) {
 
   currentAudio.play().catch((error) => {
     console.error("[Teaching audio failed]", audioSrc, error);
-    browserTtsFallback(text);
   });
 }
 

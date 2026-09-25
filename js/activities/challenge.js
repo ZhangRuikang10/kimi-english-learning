@@ -1,5 +1,3 @@
-import { renderActivity } from "./renderer.js";
-
 // Challenge only sequences activity data; it never owns choice, audio or feedback logic.
 export function renderChallenge(stage, activity, api) {
   const card = document.createElement("section"); card.className = "activity-card challenge-card activity-card--challenge";
@@ -16,7 +14,7 @@ export function renderChallenge(stage, activity, api) {
     if (item.type === "challenge") { console.error("Challenge cannot contain another challenge.", item); return; }
     count.textContent = `${index + 1} / ${activity.items.length}`;
     continueButton.hidden = true; inner.replaceChildren();
-    renderActivity(inner, item, { complete: () => { continueButton.hidden = false; continueButton.focus(); } });
+    api.renderNested(inner, item, { complete: () => { continueButton.hidden = false; continueButton.focus(); } });
   };
   continueButton.addEventListener("click", () => { index += 1; show(); });
   show();

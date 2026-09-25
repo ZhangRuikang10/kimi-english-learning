@@ -7,6 +7,7 @@ import { renderReview } from "./review.js";
 import { renderChallenge } from "./challenge.js";
 import { renderActionPrompt } from "./actionPrompt.js";
 import { renderWritingPrompt } from "./writingPrompt.js";
+import { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } from "./lesson03.js";
 
 export const renderers = {
   learn: renderLearn,
@@ -17,7 +18,13 @@ export const renderers = {
   review: renderReview,
   challenge: renderChallenge,
   actionPrompt: renderActionPrompt,
-  writingPrompt: renderWritingPrompt
+  writingPrompt: renderWritingPrompt,
+  cover: renderCover,
+  quantity: renderQuantity,
+  phraseBuilder: renderPhraseBuilder,
+  basketShop: renderBasketShop,
+  pricePlay: renderPricePlay,
+  compare: renderCompare
 };
 export function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];
@@ -26,5 +33,5 @@ export function renderActivity(stage, activity, api) {
     console.error(message, activity);
     const error = document.createElement("p"); error.className = "renderer-error"; error.textContent = message; stage.replaceChildren(error); return;
   }
-  renderer(stage, activity, api);
+  renderer(stage, activity, { ...api, renderNested: renderActivity });
 }
