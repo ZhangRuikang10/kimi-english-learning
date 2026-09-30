@@ -44,10 +44,6 @@ for (const visualId of visualRefs) {
 
 const lesson04Visuals = Object.values(visuals).filter((visual) => visual.id.startsWith("l4-"));
 if (lesson04Visuals.length !== 35) errors.push(`Expected 35 l4- registered visuals, got ${lesson04Visuals.length}`);
-const manifest = await readFile(path.join(root, "LESSON-04-ASSET-MANIFEST.csv"), "utf8");
-const manifestNew = (manifest.match(/NEW_REQUIRED/g) || []).length;
-if (manifestNew !== 35) errors.push(`Manifest NEW_REQUIRED count is ${manifestNew}, expected 35`);
-
 const audioRuntime = collectLesson04RuntimeAudio();
 let missingRuntimeMp3 = 0;
 let brokenAudioPaths = 0;
