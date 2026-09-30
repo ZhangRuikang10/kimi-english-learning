@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "build:standalone": "node scripts/build-standalone.mjs",
-    "qa:lesson03": "node scripts/lesson03-audit.mjs"
+    "qa:lesson03": "node scripts/lesson03-audit.mjs",
+    "generate:lesson04-audio": "node scripts/generate-lesson04-audio.mjs",
+    "qa:lesson04": "node scripts/lesson04-audit.mjs"
   }
 }

@@ -18,10 +18,16 @@ function validateActivity(activity, issues, location) {
   for (const field of NESTED_VISUAL_FIELDS) activity[field]?.forEach((item) => validateVisualReference(item.visualId, issues, `${location}/${activity.id}/${field}`));
   validateVisualReference(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`);
   validateVisualReference(activity.target?.visualId, issues, `${location}/${activity.id}/target`);
+  activity.zones?.forEach((zone) => validateVisualReference(zone.visualId, issues, `${location}/${activity.id}/zones`));
+  activity.parts?.forEach((part) => validateVisualReference(part.visualId, issues, `${location}/${activity.id}/parts`));
+  activity.rounds?.forEach((round) => validateVisualReference(round.visualId, issues, `${location}/${activity.id}/rounds`));
+  if (activity.type === "miniReading") validateVisualReference(activity.visualId, issues, `${location}/${activity.id}`);
   if (["learn", "speakPrompt", "actionPrompt", "writingPrompt"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
   if (["tapChoice", "listenChoose"].includes(activity.type)) activity.options?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/options`));
   if (activity.type === "review") activity.items?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/items`));
   if (activity.type === "dragDrop") { requireVisual(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`); requireVisual(activity.target?.visualId, issues, `${location}/${activity.id}/target`); }
+  if (["bodyMap", "bodyBuilder", "miniReading"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
+  if (["wordChoice", "wordBuilder"].includes(activity.type)) activity.rounds?.forEach((round) => requireVisual(round.visualId, issues, `${location}/${activity.id}/rounds`));
   if (activity.type === "challenge") activity.items?.forEach((item) => validateActivity(item, issues, `${location}/${activity.id}/challenge`));
 }
 

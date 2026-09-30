@@ -1,6 +1,7 @@
 import { replay } from "../audio.js";
 import { correct, feedbackLine, incorrect } from "../components/feedback.js";
 import { renderVisual } from "../visuals/renderVisual.js";
+import { shuffled } from "./shuffle.js";
 
 export function choiceButton(option, { showLabel = true } = {}) {
   const button = document.createElement("button");
@@ -28,12 +29,24 @@ export function compactChoiceSet(options = []) {
 export function renderTapChoice(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--tap-choice";
-  card.innerHTML = `<p class="activity-type">Play</p><h1 class="activity-heading">${activity.title}</h1>`;
+  card.innerHTML = '<p class="activity-type">Play</p>';
+  if (activity.showActivityTitle !== false) {
+    const title = document.createElement("h1");
+    title.className = "activity-heading";
+    title.textContent = activity.title;
+    card.append(title);
+  }
+  if (activity.question) {
+    const question = document.createElement("p");
+    question.className = "instruction";
+    question.textContent = activity.question;
+    card.append(question);
+  }
 
   const grid = document.createElement("div");
   grid.className = `choice-grid choice-grid--tap choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
   const feedback = feedbackLine();
-  activity.options.forEach((option) => {
+  shuffled(activity.options).forEach((option) => {
     const button = choiceButton(option, { showLabel: activity.showLabels !== false });
     button.addEventListener("click", () => {
       if (option.id === activity.correctAnswer) {

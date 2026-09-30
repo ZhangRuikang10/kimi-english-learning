@@ -8,6 +8,7 @@ import { renderChallenge } from "./challenge.js";
 import { renderActionPrompt } from "./actionPrompt.js";
 import { renderWritingPrompt } from "./writingPrompt.js";
 import { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } from "./lesson03.js";
+import { renderBodyBuilder, renderBodyMap, renderMiniReading, renderWordBuilder, renderWordChoice } from "./lesson04.js";
 
 export const renderers = {
   learn: renderLearn,
@@ -24,7 +25,12 @@ export const renderers = {
   phraseBuilder: renderPhraseBuilder,
   basketShop: renderBasketShop,
   pricePlay: renderPricePlay,
-  compare: renderCompare
+  compare: renderCompare,
+  bodyMap: renderBodyMap,
+  bodyBuilder: renderBodyBuilder,
+  wordChoice: renderWordChoice,
+  wordBuilder: renderWordBuilder,
+  miniReading: renderMiniReading
 };
 export function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];

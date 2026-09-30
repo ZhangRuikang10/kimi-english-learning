@@ -1,6 +1,7 @@
 import { replay } from "../audio.js";
 import { choiceButton, compactChoiceSet } from "./tapChoice.js";
 import { correct, feedbackLine, incorrect } from "../components/feedback.js";
+import { shuffled } from "./shuffle.js";
 
 export function renderListenChoose(stage, activity, api) {
   const card = document.createElement("section");
@@ -17,7 +18,7 @@ export function renderListenChoose(stage, activity, api) {
   const grid = document.createElement("div");
   grid.className = `choice-grid choice-grid--listen choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
   const feedback = feedbackLine();
-  activity.options.forEach((option) => {
+  shuffled(activity.options).forEach((option) => {
     const button = choiceButton(option, { showLabel: activity.showLabels === true });
     button.addEventListener("click", () => {
       if (option.id === activity.correctAnswer) {

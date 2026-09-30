@@ -1,6 +1,7 @@
 import { replay } from "../audio.js";
 import { renderVisual } from "../visuals/renderVisual.js";
 import { correct, feedbackLine } from "../components/feedback.js";
+import { shuffled } from "./shuffle.js";
 
 const element = (tag, className, value) => { const node = document.createElement(tag); node.className = className; if (value != null) node.textContent = value; return node; };
 const playButton = (activity) => { const button = element("button", "replay-button", "🔊 Listen"); button.type = "button"; button.addEventListener("click", () => replay(activity)); return button; };
@@ -27,7 +28,7 @@ export function renderQuantity(stage, activity, api) {
     groups.querySelectorAll("button").forEach((item) => item.disabled = true);
     correct(card, button, feedback, api.complete, "Great listening!");
   };
-  activity.groups.forEach((group) => {
+  shuffled(activity.groups).forEach((group) => {
     const section = element(activity.groupChoices ? "button" : "section", `l3-quantity-group${activity.groupChoices ? " l3-quantity-group--choice" : ""}`);
     if (activity.groupChoices) { section.type = "button"; section.setAttribute("aria-label", group.label); section.addEventListener("click", () => selectGroup(group, section)); }
     section.append(repeatVisuals([{ visualId: group.visualId, count: group.count }]));
@@ -38,7 +39,7 @@ export function renderQuantity(stage, activity, api) {
   card.append(element("p", "l3-question", activity.question));
   if (activity.groupChoices) { card.append(feedback); return; }
   const answer = element("div", "l3-answer-row");
-  activity.options.forEach((option) => { const button = element("button", "l3-number-choice", option.label); button.type = "button"; button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Count carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } answer.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "Great counting!"); }); answer.append(button); });
+  shuffled(activity.options).forEach((option) => { const button = element("button", "l3-number-choice", option.label); button.type = "button"; button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Count carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } answer.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "Great counting!"); }); answer.append(button); });
   card.append(answer, feedback);
   if (memoryStage) {
     const buttons = [...answer.querySelectorAll("button")];
@@ -56,7 +57,7 @@ export function renderPhraseBuilder(stage, activity, api) {
   const builderVisual = activity.quantityItems ? repeatVisuals(activity.quantityItems, "l3-builder-quantity") : renderVisual(activity.visualId, { className: "l3-builder-visual", size: "hero", decorative: true });
   card.append(playButton(activity), builderVisual);
   const sentence = element("p", "l3-built-phrase", "Choose the words."); const feedback = feedbackLine(); const selected = [];
-  activity.parts.forEach((part, partIndex) => { const row = element("div", "l3-builder-row"); part.options.forEach((option) => { const button = element("button", "l3-word-choice", option); button.type = "button"; button.addEventListener("click", () => { selected[partIndex] = option; row.querySelectorAll("button").forEach((node) => node.classList.toggle("selected", node === button)); sentence.textContent = selected.filter(Boolean).join(" "); if (selected.length === activity.parts.length && selected.every(Boolean)) { if (sentence.textContent === activity.answer) correct(card, button, feedback, api.complete, "You built it!"); else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and build the phrase."; } } }); row.append(button); }); card.append(row); }); card.append(sentence, feedback);
+  activity.parts.forEach((part, partIndex) => { const row = element("div", "l3-builder-row"); shuffled(part.options).forEach((option) => { const button = element("button", "l3-word-choice", option); button.type = "button"; button.addEventListener("click", () => { selected[partIndex] = option; row.querySelectorAll("button").forEach((node) => node.classList.toggle("selected", node === button)); sentence.textContent = selected.filter(Boolean).join(" "); if (selected.length === activity.parts.length && selected.every(Boolean)) { if (sentence.textContent === activity.answer) correct(card, button, feedback, api.complete, "You built it!"); else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and build the phrase."; } } }); row.append(button); }); card.append(row); }); card.append(sentence, feedback);
 }
 
 export function renderBasketShop(stage, activity, api) {
@@ -68,7 +69,7 @@ export function renderBasketShop(stage, activity, api) {
   const recipientStates = new Map((activity.recipients || []).map((recipient) => [recipient.id, { items: [], zone: null }]));
   const history = [];
   const updateSelectedProduct = () => productButtons.forEach(({ button, visualId }) => button.classList.toggle("is-selected", visualId === selectedProduct));
-  activity.products.forEach((item) => {
+  shuffled(activity.products).forEach((item) => {
     const button = element("button", "l3-product", item.label); button.type = "button"; button.prepend(visual(item.visualId));
     button.addEventListener("click", () => {
       if (recipientMode) { selectedProduct = item.visualId; updateSelectedProduct(); feedback.className = "feedback"; feedback.textContent = `Now choose who receives the ${item.label}.`; return; }
@@ -112,7 +113,7 @@ export function renderBasketShop(stage, activity, api) {
 
 export function renderPricePlay(stage, activity, api) {
   const card = cardShell(stage, activity, "Prices"); card.append(playButton(activity), element("p", "instruction", activity.prompt), visual(activity.visualId, "l3-price-product"));
-  const grid = element("div", "l3-money-choices"); const feedback = feedbackLine(); activity.options.forEach((option) => { const button = element("button", "l3-money-choice"); button.type = "button"; button.append(visual(option.visualId), element("span", "", option.label)); button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen to the price again."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } grid.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "That is the right price!"); }); grid.append(button); });
+  const grid = element("div", "l3-money-choices"); const feedback = feedbackLine(); shuffled(activity.options).forEach((option) => { const button = element("button", "l3-money-choice"); button.type = "button"; button.append(visual(option.visualId), element("span", "", option.label)); button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen to the price again."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } grid.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "That is the right price!"); }); grid.append(button); });
   card.append(element("p", "l3-question", activity.question));
   if (activity.modelAnswer) card.append(element("p", "l3-model-answer", activity.modelAnswer));
   if (activity.choicePrompt) card.append(element("p", "l3-choice-prompt", activity.choicePrompt));
@@ -121,5 +122,5 @@ export function renderPricePlay(stage, activity, api) {
 
 export function renderCompare(stage, activity, api) {
   const card = cardShell(stage, activity, "Think"); card.append(playButton(activity), element("p", "l3-question l3-think-question", activity.prompt)); const groups = element("div", "l3-compare-groups");
-  activity.groups.forEach((group) => { const button = element("button", "l3-compare-group"); button.type = "button"; button.setAttribute("aria-label", group.label || `${group.count} items`); button.append(repeatVisuals([{ visualId: group.visualId, count: group.count }])); button.addEventListener("click", () => { const feedback = card.querySelector(".feedback"); const accepted = activity.correctAnswers || [activity.correctAnswer]; if (!accepted.includes(group.id)) { feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; return; } correct(card, button, feedback, api.complete, "Great thinking!"); }); groups.append(button); }); card.append(groups, feedbackLine());
+  shuffled(activity.groups).forEach((group) => { const button = element("button", "l3-compare-group"); button.type = "button"; button.setAttribute("aria-label", group.label || `${group.count} items`); button.append(repeatVisuals([{ visualId: group.visualId, count: group.count }])); button.addEventListener("click", () => { const feedback = card.querySelector(".feedback"); const accepted = activity.correctAnswers || [activity.correctAnswer]; if (!accepted.includes(group.id)) { feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; return; } correct(card, button, feedback, api.complete, "Great thinking!"); }); groups.append(button); }); card.append(groups, feedbackLine());
 }

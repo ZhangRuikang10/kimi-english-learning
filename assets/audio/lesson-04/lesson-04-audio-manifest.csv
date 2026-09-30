@@ -1,0 +1,139 @@
+ID,TeachingText,Mp3File,Source,Provider,Model,Voice,Locale,ApprovalStatus,Notes
+l4-audio-1,Stand up! Show me your hands! Clap your hands! Touch your head!,assets/audio/lesson-04/mp3/stand-up-show-me-your-hands-clap-your-hands-touch-your-head.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-2,Stand up!,assets/audio/lesson-01/mp3/stand-up.mp3,REUSED_APPROVED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,REUSED_APPROVED,Exact approved match; 1 runtime use(s).
+l4-audio-3,Show me your hands!,assets/audio/lesson-04/mp3/show-me-your-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-4,Clap your hands!,assets/audio/lesson-04/mp3/clap-your-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-5,Touch your head!,assets/audio/lesson-04/mp3/touch-your-head.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,4 runtime use(s).
+l4-audio-6,This is my body. Head. Arms. Hands. Legs. Feet.,assets/audio/lesson-04/mp3/this-is-my-body-head-arms-hands-legs-feet.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-7,Touch your arms.,assets/audio/lesson-04/mp3/touch-your-arms.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-8,Touch your hands.,assets/audio/lesson-04/mp3/touch-your-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-9,Touch your tummy.,assets/audio/lesson-04/mp3/touch-your-tummy.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-10,Touch your legs.,assets/audio/lesson-04/mp3/touch-your-legs.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-11,Touch your knees.,assets/audio/lesson-04/mp3/touch-your-knees.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,3 runtime use(s).
+l4-audio-12,Touch your feet.,assets/audio/lesson-04/mp3/touch-your-feet.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-13,This is my face. Hair. Eyes. Ears. Nose. Mouth.,assets/audio/lesson-04/mp3/this-is-my-face-hair-eyes-ears-nose-mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-14,Touch the hair.,assets/audio/lesson-04/mp3/touch-the-hair.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-15,Touch the eyes.,assets/audio/lesson-04/mp3/touch-the-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-16,Touch the ears.,assets/audio/lesson-04/mp3/touch-the-ears.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-17,Touch the nose.,assets/audio/lesson-04/mp3/touch-the-nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,3 runtime use(s).
+l4-audio-18,Touch the mouth.,assets/audio/lesson-04/mp3/touch-the-mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-19,Eyes. These are my eyes.,assets/audio/lesson-04/mp3/eyes-these-are-my-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-20,Ears. These are my ears.,assets/audio/lesson-04/mp3/ears-these-are-my-ears.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-21,Nose,assets/audio/lesson-04/mp3/nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-22,Nose. This is my nose.,assets/audio/lesson-04/mp3/nose-this-is-my-nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-23,This is my nose.,assets/audio/lesson-04/mp3/this-is-my-nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-24,Mouth & Teeth,assets/audio/lesson-04/mp3/mouth-teeth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-25,Mouth.,assets/audio/lesson-04/mp3/mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-26,Teeth.,assets/audio/lesson-04/mp3/teeth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-27,Open your mouth.,assets/audio/lesson-04/mp3/open-your-mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-28,Hair & Face,assets/audio/lesson-04/mp3/hair-face.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-29,Hair.,assets/audio/lesson-04/mp3/hair.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-30,Face.,assets/audio/lesson-04/mp3/face.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-31,This is my face.,assets/audio/lesson-04/mp3/this-is-my-face.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-32,How many?,assets/audio/lesson-01/mp3/how-many.mp3,REUSED_APPROVED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,REUSED_APPROVED,Exact approved match; 1 runtime use(s).
+l4-audio-33,How many eyes do you have? Two.,assets/audio/lesson-04/mp3/how-many-eyes-do-you-have-two.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-34,How many ears do you have? Two.,assets/audio/lesson-04/mp3/how-many-ears-do-you-have-two.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-35,How many noses do you have? One.,assets/audio/lesson-04/mp3/how-many-noses-do-you-have-one.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-36,How many mouths do you have? One.,assets/audio/lesson-04/mp3/how-many-mouths-do-you-have-one.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-37,Head & Neck,assets/audio/lesson-04/mp3/head-neck.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-38,Head. This is my head.,assets/audio/lesson-04/mp3/head-this-is-my-head.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-39,Neck. This is my neck.,assets/audio/lesson-04/mp3/neck-this-is-my-neck.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-40,Shoulders & Arms,assets/audio/lesson-04/mp3/shoulders-arms.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-41,Shoulders.,assets/audio/lesson-04/mp3/shoulders.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-42,Raise your arms.,assets/audio/lesson-04/mp3/raise-your-arms.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-43,Hands & Fingers,assets/audio/lesson-04/mp3/hands-fingers.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-44,Hands.,assets/audio/lesson-04/mp3/hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-45,Fingers.,assets/audio/lesson-04/mp3/fingers.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-46,How many fingers? Five.,assets/audio/lesson-04/mp3/how-many-fingers-five.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-47,Chest & Tummy,assets/audio/lesson-04/mp3/chest-tummy.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-48,Chest.,assets/audio/lesson-04/mp3/chest.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-49,Tummy.,assets/audio/lesson-04/mp3/tummy.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-50,This is my tummy.,assets/audio/lesson-04/mp3/this-is-my-tummy.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-51,Back. This is my back.,assets/audio/lesson-04/mp3/back-this-is-my-back.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-52,Legs & Knees,assets/audio/lesson-04/mp3/legs-knees.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-53,Legs.,assets/audio/lesson-04/mp3/legs.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-54,Feet & Toes,assets/audio/lesson-04/mp3/feet-toes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-55,Foot. Feet.,assets/audio/lesson-04/mp3/foot-feet.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-56,Toes.,assets/audio/lesson-04/mp3/toes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-57,Build the body,assets/audio/lesson-04/mp3/build-the-body.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-58,This is my...,assets/audio/lesson-04/mp3/this-is-my.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-59,What's this? This is my hand.,assets/audio/lesson-04/mp3/what-s-this-this-is-my-hand.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-60,Show me your hand.,assets/audio/lesson-04/mp3/show-me-your-hand.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-61,Touch your nose.,assets/audio/lesson-04/mp3/touch-your-nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-62,Touch your neck.,assets/audio/lesson-04/mp3/touch-your-neck.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-63,Point to / Show me,assets/audio/lesson-04/mp3/point-to-show-me.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-64,Point to your ears.,assets/audio/lesson-04/mp3/point-to-your-ears.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-65,Point to your mouth.,assets/audio/lesson-04/mp3/point-to-your-mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-66,Show me your fingers.,assets/audio/lesson-04/mp3/show-me-your-fingers.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-67,Body actions,assets/audio/lesson-04/mp3/body-actions.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-68,Open your eyes.,assets/audio/lesson-04/mp3/open-your-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-69,Close your eyes.,assets/audio/lesson-04/mp3/close-your-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-70,Two steps,assets/audio/lesson-04/mp3/two-steps.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-71,Touch your head and clap your hands.,assets/audio/lesson-04/mp3/touch-your-head-and-clap-your-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-72,Touch your nose and raise your arms.,assets/audio/lesson-04/mp3/touch-your-nose-and-raise-your-arms.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-73,Touch your knees and stand up.,assets/audio/lesson-04/mp3/touch-your-knees-and-stand-up.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-74,Show me your hands and close your eyes.,assets/audio/lesson-04/mp3/show-me-your-hands-and-close-your-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-75,"Listen, remember, do",assets/audio/lesson-04/mp3/listen-remember-do.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-76,"Touch your head, touch your shoulders, and clap your hands.",assets/audio/lesson-04/mp3/touch-your-head-touch-your-shoulders-and-clap-your-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-77,"Touch your nose, touch your knees, and sit down.",assets/audio/lesson-04/mp3/touch-your-nose-touch-your-knees-and-sit-down.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-78,What do you use?,assets/audio/lesson-04/mp3/what-do-you-use.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-79,What do you use to see? Eyes.,assets/audio/lesson-04/mp3/what-do-you-use-to-see-eyes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-80,What do you use to hear? Ears.,assets/audio/lesson-04/mp3/what-do-you-use-to-hear-ears.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-81,What do you use to smell? Nose.,assets/audio/lesson-04/mp3/what-do-you-use-to-smell-nose.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-82,What do you use to eat? Mouth.,assets/audio/lesson-04/mp3/what-do-you-use-to-eat-mouth.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-83,What do you use to clap? Hands.,assets/audio/lesson-04/mp3/what-do-you-use-to-clap-hands.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-84,What do you use to walk? Legs and feet.,assets/audio/lesson-04/mp3/what-do-you-use-to-walk-legs-and-feet.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-85,Ouch! It hurts! My knee hurts.,assets/audio/lesson-04/mp3/ouch-it-hurts-my-knee-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-86,My head / eye hurts,assets/audio/lesson-04/mp3/my-head-eye-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-87,My head hurts.,assets/audio/lesson-04/mp3/my-head-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-88,My eye hurts.,assets/audio/lesson-04/mp3/my-eye-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-89,My neck / throat hurts,assets/audio/lesson-04/mp3/my-neck-throat-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-90,My neck hurts.,assets/audio/lesson-04/mp3/my-neck-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-91,My throat hurts.,assets/audio/lesson-04/mp3/my-throat-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-92,My arm / leg / knee hurts,assets/audio/lesson-04/mp3/my-arm-leg-knee-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-93,My knee hurts.,assets/audio/lesson-04/mp3/my-knee-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-94,My arm hurts.,assets/audio/lesson-04/mp3/my-arm-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-95,My leg hurts.,assets/audio/lesson-04/mp3/my-leg-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-96,My tummy hurts,assets/audio/lesson-04/mp3/my-tummy-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-97,What's wrong? My tummy hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-tummy-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,3 runtime use(s).
+l4-audio-98,My tooth / ear hurts,assets/audio/lesson-04/mp3/my-tooth-ear-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-99,My tooth hurts.,assets/audio/lesson-04/mp3/my-tooth-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-100,My ear hurts.,assets/audio/lesson-04/mp3/my-ear-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-101,Where does it hurt?,assets/audio/lesson-04/mp3/where-does-it-hurt.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-102,I have a...,assets/audio/lesson-04/mp3/i-have-a.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-103,I have a headache.,assets/audio/lesson-04/mp3/i-have-a-headache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-104,I have a stomachache.,assets/audio/lesson-04/mp3/i-have-a-stomachache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-105,I have a toothache.,assets/audio/lesson-04/mp3/i-have-a-toothache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-106,I have an earache.,assets/audio/lesson-04/mp3/i-have-an-earache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-107,I have a sore throat.,assets/audio/lesson-04/mp3/i-have-a-sore-throat.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-108,I don't feel well,assets/audio/lesson-04/mp3/i-don-t-feel-well.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-109,I'm sick.,assets/audio/lesson-04/mp3/i-m-sick.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-110,Are you okay?,assets/audio/lesson-04/mp3/are-you-okay.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-111,"Are you okay? Yes, I'm okay.",assets/audio/lesson-04/mp3/are-you-okay-yes-i-m-okay.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-112,Are you okay? No. I don't feel well.,assets/audio/lesson-04/mp3/are-you-okay-no-i-don-t-feel-well.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-113,What's wrong?,assets/audio/lesson-04/mp3/what-s-wrong.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s). Targeted TTS guidance applied.
+l4-audio-114,What's wrong? My head hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-head-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-115,What's wrong? My eye hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-eye-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-116,What's wrong? My ear hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-ear-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-117,What's wrong? My neck hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-neck-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-118,What's wrong? My leg hurts.,assets/audio/lesson-04/mp3/what-s-wrong-my-leg-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-119,Does it hurt?,assets/audio/lesson-04/mp3/does-it-hurt.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-120,Does your head hurt? Yes.,assets/audio/lesson-04/mp3/does-your-head-hurt-yes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-121,Does your tummy hurt? Yes.,assets/audio/lesson-04/mp3/does-your-tummy-hurt-yes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-122,Does your ear hurt? Yes.,assets/audio/lesson-04/mp3/does-your-ear-hurt-yes.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-123,At the doctor,assets/audio/lesson-04/mp3/at-the-doctor.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-124,Doctor: Hello!,assets/audio/lesson-04/mp3/doctor-hello.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,2 runtime use(s).
+l4-audio-125,The /h/ sound,assets/audio/lesson-04/mp3/the-h-sound.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-126,/h/ — head. /h/ — hair. /h/ — hand.,assets/audio/lesson-04/mp3/h-head-h-hair-h-hand.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-127,/h/ — hair.,assets/audio/lesson-04/mp3/h-hair.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-128,/h/ — hand.,assets/audio/lesson-04/mp3/h-hand.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-129,Build the word,assets/audio/lesson-04/mp3/build-the-word.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-130,Body detective,assets/audio/lesson-04/mp3/body-detective.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-131,Find the girl whose tummy hurts.,assets/audio/lesson-04/mp3/find-the-girl-whose-tummy-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-132,Find the girl with an earache.,assets/audio/lesson-04/mp3/find-the-girl-with-an-earache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-133,Find the boy whose knee hurts.,assets/audio/lesson-04/mp3/find-the-boy-whose-knee-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-134,Find the boy whose head hurts.,assets/audio/lesson-04/mp3/find-the-boy-whose-head-hurts.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-135,Final doctor mission,assets/audio/lesson-04/mp3/final-doctor-mission.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).
+l4-audio-136,What's your name?,assets/audio/lesson-01/mp3/whats-your-name.mp3,REUSED_APPROVED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,REUSED_APPROVED,Exact approved match; 1 runtime use(s).
+l4-audio-137,Do you have a headache?,assets/audio/lesson-04/mp3/do-you-have-a-headache.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s). Targeted TTS guidance applied.
+l4-audio-138,Thank you! Goodbye!,assets/audio/lesson-04/mp3/thank-you-goodbye.mp3,GENERATED,Google Cloud / Gemini TTS,gemini-2.5-flash-tts,Kore,en-GB,RC_PENDING_HUMAN_REVIEW,1 runtime use(s).

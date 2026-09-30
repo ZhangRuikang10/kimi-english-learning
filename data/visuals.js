@@ -111,7 +111,42 @@ export const visuals = {
   ,"l3-euro-2": { id: "l3-euro-2", type: "image", src: "assets/images/lesson-03/money/euro-2.svg", alt: "Two euros", concept: "two euros", approved: true }
   ,"l3-euro-5": { id: "l3-euro-5", type: "image", src: "assets/images/lesson-03/money/euro-5.svg", alt: "Five euros", concept: "five euros", approved: true }
   ,"l3-euro-3": { id: "l3-euro-3", type: "image", src: "assets/images/lesson-03/money/euro-3.svg", alt: "Three euros", concept: "three euros", approved: true }
-  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true }
+  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true },
+  "l4-tom-touching-face": { id: "l4-tom-touching-face", type: "image", src: "assets/images/lesson-04/characters/tom/tom-touching-face.png", alt: "Tom touching his face with one finger", concept: "touch your face", approved: true },
+  "l4-mia-pointing-shoulder": { id: "l4-mia-pointing-shoulder", type: "image", src: "assets/images/lesson-04/characters/mia/mia-pointing-shoulder.png", alt: "Mia pointing clearly to her shoulder", concept: "shoulder", approved: true },
+  "l4-tom-face": { id: "l4-tom-face", type: "image", src: "assets/images/lesson-04/body/face/tom-face-closeup.png", alt: "Tom showing his face clearly in close-up", concept: "face", approved: true },
+  "l4-mia-hair": { id: "l4-mia-hair", type: "image", src: "assets/images/lesson-04/body/face/mia-hair-closeup.png", alt: "Mia showing her hair clearly", concept: "hair", approved: true },
+  "l4-tom-eyes": { id: "l4-tom-eyes", type: "image", src: "assets/images/lesson-04/body/face/tom-eye-closeup.png", alt: "Tom showing both eyes clearly", concept: "eyes", approved: true },
+  "l4-mia-ears": { id: "l4-mia-ears", type: "image", src: "assets/images/lesson-04/body/face/mia-ear-closeup.png", alt: "Mia showing one clear ear and its shape", concept: "ears", approved: true },
+  "l4-tom-nose": { id: "l4-tom-nose", type: "image", src: "assets/images/lesson-04/body/face/tom-nose-closeup.png", alt: "Tom showing his nose clearly", concept: "nose", approved: true },
+  "l4-mia-mouth": { id: "l4-mia-mouth", type: "image", src: "assets/images/lesson-04/body/face/mia-mouth-closeup.png", alt: "Mia showing her mouth clearly", concept: "mouth", approved: true },
+  "l4-tom-teeth": { id: "l4-tom-teeth", type: "image", src: "assets/images/lesson-04/body/face/tom-teeth-closeup.png", alt: "Tom showing several visible teeth in a smile", concept: "teeth", approved: true },
+  "l4-tom-head": { id: "l4-tom-head", type: "image", src: "assets/images/lesson-04/body/parts/tom-head.png", alt: "Tom showing his whole head including hair and face", concept: "head", approved: true },
+  "l4-mia-neck": { id: "l4-mia-neck", type: "image", src: "assets/images/lesson-04/body/parts/mia-neck.png", alt: "Mia showing the outside of her neck", concept: "neck", approved: true },
+  "l4-tom-shoulder": { id: "l4-tom-shoulder", type: "image", src: "assets/images/lesson-04/body/parts/tom-shoulder.png", alt: "Tom showing one shoulder joint", concept: "shoulders", approved: true },
+  "l4-mia-arm": { id: "l4-mia-arm", type: "image", src: "assets/images/lesson-04/body/parts/mia-arm.png", alt: "Mia showing a complete arm from shoulder to wrist", concept: "arms", approved: true },
+  "l4-tom-hand": { id: "l4-tom-hand", type: "image", src: "assets/images/lesson-04/body/parts/tom-hand.png", alt: "Tom showing an open hand with five fingers", concept: "hands", approved: true },
+  "l4-mia-finger": { id: "l4-mia-finger", type: "image", src: "assets/images/lesson-04/body/parts/mia-finger.png", alt: "Mia showing one extended finger", concept: "fingers", approved: true },
+  "l4-tom-chest": { id: "l4-tom-chest", type: "image", src: "assets/images/lesson-04/body/parts/tom-chest.png", alt: "Tom showing the upper chest area", concept: "chest", approved: true },
+  "l4-mia-tummy": { id: "l4-mia-tummy", type: "image", src: "assets/images/lesson-04/body/parts/mia-tummy.png", alt: "Mia showing the lower front tummy area", concept: "tummy", approved: true },
+  "l4-tom-back": { id: "l4-tom-back", type: "image", src: "assets/images/lesson-04/body/parts/tom-back.png", alt: "Tom showing his back from behind", concept: "back", approved: true },
+  "l4-mia-leg": { id: "l4-mia-leg", type: "image", src: "assets/images/lesson-04/body/parts/mia-leg.png", alt: "Mia showing a complete leg from hip to ankle", concept: "legs", approved: true },
+  "l4-tom-knee": { id: "l4-tom-knee", type: "image", src: "assets/images/lesson-04/body/parts/tom-knee.png", alt: "Tom showing one bent knee joint", concept: "knees", approved: true },
+  "l4-mia-foot": { id: "l4-mia-foot", type: "image", src: "assets/images/lesson-04/body/parts/mia-foot.png", alt: "Mia showing one complete bare foot", concept: "feet", approved: true },
+  "l4-tom-toe": { id: "l4-tom-toe", type: "image", src: "assets/images/lesson-04/body/parts/tom-toe.png", alt: "Tom showing separated toes at the front of a foot", concept: "toes", approved: true },
+  "l4-tom-head-hurts": { id: "l4-tom-head-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-head-hurts.png", alt: "Tom holding the side of his head with a mild uncomfortable expression", concept: "headache", approved: true },
+  "l4-mia-eye-hurts": { id: "l4-mia-eye-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-eye-hurts.png", alt: "Mia gently covering one sore eye", concept: "eye hurts", approved: true },
+  "l4-tom-neck-hurts": { id: "l4-tom-neck-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-neck-hurts.png", alt: "Tom holding the outside side of his neck below his ear", concept: "neck hurts", approved: true },
+  "l4-mia-sore-throat": { id: "l4-mia-sore-throat", type: "image", src: "assets/images/lesson-04/health/pain/mia-sore-throat.png", alt: "Mia placing a hand on the front of her throat", concept: "sore throat", approved: true },
+  "l4-tom-arm-hurts": { id: "l4-tom-arm-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-arm-hurts.png", alt: "Tom holding the middle of his arm with mild pain", concept: "arm hurts", approved: true },
+  "l4-mia-leg-hurts": { id: "l4-mia-leg-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-leg-hurts.png", alt: "Mia holding the middle of her leg with mild pain", concept: "leg hurts", approved: true },
+  "l4-tom-knee-hurts": { id: "l4-tom-knee-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-knee-hurts.png", alt: "Tom holding his knee with a mild uncomfortable expression", concept: "knee hurts", approved: true },
+  "l4-mia-tummy-hurts": { id: "l4-mia-tummy-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-tummy-hurts.png", alt: "Mia holding the lower front of her tummy with mild pain", concept: "tummy hurts", approved: true },
+  "l4-tom-toothache": { id: "l4-tom-toothache", type: "image", src: "assets/images/lesson-04/health/pain/tom-toothache.png", alt: "Tom holding his cheek beside his visible teeth", concept: "tooth hurts", approved: true },
+  "l4-mia-earache": { id: "l4-mia-earache", type: "image", src: "assets/images/lesson-04/health/pain/mia-earache.png", alt: "Mia clearly holding her ear", concept: "ear hurts", approved: true },
+  "l4-mia-feeling-sick": { id: "l4-mia-feeling-sick", type: "image", src: "assets/images/lesson-04/health/status/mia-feeling-sick.png", alt: "Mia looking mildly tired and unwell without one specific pain", concept: "not feeling well", approved: true },
+  "l4-doctor-friendly": { id: "l4-doctor-friendly", type: "image", src: "assets/images/lesson-04/characters/doctor/doctor-friendly.png", alt: "A friendly child-safe doctor smiling with a clipboard", concept: "doctor", approved: true },
+  "l4-doctor-listening": { id: "l4-doctor-listening", type: "image", src: "assets/images/lesson-04/health/doctor/doctor-listening-to-mia.png", alt: "A friendly doctor listening kindly to Mia at child eye level", concept: "doctor role play", approved: true }
 };
 
 export const getVisual = (visualId) => visuals[visualId];

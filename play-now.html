@@ -879,6 +879,79 @@ button.choice.correct:disabled { opacity: 1; }
 @media (max-width: 600px) { .l3-quantity-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }.l3-quantity-group { min-height: 122px; padding: 8px; }.l3-object { width: 36px; height: 36px; }.l3-shop-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }.l3-product { min-height: 100px; font-size: .78rem; }.l3-product .teaching-visual { width: 48px; height: 48px; }.l3-basket { min-height: 128px; }.l3-money-choice { min-width: 92px; }.l3-money-choice .teaching-visual { width: 55px; height: 55px; }.l3-delivery-targets { gap: 9px; }.l3-delivery-target { min-height: 126px; padding: 8px; font-size: .85rem; }.l3-delivery-character { width: 55px; height: 92px; }.l3-delivery-item { width: 38px; height: 38px; }.l3-think-question { font-size: 1.42rem; }.l3-speak-quantity { min-height: 126px; }.l3-speak-object { width: min(92px, 24vw); height: min(92px, 24vw); }.l3-speak-group { min-height: 105px; padding: 8px; }.l3-shopping-list { font-size: 1rem; }.review-visuals { width: 84px; }.review-visuals .review-visual { width: 34px; height: 34px; } }
 @media (max-width: 720px) { .l3-quantity-groups, .l3-compare-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }.l3-quantity-group { min-height: 122px; padding: 8px; }.l3-object { width: 36px; height: 36px; }.l3-shop-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }.l3-product { min-height: 100px; font-size: .78rem; }.l3-product .teaching-visual { width: 48px; height: 48px; } }
 
+/* Lesson 4: body maps, stable touch zones, and reading builders. */
+.activity-card--l4 { max-width: 980px; }
+.l4-body-map { position: relative; width: min(430px, 100%); aspect-ratio: 3 / 4; margin: 8px auto 18px; overflow: hidden; border: 2px solid #dfeeea; border-radius: 24px; background: linear-gradient(180deg, #f4fbfa, #fff9f1); }
+.l4-body-map:has(.l4-map-image[src*="face"]) { aspect-ratio: 1 / 1; }
+.l4-map-image { position: absolute; inset: 2%; width: 96%; height: 96%; object-fit: contain; }
+.l4-body-cards-card { max-width: 900px; }
+.l4-body-card-grid { display: grid; grid-template-columns: repeat(4, minmax(128px, 1fr)); gap: 14px; max-width: 820px; margin: 12px auto 18px; }
+.l4-body-card-grid--face { grid-template-columns: repeat(3, minmax(140px, 1fr)); max-width: 690px; }
+.l4-body-part-card { display: grid; grid-template-rows: minmax(108px, 1fr) auto; align-items: center; min-height: 176px; padding: 10px; border: 2px solid #cfe7e2; border-radius: 20px; background: #fffdf9; color: #173c4e; font: inherit; font-weight: 900; cursor: pointer; touch-action: manipulation; box-shadow: 0 3px 0 rgba(31,97,96,.08); }
+.l4-body-part-card:hover, .l4-body-part-card:focus-visible { border-color: var(--primary); background: #f2fcf8; outline: none; transform: translateY(-1px); }
+.l4-body-part-card.is-correct { border-color: var(--success); background: #e7f8eb; color: #27653a; }
+.l4-body-part-image { width: min(138px, 100%); height: 112px; object-fit: contain; margin: 0 auto; }
+.l4-body-part-label { display: block; padding-top: 5px; font-size: clamp(1rem, 2vw, 1.18rem); }
+.l4-self-touch-card { max-width: 640px; }
+.l4-self-touch-round { display: grid; justify-items: center; gap: 12px; }
+.l4-self-touch-progress { margin: 2px 0 0; color: #1b757a; font-size: .88rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.l4-self-touch-face { width: min(260px, 72vw); height: min(260px, 38vh); object-fit: contain; padding: 8px; border: 2px solid #dfeeea; border-radius: 24px; background: linear-gradient(180deg, #f4fbfa, #fff9f1); }
+.l4-self-touch-hint { margin: 0; color: #4b6674; font-weight: 800; }
+.l4-self-touch-done { min-height: 52px; }
+.l4-hotspot { position: absolute; z-index: 2; min-width: 48px; min-height: 48px; padding: 5px; border: 3px solid transparent; border-radius: 18px; background: rgba(255,255,255,.04); color: #1b5d61; font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.l4-hotspot.is-labelled { border-color: rgba(47,130,132,.32); background: rgba(255,255,255,.78); font-size: clamp(.76rem, 2vw, .94rem); }
+.l4-hotspot:hover, .l4-hotspot:focus-visible { border-color: var(--primary); background: rgba(225,247,242,.88); outline: none; }
+.l4-hotspot.is-correct { border-color: var(--success); background: rgba(209,242,216,.9); color: #27653a; }
+.l4-hotspot.is-wrong { border-color: var(--danger); background: rgba(255,225,215,.9); animation: l4-shake 180ms linear; }
+.l4-listen { min-width: 180px; }
+.l4-builder-map { margin-bottom: 12px; }
+.l4-builder-parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 760px; margin: 0 auto; }
+.l4-builder-part { display: grid; place-items: center; gap: 3px; min-height: 108px; padding: 8px; border: 2px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.l4-builder-part-image { width: 70px; height: 70px; }
+.l4-builder-part.is-selected { border-color: var(--primary); background: var(--primary-soft); box-shadow: 0 0 0 3px rgba(47,130,132,.15); }
+.l4-builder-part.is-placed { border-color: var(--success); background: var(--success-soft); opacity: .72; }
+.l4-word-visual { width: min(260px, 70vw); height: min(240px, 30vh); margin: 0 auto 12px; object-fit: contain; }
+.l4-reading-question { max-width: 760px; margin: 14px auto; padding: 14px 18px; border-radius: 18px; background: var(--accent-soft); color: #173c4e; font-size: clamp(1.25rem, 3vw, 1.8rem); font-weight: 900; }
+.l4-word-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 12px; max-width: 760px; margin: 16px auto 0; }
+.l4-word-option { min-height: 58px; padding: 12px 14px; border: 3px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); font-size: clamp(1.05rem, 2.5vw, 1.28rem); font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.l4-word-option:hover, .l4-word-option:focus-visible { border-color: var(--primary); outline: none; }
+.l4-word-option.is-correct { border-color: var(--success); background: var(--success-soft); color: #27653a; }
+.l4-word-option.is-wrong { border-color: var(--danger); background: #fff1ed; animation: l4-shake 180ms linear; }
+.l4-round-next { margin: 14px auto 0; }
+.l4-built-word { min-height: 60px; margin: 10px auto; padding: 8px 16px; border-bottom: 3px solid var(--primary); color: var(--primary); font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 1000; letter-spacing: .16em; }
+.l4-letter-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 560px; margin: 14px auto; }
+.l4-letter-button { min-width: 58px; min-height: 58px; border: 3px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); font-size: 1.45rem; font-weight: 1000; cursor: pointer; touch-action: manipulation; }
+.l4-letter-button:disabled { opacity: .42; }
+.l4-reset { margin-top: 6px; }
+.l4-reading-layout { display: grid; grid-template-columns: minmax(160px, 250px) minmax(260px, 1fr); align-items: center; gap: 22px; max-width: 820px; margin: 0 auto 18px; }
+.l4-reading-character { width: 100%; height: 250px; object-fit: contain; }
+.l4-reading-text { padding: 18px 22px; border: 2px solid #eadfce; border-radius: 18px; background: #fffaf2; color: #173c4e; font-size: clamp(1.12rem, 2.5vw, 1.48rem); font-weight: 800; line-height: 1.55; text-align: left; white-space: pre-line; }
+@keyframes l4-shake { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+@media (max-width: 600px) {
+  .l4-body-map { width: min(360px, 100%); }
+  .l4-body-card-grid, .l4-body-card-grid--face { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .l4-body-part-card { min-height: 158px; padding: 8px; border-radius: 17px; }
+  .l4-body-part-image { height: 100px; }
+  .l4-self-touch-face { width: min(240px, 74vw); height: min(240px, 34vh); }
+  .l4-hotspot { min-width: 50px; min-height: 50px; border-radius: 16px; }
+  .l4-hotspot.is-labelled { font-size: .72rem; }
+  .l4-builder-parts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .l4-builder-part { min-height: 94px; padding: 5px; font-size: .86rem; }
+  .l4-builder-part-image { width: 58px; height: 58px; }
+  .l4-word-visual { width: min(230px, 70vw); height: min(190px, 27vh); }
+  .l4-word-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .l4-word-option { min-height: 56px; padding: 10px 7px; font-size: 1rem; }
+  .l4-reading-layout { grid-template-columns: 1fr; gap: 10px; }
+  .l4-reading-character { width: min(190px, 55vw); height: 170px; margin: 0 auto; }
+  .l4-reading-text { font-size: 1.04rem; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .l4-body-map { width: min(330px, 42vh); }
+  .l4-word-visual { height: 28vh; }
+  .l4-reading-layout { grid-template-columns: 180px 1fr; }
+  .l4-reading-character { height: 150px; }
+}
+
 /* Lesson 3 final alignment pass: product, question and answer share one centre line. */
 .l3-price-product { display: block; width: 118px; height: 118px; margin: 6px auto 2px; }
 .l3-delivery-target { grid-template-columns: minmax(58px, 78px) minmax(54px, max-content); grid-template-rows: auto minmax(88px, 1fr); justify-content: center; }
@@ -1116,17 +1189,181 @@ const numbersLesson = {
 Object.assign(exports, { numbersLesson });
 })(window.__eaModules["data/lessons/numbers.js"]);
 
+window.__eaModules["data/lessons/body.js"] = {};
+(function(exports) {
+const learn = (id, title, visualId, ttsText = title) => ({ id, type: "learn", title, visualId, ttsText });
+const speak = (id, title, prompt, visualId, ttsText = prompt) => ({ id, type: "speakPrompt", title, prompt, visualId, ttsText, completeLabel: "I said it!", teacherNote: "Wait for the child to say the full English phrase, then confirm." });
+const action = (id, title, ttsText, visualId = "boy-child", childPrompt = "Listen. Then do it!") => ({ id, type: "actionPrompt", title, ttsText, visualId, childPrompt, completeLabel: "I did it!", teacherNote: "Play the instruction, watch the real-life action, then confirm." });
+const choice = (id, visualId, label) => ({ id, visualId, label });
+
+const faceZones = [
+  { id: "hair", label: "hair", x: 28, y: 4, w: 44, h: 25, visualId: "l4-mia-hair", ttsText: "Touch the hair." },
+  { id: "eyes", label: "eyes", x: 32, y: 28, w: 36, h: 15, visualId: "l4-tom-eyes", ttsText: "Touch the eyes." },
+  { id: "ears", label: "ears", x: 17, y: 29, w: 66, h: 20, visualId: "l4-mia-ears", ttsText: "Touch the ears." },
+  { id: "nose", label: "nose", x: 40, y: 39, w: 20, h: 19, visualId: "l4-tom-nose", ttsText: "Touch the nose." },
+  { id: "mouth", label: "mouth", x: 34, y: 55, w: 32, h: 18, visualId: "l4-mia-mouth", ttsText: "Touch the mouth." }
+];
+
+const bodyZones = [
+  { id: "head", label: "head", x: 35, y: 2, w: 30, h: 20, visualId: "l4-tom-head", ttsText: "Touch your head." },
+  { id: "arms", label: "arms", x: 9, y: 29, w: 82, h: 31, visualId: "l4-mia-arm", ttsText: "Touch your arms." },
+  { id: "hands", label: "hands", x: 5, y: 53, w: 90, h: 22, visualId: "l4-tom-hand", ttsText: "Touch your hands." },
+  { id: "tummy", label: "tummy", x: 34, y: 37, w: 32, h: 20, visualId: "l4-mia-tummy", ttsText: "Touch your tummy." },
+  { id: "legs", label: "legs", x: 31, y: 58, w: 38, h: 30, visualId: "l4-mia-leg", ttsText: "Touch your legs." },
+  { id: "knees", label: "knees", x: 28, y: 72, w: 44, h: 17, visualId: "l4-tom-knee", ttsText: "Touch your knees." },
+  { id: "feet", label: "feet", x: 22, y: 87, w: 56, h: 12, visualId: "l4-mia-foot", ttsText: "Touch your feet." }
+];
+const bodyTouchZones = [...bodyZones, { id: "nose", label: "nose", x: 39, y: 18, w: 22, h: 10, visualId: "l4-tom-nose", ttsText: "Touch your nose." }, { id: "neck", label: "neck", x: 39, y: 21, w: 22, h: 10, visualId: "l4-mia-neck", ttsText: "Touch your neck." }];
+
+const pain = {
+  head: "l4-tom-head-hurts", eye: "l4-mia-eye-hurts", neck: "l4-tom-neck-hurts", throat: "l4-mia-sore-throat",
+  arm: "l4-tom-arm-hurts", leg: "l4-mia-leg-hurts", knee: "l4-tom-knee-hurts", tummy: "l4-mia-tummy-hurts",
+  tooth: "l4-tom-toothache", ear: "l4-mia-earache"
+};
+
+const bodyFunctionChoices = (id, question, options, correctAnswer, ttsText) => ({ id, type: "tapChoice", title: "What do you use?", showActivityTitle: false, question, ttsText, options, correctAnswer, showLabels: true });
+
+const bodyLesson = {
+  id: "body",
+  lessonNumber: 4,
+  title: "My Body & I Don't Feel Well",
+  icon: "🖐️",
+  activities: [
+    { id: "01-ready-to-move", type: "challenge", title: "Ready to move?", ttsText: "Stand up! Show me your hands! Clap your hands! Touch your head!", items: [
+      action("01a-stand", "Stand up!", "Stand up!", "child-standing"), action("01b-show-hands", "Show me your hands!", "Show me your hands!", "l4-tom-hand"), action("01c-clap", "Clap your hands!", "Clap your hands!", "child-standing"), action("01d-touch-head", "Touch your head!", "Touch your head!", "l4-tom-touching-face")
+    ] },
+    { id: "02-my-body", type: "bodyMap", title: "My Body", mode: "learn", presentation: "cards", visualId: "boy-child", zones: bodyZones, targets: ["head", "arms", "hands", "legs", "feet"], ttsText: "This is my body. Head. Arms. Hands. Legs. Feet." },
+    { id: "03-my-face", type: "bodyMap", title: "My Face", mode: "learn", presentation: "cards", visualId: "l4-tom-face", zones: faceZones, targets: faceZones.map((zone) => zone.id), ttsText: "This is my face. Hair. Eyes. Ears. Nose. Mouth." },
+    learn("04-eyes", "Eyes", "l4-tom-eyes", "Eyes. These are my eyes."),
+    learn("05-ears", "Ears", "l4-mia-ears", "Ears. These are my ears."),
+    { id: "06-nose", type: "challenge", title: "Nose", items: [learn("06a-learn", "Nose", "l4-tom-nose", "Nose. This is my nose."), speak("06b-speak", "This is my nose.", "This is my nose.", "l4-tom-nose")] },
+    { id: "07-mouth-teeth", type: "challenge", title: "Mouth & Teeth", items: [learn("07a-mouth", "Mouth", "l4-mia-mouth", "Mouth."), learn("07b-teeth", "Teeth", "l4-tom-teeth", "Teeth."), action("07c-open", "Open your mouth.", "Open your mouth.", "l4-mia-mouth")] },
+    { id: "08-hair-face", type: "challenge", title: "Hair & Face", items: [learn("08a-hair", "Hair", "l4-mia-hair", "Hair."), learn("08b-face", "Face", "l4-tom-face", "Face."), speak("08c-speak", "This is my face.", "This is my face.", "l4-tom-face")] },
+    { id: "09-touch-your-face", type: "wordChoice", title: "Touch your face", displayLabel: "Listen and choose", visualId: "l4-tom-face", ttsText: "Touch the nose.", rounds: [
+      { id: "nose", visualId: "l4-tom-nose", question: "Listen and choose the face word.", options: ["eyes", "nose", "mouth"], correctAnswer: "nose", ttsText: "Touch the nose." },
+      { id: "eyes", visualId: "l4-tom-eyes", question: "Listen and choose the face word.", options: ["ears", "eyes", "hair"], correctAnswer: "eyes", ttsText: "Touch the eyes." },
+      { id: "ears", visualId: "l4-mia-ears", question: "Listen and choose the face word.", options: ["mouth", "nose", "ears"], correctAnswer: "ears", ttsText: "Touch the ears." },
+      { id: "mouth", visualId: "l4-mia-mouth", question: "Listen and choose the face word.", options: ["hair", "mouth", "eyes"], correctAnswer: "mouth", ttsText: "Touch the mouth." },
+      { id: "hair", visualId: "l4-mia-hair", question: "Listen and choose the face word.", options: ["ears", "hair", "nose"], correctAnswer: "hair", ttsText: "Touch the hair." }
+    ] },
+    { id: "10-how-many", type: "wordChoice", title: "How many?", rounds: [
+      { id: "eyes", visualId: "l4-tom-eyes", question: "How many eyes do you have?", options: ["One", "Two"], correctAnswer: "Two", ttsText: "How many eyes do you have? Two." },
+      { id: "ears", visualId: "l4-mia-ears", question: "How many ears do you have?", options: ["One", "Two"], correctAnswer: "Two", ttsText: "How many ears do you have? Two." },
+      { id: "nose", visualId: "l4-tom-nose", question: "How many noses do you have?", options: ["One", "Two"], correctAnswer: "One", ttsText: "How many noses do you have? One." },
+      { id: "mouth", visualId: "l4-mia-mouth", question: "How many mouths do you have?", options: ["One", "Two"], correctAnswer: "One", ttsText: "How many mouths do you have? One." }
+    ] },
+    { id: "11-head-neck", type: "challenge", title: "Head & Neck", items: [learn("11a-head", "Head", "l4-tom-head", "Head. This is my head."), learn("11b-neck", "Neck", "l4-mia-neck", "Neck. This is my neck.")] },
+    { id: "12-shoulders-arms", type: "challenge", title: "Shoulders & Arms", items: [learn("12a-shoulders", "Shoulders", "l4-tom-shoulder", "Shoulders."), action("12b-arms", "Raise your arms.", "Raise your arms.", "l4-mia-arm")] },
+    { id: "13-hands-fingers", type: "challenge", title: "Hands & Fingers", items: [learn("13a-hands", "Hands", "l4-tom-hand", "Hands."), learn("13b-fingers", "Fingers", "l4-mia-finger", "Fingers."), { id: "13c-count", type: "wordChoice", rounds: [{ id: "fingers", visualId: "l4-tom-hand", question: "How many fingers?", options: ["Five", "Two"], correctAnswer: "Five", ttsText: "How many fingers? Five." }] }] },
+    { id: "14-chest-tummy", type: "challenge", title: "Chest & Tummy", items: [learn("14a-chest", "Chest", "l4-tom-chest", "Chest."), learn("14b-tummy", "Tummy", "l4-mia-tummy", "Tummy."), speak("14c-speak", "This is my tummy.", "This is my tummy.", "l4-mia-tummy")] },
+    learn("15-back", "Back", "l4-tom-back", "Back. This is my back."),
+    { id: "16-legs-knees", type: "challenge", title: "Legs & Knees", items: [learn("16a-legs", "Legs", "l4-mia-leg", "Legs."), action("16b-knees", "Touch your knees.", "Touch your knees.", "l4-tom-knee")] },
+    { id: "17-feet-toes", type: "challenge", title: "Feet & Toes", items: [learn("17a-foot", "Foot and feet", "l4-mia-foot", "Foot. Feet."), learn("17b-toes", "Toes", "l4-tom-toe", "Toes.")] },
+    { id: "18-build-the-body", type: "wordChoice", title: "Build the body", displayLabel: "Choose", audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", rounds: [
+      { id: "head", visualId: "l4-tom-head", question: "Which body part is this?", options: ["head", "hand", "foot"], correctAnswer: "head" },
+      { id: "arms", visualId: "l4-mia-arm", question: "Which body part is this?", options: ["arms", "legs", "hands"], correctAnswer: "arms" },
+      { id: "hands", visualId: "l4-tom-hand", question: "Which body part is this?", options: ["hands", "feet", "knees"], correctAnswer: "hands" },
+      { id: "tummy", visualId: "l4-mia-tummy", question: "Which body part is this?", options: ["tummy", "chest", "back"], correctAnswer: "tummy" },
+      { id: "legs", visualId: "l4-mia-leg", question: "Which body part is this?", options: ["legs", "arms", "feet"], correctAnswer: "legs" },
+      { id: "knees", visualId: "l4-tom-knee", question: "Which body part is this?", options: ["knees", "toes", "hands"], correctAnswer: "knees" },
+      { id: "feet", visualId: "l4-mia-foot", question: "Which body part is this?", options: ["feet", "ears", "eyes"], correctAnswer: "feet" }
+    ] },
+    { id: "19-this-is-my", type: "challenge", title: "This is my...", items: [speak("19a-speak", "What's this?", "This is my hand.", "l4-tom-hand", "What's this? This is my hand."), action("19b-show", "Show me your hand.", "Show me your hand.", "l4-tom-hand", "Listen. Then show the teacher your hand.")] },
+    { id: "20-touch-your", type: "wordChoice", title: "Touch your...", displayLabel: "Listen and choose", visualId: "boy-child", ttsText: "Touch your head.", rounds: [
+      { id: "head", visualId: "l4-tom-head", question: "Listen and choose the body word.", options: ["head", "nose", "neck"], correctAnswer: "head", ttsText: "Touch your head." },
+      { id: "nose", visualId: "l4-tom-nose", question: "Listen and choose the body word.", options: ["ears", "nose", "mouth"], correctAnswer: "nose", ttsText: "Touch your nose." },
+      { id: "neck", visualId: "l4-mia-neck", question: "Listen and choose the body word.", options: ["neck", "tummy", "knee"], correctAnswer: "neck", ttsText: "Touch your neck." },
+      { id: "tummy", visualId: "l4-mia-tummy", question: "Listen and choose the body word.", options: ["chest", "tummy", "back"], correctAnswer: "tummy", ttsText: "Touch your tummy." },
+      { id: "knees", visualId: "l4-tom-knee", question: "Listen and choose the body word.", options: ["legs", "knees", "feet"], correctAnswer: "knees", ttsText: "Touch your knees." },
+      { id: "feet", visualId: "l4-mia-foot", question: "Listen and choose the body word.", options: ["hands", "toes", "feet"], correctAnswer: "feet", ttsText: "Touch your feet." }
+    ] },
+    { id: "21-point-show", type: "challenge", title: "Point to / Show me", items: [action("21a-ears", "Point to your ears.", "Point to your ears.", "l4-mia-ears"), action("21b-mouth", "Point to your mouth.", "Point to your mouth.", "l4-mia-mouth"), action("21c-hands", "Show me your hands.", "Show me your hands.", "l4-tom-hand"), action("21d-fingers", "Show me your fingers.", "Show me your fingers.", "l4-mia-finger")] },
+    { id: "22-body-actions", type: "challenge", title: "Body actions", items: [action("22a-open-eyes", "Open your eyes.", "Open your eyes.", "l4-tom-eyes"), action("22b-close-eyes", "Close your eyes.", "Close your eyes.", "l4-tom-eyes"), action("22c-open-mouth", "Open your mouth.", "Open your mouth.", "l4-mia-mouth"), action("22d-clap", "Clap your hands.", "Clap your hands.", "l4-tom-hand"), action("22e-raise", "Raise your arms.", "Raise your arms.", "l4-mia-arm")] },
+    { id: "23-two-steps", type: "challenge", title: "Two steps", items: [action("23a-head-clap", "Touch your head and clap your hands.", "Touch your head and clap your hands."), action("23b-nose-arms", "Touch your nose and raise your arms.", "Touch your nose and raise your arms."), action("23c-knees-stand", "Touch your knees and stand up.", "Touch your knees and stand up.", "child-standing"), action("23d-hands-eyes", "Show me your hands and close your eyes.", "Show me your hands and close your eyes.")] },
+    { id: "24-listen-remember-do", type: "challenge", title: "Listen, remember, do", items: [action("24a-three", "Three steps", "Touch your head, touch your shoulders, and clap your hands."), action("24b-three", "Three steps", "Touch your nose, touch your knees, and sit down.", "child-sitting")] },
+    { id: "25-what-do-you-use", type: "challenge", title: "What do you use?", items: [
+      bodyFunctionChoices("25a-see", "What do you use to see?", [choice("eyes", "l4-tom-eyes", "eyes"), choice("ears", "l4-mia-ears", "ears"), choice("nose", "l4-tom-nose", "nose")], "eyes", "What do you use to see? Eyes."),
+      bodyFunctionChoices("25b-hear", "What do you use to hear?", [choice("eyes", "l4-tom-eyes", "eyes"), choice("ears", "l4-mia-ears", "ears"), choice("mouth", "l4-mia-mouth", "mouth")], "ears", "What do you use to hear? Ears."),
+      bodyFunctionChoices("25c-smell", "What do you use to smell?", [choice("nose", "l4-tom-nose", "nose"), choice("eyes", "l4-tom-eyes", "eyes"), choice("hand", "l4-tom-hand", "hand")], "nose", "What do you use to smell? Nose."),
+      bodyFunctionChoices("25d-eat", "What do you use to eat?", [choice("mouth", "l4-mia-mouth", "mouth"), choice("ear", "l4-mia-ears", "ears"), choice("foot", "l4-mia-foot", "feet")], "mouth", "What do you use to eat? Mouth."),
+      bodyFunctionChoices("25e-clap", "What do you use to clap?", [choice("hands", "l4-tom-hand", "hands"), choice("legs", "l4-mia-leg", "legs"), choice("eyes", "l4-tom-eyes", "eyes")], "hands", "What do you use to clap? Hands."),
+      bodyFunctionChoices("25f-walk", "What do you use to walk?", [choice("legs", "l4-mia-leg", "legs"), choice("ears", "l4-mia-ears", "ears"), choice("mouth", "l4-mia-mouth", "mouth")], "legs", "What do you use to walk? Legs and feet.")
+    ] },
+    learn("26-ouch", "Ouch! It hurts!", "l4-tom-knee-hurts", "Ouch! It hurts! My knee hurts."),
+    { id: "27-head-eye-hurts", type: "challenge", title: "My head / eye hurts", items: [learn("27a-head", "My head hurts.", pain.head, "My head hurts."), learn("27b-eye", "My eye hurts.", pain.eye, "My eye hurts.")] },
+    { id: "28-neck-throat-hurts", type: "challenge", title: "My neck / throat hurts", items: [learn("28a-neck", "My neck hurts.", pain.neck, "My neck hurts."), learn("28b-throat", "My throat hurts.", pain.throat, "My throat hurts.")] },
+    { id: "29-arm-leg-knee-hurts", type: "challenge", title: "My arm / leg / knee hurts", items: [
+      { id: "29a-knee", type: "listenChoose", title: "Listen", ttsText: "My knee hurts.", options: [choice("arm", pain.arm, "arm hurts"), choice("leg", pain.leg, "leg hurts"), choice("knee", pain.knee, "knee hurts")], correctAnswer: "knee" },
+      { id: "29b-arm", type: "listenChoose", title: "Listen", ttsText: "My arm hurts.", options: [choice("arm", pain.arm, "arm hurts"), choice("leg", pain.leg, "leg hurts"), choice("knee", pain.knee, "knee hurts")], correctAnswer: "arm" },
+      { id: "29c-leg", type: "listenChoose", title: "Listen", ttsText: "My leg hurts.", options: [choice("arm", pain.arm, "arm hurts"), choice("leg", pain.leg, "leg hurts"), choice("knee", pain.knee, "knee hurts")], correctAnswer: "leg" }
+    ] },
+    { id: "30-tummy-hurts", type: "challenge", title: "My tummy hurts", items: [speak("30a-speak", "What's wrong?", "My tummy hurts.", pain.tummy, "What's wrong? My tummy hurts.")] },
+    { id: "31-tooth-ear-hurts", type: "challenge", title: "My tooth / ear hurts", items: [learn("31a-tooth", "My tooth hurts.", pain.tooth, "My tooth hurts."), learn("31b-ear", "My ear hurts.", pain.ear, "My ear hurts.")] },
+    { id: "32-where-hurt", type: "challenge", title: "Where does it hurt?", items: [
+      { id: "32a-eye", type: "listenChoose", title: "Listen", ttsText: "My eye hurts.", options: [choice("eye", pain.eye, "eye"), choice("neck", pain.neck, "neck"), choice("arm", pain.arm, "arm"), choice("tummy", pain.tummy, "tummy"), choice("leg", pain.leg, "leg")], correctAnswer: "eye" },
+      { id: "32b-neck", type: "listenChoose", title: "Listen", ttsText: "My neck hurts.", options: [choice("eye", pain.eye, "eye"), choice("neck", pain.neck, "neck"), choice("arm", pain.arm, "arm"), choice("tummy", pain.tummy, "tummy"), choice("leg", pain.leg, "leg")], correctAnswer: "neck" },
+      { id: "32c-arm", type: "listenChoose", title: "Listen", ttsText: "My arm hurts.", options: [choice("eye", pain.eye, "eye"), choice("neck", pain.neck, "neck"), choice("arm", pain.arm, "arm"), choice("tummy", pain.tummy, "tummy"), choice("leg", pain.leg, "leg")], correctAnswer: "arm" },
+      { id: "32d-tummy", type: "listenChoose", title: "Listen", ttsText: "My tummy hurts.", options: [choice("eye", pain.eye, "eye"), choice("neck", pain.neck, "neck"), choice("arm", pain.arm, "arm"), choice("tummy", pain.tummy, "tummy"), choice("leg", pain.leg, "leg")], correctAnswer: "tummy" },
+      { id: "32e-leg", type: "listenChoose", title: "Listen", ttsText: "My leg hurts.", options: [choice("eye", pain.eye, "eye"), choice("neck", pain.neck, "neck"), choice("arm", pain.arm, "arm"), choice("tummy", pain.tummy, "tummy"), choice("leg", pain.leg, "leg")], correctAnswer: "leg" }
+    ] },
+    { id: "33-i-have-a", type: "review", title: "I have a...", items: [
+      { visualId: pain.head, text: "I have a headache.", ttsText: "I have a headache." }, { visualId: pain.tummy, text: "I have a stomachache.", ttsText: "I have a stomachache." }, { visualId: pain.tooth, text: "I have a toothache.", ttsText: "I have a toothache." }, { visualId: pain.ear, text: "I have an earache.", ttsText: "I have an earache." }, { visualId: pain.throat, text: "I have a sore throat.", ttsText: "I have a sore throat." }
+    ] },
+    { id: "34-dont-feel-well", type: "challenge", title: "I don't feel well", items: [learn("34a-well", "I don't feel well.", "l4-mia-feeling-sick", "I don't feel well."), learn("34b-sick", "I'm sick.", "l4-mia-feeling-sick", "I'm sick.")] },
+    { id: "35-are-you-okay", type: "challenge", title: "Are you okay?", items: [speak("35a-yes", "Are you okay?", "Yes, I'm okay.", "boy-child", "Are you okay? Yes, I'm okay."), speak("35b-no", "Are you okay?", "No. I don't feel well.", "l4-mia-feeling-sick", "Are you okay? No. I don't feel well.")] },
+    { id: "36-whats-wrong", type: "challenge", title: "What's wrong?", items: [
+      speak("36a-head", "What's wrong?", "My head hurts.", pain.head, "What's wrong? My head hurts."), speak("36b-tummy", "What's wrong?", "My tummy hurts.", pain.tummy, "What's wrong? My tummy hurts."), speak("36c-eye", "What's wrong?", "My eye hurts.", pain.eye, "What's wrong? My eye hurts."), speak("36d-ear", "What's wrong?", "My ear hurts.", pain.ear, "What's wrong? My ear hurts."), speak("36e-neck", "What's wrong?", "My neck hurts.", pain.neck, "What's wrong? My neck hurts."), speak("36f-leg", "What's wrong?", "My leg hurts.", pain.leg, "What's wrong? My leg hurts.")
+    ] },
+    { id: "37-does-it-hurt", type: "wordChoice", title: "Does it hurt?", rounds: [
+      { id: "head", visualId: pain.head, question: "Does your head hurt?", options: ["YES", "NO"], correctAnswer: "YES", ttsText: "Does your head hurt? Yes." },
+      { id: "tummy", visualId: pain.tummy, question: "Does your tummy hurt?", options: ["YES", "NO"], correctAnswer: "YES", ttsText: "Does your tummy hurt? Yes." },
+      { id: "ear", visualId: pain.ear, question: "Does your ear hurt?", options: ["YES", "NO"], correctAnswer: "YES", ttsText: "Does your ear hurt? Yes." }
+    ] },
+    { id: "38-at-the-doctor", type: "challenge", title: "At the doctor", items: [
+      speak("38a-hello", "Doctor: Hello!", "Hello!", "l4-doctor-friendly", "Doctor: Hello!"), speak("38b-okay", "Are you okay?", "No. I don't feel well.", "l4-doctor-listening", "Are you okay? No. I don't feel well."), speak("38c-wrong", "What's wrong?", "My head hurts.", pain.head, "What's wrong? My head hurts."), speak("38d-round-two", "What's wrong?", "My tummy hurts.", pain.tummy, "What's wrong? My tummy hurts.")
+    ] },
+    { id: "39-h-sound", type: "wordChoice", title: "The /h/ sound", rounds: [
+      { id: "h", visualId: "l4-tom-head", question: "Which word starts with /h/?", options: ["head", "nose", "ear"], correctAnswer: "head", ttsText: "/h/ — head. /h/ — hair. /h/ — hand." },
+      { id: "hair", visualId: "l4-mia-hair", question: "Which word starts with /h/?", options: ["hair", "eye", "leg"], correctAnswer: "hair", ttsText: "/h/ — hair." },
+      { id: "hand", visualId: "l4-tom-hand", question: "Which word starts with /h/?", options: ["hand", "mouth", "toe"], correctAnswer: "hand", ttsText: "/h/ — hand." }
+    ] },
+    { id: "40-read-body-word", type: "wordChoice", title: "Read the body word", audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", rounds: [
+      { id: "hand", visualId: "l4-tom-hand", question: "Read the word.", options: ["hand", "nose", "leg"], correctAnswer: "hand" }, { id: "nose", visualId: "l4-tom-nose", question: "Read the word.", options: ["eye", "ear", "nose"], correctAnswer: "nose" }, { id: "foot", visualId: "l4-mia-foot", question: "Read the word.", options: ["head", "hand", "foot"], correctAnswer: "foot" }
+    ] },
+    { id: "41-build-the-word", type: "wordBuilder", title: "Build the word", rounds: [{ id: "head", visualId: "l4-tom-head", word: "HEAD", letters: ["A", "H", "D", "E"] }, { id: "hand", visualId: "l4-tom-hand", word: "HAND", letters: ["A", "H", "D", "N"] }] },
+    { id: "42-read-the-sentence", type: "wordChoice", title: "Read the sentence", nextLabel: "I said it!", audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", rounds: [
+      { id: "head", visualId: pain.head, question: "My head hurts.", options: ["My head hurts.", "My tummy hurts.", "I have a toothache."], correctAnswer: "My head hurts." }, { id: "tummy", visualId: pain.tummy, question: "My tummy hurts.", options: ["My head hurts.", "My tummy hurts.", "I don't feel well."], correctAnswer: "My tummy hurts." }, { id: "tooth", visualId: pain.tooth, question: "I have a toothache.", options: ["My ear hurts.", "I have a toothache.", "My leg hurts."], correctAnswer: "I have a toothache." }, { id: "well", visualId: "l4-mia-feeling-sick", question: "I don't feel well.", options: ["I don't feel well.", "My eye hurts.", "My neck hurts."], correctAnswer: "I don't feel well." }
+    ] },
+    { id: "43-mini-reading", type: "miniReading", title: "Mini reading", visualId: "boy-child", audioEnabled: false, audioDisposition: "INTENTIONALLY_SILENT", text: "Hi! I'm Tom.\n\nI don't feel well.\n\nMy head hurts.\n\nI have a headache.", questions: [
+      { id: "who", question: "Who is he?", options: ["Tom", "Mia"], correctAnswer: "Tom" }, { id: "okay", question: "Is Tom okay?", options: ["Yes", "No"], correctAnswer: "No" }, { id: "hurt", question: "What hurts?", options: ["His head", "His foot"], correctAnswer: "His head" }
+    ] },
+    { id: "44-body-detective", type: "challenge", title: "Body detective", items: [
+      { id: "44a-tummy", type: "listenChoose", title: "Find the child", ttsText: "Find the girl whose tummy hurts.", options: [choice("tummy", pain.tummy, "Mia"), choice("head", pain.head, "Tom")], correctAnswer: "tummy" },
+      { id: "44b-ear", type: "listenChoose", title: "Find the child", ttsText: "Find the girl with an earache.", options: [choice("ear", pain.ear, "Mia"), choice("head", pain.head, "Tom")], correctAnswer: "ear" },
+      { id: "44c-knee", type: "listenChoose", title: "Find the child", ttsText: "Find the boy whose knee hurts.", options: [choice("knee", pain.knee, "Tom"), choice("leg", pain.leg, "Mia")], correctAnswer: "knee" },
+      { id: "44d-head", type: "listenChoose", title: "Find the child", ttsText: "Find the boy whose head hurts.", options: [choice("head", pain.head, "Tom"), choice("tummy", pain.tummy, "Mia")], correctAnswer: "head" }
+    ] },
+    { id: "45-final-doctor-mission", type: "challenge", title: "Final doctor mission", items: [
+      speak("45a-hello", "Doctor: Hello!", "Hello!", "l4-doctor-friendly", "Doctor: Hello!"), speak("45b-name", "What's your name?", "My name is ...", "boy-child", "What's your name?"), speak("45c-okay", "Are you okay?", "No. I don't feel well.", "l4-mia-feeling-sick", "Are you okay?"), speak("45d-wrong", "What's wrong?", "My tummy hurts.", pain.tummy, "What's wrong?"), speak("45e-headache", "Do you have a headache?", "Yes.", pain.head, "Do you have a headache?"), speak("45f-goodbye", "Thank you! Goodbye!", "Thank you! Goodbye!", "l4-doctor-listening", "Thank you! Goodbye!")
+    ] }
+  ]
+};
+
+Object.assign(exports, { bodyLesson });
+})(window.__eaModules["data/lessons/body.js"]);
+
 window.__eaModules["data/lessonIndex.js"] = {};
 (function(exports) {
 const { helloLesson } = window.__eaModules["data/lessons/hello.js"];
 const { coloursLesson } = window.__eaModules["data/lessons/colours.js"];
 const { numbersLesson } = window.__eaModules["data/lessons/numbers.js"];
+const { bodyLesson } = window.__eaModules["data/lessons/body.js"];
 
 const lessons = [
   helloLesson,
   coloursLesson,
   numbersLesson,
-  { id: "body", lessonNumber: 4, title: "Body", icon: "🖐️", locked: true },
+  bodyLesson,
 ];
 
 const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
@@ -1232,13 +1469,159 @@ const lesson03Entries = [
 Object.assign(exports, { lesson03Entries });
 })(window.__eaModules["data/audio/lesson03Entries.js"]);
 
+window.__eaModules["data/audio/lesson04Entries.js"] = {};
+(function(exports) {
+// Generated by scripts/generate-lesson04-audio.mjs. Do not hand-edit filenames.
+const lesson04Entries = [
+  ["Stand up! Show me your hands! Clap your hands! Touch your head!", "stand-up-show-me-your-hands-clap-your-hands-touch-your-head.mp3"],
+  ["Show me your hands!", "show-me-your-hands.mp3"],
+  ["Clap your hands!", "clap-your-hands.mp3"],
+  ["Touch your head!", "touch-your-head.mp3"],
+  ["This is my body. Head. Arms. Hands. Legs. Feet.", "this-is-my-body-head-arms-hands-legs-feet.mp3"],
+  ["Touch your arms.", "touch-your-arms.mp3"],
+  ["Touch your hands.", "touch-your-hands.mp3"],
+  ["Touch your tummy.", "touch-your-tummy.mp3"],
+  ["Touch your legs.", "touch-your-legs.mp3"],
+  ["Touch your knees.", "touch-your-knees.mp3"],
+  ["Touch your feet.", "touch-your-feet.mp3"],
+  ["This is my face. Hair. Eyes. Ears. Nose. Mouth.", "this-is-my-face-hair-eyes-ears-nose-mouth.mp3"],
+  ["Touch the hair.", "touch-the-hair.mp3"],
+  ["Touch the eyes.", "touch-the-eyes.mp3"],
+  ["Touch the ears.", "touch-the-ears.mp3"],
+  ["Touch the nose.", "touch-the-nose.mp3"],
+  ["Touch the mouth.", "touch-the-mouth.mp3"],
+  ["Eyes. These are my eyes.", "eyes-these-are-my-eyes.mp3"],
+  ["Ears. These are my ears.", "ears-these-are-my-ears.mp3"],
+  ["Nose", "nose.mp3"],
+  ["Nose. This is my nose.", "nose-this-is-my-nose.mp3"],
+  ["This is my nose.", "this-is-my-nose.mp3"],
+  ["Mouth & Teeth", "mouth-teeth.mp3"],
+  ["Mouth.", "mouth.mp3"],
+  ["Teeth.", "teeth.mp3"],
+  ["Open your mouth.", "open-your-mouth.mp3"],
+  ["Hair & Face", "hair-face.mp3"],
+  ["Hair.", "hair.mp3"],
+  ["Face.", "face.mp3"],
+  ["This is my face.", "this-is-my-face.mp3"],
+  ["How many eyes do you have? Two.", "how-many-eyes-do-you-have-two.mp3"],
+  ["How many ears do you have? Two.", "how-many-ears-do-you-have-two.mp3"],
+  ["How many noses do you have? One.", "how-many-noses-do-you-have-one.mp3"],
+  ["How many mouths do you have? One.", "how-many-mouths-do-you-have-one.mp3"],
+  ["Head & Neck", "head-neck.mp3"],
+  ["Head. This is my head.", "head-this-is-my-head.mp3"],
+  ["Neck. This is my neck.", "neck-this-is-my-neck.mp3"],
+  ["Shoulders & Arms", "shoulders-arms.mp3"],
+  ["Shoulders.", "shoulders.mp3"],
+  ["Raise your arms.", "raise-your-arms.mp3"],
+  ["Hands & Fingers", "hands-fingers.mp3"],
+  ["Hands.", "hands.mp3"],
+  ["Fingers.", "fingers.mp3"],
+  ["How many fingers? Five.", "how-many-fingers-five.mp3"],
+  ["Chest & Tummy", "chest-tummy.mp3"],
+  ["Chest.", "chest.mp3"],
+  ["Tummy.", "tummy.mp3"],
+  ["This is my tummy.", "this-is-my-tummy.mp3"],
+  ["Back. This is my back.", "back-this-is-my-back.mp3"],
+  ["Legs & Knees", "legs-knees.mp3"],
+  ["Legs.", "legs.mp3"],
+  ["Feet & Toes", "feet-toes.mp3"],
+  ["Foot. Feet.", "foot-feet.mp3"],
+  ["Toes.", "toes.mp3"],
+  ["Build the body", "build-the-body.mp3"],
+  ["This is my...", "this-is-my.mp3"],
+  ["What's this? This is my hand.", "what-s-this-this-is-my-hand.mp3"],
+  ["Show me your hand.", "show-me-your-hand.mp3"],
+  ["Touch your nose.", "touch-your-nose.mp3"],
+  ["Touch your neck.", "touch-your-neck.mp3"],
+  ["Point to / Show me", "point-to-show-me.mp3"],
+  ["Point to your ears.", "point-to-your-ears.mp3"],
+  ["Point to your mouth.", "point-to-your-mouth.mp3"],
+  ["Show me your fingers.", "show-me-your-fingers.mp3"],
+  ["Body actions", "body-actions.mp3"],
+  ["Open your eyes.", "open-your-eyes.mp3"],
+  ["Close your eyes.", "close-your-eyes.mp3"],
+  ["Two steps", "two-steps.mp3"],
+  ["Touch your head and clap your hands.", "touch-your-head-and-clap-your-hands.mp3"],
+  ["Touch your nose and raise your arms.", "touch-your-nose-and-raise-your-arms.mp3"],
+  ["Touch your knees and stand up.", "touch-your-knees-and-stand-up.mp3"],
+  ["Show me your hands and close your eyes.", "show-me-your-hands-and-close-your-eyes.mp3"],
+  ["Listen, remember, do", "listen-remember-do.mp3"],
+  ["Touch your head, touch your shoulders, and clap your hands.", "touch-your-head-touch-your-shoulders-and-clap-your-hands.mp3"],
+  ["Touch your nose, touch your knees, and sit down.", "touch-your-nose-touch-your-knees-and-sit-down.mp3"],
+  ["What do you use?", "what-do-you-use.mp3"],
+  ["What do you use to see? Eyes.", "what-do-you-use-to-see-eyes.mp3"],
+  ["What do you use to hear? Ears.", "what-do-you-use-to-hear-ears.mp3"],
+  ["What do you use to smell? Nose.", "what-do-you-use-to-smell-nose.mp3"],
+  ["What do you use to eat? Mouth.", "what-do-you-use-to-eat-mouth.mp3"],
+  ["What do you use to clap? Hands.", "what-do-you-use-to-clap-hands.mp3"],
+  ["What do you use to walk? Legs and feet.", "what-do-you-use-to-walk-legs-and-feet.mp3"],
+  ["Ouch! It hurts! My knee hurts.", "ouch-it-hurts-my-knee-hurts.mp3"],
+  ["My head / eye hurts", "my-head-eye-hurts.mp3"],
+  ["My head hurts.", "my-head-hurts.mp3"],
+  ["My eye hurts.", "my-eye-hurts.mp3"],
+  ["My neck / throat hurts", "my-neck-throat-hurts.mp3"],
+  ["My neck hurts.", "my-neck-hurts.mp3"],
+  ["My throat hurts.", "my-throat-hurts.mp3"],
+  ["My arm / leg / knee hurts", "my-arm-leg-knee-hurts.mp3"],
+  ["My knee hurts.", "my-knee-hurts.mp3"],
+  ["My arm hurts.", "my-arm-hurts.mp3"],
+  ["My leg hurts.", "my-leg-hurts.mp3"],
+  ["My tummy hurts", "my-tummy-hurts.mp3"],
+  ["What's wrong? My tummy hurts.", "what-s-wrong-my-tummy-hurts.mp3"],
+  ["My tooth / ear hurts", "my-tooth-ear-hurts.mp3"],
+  ["My tooth hurts.", "my-tooth-hurts.mp3"],
+  ["My ear hurts.", "my-ear-hurts.mp3"],
+  ["Where does it hurt?", "where-does-it-hurt.mp3"],
+  ["I have a...", "i-have-a.mp3"],
+  ["I have a headache.", "i-have-a-headache.mp3"],
+  ["I have a stomachache.", "i-have-a-stomachache.mp3"],
+  ["I have a toothache.", "i-have-a-toothache.mp3"],
+  ["I have an earache.", "i-have-an-earache.mp3"],
+  ["I have a sore throat.", "i-have-a-sore-throat.mp3"],
+  ["I don't feel well", "i-don-t-feel-well.mp3"],
+  ["I'm sick.", "i-m-sick.mp3"],
+  ["Are you okay?", "are-you-okay.mp3"],
+  ["Are you okay? Yes, I'm okay.", "are-you-okay-yes-i-m-okay.mp3"],
+  ["Are you okay? No. I don't feel well.", "are-you-okay-no-i-don-t-feel-well.mp3"],
+  ["What's wrong?", "what-s-wrong.mp3"],
+  ["What's wrong? My head hurts.", "what-s-wrong-my-head-hurts.mp3"],
+  ["What's wrong? My eye hurts.", "what-s-wrong-my-eye-hurts.mp3"],
+  ["What's wrong? My ear hurts.", "what-s-wrong-my-ear-hurts.mp3"],
+  ["What's wrong? My neck hurts.", "what-s-wrong-my-neck-hurts.mp3"],
+  ["What's wrong? My leg hurts.", "what-s-wrong-my-leg-hurts.mp3"],
+  ["Does it hurt?", "does-it-hurt.mp3"],
+  ["Does your head hurt? Yes.", "does-your-head-hurt-yes.mp3"],
+  ["Does your tummy hurt? Yes.", "does-your-tummy-hurt-yes.mp3"],
+  ["Does your ear hurt? Yes.", "does-your-ear-hurt-yes.mp3"],
+  ["At the doctor", "at-the-doctor.mp3"],
+  ["Doctor: Hello!", "doctor-hello.mp3"],
+  ["The /h/ sound", "the-h-sound.mp3"],
+  ["/h/ — head. /h/ — hair. /h/ — hand.", "h-head-h-hair-h-hand.mp3"],
+  ["/h/ — hair.", "h-hair.mp3"],
+  ["/h/ — hand.", "h-hand.mp3"],
+  ["Build the word", "build-the-word.mp3"],
+  ["Body detective", "body-detective.mp3"],
+  ["Find the girl whose tummy hurts.", "find-the-girl-whose-tummy-hurts.mp3"],
+  ["Find the girl with an earache.", "find-the-girl-with-an-earache.mp3"],
+  ["Find the boy whose knee hurts.", "find-the-boy-whose-knee-hurts.mp3"],
+  ["Find the boy whose head hurts.", "find-the-boy-whose-head-hurts.mp3"],
+  ["Final doctor mission", "final-doctor-mission.mp3"],
+  ["Do you have a headache?", "do-you-have-a-headache.mp3"],
+  ["Thank you! Goodbye!", "thank-you-goodbye.mp3"],
+];
+
+Object.assign(exports, { lesson04Entries });
+})(window.__eaModules["data/audio/lesson04Entries.js"]);
+
 window.__eaModules["data/audio/audioRegistry.js"] = {};
 (function(exports) {
 const { lesson03Entries } = window.__eaModules["data/audio/lesson03Entries.js"];
+const { lesson04Entries } = window.__eaModules["data/audio/lesson04Entries.js"];
 
 const LESSON_01_BASE = "assets/audio/lesson-01/mp3/";
 const LESSON_02_BASE = "assets/audio/lesson-02/mp3/";
 const LESSON_03_BASE = "assets/audio/lesson-03/mp3/";
+const LESSON_04_BASE = "assets/audio/lesson-04/mp3/";
 function normalizeAudioText(text) {
   return String(text ?? "")
     .replace(/[\u2018\u2019]/g, "'")
@@ -1368,6 +1751,9 @@ const teachingAudioRegistry = new Map(
   ])).concat(lesson03Entries.map(([text, file]) => [
     normalizeAudioText(text),
     LESSON_03_BASE + file,
+  ])).concat(lesson04Entries.map(([text, file]) => [
+    normalizeAudioText(text),
+    LESSON_04_BASE + file,
   ]))
 );
 
@@ -1626,7 +2012,42 @@ const visuals = {
   ,"l3-euro-2": { id: "l3-euro-2", type: "image", src: "assets/images/lesson-03/money/euro-2.svg", alt: "Two euros", concept: "two euros", approved: true }
   ,"l3-euro-5": { id: "l3-euro-5", type: "image", src: "assets/images/lesson-03/money/euro-5.svg", alt: "Five euros", concept: "five euros", approved: true }
   ,"l3-euro-3": { id: "l3-euro-3", type: "image", src: "assets/images/lesson-03/money/euro-3.svg", alt: "Three euros", concept: "three euros", approved: true }
-  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true }
+  ,"l3-euro-4": { id: "l3-euro-4", type: "image", src: "assets/images/lesson-03/money/euro-4.svg", alt: "Four euros", concept: "four euros", approved: true },
+  "l4-tom-touching-face": { id: "l4-tom-touching-face", type: "image", src: "assets/images/lesson-04/characters/tom/tom-touching-face.png", alt: "Tom touching his face with one finger", concept: "touch your face", approved: true },
+  "l4-mia-pointing-shoulder": { id: "l4-mia-pointing-shoulder", type: "image", src: "assets/images/lesson-04/characters/mia/mia-pointing-shoulder.png", alt: "Mia pointing clearly to her shoulder", concept: "shoulder", approved: true },
+  "l4-tom-face": { id: "l4-tom-face", type: "image", src: "assets/images/lesson-04/body/face/tom-face-closeup.png", alt: "Tom showing his face clearly in close-up", concept: "face", approved: true },
+  "l4-mia-hair": { id: "l4-mia-hair", type: "image", src: "assets/images/lesson-04/body/face/mia-hair-closeup.png", alt: "Mia showing her hair clearly", concept: "hair", approved: true },
+  "l4-tom-eyes": { id: "l4-tom-eyes", type: "image", src: "assets/images/lesson-04/body/face/tom-eye-closeup.png", alt: "Tom showing both eyes clearly", concept: "eyes", approved: true },
+  "l4-mia-ears": { id: "l4-mia-ears", type: "image", src: "assets/images/lesson-04/body/face/mia-ear-closeup.png", alt: "Mia showing one clear ear and its shape", concept: "ears", approved: true },
+  "l4-tom-nose": { id: "l4-tom-nose", type: "image", src: "assets/images/lesson-04/body/face/tom-nose-closeup.png", alt: "Tom showing his nose clearly", concept: "nose", approved: true },
+  "l4-mia-mouth": { id: "l4-mia-mouth", type: "image", src: "assets/images/lesson-04/body/face/mia-mouth-closeup.png", alt: "Mia showing her mouth clearly", concept: "mouth", approved: true },
+  "l4-tom-teeth": { id: "l4-tom-teeth", type: "image", src: "assets/images/lesson-04/body/face/tom-teeth-closeup.png", alt: "Tom showing several visible teeth in a smile", concept: "teeth", approved: true },
+  "l4-tom-head": { id: "l4-tom-head", type: "image", src: "assets/images/lesson-04/body/parts/tom-head.png", alt: "Tom showing his whole head including hair and face", concept: "head", approved: true },
+  "l4-mia-neck": { id: "l4-mia-neck", type: "image", src: "assets/images/lesson-04/body/parts/mia-neck.png", alt: "Mia showing the outside of her neck", concept: "neck", approved: true },
+  "l4-tom-shoulder": { id: "l4-tom-shoulder", type: "image", src: "assets/images/lesson-04/body/parts/tom-shoulder.png", alt: "Tom showing one shoulder joint", concept: "shoulders", approved: true },
+  "l4-mia-arm": { id: "l4-mia-arm", type: "image", src: "assets/images/lesson-04/body/parts/mia-arm.png", alt: "Mia showing a complete arm from shoulder to wrist", concept: "arms", approved: true },
+  "l4-tom-hand": { id: "l4-tom-hand", type: "image", src: "assets/images/lesson-04/body/parts/tom-hand.png", alt: "Tom showing an open hand with five fingers", concept: "hands", approved: true },
+  "l4-mia-finger": { id: "l4-mia-finger", type: "image", src: "assets/images/lesson-04/body/parts/mia-finger.png", alt: "Mia showing one extended finger", concept: "fingers", approved: true },
+  "l4-tom-chest": { id: "l4-tom-chest", type: "image", src: "assets/images/lesson-04/body/parts/tom-chest.png", alt: "Tom showing the upper chest area", concept: "chest", approved: true },
+  "l4-mia-tummy": { id: "l4-mia-tummy", type: "image", src: "assets/images/lesson-04/body/parts/mia-tummy.png", alt: "Mia showing the lower front tummy area", concept: "tummy", approved: true },
+  "l4-tom-back": { id: "l4-tom-back", type: "image", src: "assets/images/lesson-04/body/parts/tom-back.png", alt: "Tom showing his back from behind", concept: "back", approved: true },
+  "l4-mia-leg": { id: "l4-mia-leg", type: "image", src: "assets/images/lesson-04/body/parts/mia-leg.png", alt: "Mia showing a complete leg from hip to ankle", concept: "legs", approved: true },
+  "l4-tom-knee": { id: "l4-tom-knee", type: "image", src: "assets/images/lesson-04/body/parts/tom-knee.png", alt: "Tom showing one bent knee joint", concept: "knees", approved: true },
+  "l4-mia-foot": { id: "l4-mia-foot", type: "image", src: "assets/images/lesson-04/body/parts/mia-foot.png", alt: "Mia showing one complete bare foot", concept: "feet", approved: true },
+  "l4-tom-toe": { id: "l4-tom-toe", type: "image", src: "assets/images/lesson-04/body/parts/tom-toe.png", alt: "Tom showing separated toes at the front of a foot", concept: "toes", approved: true },
+  "l4-tom-head-hurts": { id: "l4-tom-head-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-head-hurts.png", alt: "Tom holding the side of his head with a mild uncomfortable expression", concept: "headache", approved: true },
+  "l4-mia-eye-hurts": { id: "l4-mia-eye-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-eye-hurts.png", alt: "Mia gently covering one sore eye", concept: "eye hurts", approved: true },
+  "l4-tom-neck-hurts": { id: "l4-tom-neck-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-neck-hurts.png", alt: "Tom holding the outside side of his neck below his ear", concept: "neck hurts", approved: true },
+  "l4-mia-sore-throat": { id: "l4-mia-sore-throat", type: "image", src: "assets/images/lesson-04/health/pain/mia-sore-throat.png", alt: "Mia placing a hand on the front of her throat", concept: "sore throat", approved: true },
+  "l4-tom-arm-hurts": { id: "l4-tom-arm-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-arm-hurts.png", alt: "Tom holding the middle of his arm with mild pain", concept: "arm hurts", approved: true },
+  "l4-mia-leg-hurts": { id: "l4-mia-leg-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-leg-hurts.png", alt: "Mia holding the middle of her leg with mild pain", concept: "leg hurts", approved: true },
+  "l4-tom-knee-hurts": { id: "l4-tom-knee-hurts", type: "image", src: "assets/images/lesson-04/health/pain/tom-knee-hurts.png", alt: "Tom holding his knee with a mild uncomfortable expression", concept: "knee hurts", approved: true },
+  "l4-mia-tummy-hurts": { id: "l4-mia-tummy-hurts", type: "image", src: "assets/images/lesson-04/health/pain/mia-tummy-hurts.png", alt: "Mia holding the lower front of her tummy with mild pain", concept: "tummy hurts", approved: true },
+  "l4-tom-toothache": { id: "l4-tom-toothache", type: "image", src: "assets/images/lesson-04/health/pain/tom-toothache.png", alt: "Tom holding his cheek beside his visible teeth", concept: "tooth hurts", approved: true },
+  "l4-mia-earache": { id: "l4-mia-earache", type: "image", src: "assets/images/lesson-04/health/pain/mia-earache.png", alt: "Mia clearly holding her ear", concept: "ear hurts", approved: true },
+  "l4-mia-feeling-sick": { id: "l4-mia-feeling-sick", type: "image", src: "assets/images/lesson-04/health/status/mia-feeling-sick.png", alt: "Mia looking mildly tired and unwell without one specific pain", concept: "not feeling well", approved: true },
+  "l4-doctor-friendly": { id: "l4-doctor-friendly", type: "image", src: "assets/images/lesson-04/characters/doctor/doctor-friendly.png", alt: "A friendly child-safe doctor smiling with a clipboard", concept: "doctor", approved: true },
+  "l4-doctor-listening": { id: "l4-doctor-listening", type: "image", src: "assets/images/lesson-04/health/doctor/doctor-listening-to-mia.png", alt: "A friendly doctor listening kindly to Mia at child eye level", concept: "doctor role play", approved: true }
 };
 
 const getVisual = (visualId) => visuals[visualId];
@@ -1725,11 +2146,27 @@ function incorrect(button, feedback, replayText) { button.classList.add("incorre
 Object.assign(exports, { feedbackLine, correct, incorrect });
 })(window.__eaModules["js/components/feedback.js"]);
 
+window.__eaModules["js/activities/shuffle.js"] = {};
+(function(exports) {
+// Return a fresh Fisher–Yates shuffle so choice order cannot reveal the answer.
+function shuffled(items = []) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+  return result;
+}
+
+Object.assign(exports, { shuffled });
+})(window.__eaModules["js/activities/shuffle.js"]);
+
 window.__eaModules["js/activities/tapChoice.js"] = {};
 (function(exports) {
 const { replay } = window.__eaModules["js/audio.js"];
 const { correct, feedbackLine, incorrect } = window.__eaModules["js/components/feedback.js"];
 const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+const { shuffled } = window.__eaModules["js/activities/shuffle.js"];
 
 function choiceButton(option, { showLabel = true } = {}) {
   const button = document.createElement("button");
@@ -1757,12 +2194,24 @@ function compactChoiceSet(options = []) {
 function renderTapChoice(stage, activity, api) {
   const card = document.createElement("section");
   card.className = "activity-card activity-card--tap-choice";
-  card.innerHTML = `<p class="activity-type">Play</p><h1 class="activity-heading">${activity.title}</h1>`;
+  card.innerHTML = '<p class="activity-type">Play</p>';
+  if (activity.showActivityTitle !== false) {
+    const title = document.createElement("h1");
+    title.className = "activity-heading";
+    title.textContent = activity.title;
+    card.append(title);
+  }
+  if (activity.question) {
+    const question = document.createElement("p");
+    question.className = "instruction";
+    question.textContent = activity.question;
+    card.append(question);
+  }
 
   const grid = document.createElement("div");
   grid.className = `choice-grid choice-grid--tap choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
   const feedback = feedbackLine();
-  activity.options.forEach((option) => {
+  shuffled(activity.options).forEach((option) => {
     const button = choiceButton(option, { showLabel: activity.showLabels !== false });
     button.addEventListener("click", () => {
       if (option.id === activity.correctAnswer) {
@@ -1795,6 +2244,7 @@ window.__eaModules["js/activities/listenChoose.js"] = {};
 const { replay } = window.__eaModules["js/audio.js"];
 const { choiceButton, compactChoiceSet } = window.__eaModules["js/activities/tapChoice.js"];
 const { correct, feedbackLine, incorrect } = window.__eaModules["js/components/feedback.js"];
+const { shuffled } = window.__eaModules["js/activities/shuffle.js"];
 
 function renderListenChoose(stage, activity, api) {
   const card = document.createElement("section");
@@ -1811,7 +2261,7 @@ function renderListenChoose(stage, activity, api) {
   const grid = document.createElement("div");
   grid.className = `choice-grid choice-grid--listen choice-grid--count-${activity.options.length}${compactChoiceSet(activity.options) ? " choice-grid--compact" : ""}`;
   const feedback = feedbackLine();
-  activity.options.forEach((option) => {
+  shuffled(activity.options).forEach((option) => {
     const button = choiceButton(option, { showLabel: activity.showLabels === true });
     button.addEventListener("click", () => {
       if (option.id === activity.correctAnswer) {
@@ -1985,6 +2435,7 @@ window.__eaModules["js/activities/lesson03.js"] = {};
 const { replay } = window.__eaModules["js/audio.js"];
 const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
 const { correct, feedbackLine } = window.__eaModules["js/components/feedback.js"];
+const { shuffled } = window.__eaModules["js/activities/shuffle.js"];
 
 const element = (tag, className, value) => { const node = document.createElement(tag); node.className = className; if (value != null) node.textContent = value; return node; };
 const playButton = (activity) => { const button = element("button", "replay-button", "🔊 Listen"); button.type = "button"; button.addEventListener("click", () => replay(activity)); return button; };
@@ -2011,7 +2462,7 @@ function renderQuantity(stage, activity, api) {
     groups.querySelectorAll("button").forEach((item) => item.disabled = true);
     correct(card, button, feedback, api.complete, "Great listening!");
   };
-  activity.groups.forEach((group) => {
+  shuffled(activity.groups).forEach((group) => {
     const section = element(activity.groupChoices ? "button" : "section", `l3-quantity-group${activity.groupChoices ? " l3-quantity-group--choice" : ""}`);
     if (activity.groupChoices) { section.type = "button"; section.setAttribute("aria-label", group.label); section.addEventListener("click", () => selectGroup(group, section)); }
     section.append(repeatVisuals([{ visualId: group.visualId, count: group.count }]));
@@ -2022,7 +2473,7 @@ function renderQuantity(stage, activity, api) {
   card.append(element("p", "l3-question", activity.question));
   if (activity.groupChoices) { card.append(feedback); return; }
   const answer = element("div", "l3-answer-row");
-  activity.options.forEach((option) => { const button = element("button", "l3-number-choice", option.label); button.type = "button"; button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Count carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } answer.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "Great counting!"); }); answer.append(button); });
+  shuffled(activity.options).forEach((option) => { const button = element("button", "l3-number-choice", option.label); button.type = "button"; button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Count carefully."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } answer.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "Great counting!"); }); answer.append(button); });
   card.append(answer, feedback);
   if (memoryStage) {
     const buttons = [...answer.querySelectorAll("button")];
@@ -2040,7 +2491,7 @@ function renderPhraseBuilder(stage, activity, api) {
   const builderVisual = activity.quantityItems ? repeatVisuals(activity.quantityItems, "l3-builder-quantity") : renderVisual(activity.visualId, { className: "l3-builder-visual", size: "hero", decorative: true });
   card.append(playButton(activity), builderVisual);
   const sentence = element("p", "l3-built-phrase", "Choose the words."); const feedback = feedbackLine(); const selected = [];
-  activity.parts.forEach((part, partIndex) => { const row = element("div", "l3-builder-row"); part.options.forEach((option) => { const button = element("button", "l3-word-choice", option); button.type = "button"; button.addEventListener("click", () => { selected[partIndex] = option; row.querySelectorAll("button").forEach((node) => node.classList.toggle("selected", node === button)); sentence.textContent = selected.filter(Boolean).join(" "); if (selected.length === activity.parts.length && selected.every(Boolean)) { if (sentence.textContent === activity.answer) correct(card, button, feedback, api.complete, "You built it!"); else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and build the phrase."; } } }); row.append(button); }); card.append(row); }); card.append(sentence, feedback);
+  activity.parts.forEach((part, partIndex) => { const row = element("div", "l3-builder-row"); shuffled(part.options).forEach((option) => { const button = element("button", "l3-word-choice", option); button.type = "button"; button.addEventListener("click", () => { selected[partIndex] = option; row.querySelectorAll("button").forEach((node) => node.classList.toggle("selected", node === button)); sentence.textContent = selected.filter(Boolean).join(" "); if (selected.length === activity.parts.length && selected.every(Boolean)) { if (sentence.textContent === activity.answer) correct(card, button, feedback, api.complete, "You built it!"); else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen and build the phrase."; } } }); row.append(button); }); card.append(row); }); card.append(sentence, feedback);
 }
 
 function renderBasketShop(stage, activity, api) {
@@ -2052,7 +2503,7 @@ function renderBasketShop(stage, activity, api) {
   const recipientStates = new Map((activity.recipients || []).map((recipient) => [recipient.id, { items: [], zone: null }]));
   const history = [];
   const updateSelectedProduct = () => productButtons.forEach(({ button, visualId }) => button.classList.toggle("is-selected", visualId === selectedProduct));
-  activity.products.forEach((item) => {
+  shuffled(activity.products).forEach((item) => {
     const button = element("button", "l3-product", item.label); button.type = "button"; button.prepend(visual(item.visualId));
     button.addEventListener("click", () => {
       if (recipientMode) { selectedProduct = item.visualId; updateSelectedProduct(); feedback.className = "feedback"; feedback.textContent = `Now choose who receives the ${item.label}.`; return; }
@@ -2096,7 +2547,7 @@ function renderBasketShop(stage, activity, api) {
 
 function renderPricePlay(stage, activity, api) {
   const card = cardShell(stage, activity, "Prices"); card.append(playButton(activity), element("p", "instruction", activity.prompt), visual(activity.visualId, "l3-price-product"));
-  const grid = element("div", "l3-money-choices"); const feedback = feedbackLine(); activity.options.forEach((option) => { const button = element("button", "l3-money-choice"); button.type = "button"; button.append(visual(option.visualId), element("span", "", option.label)); button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen to the price again."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } grid.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "That is the right price!"); }); grid.append(button); });
+  const grid = element("div", "l3-money-choices"); const feedback = feedbackLine(); shuffled(activity.options).forEach((option) => { const button = element("button", "l3-money-choice"); button.type = "button"; button.append(visual(option.visualId), element("span", "", option.label)); button.addEventListener("click", () => { if (option.id !== activity.correctAnswer) { button.classList.add("incorrect"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen to the price again."; window.setTimeout(() => button.classList.remove("incorrect"), 520); return; } grid.querySelectorAll("button").forEach((item) => item.disabled = true); correct(card, button, feedback, api.complete, "That is the right price!"); }); grid.append(button); });
   card.append(element("p", "l3-question", activity.question));
   if (activity.modelAnswer) card.append(element("p", "l3-model-answer", activity.modelAnswer));
   if (activity.choicePrompt) card.append(element("p", "l3-choice-prompt", activity.choicePrompt));
@@ -2105,11 +2556,198 @@ function renderPricePlay(stage, activity, api) {
 
 function renderCompare(stage, activity, api) {
   const card = cardShell(stage, activity, "Think"); card.append(playButton(activity), element("p", "l3-question l3-think-question", activity.prompt)); const groups = element("div", "l3-compare-groups");
-  activity.groups.forEach((group) => { const button = element("button", "l3-compare-group"); button.type = "button"; button.setAttribute("aria-label", group.label || `${group.count} items`); button.append(repeatVisuals([{ visualId: group.visualId, count: group.count }])); button.addEventListener("click", () => { const feedback = card.querySelector(".feedback"); const accepted = activity.correctAnswers || [activity.correctAnswer]; if (!accepted.includes(group.id)) { feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; return; } correct(card, button, feedback, api.complete, "Great thinking!"); }); groups.append(button); }); card.append(groups, feedbackLine());
+  shuffled(activity.groups).forEach((group) => { const button = element("button", "l3-compare-group"); button.type = "button"; button.setAttribute("aria-label", group.label || `${group.count} items`); button.append(repeatVisuals([{ visualId: group.visualId, count: group.count }])); button.addEventListener("click", () => { const feedback = card.querySelector(".feedback"); const accepted = activity.correctAnswers || [activity.correctAnswer]; if (!accepted.includes(group.id)) { feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; return; } correct(card, button, feedback, api.complete, "Great thinking!"); }); groups.append(button); }); card.append(groups, feedbackLine());
 }
 
 Object.assign(exports, { renderCover, renderQuantity, renderPhraseBuilder, renderBasketShop, renderPricePlay, renderCompare });
 })(window.__eaModules["js/activities/lesson03.js"]);
+
+window.__eaModules["js/activities/lesson04.js"] = {};
+(function(exports) {
+const { playText, replay } = window.__eaModules["js/audio.js"];
+const { feedbackLine } = window.__eaModules["js/components/feedback.js"];
+const { renderVisual } = window.__eaModules["js/visuals/renderVisual.js"];
+const { shuffled } = window.__eaModules["js/activities/shuffle.js"];
+
+const el = (tag, className, text = "") => { const node = document.createElement(tag); node.className = className; if (text) node.textContent = text; return node; };
+const heading = (card, activity, label) => card.append(el("p", "activity-type", label), el("h1", "activity-heading", activity.title));
+const listenButton = (text, onClick) => { const button = el("button", "replay-button l4-listen", `🔊 ${text || "Listen"}`); button.type = "button"; button.addEventListener("click", onClick); return button; };
+
+function zoneButton(zone, showLabel) {
+  const button = el("button", `l4-hotspot${showLabel ? " is-labelled" : ""}`, showLabel ? zone.label : "");
+  button.type = "button";
+  button.dataset.zone = zone.id;
+  button.setAttribute("aria-label", zone.label);
+  button.style.left = `${zone.x}%`; button.style.top = `${zone.y}%`; button.style.width = `${zone.w}%`; button.style.height = `${zone.h}%`;
+  return button;
+}
+
+function renderBodyCards(stage, activity, api) {
+  const card = el("section", "activity-card activity-card--l4 l4-body-map-card l4-body-cards-card");
+  heading(card, activity, "Learn");
+  card.append(el("p", "instruction", "Tap each clear picture to learn the body word."));
+  const feedback = feedbackLine();
+  const targets = activity.targets?.length ? [...activity.targets] : activity.zones.map((zone) => zone.id);
+  const visited = new Set();
+  const grid = el("div", `l4-body-card-grid${activity.title === "My Face" ? " l4-body-card-grid--face" : ""}`);
+  const buttons = new Map();
+  activity.zones.filter((zone) => targets.includes(zone.id)).forEach((zone) => {
+    const button = el("button", "l4-body-part-card");
+    button.type = "button";
+    button.setAttribute("aria-label", `Learn ${zone.label}`);
+    button.append(renderVisual(zone.visualId, { className: "l4-body-part-image", size: "choice", decorative: true }), el("span", "l4-body-part-label", zone.label));
+    button.addEventListener("click", () => {
+      visited.add(zone.id);
+      button.classList.add("is-correct");
+      feedback.className = "feedback correct";
+      feedback.textContent = `${zone.label}.`;
+      playText(zone.ttsText || zone.label);
+      if (visited.size === targets.length) window.setTimeout(api.complete, 420);
+    });
+    buttons.set(zone.id, button);
+    grid.append(button);
+  });
+  const replay = listenButton("Hear the next body word", () => {
+    const zone = activity.zones.find((item) => targets.includes(item.id) && !visited.has(item.id));
+    playText(zone?.ttsText || activity.ttsText || activity.title);
+  });
+  card.append(grid, replay, feedback);
+  stage.append(card);
+}
+
+function renderSelfTouch(stage, activity, api) {
+  const card = el("section", "activity-card activity-card--l4 l4-body-map-card l4-self-touch-card");
+  heading(card, activity, "Listen and move");
+  card.append(el("p", "instruction", "Listen. Touch your own face. Then tell us when you did it."));
+  const round = el("div", "l4-self-touch-round");
+  const feedback = feedbackLine();
+  const targets = activity.targets?.length ? [...activity.targets] : activity.zones.map((zone) => zone.id);
+  let index = 0;
+  const playCurrent = () => {
+    const zone = activity.zones.find((item) => item.id === targets[index]);
+    playText(zone?.ttsText || activity.ttsText || activity.title);
+  };
+  const renderRound = () => {
+    round.replaceChildren();
+    const progress = el("p", "l4-self-touch-progress", `Action ${index + 1} of ${targets.length}`);
+    const face = renderVisual(activity.visualId, { className: "l4-self-touch-face", size: "hero", decorative: true });
+    const hint = el("p", "l4-self-touch-hint", "Use your own face — do not tap the picture.");
+    const listen = listenButton("Listen", playCurrent);
+    const done = el("button", "nav-button next l4-self-touch-done", "I did it!");
+    done.type = "button";
+    done.addEventListener("click", () => {
+      feedback.className = "feedback correct";
+      if (index >= targets.length - 1) {
+        feedback.textContent = "Great listening and moving!";
+        done.disabled = true;
+        window.setTimeout(api.complete, 420);
+        return;
+      }
+      feedback.textContent = "Great! Listen for the next action.";
+      index += 1;
+      renderRound();
+    });
+    round.append(progress, face, hint, listen, done);
+  };
+  renderRound();
+  card.append(round, feedback);
+  stage.append(card);
+}
+
+function renderBodyMap(stage, activity, api) {
+  if (activity.presentation === "cards") { renderBodyCards(stage, activity, api); return; }
+  if (activity.interaction === "selfTouch") { renderSelfTouch(stage, activity, api); return; }
+  const card = el("section", "activity-card activity-card--l4 l4-body-map-card");
+  heading(card, activity, activity.mode === "listen" ? "Listen and touch" : "Learn");
+  const instruction = el("p", "instruction", activity.mode === "listen" ? "Listen, then touch the right place." : "Touch each body part to learn it.");
+  const map = el("div", "l4-body-map");
+  map.append(renderVisual(activity.visualId, { className: "l4-map-image", size: "hero", decorative: true }));
+  const feedback = feedbackLine();
+  const targets = activity.targets?.length ? [...activity.targets] : activity.zones.map((zone) => zone.id);
+  let index = 0; const visited = new Set();
+  const buttons = new Map();
+  activity.zones.forEach((zone) => {
+    const button = zoneButton(zone, activity.mode !== "listen");
+    button.addEventListener("click", () => {
+      if (activity.mode === "listen") {
+        const expected = targets[index];
+        if (zone.id !== expected) { button.classList.add("is-wrong"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Listen carefully."; window.setTimeout(() => button.classList.remove("is-wrong"), 420); return; }
+        button.classList.add("is-correct"); index += 1; feedback.className = "feedback correct"; feedback.textContent = `Good! ${zone.label}.`;
+        if (index >= targets.length) { window.setTimeout(api.complete, 420); }
+        return;
+      }
+      if (!targets.includes(zone.id)) return;
+      visited.add(zone.id); button.classList.add("is-correct"); feedback.className = "feedback correct"; feedback.textContent = `${zone.label}.`;
+      playText(zone.ttsText || zone.label);
+      if (visited.size === new Set(targets).size) window.setTimeout(api.complete, 420);
+    });
+    buttons.set(zone.id, button); map.append(button);
+  });
+  const replay = listenButton(activity.mode === "listen" ? "Listen" : "Hear the body word", () => {
+    const zone = activity.zones.find((item) => item.id === (activity.mode === "listen" ? targets[index] : targets.find((id) => !visited.has(id))));
+    playText(zone?.ttsText || activity.ttsText || activity.title);
+  });
+  card.append(instruction, map, replay, feedback); stage.append(card);
+}
+
+function renderBodyBuilder(stage, activity, api) {
+  const card = el("section", "activity-card activity-card--l4 l4-body-builder-card"); heading(card, activity, "Build");
+  card.append(el("p", "instruction", "Choose a body part, then touch its place on Tom."));
+  const map = el("div", "l4-body-map l4-builder-map"); map.append(renderVisual(activity.visualId, { className: "l4-map-image", size: "hero", decorative: true }));
+  const feedback = feedbackLine(); const parts = el("div", "l4-builder-parts"); let selected = null; const placed = new Set();
+  const partButtons = new Map();
+  activity.parts.forEach((part) => {
+    const button = el("button", "l4-builder-part"); button.type = "button"; button.append(renderVisual(part.visualId, { className: "l4-builder-part-image", size: "choice", decorative: true }), el("span", "", part.label)); button.setAttribute("aria-label", `Choose ${part.label}`);
+    button.addEventListener("click", () => { if (placed.has(part.id)) return; selected = part.id; partButtons.forEach((item, id) => item.classList.toggle("is-selected", id === selected)); feedback.className = "feedback"; feedback.textContent = `Now touch the ${part.label}.`; });
+    partButtons.set(part.id, button); parts.append(button);
+  });
+  activity.zones.forEach((zone) => {
+    const button = zoneButton(zone, false); button.addEventListener("click", () => {
+      if (!selected) { feedback.className = "feedback incorrect"; feedback.textContent = "Choose a body part first."; return; }
+      if (selected !== zone.id) { button.classList.add("is-wrong"); feedback.className = "feedback incorrect"; feedback.textContent = "That is not the right place. Try again."; window.setTimeout(() => button.classList.remove("is-wrong"), 420); return; }
+      placed.add(selected); button.classList.add("is-correct"); partButtons.get(selected)?.classList.add("is-placed"); partButtons.get(selected)?.setAttribute("disabled", "true"); feedback.className = "feedback correct"; feedback.textContent = `Great — ${zone.label}.`; selected = null; partButtons.forEach((item) => item.classList.remove("is-selected")); if (placed.size === activity.parts.length) window.setTimeout(api.complete, 420);
+    }); map.append(button);
+  });
+  card.append(map, parts, feedback); stage.append(card);
+}
+
+function showWordRound(card, activity, round, api, state) {
+  card.replaceChildren(); heading(card, activity, activity.displayLabel || "Read");
+  if (round.visualId) card.append(renderVisual(round.visualId, { className: "l4-word-visual", size: "hero", decorative: true }));
+  card.append(el("p", "l4-reading-question", round.question));
+  if (activity.audioEnabled !== false && activity.audioDisposition !== "INTENTIONALLY_SILENT") card.append(listenButton("Listen", () => playText(round.ttsText || round.question)));
+  const grid = el("div", "l4-word-options"); const feedback = feedbackLine();
+  shuffled(round.options).forEach((option) => {
+    const button = el("button", "l4-word-option", option); button.type = "button"; button.addEventListener("click", () => {
+      if (option !== round.correctAnswer) { button.classList.add("is-wrong"); feedback.className = "feedback incorrect"; feedback.textContent = "Try again."; window.setTimeout(() => button.classList.remove("is-wrong"), 420); return; }
+      button.classList.add("is-correct"); grid.querySelectorAll("button").forEach((item) => { item.disabled = true; }); feedback.className = "feedback correct"; feedback.textContent = "Great reading!";
+      if (state.index >= activity.rounds.length - 1) window.setTimeout(api.complete, 420);
+      else { const next = el("button", "nav-button next l4-round-next", activity.nextLabel || "Next"); next.type = "button"; next.addEventListener("click", () => { state.index += 1; showWordRound(card, activity, activity.rounds[state.index], api, state); }); card.append(next); }
+    }); grid.append(button);
+  });
+  card.append(grid, feedback);
+}
+
+function renderWordChoice(stage, activity, api) { const card = el("section", "activity-card activity-card--l4 l4-word-choice-card"); stage.append(card); showWordRound(card, activity, activity.rounds[0], api, { index: 0 }); }
+
+function renderWordBuilder(stage, activity, api) {
+  const card = el("section", "activity-card activity-card--l4 l4-word-builder-card"); heading(card, activity, "Build"); const state = { round: 0, chosen: "" };
+  const render = () => {
+    const round = activity.rounds[state.round]; card.replaceChildren(); heading(card, activity, "Build"); card.append(renderVisual(round.visualId, { className: "l4-word-visual", size: "hero", decorative: true }), el("p", "instruction", "Tap the letters to build the word."));
+    const answer = el("div", "l4-built-word", ""); const letters = el("div", "l4-letter-buttons"); const feedback = feedbackLine();
+    round.letters.forEach((letter, index) => { const button = el("button", "l4-letter-button", letter); button.type = "button"; button.dataset.index = String(index); button.addEventListener("click", () => { if (button.disabled) return; state.chosen += letter; answer.textContent = state.chosen; button.disabled = true; if (state.chosen.length === round.word.length) { if (state.chosen === round.word) { feedback.className = "feedback correct"; feedback.textContent = "You built the word!"; letters.querySelectorAll("button").forEach((item) => item.disabled = true); if (state.round === activity.rounds.length - 1) window.setTimeout(api.complete, 520); else { const next = el("button", "nav-button next l4-round-next", "Next word"); next.type = "button"; next.addEventListener("click", () => { state.round += 1; state.chosen = ""; render(); }); card.append(next); } } else { feedback.className = "feedback incorrect"; feedback.textContent = "Try again. Reset and build it again."; } } }); letters.append(button); });
+    const reset = el("button", "replay-button l4-reset", "Reset"); reset.type = "button"; reset.addEventListener("click", render); card.append(answer, letters, reset, feedback);
+  }; render(); stage.append(card);
+}
+
+function renderMiniReading(stage, activity, api) {
+  const card = el("section", "activity-card activity-card--l4 l4-mini-reading"); const state = { index: 0 };
+  const render = () => { const question = activity.questions[state.index]; card.replaceChildren(); heading(card, activity, "Read"); const body = el("div", "l4-reading-layout"); body.append(renderVisual(activity.visualId, { className: "l4-reading-character", size: "hero", decorative: true })); const text = el("div", "l4-reading-text", activity.text); text.setAttribute("aria-label", "Reading passage"); body.append(text); card.append(body, el("p", "l4-reading-question", question.question)); const options = el("div", "l4-word-options"); const feedback = feedbackLine(); shuffled(question.options).forEach((option) => { const button = el("button", "l4-word-option", option); button.type = "button"; button.addEventListener("click", () => { if (option !== question.correctAnswer) { button.classList.add("is-wrong"); feedback.className = "feedback incorrect"; feedback.textContent = "Read it again and try."; window.setTimeout(() => button.classList.remove("is-wrong"), 420); return; } button.classList.add("is-correct"); options.querySelectorAll("button").forEach((item) => { item.disabled = true; }); feedback.className = "feedback correct"; feedback.textContent = "Great reading!"; if (state.index === activity.questions.length - 1) window.setTimeout(api.complete, 450); else { const next = el("button", "nav-button next l4-round-next", "Next question"); next.type = "button"; next.addEventListener("click", () => { state.index += 1; render(); }); card.append(next); } }); options.append(button); }); card.append(options, feedback); };
+  render(); stage.append(card);
+}
+
+Object.assign(exports, { renderBodyMap, renderBodyBuilder, renderWordChoice, renderWordBuilder, renderMiniReading });
+})(window.__eaModules["js/activities/lesson04.js"]);
 
 window.__eaModules["js/activities/renderer.js"] = {};
 (function(exports) {
@@ -2123,6 +2761,7 @@ const { renderChallenge } = window.__eaModules["js/activities/challenge.js"];
 const { renderActionPrompt } = window.__eaModules["js/activities/actionPrompt.js"];
 const { renderWritingPrompt } = window.__eaModules["js/activities/writingPrompt.js"];
 const { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } = window.__eaModules["js/activities/lesson03.js"];
+const { renderBodyBuilder, renderBodyMap, renderMiniReading, renderWordBuilder, renderWordChoice } = window.__eaModules["js/activities/lesson04.js"];
 
 const renderers = {
   learn: renderLearn,
@@ -2139,7 +2778,12 @@ const renderers = {
   phraseBuilder: renderPhraseBuilder,
   basketShop: renderBasketShop,
   pricePlay: renderPricePlay,
-  compare: renderCompare
+  compare: renderCompare,
+  bodyMap: renderBodyMap,
+  bodyBuilder: renderBodyBuilder,
+  wordChoice: renderWordChoice,
+  wordBuilder: renderWordBuilder,
+  miniReading: renderMiniReading
 };
 function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];
@@ -2176,10 +2820,16 @@ function validateActivity(activity, issues, location) {
   for (const field of NESTED_VISUAL_FIELDS) activity[field]?.forEach((item) => validateVisualReference(item.visualId, issues, `${location}/${activity.id}/${field}`));
   validateVisualReference(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`);
   validateVisualReference(activity.target?.visualId, issues, `${location}/${activity.id}/target`);
+  activity.zones?.forEach((zone) => validateVisualReference(zone.visualId, issues, `${location}/${activity.id}/zones`));
+  activity.parts?.forEach((part) => validateVisualReference(part.visualId, issues, `${location}/${activity.id}/parts`));
+  activity.rounds?.forEach((round) => validateVisualReference(round.visualId, issues, `${location}/${activity.id}/rounds`));
+  if (activity.type === "miniReading") validateVisualReference(activity.visualId, issues, `${location}/${activity.id}`);
   if (["learn", "speakPrompt", "actionPrompt", "writingPrompt"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
   if (["tapChoice", "listenChoose"].includes(activity.type)) activity.options?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/options`));
   if (activity.type === "review") activity.items?.forEach((item) => requireVisual(item.visualId, issues, `${location}/${activity.id}/items`));
   if (activity.type === "dragDrop") { requireVisual(activity.draggable?.visualId, issues, `${location}/${activity.id}/draggable`); requireVisual(activity.target?.visualId, issues, `${location}/${activity.id}/target`); }
+  if (["bodyMap", "bodyBuilder", "miniReading"].includes(activity.type)) requireVisual(activity.visualId, issues, `${location}/${activity.id}`);
+  if (["wordChoice", "wordBuilder"].includes(activity.type)) activity.rounds?.forEach((round) => requireVisual(round.visualId, issues, `${location}/${activity.id}/rounds`));
   if (activity.type === "challenge") activity.items?.forEach((item) => validateActivity(item, issues, `${location}/${activity.id}/challenge`));
 }
 
