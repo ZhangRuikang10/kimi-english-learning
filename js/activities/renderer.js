@@ -9,6 +9,7 @@ import { renderActionPrompt } from "./actionPrompt.js";
 import { renderWritingPrompt } from "./writingPrompt.js";
 import { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } from "./lesson03.js";
 import { renderBodyBuilder, renderBodyMap, renderMiniReading, renderWordBuilder, renderWordChoice } from "./lesson04.js";
+import { renderPhonicsPractice } from "./phonicsPractice.js";
 
 export const renderers = {
   learn: renderLearn,
@@ -30,7 +31,8 @@ export const renderers = {
   bodyBuilder: renderBodyBuilder,
   wordChoice: renderWordChoice,
   wordBuilder: renderWordBuilder,
-  miniReading: renderMiniReading
+  miniReading: renderMiniReading,
+  phonicsPractice: renderPhonicsPractice
 };
 export function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];

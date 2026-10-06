@@ -1,5 +1,5 @@
 import { getLesson, lessons } from "../data/lessonIndex.js";
-import { replay } from "./audio.js";
+import { replay, stopTeachingAudio } from "./audio.js";
 import { activityDone, lessonPosition, markActivityDone, openLesson, patch, resetLesson, setLessonPosition, state } from "./store.js";
 import { lessonCard } from "./components/lessonCard.js";
 import { progress } from "./components/progress.js";
@@ -24,7 +24,7 @@ export function showHome() {
 }
 
 export function showPlayer() {
-  page = "player"; const currentLesson = lesson(); const currentActivity = activity();
+  stopTeachingAudio(); page = "player"; const currentLesson = lesson(); const currentActivity = activity();
   if (!currentLesson || !currentActivity) return showHome();
   validateLesson(currentLesson, { strict: true });
   app.replaceChildren(); const player = document.createElement("section"); player.className = "player";
@@ -38,9 +38,11 @@ export function showPlayer() {
   const replayButton = button("🔊", "Replay audio", "replay-button");
   const next = button("›", "Next", "nav-button next"); next.innerHTML = '<span>Next</span><span aria-hidden="true">›</span>';
   const center = document.createElement("div"); center.className = "bottom-center"; center.append(replayButton); footer.append(previous, center, next); player.append(header, stage, footer); app.append(player);
-  const complete = () => { markActivityDone(currentLesson.id, currentActivity.id); next.disabled = false; };
-  renderActivity(stage, currentActivity, { complete });
-  back.addEventListener("click", showHome); replayButton.addEventListener("click", () => replay(currentActivity)); previous.addEventListener("click", previousActivity); next.addEventListener("click", nextActivity); next.disabled = !activityDone(currentLesson.id, currentActivity.id);
+  const complete = () => { markActivityDone(currentLesson.id, currentActivity.id); if (currentActivity.type === "phonicsPractice" && currentActivity.mode === "finish") { state.completedLessons[currentLesson.id] = true; patch({}); } next.disabled = false; };
+  renderActivity(stage, currentActivity, { complete, home: showHome, restart: () => { resetLesson(currentLesson.id); showPlayer(); } });
+  if (currentActivity.type === "phonicsPractice") replayButton.hidden = true;
+  if (currentActivity.type === "phonicsPractice" && currentActivity.mode === "finish") { previous.hidden = true; next.hidden = true; }
+  back.addEventListener("click", () => { stopTeachingAudio(); showHome(); }); replayButton.addEventListener("click", () => replay(currentActivity)); previous.addEventListener("click", previousActivity); next.addEventListener("click", nextActivity); next.disabled = !activityDone(currentLesson.id, currentActivity.id);
   const openTeacher = () => openTeacherPanel({ lesson: currentLesson, activity: currentActivity, onPrevious: previousActivity, onNext: teacherNext, onMarkCorrect: markCorrect, onTryAgain: showPlayer, onClose: () => {}, onHome: showHome });
   title.addEventListener("pointerdown", () => { longPress = window.setTimeout(openTeacher, 1500); });
   ["pointerup", "pointerleave", "pointercancel"].forEach((event) => title.addEventListener(event, () => window.clearTimeout(longPress)));

@@ -959,6 +959,49 @@ button.choice.correct:disabled { opacity: 1; }
 .l3-delivery-character { grid-column: 1; grid-row: 2; justify-self: center; align-self: center; width: 78px; height: 102px; }
 .l3-delivery-items { grid-column: 2; grid-row: 2; min-width: 54px; justify-content: center; }
 @media (max-width: 600px) { .l3-delivery-character { width: 55px; height: 84px; } }
+
+/* Lesson 5: text-first phonics decoding. No picture or vocabulary-card cueing. */
+.phonics-card { width: min(880px, 100%); min-height: min(610px, 72vh); display: grid; align-content: center; justify-items: center; gap: 14px; text-align: center; }
+.phonics-card .activity-heading { margin-bottom: 0; }
+.phonics-meter { margin: 0; color: var(--primary); font-weight: 1000; letter-spacing: .06em; }
+.phonics-rounds { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.phonics-round { padding: 5px 9px; border-radius: 999px; background: #f0ede7; color: #7b8587; font-size: .8rem; font-weight: 900; }
+.phonics-round.is-current { background: var(--primary-soft); color: #1f6262; }
+.phonics-round.is-done { background: var(--success-soft); color: #357244; }
+.phonics-vowel-head { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.phonics-vowel-letter { color: #173c4e; font-size: clamp(2rem, 5vw, 3.35rem); font-weight: 1000; letter-spacing: -.06em; }
+.phonics-vowel-sound { color: var(--accent); font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 1000; }
+.phonics-task-title { margin: 2px 0 -4px; color: #1e5265; font-size: clamp(1.15rem, 2.7vw, 1.6rem); }
+.phonics-word { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 5vw, 54px); min-height: clamp(100px, 16vw, 154px); color: #173c4e; font-size: clamp(4.8rem, 14vw, 9rem); font-weight: 1000; letter-spacing: -.085em; line-height: .9; }
+.phonics-letter { display: inline-grid; min-width: .63em; place-items: center; border-bottom: 5px solid transparent; transition: transform 220ms ease, color 220ms ease, background 220ms ease; }
+.phonics-letter.is-target { padding: 0 .08em .04em; border-bottom-color: var(--accent); border-radius: .15em; background: var(--accent-soft); color: #bd6423; }
+.phonics-word.is-blending { gap: .02em; }
+.phonics-word.is-blending .phonics-letter { animation: phonics-blend 720ms ease both; animation-delay: calc(var(--letter-index) * 120ms); }
+.phonics-helper { max-width: 540px; margin: 0; color: var(--muted); font-size: clamp(.94rem, 2.2vw, 1.1rem); font-weight: 800; }
+.phonics-controls { display: flex; align-items: center; justify-content: center; gap: 11px; flex-wrap: wrap; }
+.phonics-audio-button { min-height: 52px; padding: 11px 16px; border: 2px solid #beded9; border-radius: var(--radius-button); background: #fff; color: #1d6768; font-weight: 1000; touch-action: manipulation; }
+.phonics-audio-button:hover, .phonics-audio-button:focus-visible { border-color: var(--primary); background: #f3fbfa; outline: none; }
+.phonics-primary { min-height: 56px; }
+.phonics-vowel-grid { display: grid; grid-template-columns: repeat(5, minmax(112px, 1fr)); gap: 12px; width: min(760px, 100%); margin: 8px auto 4px; }
+.phonics-vowel-tile { display: grid; place-items: center; gap: 5px; min-height: 162px; padding: 16px 8px; border: 3px solid #d5e6e2; border-radius: 21px; background: #fffdf9; color: #173c4e; touch-action: manipulation; }
+.phonics-vowel-tile:hover, .phonics-vowel-tile:focus-visible, .phonics-vowel-tile.is-heard { border-color: var(--primary); background: var(--primary-soft); outline: none; }
+.phonics-vowel-tile .phonics-vowel-letter { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.phonics-vowel-tile .phonics-vowel-sound { font-size: 1.38rem; }.phonics-vowel-speaker { font-size: 1.3rem; }
+.phonics-finish-copy { margin: 0; color: var(--primary); font-size: clamp(1.08rem, 2.5vw, 1.4rem); font-weight: 1000; }
+.phonics-finish-vowels { display: flex; justify-content: center; gap: 9px; flex-wrap: wrap; max-width: 570px; }
+.phonics-finish-vowel { padding: 9px 12px; border-radius: 14px; background: var(--accent-soft); color: #95501d; font-size: 1.05rem; font-weight: 1000; }
+@keyframes phonics-blend { 0% { transform: translateX(0); } 55% { color: var(--primary); transform: translateX(-3px); } 100% { transform: translateX(0); } }
+@media (max-width: 600px) {
+  .phonics-card { min-height: 0; gap: 11px; padding: 22px 15px; }
+  .phonics-word { min-height: 88px; font-size: clamp(4.2rem, 22vw, 6.4rem); gap: clamp(10px, 6vw, 25px); }
+  .phonics-vowel-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .phonics-vowel-tile { min-height: 120px; padding: 9px 3px; border-radius: 15px; }
+  .phonics-vowel-tile .phonics-vowel-letter { font-size: clamp(1.35rem, 7vw, 2rem); }.phonics-vowel-tile .phonics-vowel-sound { font-size: 1rem; }
+  .phonics-controls { width: 100%; }.phonics-controls > button { flex: 1 1 min(220px, 100%); }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .phonics-card { min-height: 0; gap: 3px; padding: 4px 14px; }.phonics-card .activity-type { margin: 0; }.phonics-card .activity-heading { margin: 0; font-size: 1.45rem; }.phonics-meter { font-size: .82rem; }.phonics-round { padding: 3px 7px; }.phonics-word { min-height: 58px; font-size: clamp(3.65rem, 9.6vh, 5.25rem); }.phonics-vowel-grid { grid-template-columns: repeat(5, minmax(88px, 1fr)); max-width: 620px; }.phonics-vowel-tile { min-height: 88px; padding: 4px; }.phonics-helper { font-size: .84rem; }.phonics-audio-button, .phonics-primary { min-height: 48px; }
+}
 </style></head><body><main id="app" class="app" aria-live="polite"></main><script>window.__eaModules = {};
 window.__eaModules["data/lessons/hello.js"] = {};
 (function(exports) {
@@ -1352,18 +1395,84 @@ const bodyLesson = {
 Object.assign(exports, { bodyLesson });
 })(window.__eaModules["data/lessons/body.js"]);
 
+window.__eaModules["data/lessons/phonics.js"] = {};
+(function(exports) {
+const AUDIO_ROOT = "assets/audio/lesson-05/phonics-vowels/mp3";
+const target = (word, vowel) => ({
+  word,
+  vowel,
+  letters: [...word],
+  wholeWordAudio: `${AUDIO_ROOT}/words/word-${word}.mp3`,
+  blendAudio: `${AUDIO_ROOT}/blends/blend-${word}.mp3`,
+});
+
+const vowelSection = (id, letter, sound, words) => ({
+  id: `0${id}-short-${letter}`,
+  type: "phonicsPractice",
+  mode: "vowel",
+  title: `Short ${letter.toUpperCase()}`,
+  letter,
+  sound,
+  vowelAudio: `${AUDIO_ROOT}/vowels/short-${letter}.mp3`,
+  rounds: [
+    { type: "learn", label: "Learn to Blend", words: words.slice(0, 5).map((word) => target(word, letter)) },
+    { type: "practice", label: "Your Turn", words: words.slice(5, 10).map((word) => target(word, letter)) },
+    { type: "quick-read", label: "Quick Read", words: words.slice(10, 15).map((word) => target(word, letter)) },
+  ],
+});
+
+const vowels = [
+  { letter: "a", sound: "/æ/", words: ["cat", "hat", "bat", "mat", "map", "cap", "tap", "bag", "man", "fan", "pan", "jam", "sad", "mad", "van"] },
+  { letter: "i", sound: "/ɪ/", words: ["pig", "big", "sit", "hit", "fit", "lip", "pin", "fin", "win", "dig", "kid", "lid", "zip", "fig", "wig"] },
+  { letter: "o", sound: "/ɒ/", words: ["hot", "pot", "top", "mop", "hop", "dog", "log", "fog", "cot", "dot", "nod", "rod", "job", "pop", "lot"] },
+  { letter: "e", sound: "/e/", words: ["red", "bed", "pen", "hen", "ten", "leg", "net", "pet", "wet", "jet", "men", "den", "get", "let", "web"] },
+  { letter: "u", sound: "/ʌ/", words: ["sun", "cup", "bus", "run", "fun", "bug", "rug", "cut", "nut", "hut", "mud", "mum", "bun", "pup", "tub"] },
+];
+
+const vowelReference = Object.fromEntries(vowels.map((item) => [item.letter, { sound: item.sound, audio: `${AUDIO_ROOT}/vowels/short-${item.letter}.mp3` }]));
+const mixWords = ["cat", "pig", "hot", "red", "sun", "bag", "fin", "dog", "pen", "cup", "jam", "wig", "lot", "web", "mud"];
+const vowelForWord = Object.fromEntries(vowels.flatMap((item) => item.words.map((word) => [word, item.letter])));
+const finalWords = ["rag", "vet", "rim", "pod", "gum"];
+
+const phonicsLesson = {
+  id: "phonics-vowels",
+  lessonNumber: 5,
+  title: "Phonics Power",
+  subtitle: "A E I O U",
+  icon: "🔤",
+  activities: [
+    { id: "01-vowel-warmup", type: "phonicsPractice", mode: "warmup", title: "Vowel Power", vowels: vowelReference },
+    vowelSection(2, "a", "/æ/", vowels[0].words),
+    vowelSection(3, "i", "/ɪ/", vowels[1].words),
+    vowelSection(4, "o", "/ɒ/", vowels[2].words),
+    vowelSection(5, "e", "/e/", vowels[3].words),
+    vowelSection(6, "u", "/ʌ/", vowels[4].words),
+    { id: "07-mix-it-up", type: "phonicsPractice", mode: "mixed", title: "Mix It Up!", words: mixWords.map((word) => target(word, vowelForWord[word])) },
+    { id: "08-reading-challenge", type: "phonicsPractice", mode: "final", title: "Reading Challenge", words: finalWords.map((word) => ({ word, letters: [...word], vowel: word[1], wholeWordAudio: null, blendAudio: null, audioStatus: "pending" })) },
+    { id: "09-finish", type: "phonicsPractice", mode: "finish", title: "Great reading!", vowels: vowelReference },
+  ],
+};
+
+const phonicsAudioRoot = AUDIO_ROOT;
+const phonicsFinalChallengeMissingAudio = finalWords;
+
+Object.assign(exports, { phonicsLesson, phonicsAudioRoot, phonicsFinalChallengeMissingAudio });
+})(window.__eaModules["data/lessons/phonics.js"]);
+
 window.__eaModules["data/lessonIndex.js"] = {};
 (function(exports) {
 const { helloLesson } = window.__eaModules["data/lessons/hello.js"];
 const { coloursLesson } = window.__eaModules["data/lessons/colours.js"];
 const { numbersLesson } = window.__eaModules["data/lessons/numbers.js"];
 const { bodyLesson } = window.__eaModules["data/lessons/body.js"];
+const { phonicsLesson } = window.__eaModules["data/lessons/phonics.js"];
 
 const lessons = [
   helloLesson,
   coloursLesson,
   numbersLesson,
   bodyLesson,
+  phonicsLesson,
 ];
 
 const getLesson = (id) => lessons.find((lesson) => lesson.id === id);
@@ -1784,6 +1893,8 @@ function stopCurrentPlayback() {
   }
 }
 
+function stopTeachingAudio() { stopCurrentPlayback(); }
+
 function playText(text, explicitSrc = null) {
   if (!state.soundOn || !text) return;
 
@@ -1837,7 +1948,7 @@ function successSound() {
   oscillator.stop(context.currentTime + .29);
 }
 
-Object.assign(exports, { playText, replay, speak, toggleSound, successSound });
+Object.assign(exports, { stopTeachingAudio, playText, replay, speak, toggleSound, successSound });
 })(window.__eaModules["js/audio.js"]);
 
 window.__eaModules["js/components/lessonCard.js"] = {};
@@ -2749,6 +2860,110 @@ function renderMiniReading(stage, activity, api) {
 Object.assign(exports, { renderBodyMap, renderBodyBuilder, renderWordChoice, renderWordBuilder, renderMiniReading });
 })(window.__eaModules["js/activities/lesson04.js"]);
 
+window.__eaModules["js/activities/phonicsPractice.js"] = {};
+(function(exports) {
+const { playText, stopTeachingAudio } = window.__eaModules["js/audio.js"];
+
+const el = (tag, className, text = "") => { const node = document.createElement(tag); node.className = className; if (text) node.textContent = text; return node; };
+const audioButton = (label, source, onPlay) => { const button = el("button", "phonics-audio-button", `🔊 ${label}`); button.type = "button"; button.addEventListener("click", () => { if (!source) return; playText(label, source); onPlay?.(); }); return button; };
+const primaryButton = (label, onClick) => { const button = el("button", "nav-button next phonics-primary", label); button.type = "button"; button.addEventListener("click", onClick); return button; };
+
+function heading(card, title, kicker = "Phonics") { card.append(el("p", "activity-type", kicker), el("h1", "activity-heading", title)); }
+function wordDisplay(item, { split = true, animate = false } = {}) {
+  const wrap = el("div", `phonics-word${animate ? " is-blending" : ""}`);
+  wrap.setAttribute("aria-label", item.word);
+  if (!split) { wrap.textContent = item.word; return wrap; }
+  item.letters.forEach((letter, index) => {
+    const span = el("span", `phonics-letter${index === 1 ? " is-target" : ""}`, letter);
+    span.style.setProperty("--letter-index", String(index)); wrap.append(span);
+  });
+  return wrap;
+}
+
+function roundIndicator(round) {
+  const labels = ["Learn", "Your Turn", "Quick Read"];
+  const wrap = el("div", "phonics-rounds");
+  labels.forEach((label, index) => wrap.append(el("span", `phonics-round${index === round ? " is-current" : index < round ? " is-done" : ""}`, label)));
+  return wrap;
+}
+
+function renderWarmup(card, activity, api) {
+  heading(card, activity.title, "Phonics");
+  card.append(el("p", "phonics-helper", "今天我们练习五个最重要的声音。听一听，然后跟着读。"));
+  const grid = el("div", "phonics-vowel-grid"); const heard = new Set();
+  Object.entries(activity.vowels).forEach(([letter, vowel]) => {
+    const button = el("button", "phonics-vowel-tile"); button.type = "button";
+    button.append(el("strong", "phonics-vowel-letter", `${letter.toUpperCase()} ${letter}`), el("span", "phonics-vowel-sound", vowel.sound), el("span", "phonics-vowel-speaker", "🔊"));
+    button.addEventListener("click", () => { heard.add(letter); button.classList.add("is-heard"); playText(`Short ${letter}`, vowel.audio); }); grid.append(button);
+  });
+  const start = primaryButton("Let's read!", () => api.complete());
+  card.append(grid, start);
+}
+
+function renderVowel(card, activity, api) {
+  const state = { index: 0, checked: false, blending: false };
+  const allWords = activity.rounds.flatMap((round) => round.words);
+  const render = () => {
+    const roundIndex = Math.floor(state.index / 5); const round = activity.rounds[roundIndex]; const item = allWords[state.index]; const inRound = state.index % 5;
+    card.replaceChildren(); heading(card, `Short ${activity.letter.toUpperCase()}`, "Phonics");
+    const meter = el("p", "phonics-meter", `${state.index + 1} / ${allWords.length}`); card.append(meter, roundIndicator(roundIndex));
+    const vowelHead = el("div", "phonics-vowel-head"); vowelHead.append(el("strong", "phonics-vowel-letter", `${activity.letter.toUpperCase()} ${activity.letter}`), el("span", "phonics-vowel-sound", activity.sound), audioButton("听声音", activity.vowelAudio)); card.append(vowelHead);
+    const title = round.type === "quick-read" ? "Can you read it?" : round.label;
+    card.append(el("h2", "phonics-task-title", title), wordDisplay(item, { split: round.type !== "quick-read", animate: state.blending }));
+    const helper = round.type === "learn" ? "一个音一个音读，再连起来。" : round.type === "practice" ? "先自己拼一拼。" : "先自己读。"; card.append(el("p", "phonics-helper", helper));
+    const controls = el("div", "phonics-controls");
+    const advance = () => { stopTeachingAudio(); if (state.index === allWords.length - 1) { api.complete(); return; } state.index += 1; state.checked = false; state.blending = false; render(); };
+    const showBlend = () => { state.blending = true; playText(`Blend ${item.word}`, item.blendAudio); render(); };
+    if (round.type === "learn") {
+      controls.append(audioButton("听拼读", item.blendAudio, () => { state.blending = true; render(); }), audioButton("听整词", item.wholeWordAudio), primaryButton("我读好了 ✓", advance));
+    } else if (round.type === "practice") {
+      const done = primaryButton(state.checked ? (inRound === 4 && state.index === allWords.length - 1 ? "完成" : "Next word") : "我读好了 ✓", () => { if (!state.checked) { state.checked = true; playText(item.word, item.wholeWordAudio); render(); } else advance(); });
+      controls.append(done, audioButton("需要帮助？听拼读", item.blendAudio, () => { state.blending = true; render(); }));
+    } else {
+      const check = primaryButton(state.checked ? (state.index === allWords.length - 1 ? "完成" : "Next word") : "Check ✓", () => { if (!state.checked) { state.checked = true; playText(item.word, item.wholeWordAudio); render(); } else advance(); });
+      controls.append(check, audioButton("Help me", item.blendAudio, () => { state.blending = true; render(); }));
+    }
+    card.append(controls);
+  };
+  render();
+}
+
+function renderReading(card, activity, api) {
+  const state = { index: 0, checked: false, blending: false };
+  const render = () => {
+    const item = activity.words[state.index]; const hasAudio = Boolean(item.wholeWordAudio && item.blendAudio);
+    card.replaceChildren(); heading(card, activity.title, "Phonics");
+    card.append(el("p", "phonics-meter", `${state.index + 1} / ${activity.words.length}`), el("h2", "phonics-task-title", activity.mode === "mixed" ? "Can you read it?" : "Can you read it?"), wordDisplay(item, { split: false }), el("p", "phonics-helper", activity.mode === "mixed" ? "看看中间的字母，自己拼出来。" : "这次没有练过，自己试试看。"));
+    const controls = el("div", "phonics-controls");
+    const next = () => { stopTeachingAudio(); if (state.index === activity.words.length - 1) { api.complete(); return; } state.index += 1; state.checked = false; state.blending = false; render(); };
+    if (hasAudio) {
+      controls.append(primaryButton(state.checked ? (state.index === activity.words.length - 1 ? "完成" : "Next") : "Check ✓", () => { if (!state.checked) { state.checked = true; playText(item.word, item.wholeWordAudio); render(); } else next(); }), audioButton("Help me", item.blendAudio));
+    } else {
+      controls.append(primaryButton(state.checked ? (state.index === activity.words.length - 1 ? "完成" : "Next") : "我读好了 ✓", () => { if (!state.checked) { state.checked = true; render(); } else next(); }), (() => { const button = el("button", "phonics-audio-button", "需要帮助（音频待补）"); button.type = "button"; button.disabled = true; return button; })());
+    }
+    card.append(controls);
+  };
+  render();
+}
+
+function renderFinish(card, activity, api) {
+  heading(card, activity.title, "Finish"); card.append(el("p", "phonics-finish-copy", "75 words practised · 5 vowel sounds"));
+  const list = el("div", "phonics-finish-vowels"); ["a", "e", "i", "o", "u"].forEach((letter) => { const vowel = activity.vowels[letter]; list.append(el("span", "phonics-finish-vowel", `${letter.toUpperCase()}  ${vowel.sound}`)); }); card.append(list);
+  const controls = el("div", "phonics-controls"); controls.append(primaryButton("Read again", () => api.restart?.()), primaryButton("Back to Lessons", () => api.home?.())); card.append(controls); api.complete();
+}
+
+function renderPhonicsPractice(stage, activity, api) {
+  const card = el("section", "activity-card phonics-card");
+  if (activity.mode === "warmup") renderWarmup(card, activity, api);
+  else if (activity.mode === "vowel") renderVowel(card, activity, api);
+  else if (activity.mode === "mixed" || activity.mode === "final") renderReading(card, activity, api);
+  else if (activity.mode === "finish") renderFinish(card, activity, api);
+  stage.append(card);
+}
+
+Object.assign(exports, { renderPhonicsPractice });
+})(window.__eaModules["js/activities/phonicsPractice.js"]);
+
 window.__eaModules["js/activities/renderer.js"] = {};
 (function(exports) {
 const { renderLearn } = window.__eaModules["js/activities/learn.js"];
@@ -2762,6 +2977,7 @@ const { renderActionPrompt } = window.__eaModules["js/activities/actionPrompt.js
 const { renderWritingPrompt } = window.__eaModules["js/activities/writingPrompt.js"];
 const { renderBasketShop, renderCompare, renderCover, renderPhraseBuilder, renderPricePlay, renderQuantity } = window.__eaModules["js/activities/lesson03.js"];
 const { renderBodyBuilder, renderBodyMap, renderMiniReading, renderWordBuilder, renderWordChoice } = window.__eaModules["js/activities/lesson04.js"];
+const { renderPhonicsPractice } = window.__eaModules["js/activities/phonicsPractice.js"];
 
 const renderers = {
   learn: renderLearn,
@@ -2783,7 +2999,8 @@ const renderers = {
   bodyBuilder: renderBodyBuilder,
   wordChoice: renderWordChoice,
   wordBuilder: renderWordBuilder,
-  miniReading: renderMiniReading
+  miniReading: renderMiniReading,
+  phonicsPractice: renderPhonicsPractice
 };
 function renderActivity(stage, activity, api) {
   const renderer = renderers[activity?.type];
@@ -2849,7 +3066,7 @@ Object.assign(exports, { validateLesson, validateLessons });
 window.__eaModules["js/router.js"] = {};
 (function(exports) {
 const { getLesson, lessons } = window.__eaModules["data/lessonIndex.js"];
-const { replay } = window.__eaModules["js/audio.js"];
+const { replay, stopTeachingAudio } = window.__eaModules["js/audio.js"];
 const { activityDone, lessonPosition, markActivityDone, openLesson, patch, resetLesson, setLessonPosition, state } = window.__eaModules["js/store.js"];
 const { lessonCard } = window.__eaModules["js/components/lessonCard.js"];
 const { progress } = window.__eaModules["js/components/progress.js"];
@@ -2874,7 +3091,7 @@ function showHome() {
 }
 
 function showPlayer() {
-  page = "player"; const currentLesson = lesson(); const currentActivity = activity();
+  stopTeachingAudio(); page = "player"; const currentLesson = lesson(); const currentActivity = activity();
   if (!currentLesson || !currentActivity) return showHome();
   validateLesson(currentLesson, { strict: true });
   app.replaceChildren(); const player = document.createElement("section"); player.className = "player";
@@ -2888,9 +3105,11 @@ function showPlayer() {
   const replayButton = button("🔊", "Replay audio", "replay-button");
   const next = button("›", "Next", "nav-button next"); next.innerHTML = '<span>Next</span><span aria-hidden="true">›</span>';
   const center = document.createElement("div"); center.className = "bottom-center"; center.append(replayButton); footer.append(previous, center, next); player.append(header, stage, footer); app.append(player);
-  const complete = () => { markActivityDone(currentLesson.id, currentActivity.id); next.disabled = false; };
-  renderActivity(stage, currentActivity, { complete });
-  back.addEventListener("click", showHome); replayButton.addEventListener("click", () => replay(currentActivity)); previous.addEventListener("click", previousActivity); next.addEventListener("click", nextActivity); next.disabled = !activityDone(currentLesson.id, currentActivity.id);
+  const complete = () => { markActivityDone(currentLesson.id, currentActivity.id); if (currentActivity.type === "phonicsPractice" && currentActivity.mode === "finish") { state.completedLessons[currentLesson.id] = true; patch({}); } next.disabled = false; };
+  renderActivity(stage, currentActivity, { complete, home: showHome, restart: () => { resetLesson(currentLesson.id); showPlayer(); } });
+  if (currentActivity.type === "phonicsPractice") replayButton.hidden = true;
+  if (currentActivity.type === "phonicsPractice" && currentActivity.mode === "finish") { previous.hidden = true; next.hidden = true; }
+  back.addEventListener("click", () => { stopTeachingAudio(); showHome(); }); replayButton.addEventListener("click", () => replay(currentActivity)); previous.addEventListener("click", previousActivity); next.addEventListener("click", nextActivity); next.disabled = !activityDone(currentLesson.id, currentActivity.id);
   const openTeacher = () => openTeacherPanel({ lesson: currentLesson, activity: currentActivity, onPrevious: previousActivity, onNext: teacherNext, onMarkCorrect: markCorrect, onTryAgain: showPlayer, onClose: () => {}, onHome: showHome });
   title.addEventListener("pointerdown", () => { longPress = window.setTimeout(openTeacher, 1500); });
   ["pointerup", "pointerleave", "pointercancel"].forEach((event) => title.addEventListener(event, () => window.clearTimeout(longPress)));

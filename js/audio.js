@@ -11,6 +11,8 @@ function stopCurrentPlayback() {
   }
 }
 
+export function stopTeachingAudio() { stopCurrentPlayback(); }
+
 export function playText(text, explicitSrc = null) {
   if (!state.soundOn || !text) return;
 
